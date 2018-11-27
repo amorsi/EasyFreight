@@ -1,0 +1,218 @@
+﻿@model EasyFreight.Models.OperationView
+
+@{
+    List<EasyFreight.ViewModel.OperationContainerVm> contain = EasyFreight.DAL.OperationHelper.GetOperationContainers(Model.OperationId);
+}
+ 
+        <section class="panel hblist">
+    <div class="panel-body">
+        <div class="col-sm-12 col-xs-12 form-group">
+            <div class="col-md-6 col-xs-6 col-md-offset-4 col-xs-offset-4">
+                <h4 class="text-dark">Shipping Declaration</h4>
+            </div>
+        </div>
+        @*<div class="col-sm-12 col-xs-12 form-group">
+            <div class="col-md-6 col-xs-6 col-md-offset-4 col-xs-offset-4">
+                <h4 class="text-dark">Quotation Code: @Model.OperationCode</h4>
+            </div>
+
+        </div>*@
+        <table class="table table-bordered">
+            <tbody>
+                <tr>
+                    <td style="width:50%">Primary</td>
+                    <td style="width:50%">Alex in @DateTime.Now.ToString("dd/MM/yyyy")</td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="col-sm-12 col-xs-12 form-group">
+                            <label class="control-label">Shipper</label>
+                            <div>
+                                <span class="text-dark">@Model.ShipperNameEn
+                                    @(Model.IsCareOf ? "C/O AM Cargo" : "")
+ 
+                                </span>
+                            </div>
+                            <div>
+                                <span class="text-dark">@ViewBag.ShipperAddress</span>
+                            </div>
+                            <div>
+                                <span class="text-dark">@ViewBag.ShipperTel</span>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="col-sm-12 col-xs-12 form-group">
+                            @if (Model.CarrierType == 1)
+                            {
+                                <label class="control-label">Vessel</label>
+                                <div>
+                                    <span class="text-dark"> @Model.VesselName</span>
+                                </div>
+                            }
+                            else
+                            {
+                                <label class="control-label">Flight Number</label>
+                                <div>
+                                    <span class="text-dark"> @Model.FlightNumber</span>
+                                </div>
+                            }
+                            <label class="control-label">Date Of Departure</label>
+                            <div>
+                                <span class="text-dark">@(Model.DateOfDeparture == null ? "" : Model.DateOfDeparture.Value.ToString("dd/MM/yyyy"))</span>
+                            </div>
+                            <label class="control-label">Shipping Line</label>
+                            <div>
+                                <span class="text-dark"> @Model.CarrierNameEn</span>
+                            </div>
+                        </div>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td>
+                        <div class="col-sm-12 col-xs-12 form-group">
+
+                            <label class="control-label">Consignee</label>
+                            <div>
+                                <span class="text-dark">   @Model.ConsigneeNameEn</span>
+                            </div>
+                            <div>
+                                 <span class="text-dark"> @Model.ConsigneeAddressEn</span> 
+                            </div>
+                            <div>
+                                <span class="text-dark">  Tel. @Model.ConsigneePhoneNumber Fax. @Model.ConsigneeFaxNumber</span> 
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="col-sm-6 col-xs-6 form-group">
+                            <label class="control-label">Port Of Loading</label>
+                            <div>
+                                <span class="text-dark">  @Model.FromPort</span>
+                            </div>
+                          </div>  
+                            <div class="col-sm-6 col-xs-6 form-group">
+                                <label class="control-label">Port Of Discharge</label>
+                            <div>
+
+                                <span class="text-dark">   @Model.ToPort</span>
+                            </div>
+                            </div>
+                        
+                    </td>
+                </tr>
+                <tr>
+                    @if (!Model.NotifierAsConsignee)
+                    { 
+                    <td>
+                        <div class="col-sm-12 col-xs-12 form-group">
+                            <label class="control-label">Notifier</label>
+                            <div>
+                                <span class="text-dark"> @Model.NotifierNameEn</span>
+                            </div>
+                            <div>
+                                 <span class="text-dark"> @Model.NotifierAddressEn</span> 
+                            </div>
+                            <div>
+                               <span class="text-dark"> Tel. @Model.NotifierPhoneNumber Fax. @Model.NotifierFaxNumber</span> 
+                            </div>
+                        </div>
+                    </td>}
+                    else
+                    {
+                         <td>
+                        <div class="col-sm-12 col-xs-12 form-group">
+                            <label class="control-label">Notifier</label>
+                            <div>
+                                <span class="text-dark"> @Model.ConsigneeNameEn</span>
+                            </div>
+                            <div>
+                                 <span class="text-dark"> @Model.ConsigneeAddressEn</span> 
+                            </div>
+                            <div>
+                               <span class="text-dark"> Tel. @Model.ConsigneePhoneNumber Fax. @Model.ConsigneeFaxNumber</span> 
+                            </div>
+                        </div>
+                    </td>
+                    }
+                    <td>
+                        <div class="col-sm-12 col-xs-12 form-group">
+                            <label class="control-label">Freight Payment</label>
+                            <div>
+                                <span class="text-dark">@(Model.IsPrepaid ? "Prepaid" : "Collect")</span>
+                            </div>
+
+                        </div>
+
+                        @*<div class="col-sm-6 col-xs-6 form-group">
+                            <label class="control-label">Freight Amount</label>
+                            <div>
+                                <span class="text-dark">@Model.FreightCostAmount <span class="sign">@(((Dictionary<int, string>)ViewData["CurrecyList"]).Where(x => x.Key == Model.FreighCurrencyId).FirstOrDefault().Value)</span></span>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-xs-6 form-group">
+                            <label class="control-label">THC Cost</label>
+                            <div>
+                                <span class="text-dark">@Model.ThcCostAmount <span class="sign">@(((Dictionary<int, string>)ViewData["CurrecyList"]).Where(x => x.Key == Model.ThcCurrencyId).FirstOrDefault().Value)</span></span>
+                            </div>
+                        </div>*@
+
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="col-sm-12 col-xs-12 form-group">
+                            <label class="control-label">Containers</label>
+                            <div class="col-sm-12 col-xs-12">
+                                @{Html.RenderPartial("~/Views/Operation/_ShippingDecContainers.cshtml", ViewBag.QuoteContainers as List<EasyFreight.ViewModel.OperationContainerVm>);}
+                            </div> 
+
+                        </div>
+                    </td>
+                    <td>
+                        <div class="col-md-3 form-group">
+                            <label class="control-label">Total G.W</label>
+                            <div>
+                                <span class="text-dark">@Model.GrossWeight <span class="sign">KG</span></span>
+                            </div>
+                        </div>
+                         <div class="col-md-3 form-group">
+                            <label class="control-label">CBM</label>
+                            <div>
+                                <span class="text-dark">@Model.CBM <span class="sign"></span></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label class="control-label">Total #</label>
+                            <div>
+                                <span class="text-dark">@Model.NumberOfPackages <span class="sign">  
+                                     @foreach (var item in contain.GroupBy(m => m.PackageTypeName).Select((n) => new { PackageTypeName = n.Key, Items = n.ToList() }).ToList())
+                                     { @item.PackageTypeName <br />}
+                                     </span></span>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+
+        <div class="col-sm-12 col-xs-12 form-group">
+            <label class="control-label">Description of goods</label>
+            <div>
+                <span class="text-dark" style="white-space: pre-wrap;">@Model.GoodsDescription</span>
+            </div>
+        </div>
+
+        @{var staticText = (EasyFreight.Models.StaticText)ViewData["StaticText"];}
+
+        <div style="text-align:right" class="col-sm-12 col-xs-12  form-group">
+            <label class="control-label pull-right">@staticText.StaticTextAr1</label>
+            <div class="text-dark pull-right">
+                @staticText.StaticTextAr2
+            </div>
+        </div>
+
+    </div>
+</section>

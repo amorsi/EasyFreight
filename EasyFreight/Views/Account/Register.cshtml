@@ -1,0 +1,129 @@
+﻿@model EasyFreight.Models.RegisterViewModel
+@{
+    ViewBag.Title = "Register";
+}
+
+@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form", id = "form1" }))
+{
+    @Html.AntiForgeryToken()
+    <section class="body-sign">
+        <div class="center-sign">
+            @*<a href="/" class="logo pull-left">
+                    <img src="assets/images/logo.png" height="54" alt="Porto Admin" />
+                </a>*@
+
+            <div class="panel panel-sign">
+                <div class="panel-title-sign mt-xl text-right">
+                    <h2 class="title text-uppercase text-bold m-none"><i class="fa fa-user mr-xs"></i> Sign Up</h2>
+                </div>
+                <div class="panel-body">
+                    @Html.ValidationSummary()
+
+
+                        <div class="form-group mb-lg">
+                            <label>Select Employee</label>
+                            <select id="EmpId" name="EmpId" required class="form-control input-lg">
+                                <option value=""></option>
+                                @foreach (var item in ViewBag.EmpList)
+                                {
+                                    <option value="@item.Key">@item.Value</option>
+                                }
+                            </select>
+                        </div>
+
+                        <div class="form-group mb-lg">
+                            <label>User Name</label>
+                            @Html.TextBoxFor(m => m.UserName, new { @class = "form-control input-lg" })
+                        </div>
+
+                        <div class="form-group mb-none">
+                            <div class="row">
+                                <div class="col-sm-6 mb-lg">
+                                    <label>Password</label>
+                                    @Html.PasswordFor(m => m.Password, new { @class = "form-control input-lg" })
+                                </div>
+                                <div class="col-sm-6 mb-lg">
+                                    <label>Password Confirmation</label>
+                                    @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control input-lg" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-8">
+                                @*<div class="checkbox-custom checkbox-default">
+                                    <input id="AgreeTerms" name="agreeterms" type="checkbox" />
+                                    <label for="AgreeTerms">I agree with <a href="#">terms of use</a></label>
+                                </div>*@
+                            </div>
+                            <div class="col-sm-4 text-right">
+                                <input id="signup" type="submit" class="btn btn-primary hidden-xs" value="Sign Up">
+                                <input id="signup" type="submit" class="btn btn-primary btn-block btn-lg visible-xs mt-lg" value="Sign Up">
+                            </div>
+                        </div>
+
+                        @*<span class="mt-lg mb-lg line-thru text-center text-uppercase">
+                            <span>or</span>
+                        </span>
+
+                        <div class="mb-xs text-center">
+                            <a class="btn btn-facebook mb-md ml-xs mr-xs">Connect with <i class="fa fa-facebook"></i></a>
+                            <a class="btn btn-twitter mb-md ml-xs mr-xs">Connect with <i class="fa fa-twitter"></i></a>
+                        </div>
+
+                        <p class="text-center">Already have an account? <a href="pages-signin.html">Sign In!</a>*@
+
+                    
+                </div>
+            </div>
+
+          @*  <p class="text-center text-muted mt-md mb-md">&copy; Copyright 2016. All Rights Reserved.</p>*@
+        </div>
+    </section>
+
+   <input type="hidden" id="formisvalid" />
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $(function () {
+            $("#signup").click(function (e) {
+                
+
+                var isValid = CheckFormIsValid('form1');
+                if (!isValid) {
+                    e.preventDefault();
+                    return;
+                }
+                var empId = $("#EmpId").val();
+                $.ajax({
+                    url: ROOT + "Account/CheckIfEmpHasUser",
+                    type: "POST",
+                    data: { 'empId': empId },
+                    async: false,
+                    dataType: "json",
+                    success: function (data) {
+                        $("#formisvalid").val(data);
+                        if (data) //true .. has user .. can't add new one
+                        {
+                            new PNotify({
+                                title: 'Sorry!',
+                                text: 'This Employee Has User. Can not add new one.',
+                                type: 'error'
+                            });
+                        }
+                    }
+                });
+
+                if ($("#formisvalid").val() == "true") {
+                    e.preventDefault();
+                }
+                           
+
+            })
+        });
+
+
+    </script>
+}

@@ -1,0 +1,94 @@
+﻿@model EasyFreight.ViewModel.AccountSummary
+@{
+    ViewBag.Title = "AccTransByAccId";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<header class="page-header">
+    <h2>Accounting Reports</h2>
+
+    <div class="right-wrapper pull-right">
+        <ol class="breadcrumbs">
+            <li>
+                <a href="@Url.Content("~/Home/Index")">
+                    <i class="fa fa-home"></i>
+                </a>
+            </li>
+            <li><span>Accounting Reports</span></li>
+            <li><span>Account Transactions</span></li>
+        </ol>
+
+        <a class="sidebar-right-toggle" data-open="sidebar-right"><i class="fa fa-chevron-left"></i></a>
+    </div>
+</header>
+<div class="row">
+    <div class="col-lg-12 col-md-12">
+
+        <section class="panel">
+            <header class="panel-heading" style="padding-bottom: 30px">
+                <div class="panel-actions">
+                    <a href="#" class="fa fa-caret-down"></a>
+                </div>
+                <h2 class="panel-title col-md-6"> Filter </h2>
+            </header>
+            <div class="panel-body">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Transaction Date</label>
+                    <div class="col-md-6">
+                        <div data-plugin-datepicker="" data-date-format="dd/mm/yyyy" class="input-daterange input-group">
+                            <span class="input-group-addon">
+                                From <i class="fa fa-calendar"></i>
+                            </span>
+                            <input type="text" id="FromDate" name="FromDate" class="form-control date">
+                            <span class="input-group-addon">to <i class="fa fa-calendar"></i></span>
+                            <input type="text" id="ToDate" name="ToDate" class="form-control date">
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <input type="button" id="searchbtn" class="btn btn-primary" value="Search" />
+                    </div>
+                    <div class="col-md-2">
+                        <div class="col-sm-12 border">
+                            <a id="ClearSearch" class="default-icon" onclick="window.location.reload();" 
+                               title="Clear Search" href="javascript:void(0)">
+                                <i class="fa fa-eraser fa-2x"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div id="totalsection">
+            @{ Html.RenderPartial("~/Views/AccountingRpt/_TotalsSummaryTb.cshtml", Model);}
+        </div>
+
+        <section class="panel">
+            <header class="panel-heading" style="padding-bottom: 30px">
+
+                    <h2 class="panel-title col-md-12" id="rpTitle"> Accounting Transactions For : @Model.AccountNameEn </h2>
+            </header>
+            <div class="panel-body">
+
+                <div id="tbResult">
+                    @Html.Partial("~/Views/AccountingRpt/_AccTransTb.cshtml")
+                </div>
+                <input type="hidden" id="accountId" name="accountId" value="@ViewBag.AccountId">
+            </div>
+        </section>
+    </div>
+</div>
+
+@section scripts{
+    <link href="@Url.Content("~/assets/vendor/jquery-datatables/responsive.dataTables.min.css")" rel="stylesheet" />
+    <script src="@Url.Content("~/assets/vendor/jquery-datatables/dataTables.responsive.min.js")"></script> 
+    <script src="@Url.Content("~/assets/vendor/jquery-datatables/pdfmake.min.js")"></script>
+    <script src="@Url.Content("~/assets/vendor/jquery-datatables/vfs_fonts.js")"></script> 
+    <script src="@Url.Content("~/assets/vendor/jquery-datatables/buttons.print.min.js")"></script>
+    <script src="@Url.Content("~/assets/vendor/jquery-datatables/buttons.colVis.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/AccountingRpt/AccountTrans.js")"></script>
+}
+
+
+
+

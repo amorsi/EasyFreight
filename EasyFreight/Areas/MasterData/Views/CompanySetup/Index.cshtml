@@ -1,0 +1,287 @@
+﻿@model EasyFreight.ViewModel.CompanySetupVm
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link rel="stylesheet" href="@Url.Content("~/assets/vendor/bootstrap-fileupload/bootstrap-fileupload.min.css")" />
+<header class="page-header">
+    <h2>Company Setup</h2>
+
+    <div class="right-wrapper pull-right">
+        <ol class="breadcrumbs">
+            <li>
+                <a href="@Url.Content("~/Home/Index")">
+                    <i class="fa fa-home"></i>
+                </a>
+            </li>
+            <li><span>Master Data</span></li>
+            <li><span>Company Setup</span></li>
+        </ol>
+
+        <a class="sidebar-right-toggle" data-open="sidebar-right"><i class="fa fa-chevron-left"></i></a>
+    </div>
+</header>
+
+<div class="row">
+    <div class="col-xs-12">
+        <section class="panel form-wizard" id="w4">
+            <header class="panel-heading">
+                <div class="panel-actions">
+                </div>
+
+                <h2 class="panel-title"></h2>
+            </header>
+            <div class="panel-body">
+                <div class="wizard-progress wizard-progress-lg">
+                    <div class="steps-progress">
+                        <div class="progress-indicator"></div>
+                    </div>
+                    <ul class="wizard-steps">
+                        <li class="active">
+                            <a href="#w4-account" data-toggle="tab"><span>1</span>Main Info</a>
+                        </li>
+                        <li>
+                            <a href="#w4-profile" data-toggle="tab"><span>2</span>Contact Info</a>
+                        </li>
+                        <li>
+                            <a href="#w4-billing" data-toggle="tab"><span>3</span>System Setup</a>
+                        </li>
+
+                    </ul>
+                </div>
+
+                <form id="SetupForm" class="form-horizontal" novalidate="novalidate">
+
+                    <div class="tab-content">
+                        <div id="w4-account" class="tab-pane active">
+                            <div class="col-md-6 form-group">
+                                <label class="col-sm-4 control-label" for="w4-username">Name <span class="required">*</span></label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="CompanyNameEn" 
+                                        id="CompanyNameEn" value="@Model.CompanyNameEn" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label class="col-sm-4 control-label" for="w4-password">Name Arabic</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" 
+                                        name="CompanyNameAr" id="CompanyNameAr" value="@Model.CompanyNameAr">
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 form-group">
+                                <label class="col-sm-4 control-label" for="w4-username">Address <span class="required">*</span></label>
+                                <div class="col-sm-8">
+                                    <textarea id="CompanyAddressEn" rows="3" class="form-control"
+                                        name="CompanyAddressEn" required>@Model.CompanyAddressEn</textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label class="col-sm-4 control-label" for="w4-password">Address Arabic</label>
+                                <div class="col-sm-8">
+                                    <textarea id="CompanyAddressAr" rows="3" class="form-control"
+                                        name="CompanyAddressAr">@Model.CompanyAddressAr</textarea>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-2 control-label" for="w4-CityId">City <span class="required">*</span></label>
+                                <div class="col-md-3">
+                                    @Html.Partial("~/Views/Shared/_CityGrouped.cshtml",
+                                    ViewData["CityList"] as List<EasyFreight.ViewModel.CountryCityList>,
+                                    new ViewDataDictionary { { "ddlName", "CityId" }, 
+                                    { "selectedVal", @Model.CityId } })
+
+                                </div>
+                            </div>
+                            <input type="hidden" name="CountryId" id="CountryId" value="@Model.CountryId" />
+                            <div class="col-md-6 form-group">
+                                <label class="col-sm-4 control-label">Email <span class="required">*</span></label>
+                                <div class="col-sm-8">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="fa fa-envelope"></i>
+                                        </span>
+                                        <input type="email" required placeholder="eg.: email@email.com" 
+                                            class="form-control" name="email" value="@Model.Email">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label class="col-sm-4 control-label">WebSite</label>
+                                <div class="col-sm-8">
+                                    <input type="url" placeholder="eg.: https://google.com" 
+                                        class="form-control" name="WebSite" value="@Model.WebSite">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">Logo English</label>
+                                <div class="col-md-4">
+                                    <div class="fileupload fileupload-new" data-provides="fileupload">
+                                        <div class="input-append">
+                                            <div class="uneditable-input">
+                                                <i class="fa fa-file fileupload-exists"></i>
+                                                <span class="fileupload-preview"></span>
+                                            </div>
+                                            <span class="btn btn-default btn-file">
+                                                <span class="fileupload-exists">Change</span>
+                                                <span class="fileupload-new">Select file</span>
+                                                <input type="file" name="EnglishLogoUrl" />
+                                            </span>
+                                            <a href="#" class="btn btn-default fileupload-exists" data-dismiss="fileupload">Remove</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">Logo Arabic</label>
+                                <div class="col-md-8">
+                                    <div class="fileupload fileupload-new" data-provides="fileupload">
+                                        <div class="input-append">
+                                            <div class="uneditable-input">
+                                                <i class="fa fa-file fileupload-exists"></i>
+                                                <span class="fileupload-preview"></span>
+                                            </div>
+                                            <span class="btn btn-default btn-file">
+                                                <span class="fileupload-exists">Change</span>
+                                                <span class="fileupload-new">Select file</span>
+                                                <input type="file" name="ArabicLogoUrl" />
+                                            </span>
+                                            <a href="#" class="btn btn-default fileupload-exists" data-dismiss="fileupload">Remove</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div id="w4-profile" class="tab-pane">
+                            <div class="col-md-6 form-group">
+                                <label class="col-sm-4 control-label">Phone 1 <span class="required">*</span></label>
+                                <div class="col-sm-8">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="fa fa-phone"></i>
+                                        </span>
+                                        <input type="text" required class="form-control" 
+                                            name="PhoneNumber1" value="@Model.PhoneNumber1">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label class="col-sm-4 control-label">Phone 2 </label>
+                                <div class="col-sm-8">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="fa fa-phone"></i>
+                                        </span>
+                                        <input type="text" class="form-control" 
+                                            name="PhoneNumber2" value="@Model.PhoneNumber2">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label class="col-sm-4 control-label">Phone 3 </label>
+                                <div class="col-sm-8">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="fa fa-phone"></i>
+                                        </span>
+                                        <input type="text" class="form-control" 
+                                            name="PhoneNumber3" value="@Model.PhoneNumber3">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label class="col-sm-4 control-label">Fax </label>
+                                <div class="col-sm-8">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="fa fa-fax"></i>
+                                        </span>
+                                        <input type="text" class="form-control" 
+                                            name="FaxNumber" value="@Model.FaxNumber">
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div id="w4-billing" class="tab-pane">
+                            <div class="col-md-6 form-group">
+                                <label class="col-sm-4 control-label" for="w4-password">Carrier Prefix</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" 
+                                        name="CarrierPrefix" id="CarrierPrefix" value="@Model.CarrierPrefix">
+                                </div>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label class="col-sm-4 control-label" for="w4-password">Shipper Prefix</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" 
+                                        name="ShipperPrefix" id="ShipperPrefix" value="@Model.ShipperPrefix">
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 form-group">
+                                <label class="col-sm-4 control-label" for="w4-password">Consignee Prefix</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" 
+                                        name="ConsigneePrefix" id="ConsigneePrefix" value="@Model.ConsigneePrefix">
+                                </div>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label class="col-sm-4 control-label" for="w4-password">Notifier Prefix</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" 
+                                        name="NotifierPrefix" id="NotifierPrefix" value="@Model.NotifierPrefix">
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 form-group">
+                                <label class="col-sm-4 control-label" for="w4-password">Contractor Prefix</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" 
+                                        name="ContractorPrefix" id="ContractorPrefix" value="@Model.ContractorPrefix">
+                                </div>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label class="col-sm-4 control-label" for="w4-password">Default Currency</label>
+                                <div class="col-sm-8">
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <input type="hidden" id="CompanyId" name="CompanyId" value="@Model.CompanyId" />
+                    <input type="hidden" id="TabIndex" name="TabIndex" />
+                </form>
+            </div>
+            <div class="panel-footer">
+                <ul class="pager">
+                    <li class="previous disabled">
+                        <a><i class="fa fa-angle-left"></i>Previous</a>
+                    </li>
+                    <li class="finish hidden pull-right">
+                        <a>Finish</a>
+                    </li>
+                    <li class="next">
+                        <a>Next <i class="fa fa-angle-right"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </section>
+    </div>
+</div>
+
+@section scripts{
+    <script src="@Url.Content("~/assets/vendor/bootstrap-wizard/jquery.bootstrap.wizard.js")"></script>
+
+    <script src="@Url.Content("~/Scripts/forms/examples.wizard.js")"></script>
+    <script src="@Url.Content("~/assets/vendor/bootstrap-fileupload/bootstrap-fileupload.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/MasterData/CompanySetup.js")"></script>
+}

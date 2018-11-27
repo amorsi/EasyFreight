@@ -1,0 +1,695 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="SetupModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AspNetUserRoles">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar(max)" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="Discriminator" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Module">
+          <Key>
+            <PropertyRef Name="ModuleId" />
+          </Key>
+          <Property Name="ModuleId" Type="int" Nullable="false" />
+          <Property Name="ModuleName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ModuleNameAr" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ModuleScreen">
+          <Key>
+            <PropertyRef Name="ScreenId" />
+          </Key>
+          <Property Name="ScreenId" Type="int" Nullable="false" />
+          <Property Name="ModuleId" Type="int" Nullable="false" />
+          <Property Name="ScreenName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ScreenNameAr" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="PrefixLastId">
+          <Key>
+            <PropertyRef Name="PrefixForId" />
+          </Key>
+          <Property Name="PrefixForId" Type="tinyint" Nullable="false" />
+          <Property Name="LastId" Type="int" Nullable="false" />
+          <Property Name="LastUpdateDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="PrefixSetup">
+          <Key>
+            <PropertyRef Name="PrefixForId" />
+          </Key>
+          <Property Name="PrefixForId" Type="tinyint" Nullable="false" />
+          <Property Name="PrefixFor" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PrefixChar" Type="varchar" MaxLength="5" />
+          <Property Name="NumberAfterChar" Type="bit" />
+          <Property Name="IncludeMonth" Type="bit" />
+          <Property Name="IncludeYear" Type="bit" />
+          <Property Name="Delimiter" Type="varchar" MaxLength="1" />
+          <Property Name="ResetNumberEvery" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="ScreenAction">
+          <Key>
+            <PropertyRef Name="ScreenId" />
+            <PropertyRef Name="ActionId" />
+          </Key>
+          <Property Name="ScreenId" Type="int" Nullable="false" />
+          <Property Name="ActionId" Type="int" Nullable="false" />
+          <Property Name="TempCol" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="ScreenActionDep">
+          <Key>
+            <PropertyRef Name="ScreenId" />
+            <PropertyRef Name="ActionId" />
+            <PropertyRef Name="DepId" />
+          </Key>
+          <Property Name="ScreenId" Type="int" Nullable="false" />
+          <Property Name="ActionId" Type="int" Nullable="false" />
+          <Property Name="DepId" Type="int" Nullable="false" />
+          <Property Name="TempCol" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="ScreenActionUser">
+          <Key>
+            <PropertyRef Name="ScreenId" />
+            <PropertyRef Name="ActionId" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="ScreenId" Type="int" Nullable="false" />
+          <Property Name="ActionId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="TempCol" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="SecActionLib">
+          <Key>
+            <PropertyRef Name="ActionId" />
+          </Key>
+          <Property Name="ActionId" Type="int" Nullable="false" />
+          <Property Name="ActionName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ActionNameAr" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="UserEmployee">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="EmpId" />
+          </Key>
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="EmpId" Type="int" Nullable="false" />
+          <Property Name="TempCol" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ModuleScreen_Module">
+          <End Role="Module" Type="Self.Module" Multiplicity="1" />
+          <End Role="ModuleScreen" Type="Self.ModuleScreen" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Module">
+              <PropertyRef Name="ModuleId" />
+            </Principal>
+            <Dependent Role="ModuleScreen">
+              <PropertyRef Name="ModuleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PrefixSetup_PrefixLastId">
+          <End Role="PrefixSetup" Type="Self.PrefixSetup" Multiplicity="1" />
+          <End Role="PrefixLastId" Type="Self.PrefixLastId" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="PrefixSetup">
+              <PropertyRef Name="PrefixForId" />
+            </Principal>
+            <Dependent Role="PrefixLastId">
+              <PropertyRef Name="PrefixForId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ScreenAction_ModuleScreen">
+          <End Role="ModuleScreen" Type="Self.ModuleScreen" Multiplicity="1" />
+          <End Role="ScreenAction" Type="Self.ScreenAction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ModuleScreen">
+              <PropertyRef Name="ScreenId" />
+            </Principal>
+            <Dependent Role="ScreenAction">
+              <PropertyRef Name="ScreenId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ScreenAction_SecActionLib">
+          <End Role="SecActionLib" Type="Self.SecActionLib" Multiplicity="1" />
+          <End Role="ScreenAction" Type="Self.ScreenAction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SecActionLib">
+              <PropertyRef Name="ActionId" />
+            </Principal>
+            <Dependent Role="ScreenAction">
+              <PropertyRef Name="ActionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ScreenActionDep_ModuleScreen">
+          <End Role="ModuleScreen" Type="Self.ModuleScreen" Multiplicity="1" />
+          <End Role="ScreenActionDep" Type="Self.ScreenActionDep" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ModuleScreen">
+              <PropertyRef Name="ScreenId" />
+            </Principal>
+            <Dependent Role="ScreenActionDep">
+              <PropertyRef Name="ScreenId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ScreenActionUser_ModuleScreen">
+          <End Role="ModuleScreen" Type="Self.ModuleScreen" Multiplicity="1" />
+          <End Role="ScreenActionUser" Type="Self.ScreenActionUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ModuleScreen">
+              <PropertyRef Name="ScreenId" />
+            </Principal>
+            <Dependent Role="ScreenActionUser">
+              <PropertyRef Name="ScreenId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserEmployee_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="UserEmployee" Type="Self.UserEmployee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserEmployee">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SetupModelStoreContainer">
+          <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Module" EntityType="Self.Module" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ModuleScreen" EntityType="Self.ModuleScreen" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PrefixLastId" EntityType="Self.PrefixLastId" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PrefixSetup" EntityType="Self.PrefixSetup" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ScreenAction" EntityType="Self.ScreenAction" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ScreenActionDep" EntityType="Self.ScreenActionDep" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ScreenActionUser" EntityType="Self.ScreenActionUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SecActionLib" EntityType="Self.SecActionLib" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserEmployee" EntityType="Self.UserEmployee" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ModuleScreen_Module" Association="Self.FK_ModuleScreen_Module">
+            <End Role="Module" EntitySet="Module" />
+            <End Role="ModuleScreen" EntitySet="ModuleScreen" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PrefixSetup_PrefixLastId" Association="Self.FK_PrefixSetup_PrefixLastId">
+            <End Role="PrefixSetup" EntitySet="PrefixSetup" />
+            <End Role="PrefixLastId" EntitySet="PrefixLastId" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ScreenAction_ModuleScreen" Association="Self.FK_ScreenAction_ModuleScreen">
+            <End Role="ModuleScreen" EntitySet="ModuleScreen" />
+            <End Role="ScreenAction" EntitySet="ScreenAction" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ScreenAction_SecActionLib" Association="Self.FK_ScreenAction_SecActionLib">
+            <End Role="SecActionLib" EntitySet="SecActionLib" />
+            <End Role="ScreenAction" EntitySet="ScreenAction" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ScreenActionDep_ModuleScreen" Association="Self.FK_ScreenActionDep_ModuleScreen">
+            <End Role="ModuleScreen" EntitySet="ModuleScreen" />
+            <End Role="ScreenActionDep" EntitySet="ScreenActionDep" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ScreenActionUser_ModuleScreen" Association="Self.FK_ScreenActionUser_ModuleScreen">
+            <End Role="ModuleScreen" EntitySet="ModuleScreen" />
+            <End Role="ScreenActionUser" EntitySet="ScreenActionUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserEmployee_AspNetUsers" Association="Self.FK_UserEmployee_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="UserEmployee" EntitySet="UserEmployee" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SetupModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="PrefixSetup">
+          <Key>
+            <PropertyRef Name="PrefixForId" />
+          </Key>
+          <Property Name="PrefixForId" Type="Byte" Nullable="false" />
+          <Property Name="PrefixFor" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PrefixChar" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="NumberAfterChar" Type="Boolean" />
+          <Property Name="IncludeMonth" Type="Boolean" />
+          <Property Name="IncludeYear" Type="Boolean" />
+          <Property Name="Delimiter" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="ResetNumberEvery" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="PrefixLastId" Relationship="SetupModel.FK_PrefixSetup_PrefixLastId" FromRole="PrefixSetup" ToRole="PrefixLastId" />
+        </EntityType>
+        <EntityContainer Name="SetupEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="PrefixSetups" EntityType="Self.PrefixSetup" />
+          <EntitySet Name="PrefixLastIds" EntityType="SetupModel.PrefixLastId" />
+          <AssociationSet Name="FK_PrefixSetup_PrefixLastId" Association="SetupModel.FK_PrefixSetup_PrefixLastId">
+            <End Role="PrefixSetup" EntitySet="PrefixSetups" />
+            <End Role="PrefixLastId" EntitySet="PrefixLastIds" />
+          </AssociationSet>
+          <EntitySet Name="Modules" EntityType="SetupModel.Module" />
+          <EntitySet Name="ModuleScreens" EntityType="SetupModel.ModuleScreen" />
+          <EntitySet Name="ScreenActions" EntityType="SetupModel.ScreenAction" />
+          <EntitySet Name="ScreenActionDeps" EntityType="SetupModel.ScreenActionDep" />
+          <EntitySet Name="ScreenActionUsers" EntityType="SetupModel.ScreenActionUser" />
+          <EntitySet Name="SecActionLibs" EntityType="SetupModel.SecActionLib" />
+          <AssociationSet Name="FK_ModuleScreen_Module" Association="SetupModel.FK_ModuleScreen_Module">
+            <End Role="Module" EntitySet="Modules" />
+            <End Role="ModuleScreen" EntitySet="ModuleScreens" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ScreenAction_ModuleScreen" Association="SetupModel.FK_ScreenAction_ModuleScreen">
+            <End Role="ModuleScreen" EntitySet="ModuleScreens" />
+            <End Role="ScreenAction" EntitySet="ScreenActions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ScreenActionDep_ModuleScreen" Association="SetupModel.FK_ScreenActionDep_ModuleScreen">
+            <End Role="ModuleScreen" EntitySet="ModuleScreens" />
+            <End Role="ScreenActionDep" EntitySet="ScreenActionDeps" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ScreenActionUser_ModuleScreen" Association="SetupModel.FK_ScreenActionUser_ModuleScreen">
+            <End Role="ModuleScreen" EntitySet="ModuleScreens" />
+            <End Role="ScreenActionUser" EntitySet="ScreenActionUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ScreenAction_SecActionLib" Association="SetupModel.FK_ScreenAction_SecActionLib">
+            <End Role="SecActionLib" EntitySet="SecActionLibs" />
+            <End Role="ScreenAction" EntitySet="ScreenActions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ScreenActionDep_SecActionLib" Association="SetupModel.FK_ScreenActionDep_SecActionLib">
+            <End Role="SecActionLib" EntitySet="SecActionLibs" />
+            <End Role="ScreenActionDep" EntitySet="ScreenActionDeps" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ScreenActionUser_SecActionLib" Association="SetupModel.FK_ScreenActionUser_SecActionLib">
+            <End Role="SecActionLib" EntitySet="SecActionLibs" />
+            <End Role="ScreenActionUser" EntitySet="ScreenActionUsers" />
+          </AssociationSet>
+          <EntitySet Name="UserEmployees" EntityType="SetupModel.UserEmployee" />
+          <EntitySet Name="AspNetUsers" EntityType="SetupModel.AspNetUser" />
+          <AssociationSet Name="FK_UserEmployee_AspNetUsers" Association="SetupModel.FK_UserEmployee_AspNetUsers">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="UserEmployee" EntitySet="UserEmployees" />
+          </AssociationSet>
+          <EntitySet Name="AspNetUserRoles" EntityType="SetupModel.AspNetUserRole" />
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="SetupModel.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserRole" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="PrefixLastId">
+          <Key>
+            <PropertyRef Name="PrefixForId" />
+          </Key>
+          <Property Name="PrefixForId" Type="Byte" Nullable="false" />
+          <Property Name="LastId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="PrefixSetup" Relationship="SetupModel.FK_PrefixSetup_PrefixLastId" FromRole="PrefixLastId" ToRole="PrefixSetup" />
+          <Property Name="LastUpdateDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <Association Name="FK_PrefixSetup_PrefixLastId">
+          <End Type="SetupModel.PrefixSetup" Role="PrefixSetup" Multiplicity="1" />
+          <End Type="SetupModel.PrefixLastId" Role="PrefixLastId" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="PrefixSetup">
+              <PropertyRef Name="PrefixForId" />
+            </Principal>
+            <Dependent Role="PrefixLastId">
+              <PropertyRef Name="PrefixForId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Module">
+          <Key>
+            <PropertyRef Name="ModuleId" />
+          </Key>
+          <Property Name="ModuleId" Type="Int32" Nullable="false" />
+          <Property Name="ModuleName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ModuleNameAr" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ModuleScreens" Relationship="SetupModel.FK_ModuleScreen_Module" FromRole="Module" ToRole="ModuleScreen" />
+        </EntityType>
+        <EntityType Name="ModuleScreen">
+          <Key>
+            <PropertyRef Name="ScreenId" />
+          </Key>
+          <Property Name="ScreenId" Type="Int32" Nullable="false" />
+          <Property Name="ModuleId" Type="Int32" Nullable="false" />
+          <Property Name="ScreenName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ScreenNameAr" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Module" Relationship="SetupModel.FK_ModuleScreen_Module" FromRole="ModuleScreen" ToRole="Module" />
+          <NavigationProperty Name="ScreenActions" Relationship="SetupModel.FK_ScreenAction_ModuleScreen" FromRole="ModuleScreen" ToRole="ScreenAction" />
+          <NavigationProperty Name="ScreenActionDeps" Relationship="SetupModel.FK_ScreenActionDep_ModuleScreen" FromRole="ModuleScreen" ToRole="ScreenActionDep" />
+          <NavigationProperty Name="ScreenActionUsers" Relationship="SetupModel.FK_ScreenActionUser_ModuleScreen" FromRole="ModuleScreen" ToRole="ScreenActionUser" />
+        </EntityType>
+        <EntityType Name="ScreenAction">
+          <Key>
+            <PropertyRef Name="ScreenId" />
+            <PropertyRef Name="ActionId" />
+          </Key>
+          <Property Name="ScreenId" Type="Int32" Nullable="false" />
+          <Property Name="ActionId" Type="Int32" Nullable="false" />
+          <Property Name="TempCol" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="ModuleScreen" Relationship="SetupModel.FK_ScreenAction_ModuleScreen" FromRole="ScreenAction" ToRole="ModuleScreen" />
+          <NavigationProperty Name="SecActionLib" Relationship="SetupModel.FK_ScreenAction_SecActionLib" FromRole="ScreenAction" ToRole="SecActionLib" />
+        </EntityType>
+        <EntityType Name="ScreenActionDep">
+          <Key>
+            <PropertyRef Name="ScreenId" />
+            <PropertyRef Name="ActionId" />
+            <PropertyRef Name="DepId" />
+          </Key>
+          <Property Name="ScreenId" Type="Int32" Nullable="false" />
+          <Property Name="ActionId" Type="Int32" Nullable="false" />
+          <Property Name="DepId" Type="Int32" Nullable="false" />
+          <Property Name="TempCol" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="ModuleScreen" Relationship="SetupModel.FK_ScreenActionDep_ModuleScreen" FromRole="ScreenActionDep" ToRole="ModuleScreen" />
+          <NavigationProperty Name="SecActionLib" Relationship="SetupModel.FK_ScreenActionDep_SecActionLib" FromRole="ScreenActionDep" ToRole="SecActionLib" />
+        </EntityType>
+        <EntityType Name="ScreenActionUser">
+          <Key>
+            <PropertyRef Name="ScreenId" />
+            <PropertyRef Name="ActionId" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="ScreenId" Type="Int32" Nullable="false" />
+          <Property Name="ActionId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
+          <Property Name="TempCol" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="ModuleScreen" Relationship="SetupModel.FK_ScreenActionUser_ModuleScreen" FromRole="ScreenActionUser" ToRole="ModuleScreen" />
+          <NavigationProperty Name="SecActionLib" Relationship="SetupModel.FK_ScreenActionUser_SecActionLib" FromRole="ScreenActionUser" ToRole="SecActionLib" />
+        </EntityType>
+        <EntityType Name="SecActionLib">
+          <Key>
+            <PropertyRef Name="ActionId" />
+          </Key>
+          <Property Name="ActionId" Type="Int32" Nullable="false" />
+          <Property Name="ActionName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ActionNameAr" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ScreenActions" Relationship="SetupModel.FK_ScreenAction_SecActionLib" FromRole="SecActionLib" ToRole="ScreenAction" />
+          <NavigationProperty Name="ScreenActionDeps" Relationship="SetupModel.FK_ScreenActionDep_SecActionLib" FromRole="SecActionLib" ToRole="ScreenActionDep" />
+          <NavigationProperty Name="ScreenActionUsers" Relationship="SetupModel.FK_ScreenActionUser_SecActionLib" FromRole="SecActionLib" ToRole="ScreenActionUser" />
+        </EntityType>
+        <Association Name="FK_ModuleScreen_Module">
+          <End Type="SetupModel.Module" Role="Module" Multiplicity="1" />
+          <End Type="SetupModel.ModuleScreen" Role="ModuleScreen" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Module">
+              <PropertyRef Name="ModuleId" />
+            </Principal>
+            <Dependent Role="ModuleScreen">
+              <PropertyRef Name="ModuleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ScreenAction_ModuleScreen">
+          <End Type="SetupModel.ModuleScreen" Role="ModuleScreen" Multiplicity="1" />
+          <End Type="SetupModel.ScreenAction" Role="ScreenAction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ModuleScreen">
+              <PropertyRef Name="ScreenId" />
+            </Principal>
+            <Dependent Role="ScreenAction">
+              <PropertyRef Name="ScreenId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ScreenActionDep_ModuleScreen">
+          <End Type="SetupModel.ModuleScreen" Role="ModuleScreen" Multiplicity="1" />
+          <End Type="SetupModel.ScreenActionDep" Role="ScreenActionDep" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ModuleScreen">
+              <PropertyRef Name="ScreenId" />
+            </Principal>
+            <Dependent Role="ScreenActionDep">
+              <PropertyRef Name="ScreenId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ScreenActionUser_ModuleScreen">
+          <End Type="SetupModel.ModuleScreen" Role="ModuleScreen" Multiplicity="1" />
+          <End Type="SetupModel.ScreenActionUser" Role="ScreenActionUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ModuleScreen">
+              <PropertyRef Name="ScreenId" />
+            </Principal>
+            <Dependent Role="ScreenActionUser">
+              <PropertyRef Name="ScreenId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ScreenAction_SecActionLib">
+          <End Type="SetupModel.SecActionLib" Role="SecActionLib" Multiplicity="1" />
+          <End Type="SetupModel.ScreenAction" Role="ScreenAction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SecActionLib">
+              <PropertyRef Name="ActionId" />
+            </Principal>
+            <Dependent Role="ScreenAction">
+              <PropertyRef Name="ActionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ScreenActionDep_SecActionLib">
+          <End Type="SetupModel.SecActionLib" Role="SecActionLib" Multiplicity="1" />
+          <End Type="SetupModel.ScreenActionDep" Role="ScreenActionDep" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SecActionLib">
+              <PropertyRef Name="ActionId" />
+            </Principal>
+            <Dependent Role="ScreenActionDep">
+              <PropertyRef Name="ActionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ScreenActionUser_SecActionLib">
+          <End Type="SetupModel.SecActionLib" Role="SecActionLib" Multiplicity="1" />
+          <End Type="SetupModel.ScreenActionUser" Role="ScreenActionUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SecActionLib">
+              <PropertyRef Name="ActionId" />
+            </Principal>
+            <Dependent Role="ScreenActionUser">
+              <PropertyRef Name="ActionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="UserEmployee">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="EmpId" />
+          </Key>
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="EmpId" Type="Int32" Nullable="false" />
+          <Property Name="TempCol" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="SetupModel.FK_UserEmployee_AspNetUsers" FromRole="UserEmployee" ToRole="AspNetUser" />
+        </EntityType>
+        <EntityType Name="AspNetUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="UserName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Discriminator" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="UserEmployees" Relationship="SetupModel.FK_UserEmployee_AspNetUsers" FromRole="AspNetUser" ToRole="UserEmployee" />
+          <NavigationProperty Name="AspNetUserRoles" Relationship="SetupModel.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserRole" />
+        </EntityType>
+        <Association Name="FK_UserEmployee_AspNetUsers">
+          <End Type="SetupModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+          <End Type="SetupModel.UserEmployee" Role="UserEmployee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserEmployee">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="AspNetUserRole">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="RoleId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="SetupModel.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" FromRole="AspNetUserRole" ToRole="AspNetUser" />
+        </EntityType>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+          <End Type="SetupModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="SetupModel.AspNetUserRole" Role="AspNetUserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRole">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SetupModelStoreContainer" CdmEntityContainer="SetupEntities">
+          <EntitySetMapping Name="PrefixSetups">
+            <EntityTypeMapping TypeName="SetupModel.PrefixSetup">
+              <MappingFragment StoreEntitySet="PrefixSetup">
+                <ScalarProperty Name="PrefixForId" ColumnName="PrefixForId" />
+                <ScalarProperty Name="PrefixFor" ColumnName="PrefixFor" />
+                <ScalarProperty Name="PrefixChar" ColumnName="PrefixChar" />
+                <ScalarProperty Name="NumberAfterChar" ColumnName="NumberAfterChar" />
+                <ScalarProperty Name="IncludeMonth" ColumnName="IncludeMonth" />
+                <ScalarProperty Name="IncludeYear" ColumnName="IncludeYear" />
+                <ScalarProperty Name="Delimiter" ColumnName="Delimiter" />
+                <ScalarProperty Name="ResetNumberEvery" ColumnName="ResetNumberEvery" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PrefixLastIds">
+            <EntityTypeMapping TypeName="SetupModel.PrefixLastId">
+              <MappingFragment StoreEntitySet="PrefixLastId">
+                <ScalarProperty Name="LastUpdateDate" ColumnName="LastUpdateDate" />
+                <ScalarProperty Name="LastId" ColumnName="LastId" />
+                <ScalarProperty Name="PrefixForId" ColumnName="PrefixForId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Modules">
+            <EntityTypeMapping TypeName="SetupModel.Module">
+              <MappingFragment StoreEntitySet="Module">
+                <ScalarProperty Name="ModuleNameAr" ColumnName="ModuleNameAr" />
+                <ScalarProperty Name="ModuleName" ColumnName="ModuleName" />
+                <ScalarProperty Name="ModuleId" ColumnName="ModuleId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ModuleScreens">
+            <EntityTypeMapping TypeName="SetupModel.ModuleScreen">
+              <MappingFragment StoreEntitySet="ModuleScreen">
+                <ScalarProperty Name="ScreenNameAr" ColumnName="ScreenNameAr" />
+                <ScalarProperty Name="ScreenName" ColumnName="ScreenName" />
+                <ScalarProperty Name="ModuleId" ColumnName="ModuleId" />
+                <ScalarProperty Name="ScreenId" ColumnName="ScreenId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ScreenActions">
+            <EntityTypeMapping TypeName="SetupModel.ScreenAction">
+              <MappingFragment StoreEntitySet="ScreenAction">
+                <ScalarProperty Name="TempCol" ColumnName="TempCol" />
+                <ScalarProperty Name="ActionId" ColumnName="ActionId" />
+                <ScalarProperty Name="ScreenId" ColumnName="ScreenId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ScreenActionDeps">
+            <EntityTypeMapping TypeName="SetupModel.ScreenActionDep">
+              <MappingFragment StoreEntitySet="ScreenActionDep">
+                <ScalarProperty Name="TempCol" ColumnName="TempCol" />
+                <ScalarProperty Name="DepId" ColumnName="DepId" />
+                <ScalarProperty Name="ActionId" ColumnName="ActionId" />
+                <ScalarProperty Name="ScreenId" ColumnName="ScreenId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ScreenActionUsers">
+            <EntityTypeMapping TypeName="SetupModel.ScreenActionUser">
+              <MappingFragment StoreEntitySet="ScreenActionUser">
+                <ScalarProperty Name="TempCol" ColumnName="TempCol" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ActionId" ColumnName="ActionId" />
+                <ScalarProperty Name="ScreenId" ColumnName="ScreenId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SecActionLibs">
+            <EntityTypeMapping TypeName="SetupModel.SecActionLib">
+              <MappingFragment StoreEntitySet="SecActionLib">
+                <ScalarProperty Name="ActionNameAr" ColumnName="ActionNameAr" />
+                <ScalarProperty Name="ActionName" ColumnName="ActionName" />
+                <ScalarProperty Name="ActionId" ColumnName="ActionId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserEmployees">
+            <EntityTypeMapping TypeName="SetupModel.UserEmployee">
+              <MappingFragment StoreEntitySet="UserEmployee">
+                <ScalarProperty Name="TempCol" ColumnName="TempCol" />
+                <ScalarProperty Name="EmpId" ColumnName="EmpId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="SetupModel.AspNetUser">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="Discriminator" ColumnName="Discriminator" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserRoles">
+            <EntityTypeMapping TypeName="SetupModel.AspNetUserRole">
+              <MappingFragment StoreEntitySet="AspNetUserRoles">
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ReportsAccounting" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="ReportsAccountingEntities" annotation:LazyLoadingEnabled="true">
+    <FunctionImport Name="GetAccountSummaryByParentAccId" ReturnType="Collection(ReportsAccounting.GetAccountSummaryByParentAccId_Result)">
+      <Parameter Name="ParentAccId" Mode="In" Type="String" />
+      <Parameter Name="FromDate" Mode="In" Type="DateTime" />
+      <Parameter Name="ToDate" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="GetAccountDetailsByAccId" ReturnType="Collection(ReportsAccounting.GetAccountDetailsByAccId_Result)">
+      <Parameter Name="AccId" Mode="In" Type="String" />
+      <Parameter Name="FromDate" Mode="In" Type="String" />
+      <Parameter Name="ToDate" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="AccRpt_TopViewBalance2" ReturnType="Collection(ReportsAccounting.AccRpt_TopViewBalance2_Result)">
+      <Parameter Name="FromDate" Mode="In" Type="DateTime" />
+      <Parameter Name="ToDate" Mode="In" Type="DateTime" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="GetAccountSummaryByParentAccId_Result">
+    <Property Type="String" Name="AccountId" Nullable="false" MaxLength="15" />
+    <Property Type="String" Name="AccountNameAr" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="AccountNameEn" Nullable="false" MaxLength="100" />
+    <Property Type="Decimal" Name="DebitAmout" Nullable="true" Precision="38" Scale="2" />
+    <Property Type="Decimal" Name="CreditAmount" Nullable="true" Precision="38" Scale="2" />
+    <Property Type="String" Name="CurrencySign" Nullable="false" MaxLength="10" />
+  </ComplexType>
+  <ComplexType Name="GetAccountDetailsByAccId_Result">
+    <Property Type="String" Name="AccountId" Nullable="false" MaxLength="15" />
+    <Property Type="String" Name="AccountNameAr" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="AccountNameEn" Nullable="false" MaxLength="100" />
+    <Property Type="Decimal" Name="DebitAmount" Nullable="false" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="CreditAmount" Nullable="false" Precision="18" Scale="2" />
+    <Property Type="String" Name="CurrencySign" Nullable="false" MaxLength="10" />
+    <Property Type="DateTime" Name="CreateDate" Nullable="false" Precision="23" />
+    <Property Type="String" Name="CreateBy" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="TransactionName" Nullable="true" />
+    <Property Type="String" Name="TransactionNameAr" Nullable="true" />
+    <Property Type="String" Name="UserName" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="AccRpt_TopViewBalance2_Result">
+    <Property Type="String" Name="ParentAccountId" Nullable="true" MaxLength="15" />
+    <Property Type="String" Name="AccountNameEn" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="AccountNameAr" Nullable="true" MaxLength="100" />
+    <Property Type="Decimal" Name="EGP" Nullable="true" Precision="38" Scale="2" />
+    <Property Type="Decimal" Name="USD" Nullable="true" Precision="38" Scale="2" />
+    <Property Type="Decimal" Name="EUR" Nullable="true" Precision="38" Scale="2" />
+    <Property Type="Decimal" Name="GBP" Nullable="true" Precision="38" Scale="2" />
+  </ComplexType>
+</Schema>

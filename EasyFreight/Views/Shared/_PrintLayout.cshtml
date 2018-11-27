@@ -1,0 +1,42 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>_PrintLayout</title>
+    <link rel="stylesheet" href="@Url.Content("~/assets/vendor/bootstrap/css/bootstrap.css")" />
+    <link rel="stylesheet" href="@Url.Content("~/Content/theme-custom.css")" />
+    <link rel="stylesheet" href="@Url.Content("~/assets/vendor/font-awesome/css/font-awesome.min.css")" />
+    @*<link rel="stylesheet" href="@Url.Content("~/Content/theme.css")" />*@
+    <style>
+        tfoot { display: table-footer-group; }
+
+    </style>
+</head>
+<body>
+    <div id="wrap">
+        <div id="header" class="col-xs-12">
+            <div class="col-xs-6">
+                <img src="@Url.Content("~/images/EnglishLogo.png")" height="100" width="250" />
+            </div>
+            <div class="col-xs-6" style="text-align: right;">
+                <img src="@Url.Content("~/images/ArabicLogo.png")" height="100" width="250" />
+            </div>
+        </div>
+
+
+        <div id="main" style="min-height:1100px;">
+            @RenderBody()
+        </div>
+
+    </div>
+    
+    <div id="footer"> 
+        @{Html.RenderAction("GetPrintFooter", "Home");} 
+    </div>
+</body>
+</html>

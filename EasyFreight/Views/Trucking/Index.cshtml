@@ -1,0 +1,230 @@
+﻿@{
+    ViewBag.Title = "Trucking Orders";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .select2-drop {
+        z-index: 99959;
+    }
+
+    .datepicker-dropdown {
+        z-index: 99959 !important;
+    }
+
+    .border {
+        border: 1px solid #888;
+        padding-top: 2px;
+        text-align: center;
+        vertical-align: central;
+    }
+
+    .default-icon {
+        color: #777;
+    }
+
+    .clicked-icon {
+        color: #0088cc;
+    }
+
+
+    
+</style>
+
+<header class="page-header">
+    <h2>Trucking Orders</h2>
+
+    <div class="right-wrapper pull-right">
+        <ol class="breadcrumbs">
+            <li>
+                <a href="@Url.Content("~/Home/Index")">
+                    <i class="fa fa-home"></i>
+                </a>
+            </li>
+            <li><span>Trucking Orders</span></li>
+        </ol>
+
+        <a class="sidebar-right-toggle" data-open="sidebar-right"><i class="fa fa-chevron-left"></i></a>
+    </div>
+</header>
+<section class="panel">
+    <header class="panel-heading">
+        <div class="panel-actions">
+            <a href="#" class=""></a>
+            <a href="#" class=""></a>
+        </div>
+
+        <h2 class="panel-title"></h2>
+    </header>
+
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="mb-md">
+                    <a href="javascript:void(0)" class="modal-with-form" id="advsearchlink">
+                        <i class="fa fa-search fa-2x"></i><span style="padding-left: 8px">Advanced Search</span>
+                    </a>
+                </div>
+            </div>
+            <div class=" col-sm-1">
+                <div class="col-sm-12 border">
+                    <a id="ClearSearch" class="filter0 default-icon" title="Clear Search" href="javascript:void(0)">
+                        <i class="fa fa-eraser fa-2x"></i>
+                    </a>
+                </div>
+            </div>
+            <div class=" col-sm-3">
+                <div class="col-sm-3 border">
+                    <a id="AllType" class="filter1 clicked-icon" orderfrom="0" title="All" href="javascript:void(0)">
+                        <i class="fa fa-bars fa-2x"></i>
+                    </a>
+                </div>
+                <div class="col-sm-3 border">
+                    <a id="AirOnly" class="filter1 default-icon" orderfrom="1" title="Export" href="javascript:void(0)">
+                        <i class="fa fa-level-up fa-2x "></i>
+                    </a>
+                </div>
+                <div class="col-sm-3 border">
+                    <a id="shipOnly" href="javascript:void(0)" orderfrom="2" class="filter1 default-icon" title="Import">
+                        <i class="fa fa-level-down fa-2x"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div id="tbResult">
+            @Html.Partial("~/Views/Trucking/_ResultTable.cshtml")
+        </div>
+
+
+    </div>
+
+
+</section>
+
+<div id="modalForm" class="modal-block modal-block-lg mfp-hide">
+    <section class="panel">
+        <header class="panel-heading">
+            <div class="panel-actions">
+                <button class="modal-dismiss" data-dismiss="modal"><i class="fa fa-times"></i></button>
+            </div>
+            <h2 class="panel-title">Advanced Search</h2>
+        </header>
+        <div id="searchdiv" class="panel-body">
+        </div>
+        <footer class="panel-footer">
+            <div class="row">
+                <div class="col-md-12 text-right">
+                    <input type="button" class="btn btn-primary search-modal-confirm" value="Search" />
+                    <button class="btn btn-default modal-dismiss">Cancel</button>
+                </div>
+            </div>
+        </footer>
+    </section>
+</div>
+
+<div id="modalAnim" class="modal-block modal-block-lg mfp-hide">
+    <section class="panel">
+        <header class="panel-heading">
+            <div class="panel-actions">
+                <button class="modal-dismiss" data-dismiss="modal"><i class="fa fa-times"></i></button>
+            </div>
+            <h2 class="panel-title">Trucking Order Information</h2>
+        </header>
+        <div class="panel-body">
+            <div class="modal-wrapper">
+                <div id="ModalContent" class="modal-text">
+                </div>
+            </div>
+        </div>
+        <footer class="panel-footer">
+            <div class="row">
+                <div class="col-md-12 text-right">
+                    <a  class="btn btn-info" role="button" href="@Url.Action("PrintDetails","Trucking")">Print</a>
+                    <button class="btn btn-default modal-dismiss" data-dismiss="modal">Close</button>
+
+                </div>
+            </div>
+        </footer>
+    </section>
+</div>
+
+<div id="modelClose" class="modal-block modal-header-color modal-block-info mfp-hide">
+    <section class="panel">
+        <header class="panel-heading">
+            <h2 class="panel-title">Are you sure?</h2>
+        </header>
+        <div class="panel-body">
+            <div class="modal-wrapper">
+                <div class="modal-text">
+                    <p>Are you sure that you want to close this order?</p>
+                </div>
+            </div>
+        </div>
+        <footer class="panel-footer">
+            <div class="row">
+                <div class="col-md-12 text-right">
+                    <button id="btnCloseOrder" class="btn btn-info modal-confirm">Confirm</button>
+                    <button id="dialogCancel" class="btn btn-default modal-dismiss">Cancel</button>
+                </div>
+            </div>
+        </footer>
+    </section>
+</div>
+
+<div id="modelUnavailable" class="modal-block mfp-hide">
+    <section class="panel">
+        <header class="panel-heading">
+            <h2 class="panel-title">Error </h2>
+        </header>
+        <div class="panel-body">
+            <div class="modal-wrapper">
+                <div class="modal-text">
+                    <p>Cannot cancel this order it's status is Closed </p>
+                </div>
+            </div>
+        </div>
+        <footer class="panel-footer">
+            <div class="row">
+                <div class="col-md-12 text-right">
+                    <button id="dialogUnavailable" class="btn btn-default modal-dismiss">Cancel</button>
+                </div>
+            </div>
+        </footer>
+    </section>
+</div>
+
+<div id="modelRoll" class="modal-block modal-header-color modal-block-warning mfp-hide">
+    <section class="panel">
+        <header class="panel-heading">
+            <h2 class="panel-title">Are you sure?</h2>
+        </header>
+        <div class="panel-body">
+            <div class="modal-wrapper">
+                <div class="modal-text">
+                    <p>Are you sure that you want to Roll this order?</p>
+                </div>
+            </div>
+        </div>
+        <footer class="panel-footer">
+            <div class="row">
+                <div class="col-md-12 text-right">
+                    <button id="dialogConfirmRoll" class="btn btn-warning modal-confirmRoll">Confirm</button>
+                    <button id="dialogCancel" class="btn btn-default modal-dismiss">Cancel</button>
+                </div>
+            </div>
+        </footer>
+    </section>
+</div>
+
+<input id="deletedId" type="hidden" />
+@section scripts{
+
+      <link href="@Url.Content("~/assets/vendor/jquery-datatables/responsive.dataTables.min.css")" rel="stylesheet" />
+    <script src="@Url.Content("~/assets/vendor/jquery-datatables/dataTables.responsive.min.js")"></script> 
+    <script src="@Url.Content("~/assets/vendor/jquery-datatables/pdfmake.min.js")"></script>
+    <script src="@Url.Content("~/assets/vendor/jquery-datatables/vfs_fonts.js")"></script> 
+    <script src="@Url.Content("~/assets/vendor/jquery-datatables/buttons.print.min.js")"></script>
+    <script src="@Url.Content("~/assets/vendor/jquery-datatables/buttons.colVis.min.js")"></script>
+
+    <script src="@Url.Content("~/Scripts/Trucking/IndexScript.js")"></script>
+<script src="@Url.Content("~/Scripts/Trucking/TruckingCommon.js")"></script>
+}

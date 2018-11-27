@@ -1,0 +1,31 @@
+﻿@model List<EasyFreight.ViewModel.OperationContainerVm>
+ @{
+     int _index =1;
+     }
+<table class="table table-bordered table-striped mb-none" id="datatable-default">
+    <thead>
+        <tr>
+            <th>#</th>
+             <th> Type</th>
+            <th>Container No </th>
+            <th>Seal No. </th>
+            <th>G W</th>
+            <th>N W</th>
+            <th>Packages</th> 
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@(_index++)</td>
+            <th>@item.ContainerTypeName</th>
+            <td>@item.ContainerNumber</td>
+            <td>@item.SealNumber</td>
+            <td>@item.GrossWeight</td>
+            <td>@item.NetWeight</td>
+            <td>@item.NumberOfPackages (@item.PackageTypeName)</td> 
+        </tr>
+    }
+        </tbody>
+</table>

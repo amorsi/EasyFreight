@@ -1,0 +1,238 @@
+﻿@model EasyFreight.ViewModel.TruckingOrderDetailVm
+<style>
+    textarea {
+    border: none;
+    background-color: transparent;
+    resize: none;
+    outline: none;
+}
+</style>
+<section class="panel panel-primary">
+    <header class="panel-heading">
+        <div class="panel-actions">
+            <a href="#"></a>
+            <a href="#"></a>
+        </div>
+        <h2 class="panel-title">Trucking Order</h2>
+    </header>
+    <div class="panel-body">
+        <div class="col-sm-6 col-xs-6 form-group">
+            <label class="col-md-5 col-xs-5 control-label">Trucking Code</label>
+            <div class="col-md-7 col-xs-7 ">
+                <span class="text-dark">@Model.TruckingOrderCode</span>
+            </div>
+        </div>
+        <div class="col-sm-6 col-xs-6 form-group">
+            <label class="col-md-5 col-xs-5 control-label">Operation Code</label>
+            <div class="col-md-7 col-xs-7 ">
+                <span class="text-dark">@Model.OperationCode</span>
+            </div>
+        </div>
+        <div class="col-sm-6 col-xs-6 form-group">
+            <label class="col-md-5 col-xs-5 control-label">Department</label>
+            <div class="col-md-7 col-xs-7 ">
+                <span class="text-dark">@(Model.OrderFrom == 1 ? "Export" : "Import")</span>
+            </div>
+        </div>
+        <div class="col-sm-6 col-xs-6 form-group">
+            <label class="col-md-5 col-xs-5 control-label">Booking Number</label>
+            <div class="col-md-7 col-xs-7 ">
+                <span class="text-dark">@Model.BookingNo</span>
+            </div>
+        </div>
+        <div class="col-sm-6 col-xs-6 form-group">
+            <label class="col-md-5 col-xs-5 control-label">From</label>
+            <div class="col-md-7 col-xs-7 ">
+                <span class="text-dark">@Model.FromAreaName</span>
+            </div>
+        </div>
+        <div class="col-sm-6 col-xs-6 form-group">
+            <label class="col-md-5 col-xs-5 control-label">To</label>
+            <div class="col-md-7 col-xs-7 ">
+                <span class="text-dark">@Model.ToAreaName</span>
+            </div>
+        </div>
+        <div class="col-sm-6 col-xs-6 form-group">
+            <label class="col-md-5 col-xs-5 control-label">Carrier</label>
+            <div class="col-md-7 col-xs-7 ">
+                <span class="text-dark">@Model.CarrierNameEn</span>
+            </div>
+        </div>
+        <div class="col-sm-6 col-xs-6 form-group">
+            <label class="col-md-5 col-xs-5 control-label">Containers</label>
+            <div class="col-md-7 col-xs-7 ">
+                <span class="text-dark">@Model.ContainersSummary</span>
+            </div>
+        </div>
+        <div class="col-sm-6 col-xs-6 form-group">
+            <label class="col-md-5 col-xs-5 control-label">Need Arrive Date</label>
+            <div class="col-md-7 col-xs-7 ">
+                <span class="text-dark">@Model.NeedArriveDate.ToString("dd/MM/yyyy")</span>
+            </div>
+        </div>
+        <div class="col-sm-6 col-xs-6 form-group">
+            <label class="col-md-5 col-xs-5 control-label">Need Arrive Time</label>
+            <div class="col-md-7 col-xs-7 ">
+                <span class="text-dark">@Model.NeedArriveTime.ToString(@"h\:mm") </span>
+            </div>
+        </div>
+        <div class="col-sm-6 col-xs-6 form-group">
+            <label class="col-md-5 col-xs-5 control-label">Client</label>
+            <div class="col-md-7 col-xs-7 ">
+                <span class="text-dark">@Model.ClientName</span>
+            </div>
+        </div>
+        <div class="col-sm-6 col-xs-6 form-group">
+            <label class="col-md-5 col-xs-5 control-label">Client Address</label>
+            <div class="col-md-7 col-xs-7 ">
+                <span class="text-dark">@Model.ShipFromAddress</span>
+            </div>
+        </div>
+        <div class="col-sm-6 col-xs-6 form-group">
+            <label class="col-md-5 col-xs-5 control-label">Create Date</label>
+            <div class="col-md-7 col-xs-7 ">
+                <span class="text-dark">@Model.CreateDate.Value.ToString("d-MM-yyyy HH:mm")</span>
+            </div>
+        </div>
+        <div class="col-sm-6 col-xs-6 form-group">
+            <label class="col-md-5 col-xs-5 control-label">Status</label>
+            <div class="col-md-7 col-xs-7 ">
+                @switch (@Model.StatusId)
+                {
+                    case 1:
+                        <span class="text-dark">New</span>
+                        break;
+                    case 2:
+                    <span class="text-dark">Open</span>
+                        break;
+                    case 3:
+                    <span class="text-dark">Close</span>
+                        break;
+                    case 4:
+                    <span class="text-dark">Canceled</span>
+                        break;
+
+                }
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="panel panel-info">
+    <header class="panel-heading">
+        <div class="panel-actions">
+            <a href="#"></a>
+            <a href="#"></a>
+        </div>
+
+        <h2 class="panel-title">Trucking Containers</h2>
+    </header>
+    <div class="panel-body">
+        @{Html.RenderPartial("~/Views/Operation/_ViewContainers.cshtml", Model.OperationContainers);}
+        <table class="table table-striped mb-none"> </table>
+    </div>
+</section>
+
+@if (!string.IsNullOrEmpty(Model.ContractorNameEn))
+{
+    <section class="panel panel-info">
+        <header class="panel-heading">
+            <div class="panel-actions">
+                <a href="#"></a>
+                <a href="#"></a>
+            </div>
+            <h2 class="panel-title">Trucking Details</h2>
+        </header>
+        <div class="panel-body">
+            <div class="col-sm-12 col-xs-12 form-group">
+                <label class="col-md-2 col-xs-2 control-label">Contractor</label>
+                <div class="col-md-5 col-xs-5">
+                    <span class="text-dark">@Model.ContractorNameEn</span>
+                </div>
+            </div>
+
+
+
+            <div class="col-sm-6 col-xs-6 form-group">
+                <label class="col-md-5 col-xs-5 control-label">Driver Name</label>
+                <div class="col-md-7 col-xs-7 ">
+                    <span class="text-dark">@Model.DriverName</span>
+                </div>
+            </div>
+
+            <div class="col-sm-6 col-xs-6 form-group">
+                <label class="col-md-5 col-xs-5 control-label">Driver Cellphone </label>
+                <div class="col-md-7 col-xs-7 ">
+                    <span class="text-dark">@Model.DriverMobile</span>
+                </div>
+            </div>
+            <div class="col-sm-6 col-xs-6 form-group">
+                <label class="col-md-5 col-xs-5 control-label">Arrived Date </label>
+                <div class="col-md-7 col-xs-7 ">
+                    <span class="text-dark">@(Model.ArriveDate == null ? "" : Model.ArriveDate.Value.ToString("dd/MM/yyyy"))</span>
+                </div>
+            </div>
+
+
+            <div class="col-sm-6 col-xs-6 form-group">
+                <label class="col-md-5 col-xs-5 control-label">Arrived Time</label>
+                <div class="col-md-7 col-xs-7 ">
+                    <span class="text-dark">@(Model.ArriveTime == null ? "" : Model.ArriveTime.Value.ToString(@"h\:mm"))</span>
+                </div>
+            </div>
+            <div class="col-sm-6 col-xs-6 form-group">
+                <label class="col-md-5 col-xs-5 control-label">Leave client Date</label>
+                <div class="col-md-7 col-xs-7 ">
+                    <span class="text-dark">@(Model.LeaveDate == null ? "" : Model.LeaveDate.Value.ToString("dd/MM/yyyy"))</span>
+                </div>
+            </div>
+
+
+            <div class="col-sm-6 col-xs-6 form-group">
+                <label class="col-md-5 col-xs-5 control-label">Leave client Time  </label>
+                <div class="col-md-7 col-xs-7 ">
+                    <span class="text-dark">@(Model.LeaveTime == null ? "" : Model.LeaveTime.Value.ToString(@"h\:mm")) </span>
+                </div>
+            </div>
+            <div class="col-sm-6 col-xs-6 form-group">
+                <label class="col-md-5 col-xs-5 control-label">Loaded Date</label>
+                <div class="col-md-7 col-xs-7 ">
+                    <span class="text-dark">@(Model.LoadedDate == null ? "" : Model.LoadedDate.Value.ToString("dd/MM/yyyy"))</span>
+                </div>
+            </div>
+
+
+            <div class="col-sm-6 col-xs-6 form-group">
+                <label class="col-md-5 col-xs-5 control-label">Loaded Time</label>
+                <div class="col-md-7 col-xs-7 ">
+                    <span class="text-dark">@(Model.LoadedTime == null ? "" : Model.LoadedTime.Value.ToString(@"h\:mm"))</span>
+                </div>
+            </div>
+
+   <div class="col-sm-12 col-xs-12 form-group">
+                <label class="col-md-2 col-xs-2 control-label">Notes</label>
+                <div class="col-md-10 col-xs-10 ">
+                   <textarea rows="5"   style="overflow:hidden"> @Model.Notes</textarea>
+                </div>
+            </div>
+
+
+        </div>
+    </section>
+    
+    <section class="panel panel-info">
+        <header class="panel-heading">
+            <div class="panel-actions">
+                <a href="#"></a>
+                <a href="#"></a>
+            </div>
+
+            <h2 class="panel-title">Trucking Cost</h2>
+        </header>
+        <div class="panel-body">
+            @{Html.RenderPartial("~/Views/Trucking/_ViewTruckingCost.cshtml", Model.TruckingOrderCosts);}
+        </div>
+    </section>
+}
+

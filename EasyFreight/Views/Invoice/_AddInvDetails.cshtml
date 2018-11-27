@@ -1,0 +1,130 @@
+﻿@model EasyFreight.ViewModel.InvoiceVm
+
+@{
+    int index = 0, totalIndex = 0;
+
+}
+<table id="tbinvdetail" class="table table-striped mb-none">
+    <thead>
+        <tr><th class="index" style="width:3px;">No.</th>
+            <th   ></th> 
+            <th>Description</th>
+            <th>Amount</th>
+            <th>Print Description</th>
+            <th>Exchange</th>
+            <th>Amount (<span class="currsign">@Model.CurrencySign</span>) </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.InvoiceDetails)
+        {
+            <tr>
+                <td class="index" style="width:3px;"> @(index+1) 
+                 </td>
+                <td class="index2" > 
+                    <input class="rowselect" disabled type="checkbox" @(item.InvDetailId != 0 ? "checked" : "") />
+                    <input type="hidden" name="InvoiceDetails[@index].InvDetailId" value="@item.InvDetailId" />
+                    <input type="hidden" class="selected" name="InvoiceDetails[@index].IsSelected" value="@item.IsSelected" />
+                    <input type="hidden" name="InvoiceDetails[@index].InvoiceId" value="@Model.InvoiceId" />
+                    <input type="hidden" name="InvoiceDetails[@index].ItemOrder" class="tdIndx" value="@(index+1)" />
+                </td>
+               
+                <td>
+                    <span class="text-dark">@item.CostName</span>
+                    <input type="hidden" name="InvoiceDetails[@index].CostFkId" value="@item.CostFkId" />
+                    <input type="hidden" name="InvoiceDetails[@index].FkType" value="@item.FkType" />
+                </td>
+                <td>
+                    <span class="text-dark">@item.MainAmount  @item.MainCurrSign</span>
+                    <input type="hidden" class="mainamount" name="InvoiceDetails[@index].MainAmount" value="@item.MainAmount" />
+                    <input type="hidden" name="InvoiceDetails[@index].MainCurrencyId" value="@item.MainCurrencyId" class="invcurr"/>
+                </td>
+                  <td> 
+                     <input type="text"  name="InvoiceDetails[@index].PrintedTitle"  @(item.InvDetailId == 0 ? "disabled" : "") class="form-control" value="@(string.IsNullOrEmpty(item.PrintedTitle)?item.CostName:item.PrintedTitle)"> 
+                </td>
+                <td>
+                    <div class="form-group">
+                        <input type="text" name="InvoiceDetails[@index].ExchangeRate"
+                               @(item.InvDetailId == 0 ? "disabled" : "")
+                               class="form-control onlyNumbers exchange" value="@item.ExchangeRate">
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group">
+                        <input type="text" name="InvoiceDetails[@index].InvoiceAmount"
+                               @(item.InvDetailId == 0 ? "disabled" : "")
+                               class="form-control onlyNumbers invamount" value="@item.InvoiceAmount">
+                    </div>
+                    <input type="hidden" class="invcurrid" name="InvoiceDetails[@index].CurrencyId" value="@Model.InvCurrencyId" />
+                </td>
+            </tr>
+
+            index++;
+        }
+
+    </tbody>
+</table>
+
+<div class="invoice-summary">
+    <div class="row">
+        <div class="col-sm-4 col-sm-offset-8">
+            <table class="table h5 text-dark" >
+                <tbody>
+                    @*<tr class="b-top-none">
+                            <td colspan="2">Subtotal</td>
+                            <td class="text-left">$73.00</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">Shipping</td>
+                            <td class="text-left">$0.00</td>
+                        </tr>*@
+                    @foreach (var item in Model.InvoiceTotals) //AR Invoice .. not AP
+                    {
+                        if (Model.InvoiceType == 0)
+                        {
+                            <tr class="b-top-none">
+                                <td colspan="2">Subtotal</td>
+                                <td class="text-left suminv">@item.TotalBeforeTax</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">Tax</td>
+                                <td class="text-left">
+                                    <input type="text" name="InvoiceTotals[@totalIndex].TaxDepositAmount"
+                                           class="form-control onlyNumbers taxdeposit" value="@item.TaxDepositAmount">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">VAT  (14%)</td>
+                                <td class="text-left">
+                                    <input type="text" name="InvoiceTotals[@totalIndex].VatTaxAmount"
+                                           class="form-control onlyNumbers vat" value="@item.VatTaxAmount">
+                                </td>
+                            </tr>
+                        }
+
+                        <tr class="h4">
+                            <td colspan="2">Grand Total  (<span class="currsign">@Model.CurrencySign</span>)</td>
+                            <td class="text-left">
+                                <span class="suminvaftertax"> @item.TotalAmount </span>
+
+                                <input type="hidden" class="invcurrid" name="InvoiceTotals[@totalIndex].CurrencyId"
+                                       value="@item.CurrencyId">
+                                <input type="hidden" class="suminvhiddenaftertax" name="InvoiceTotals[@totalIndex].TotalAmount"
+                                       value="@item.TotalAmount">
+                                <input type="hidden" class="currsign" name="InvoiceTotals[@totalIndex].CurrencySign"
+                                       value="@(string.IsNullOrEmpty(item.CurrencySign) ? Model.CurrencySign : item.CurrencySign  )">
+
+                                <input type="hidden" class="suminvhidden" name="InvoiceTotals[@totalIndex].TotalBeforeTax"
+                                       value="@item.TotalBeforeTax">
+                            </td>
+                        </tr>
+                        totalIndex++;
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+ 

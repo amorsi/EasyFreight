@@ -1,0 +1,167 @@
+﻿@model List<EasyFreight.ViewModel.CCCashDepositVm>
+@{
+    int index = 1;
+}
+<section class="panel">
+    <header class="panel-heading">
+        <div class="panel-actions">
+            <a class="" href="#"></a>
+            <a class="" href="#"></a>
+        </div>
+        <h2 class="panel-title">CC Cash Deposit Receipts</h2>
+    </header>
+    <div class="panel-body">
+        <div class="table-responsive">
+            <table id="tbcccashdeplist" class="table table-striped mb-none">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Receipt Code</th>
+                        <th>Receipt Amount</th>
+                        <th>Receipt Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@index</td>
+                            <td>@item.ReceiptCode</td>
+                            <td>@item.ReceiptAmount  @item.CurrencySign</td>
+                            <td>@item.CreateDate.ToString("dd/MM/yyyy")</td>
+
+                        </tr>
+                        index++;
+
+                    }
+                </tbody>
+                @if (Model.Count > 0)
+                {
+                    <tfoot>
+                        <tr>
+                            <td>Total</td>
+                            <td></td>
+                            <td>
+                                <table>
+                                    @foreach (var item in Model.Select(x => x.CurrencySign).Distinct())
+                                    {
+                                        <tr>
+                                            <td>
+
+                                                @Model.Where(x => x.CurrencySign == item).Sum(x => x.ReceiptAmount)  @item
+                                            </td>
+                                        </tr>
+                                    }
+                                </table>
+                            </td>
+                        </tr>
+                    </tfoot>
+                }
+            </table>
+        </div>
+
+
+    </div>
+</section>
+
+@if (ViewBag.CashSettlement != null)
+{
+    <section class="panel">
+        <header class="panel-heading">
+            <div class="panel-actions">
+                <a class="" href="#"></a>
+                <a class="" href="#"></a>
+            </div>
+            <h2 class="panel-title">CC Cash Deposit settlement</h2>
+        </header>
+        <div class="panel-body">
+            <table class="table h5 text-dark">
+                <thead>
+                    <tr>
+                        <td>Currency</td>
+                        <td>Deposit Amount</td>
+                        <td>A/P Invoices Amount</td>
+                        <td>Amount Due</td>
+                        <td>Actions</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        decimal apAmount = 0;
+                        Dictionary<string, decimal> apTotals = ViewBag.CCInvTotal as Dictionary<string, decimal>;
+
+                        if (ViewBag.DepositTotal as Dictionary<string, decimal> != null)
+                        {
+                            foreach (var item in ViewBag.DepositTotal as Dictionary<string, decimal>)
+                            {
+                                if (apTotals.Keys.Contains(item.Key))
+                                {
+                                    apAmount = apTotals[item.Key];
+                                }
+                                else
+                                {
+                                    apAmount = 0;
+                                }
+                                <tr id="@ViewBag.OperId">
+                                    <td>@item.Key</td>
+                                    <td>@item.Value</td>
+                                    <td>@apAmount</td>
+                                    <td>@(item.Value - apAmount)</td>
+
+                                    <td>
+                                        <input type="hidden" class="cccashdepdiff" value="@(item.Value - apAmount)">
+
+                                        @if (item.Value - apAmount > 0 || item.Value - apAmount < 0)
+                                        {
+                                            <input type="button" id="ccsettlementbtn" class="btn btn-primary" value="Custom Clearance settlement" />
+                                        }
+
+                                    </td>
+                                </tr>
+                            }
+                        }
+
+                    }
+                    
+                </tbody>
+                @*<tbody>
+                    <tr class="b-top-none">
+                        <td colspan="2">Cash Deposit Total</td>
+                        <td class="text-left">@ViewBag.DepositTotal @ViewBag.Currency</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">AP Invoices</td>
+                        <td class="text-left">@ViewBag.CCInvTotal @ViewBag.Currency</td>
+                    </tr>
+                    @if (ViewBag.CashSettlement != 0)
+                {
+                        <tr>
+                            <td colspan="2">Cash Settlement</td>
+                            <td class="text-left">@ViewBag.CashSettlement @ViewBag.Currency</td>
+                        </tr>
+                    }
+                    <tr class="h4">
+                        <td colspan="2">Amount Due</td>
+                        <td class="text-left">
+                            @(ViewBag.DepositTotal - ViewBag.CCInvTotal - ViewBag.CashSettlement)  @ViewBag.Currency
+                        </td>
+                    </tr>
+                    @if (ViewBag.DepositTotal - ViewBag.CCInvTotal - ViewBag.CashSettlement != 0)
+                {
+                        <tr id="@ViewBag.OperId" class="h4">
+                            <td colspan="2"></td>
+                            <td class="text-left">
+                                <input type="button" id="ccsettlementbtn" class="btn btn-primary" value="Custom Clearance settlement" />
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>*@
+            </table>
+
+            @*<input type="hidden" id="cccashdepdiff" value="@(ViewBag.DepositTotal - ViewBag.CCInvTotal)">*@
+
+        </div>
+    </section>
+
+}

@@ -1,0 +1,84 @@
+﻿@model List<EasyFreight.ViewModel.CashInInvoiceVm>
+
+@{
+    int index = 0;
+
+}
+
+<table id="tbinvdetail" class="table table-striped mb-none">
+    <thead>
+        <tr>
+            <th></th>
+            <th>Invoice No.</th>
+            <th>Oper. Code</th>
+            @if ( Model != null && Model.Count > 0)
+            {
+                if (!string.IsNullOrEmpty(Model.FirstOrDefault().HouseBL))
+                {
+                
+                    <th>HBL</th>
+                    
+                }
+            }
+
+            <th>Invoice Amount</th>
+            <th width="15%">@(ViewBag.CashRecTitle.ToString().ToLower().Contains("out") ? "Paid Amount" : "Collected Amount")</th>
+            <th width="15%">Amount Due</th>
+            <th width="10%">@(ViewBag.CashRecTitle.ToString().ToLower().Contains("out") ? " Amount To Pay" : "Amount To Collect")</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <input class="rowselect" disabled type="checkbox" @(item.IsSelected ? "checked" : "") />
+                    <input type="hidden" name="CashInReceiptInvs[@index].InvoiceId" value="@item.InvoiceId" />
+                    <input type="hidden" name="CashInReceiptInvs[@index].AgentNoteId" value="@item.AgentNoteId" />
+                    <input type="hidden" class="selected" name="CashInReceiptInvs[@index].IsSelected" value="@item.IsSelected" />
+                    <input type="hidden" name="CashInReceiptInvs[@index].ReceiptId" value="@item.ReceiptId" />
+
+                </td>
+                <td>
+                    <span class="text-dark">@(string.IsNullOrEmpty(item.InvoiceCode) ? item.AgentNoteCode : item.InvoiceCode)</span>
+                </td>
+                <td>
+                    <span class="text-dark">@item.OperationCode</span>
+                </td>
+                @if (!string.IsNullOrEmpty(item.HouseBL))
+                {
+                    <td>
+                        <span class="text-dark">@item.HouseBL</span>
+                    </td>
+                }
+
+                <td>
+                    <span class="text-dark">@item.TotalAmount  @item.CurrencySign</span>
+                    <input type="hidden" class="invcurr" value="@item.CurrencyId" />
+                </td>
+                <td>
+                    <span class="text-dark maincollected">@item.CollectedAmount </span>
+                    <input type="hidden" class="collectedamount" name="CashInReceiptInvs[@index].CollectedAmount" value="@item.CollectedAmount" />
+                </td>
+                <td>
+                    <span class="text-dark maindue">@item.AmountDue </span>
+                    <input type="hidden" class="amountdue" name="CashInReceiptInvs[@index].AmountDue" value="@item.AmountDue" />
+                </td>
+                <td>
+                    <div class="form-group">
+                        <input type="text" name="CashInReceiptInvs[@index].PaidAmount"
+                               @(!item.IsSelected ? "disabled" : "")
+                               class="form-control onlyNumbers payamount" value="@item.PaidAmount">
+                    </div>
+                </td>
+                <td>
+                    <span class="text-dark">@item.InvStatusNameEn</span>
+                </td>
+            </tr>
+
+                index++;
+        }
+
+    </tbody>
+</table>

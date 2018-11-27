@@ -1,0 +1,99 @@
+﻿@model EasyFreight.ViewModel.AgentNoteVm
+
+@{
+    int index = 0, totalIndex = 0;
+
+}
+<table id="tbinvdetail" class="table table-striped mb-none">
+    <thead>
+        <tr>
+            <th></th>
+            <th width="35%">Description</th>
+            <th>Main Amount</th>
+            <th>Exchange</th>
+            <th>Amount (<span class="currsign">@Model.CurrencySign</span>) </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.AgentNoteDetails)
+        {
+            <tr>
+                <td>
+                    <input class="rowselect" type="checkbox" @(item.AgentNoteDetailId != 0 ? "checked" : "") />
+                    <input type="hidden" name="AgentNoteDetails[@index].AgentNoteDetailId" value="@item.AgentNoteDetailId" />
+                    <input type="hidden" class="selected" name="AgentNoteDetails[@index].IsSelected" value="@item.IsSelected" />
+                    <input type="hidden" name="AgentNoteDetails[@index].AgentNoteId" value="@Model.AgentNoteId" />
+
+                </td>
+                <td>
+                    <span class="text-dark">@item.CostName</span>
+                    <input type="hidden" name="AgentNoteDetails[@index].OperCostId" value="@item.OperCostId" />
+                    <input type="hidden" name="AgentNoteDetails[@index].OperCostLibId" value="@item.OperCostLibId" />
+                </td>
+                <td>
+                    <span class="text-dark">@item.MainAmount  @item.MainCurrencySign</span>
+                    <input type="hidden" class="mainamount" name="AgentNoteDetails[@index].MainAmount" value="@item.MainAmount" />
+                    <input type="hidden" name="AgentNoteDetails[@index].MainCurrencyId" value="@item.MainCurrencyId" class="invcurr"/>
+                    <input type="hidden" name="AgentNoteDetails[@index].MainCurrencySign" value="@item.MainCurrencySign" />
+                     
+                </td>
+                <td>
+                    <div class="form-group">
+                        <input type="text" name="AgentNoteDetails[@index].ExchangeRate"
+                               @(item.AgentNoteDetailId == 0 ? "disabled" : "")
+                               class="form-control onlyNumbers exchange" value="@item.ExchangeRate">
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group">
+                        <input type="text" name="AgentNoteDetails[@index].AgentNoteAmount"
+                               @(item.AgentNoteDetailId == 0 ? "disabled" : "")
+                               class="form-control onlyNumbers invamount" value="@item.AgentNoteAmount">
+                    </div>
+                    <input type="hidden" class="currsign" name="AgentNoteDetails[@index].CurrencySign"
+                           value="@Model.CurrencySign">
+                    <input type="hidden" class="invcurrid" name="AgentNoteDetails[@index].CurrencyId" value="@Model.CurrencyId" />
+                </td>
+            </tr>
+
+            index++;
+        }
+
+    </tbody>
+</table>
+
+<div class="invoice-summary">
+    <div class="row">
+        <div class="col-sm-4 col-sm-offset-8">
+            <table class="table h5 text-dark">
+                <tbody>
+                    @*<tr class="b-top-none">
+                            <td colspan="2">Subtotal</td>
+                            <td class="text-left">$73.00</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">Shipping</td>
+                            <td class="text-left">$0.00</td>
+                        </tr>*@
+                    
+                        <tr class="h4">
+                            <td colspan="2">Grand Total  (<span class="currsign">@Model.CurrencySign</span>)</td>
+                            <td class="text-left">
+                                <span class="suminv"> @Model.TotalAmount </span>
+
+                                <input type="hidden" class="invcurrid" name="CurrencyId"
+                                       value="@Model.CurrencyId">
+                                <input type="hidden" class="suminvhidden" name="TotalAmount"
+                                       value="@Model.TotalAmount">
+                                <input type="hidden" class="currsign" name="CurrencySign"
+                                       value="@Model.CurrencySign">
+                            </td>
+                        </tr>
+                    
+                    
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

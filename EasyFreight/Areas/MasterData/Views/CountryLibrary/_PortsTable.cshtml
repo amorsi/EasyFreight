@@ -1,0 +1,31 @@
+﻿@model List<EasyFreight.Models.Port>
+<table class="table table-bordered table-striped mb-none" id="datatable-default">
+    <thead>
+        <tr>
+            <th>Country</th>
+            <th>Port Name En</th>
+            <th>Port Name Ar</th>
+            <th>Port Type</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            string portType = (item.PortType == 1) ? "Seaport" : "Airport";
+            <tr id="@item.PortId" class="gradeX">
+                <td >@item.Country.CountryNameEn / @item.City.CityNameEn</td>
+                <td id="NameEn">@item.PortNameEn</td>
+                <td id="NameAr">@item.PortNameAr</td>
+                <td>@portType </td>
+                <td class="actions">
+                    <a href="javascript:void(0)" portType="@item.PortType" countryId="@item.CountryId" 
+                        portId="@item.PortId" cityId="@item.CityId" class="on-default edit-row"><i class="fa fa-pencil"></i></a>
+                    <a href="#dialog"  portId="@item.PortId" 
+                        class="on-default remove-row"><i class="fa fa-trash-o"></i></a>
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

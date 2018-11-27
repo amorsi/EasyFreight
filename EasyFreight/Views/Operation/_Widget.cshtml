@@ -1,0 +1,194 @@
+﻿@model EasyFreight.ViewModel.OperationStatisticVm 
+
+    <div class="col-md-2 col-lg-2 col-xl-2">    </div>
+         
+ <div class="col-md-8 col-lg-8 col-xl-8">
+            <section class="panel panel-horizontal"> 
+									<header class="panel-heading bg-white">
+										<div class="panel-heading-icon bg-primary mt-sm">
+											<i class="fa fa-globe"></i>
+										</div>
+									</header>
+									<div class="panel-body p-lg">
+										<h3 class="text-semibold mt-sm">Total Operations 
+                                        (@((Model.NewAir == null ? 0 : Model.NewAir) + (Model.NewSea == null ? 0 : Model.NewSea) +
+                                            (Model.OpenAir == null ? 0 : Model.OpenAir) + (Model.OpenSea == null ? 0 : Model.OpenSea)+
+                                            (Model.ClosedAir == null ? 0 : Model.ClosedAir) + (Model.ClosedSea == null ? 0 : Model.ClosedSea)+
+                                            (Model.InvoiceAir == null ? 0 : Model.InvoiceAir) + (Model.InvoiceSea == null ? 0 : Model.InvoiceSea)
+                                            ))</h3>
+										 </div>
+								</section>
+</div> 
+ <div class="col-md-2 col-lg-2 col-xl-2">    </div> 
+  <div class="col-md-6 col-lg-12 col-xl-6"> 
+               
+       <div class="col-md-12 col-lg-6 col-xl-6">
+                <section class="panel panel-featured-left panel-featured-primary">
+                    <div class="panel-body">
+                        <div class="widget-summary">
+                            <div class="widget-summary-col widget-summary-col-icon">
+                                <div class="summary-icon bg-primary">
+                                    <i class="fa fa-file"></i>
+                                </div>
+                            </div>
+                            <div class="widget-summary-col">
+                                <div class="summary">
+                                    <h4 class="title">New Operations</h4>
+                                    <div class="info">
+                                        <strong class="open amount">@((Model.NewAir == null ? 0 : Model.NewAir) + (Model.NewSea == null ? 0 : Model.NewSea))</strong>
+                                        <span class="text-primary">
+                                            <i class="fa fa-plane"></i>(<span class="openplan">@Model.NewAir</span>) 
+                                            <i class="fa fa-anchor"></i>(<span class="openship">@Model.NewSea</span>)
+
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="summary-footer ">
+                                    <a class="text-muted pull-left"><i class="fa fa-plane"></i> Net:@Model.NewAirNet.ToString("N")  CBM:@Model.NewAirCBM.ToString("N")   </a><br />
+                                   <a class="text-muted pull-left"> <i class="fa fa-anchor"></i> Net:@Model.NewSeaNet.ToString("N")  CBM:@Model.NewSeaCBM.ToString("N") </a>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <div class="col-md-12 col-lg-6 col-xl-6">
+                <section class="panel panel-featured-left panel-featured-secondary">
+                    <div class="panel-body">
+                        <div class="widget-summary">
+                            <div class="widget-summary-col widget-summary-col-icon">
+                                <div class="summary-icon bg-secondary">
+                                    <i class="fa fa-folder-open"></i>
+                                </div>
+                            </div>
+                            <div class="widget-summary-col">
+                                <div class="summary">
+                                    <h4 class="title">Open Operations</h4>
+                                    <div class="info">
+                                        <strong class="amount">@((Model.OpenAir == null ? 0 : Model.OpenAir) + (Model.OpenSea == null ? 0 : Model.OpenSea))</strong>
+                                        <span class="text-primary">
+                                            <i class="fa fa-plane"></i>(<span class="openplan">@Model.OpenAir</span>) 
+                                            <i class="fa fa-anchor"></i>(<span class="openship">@Model.OpenSea</span>) 
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="summary-footer">
+                                    <a class="text-muted pull-left"><i class="fa fa-plane"></i>  Net:@Model.OpenAirNet.ToString("N")    CBM:@Model.OpenAirCBM.ToString("N")   </a><br />
+                                    <a class="text-muted pull-left"><i class="fa fa-anchor"></i>  Net:@Model.OpenSeaNet.ToString("N")   CBM:@Model.OpenSeaCBM.ToString("N")  </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+          
+            <div class="col-md-12 col-lg-6 col-xl-6">
+                <section class="panel panel-featured-left panel-featured-tertiary">
+                    <div class="panel-body">
+                        <div class="widget-summary">
+                            <div class="widget-summary-col widget-summary-col-icon">
+                                <div class="summary-icon bg-tertiary">
+                                    <i class="fa fa-shield"></i>
+                                </div>
+                            </div>
+                            <div class="widget-summary-col">
+                                <div class="summary">
+                                    <h4 class="title">Closed Operations</h4>
+                                     <div class="info">
+                                        <strong class="amount">@((Model.ClosedAir == null ? 0 : Model.ClosedAir) + (Model.ClosedSea == null ? 0 : Model.ClosedSea))</strong>
+                                        <span class="text-primary">
+                                            <i class="fa fa-plane"></i>(<span class="Closedplan">@Model.ClosedAir</span>) 
+                                            <i class="fa fa-anchor"></i>(<span class="Closedship">@Model.ClosedSea</span>) 
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="summary-footer">
+                                    <a class="text-muted pull-left"><i class="fa fa-plane"></i>  Net:@Model.ClosedAirNet.ToString("N")    CBM:@Model.ClosedAirCBM.ToString("N")   </a><br />
+                                    <a class="text-muted pull-left"><i class="fa fa-anchor"></i>  Net:@Model.ClosedSeaNet.ToString("N")   CBM:@Model.ClosedSeaCBM.ToString("N")  </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            
+            <div class="col-md-12 col-lg-6 col-xl-6">
+                <section class="panel panel-featured-left panel-featured-quartenary">
+                    <div class="panel-body">
+                        <div class="widget-summary">
+                            <div class="widget-summary-col widget-summary-col-icon">
+                                <div class="summary-icon bg-quartenary">
+                                    <i class="fa fa-usd"></i>
+                                </div>
+                            </div>
+                            <div class="widget-summary-col">
+                                <div class="summary">
+                                    <h4 class="title">Invoice Issued</h4>
+                                   <div class="info">
+                                        <strong class="amount">@((Model.InvoiceAir == null ? 0 : Model.InvoiceAir) + (Model.InvoiceSea == null ? 0 : Model.InvoiceSea))</strong>
+                                        <span class="text-primary">
+                                            <i class="fa fa-plane"></i>(<span class="Invoiceplan">@Model.InvoiceAir</span>) 
+                                            <i class="fa fa-anchor"></i>(<span class="Invoiceship">@Model.InvoiceSea</span>) 
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="summary-footer">
+                                    <a class="text-muted pull-left"><i class="fa fa-plane"></i>  Net:@Model.InvoiceAirNet.ToString("N")    CBM:@Model.InvoiceAirCBM.ToString("N")   </a><br />
+                                    <a class="text-muted pull-left"><i class="fa fa-anchor"></i>  Net:@Model.InvoiceSeaNet.ToString("N")   CBM:@Model.InvoiceSeaCBM.ToString("N")  </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+       
+        <div class="col-md-6 col-xl-12">
+										<section class="panel">
+											<div class="panel-body bg-primary">
+												<div class="widget-summary">
+													<div class="widget-summary-col widget-summary-col-icon">
+														<div class="summary-icon">
+															<i class="fa fa-plane"></i>
+														</div>
+													</div>
+													<div class="widget-summary-col">
+														<div class="summary">
+															<h4 class="title">Air Qutation</h4>
+															<div class="info">
+																<strong class="amount">@Model.QuotNewAir</strong>
+															</div>
+														</div>
+														 
+													</div>
+												</div>
+											</div>
+										</section>
+									</div>
+        <div class="col-md-6 col-xl-12">
+										<section class="panel">
+											<div class="panel-body bg-secondary">
+												<div class="widget-summary">
+													<div class="widget-summary-col widget-summary-col-icon">
+														<div class="summary-icon">
+															<i class="fa fa-anchor"></i>
+														</div>
+													</div>
+													<div class="widget-summary-col">
+														<div class="summary">
+															<h4 class="title">Sea Qutation</h4>
+															<div class="info">
+																<strong class="amount">@Model.QuotNewSea</strong>
+															</div>
+														</div>
+														 
+													</div>
+												</div>
+											</div>
+										</section>
+									</div>
+   
+         </div>
+        
+     

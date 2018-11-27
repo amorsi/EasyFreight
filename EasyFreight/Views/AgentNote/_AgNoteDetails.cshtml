@@ -1,0 +1,53 @@
+﻿@model EasyFreight.ViewModel.AgentNoteVm
+<div class="table-responsive">
+    <table class="table invoice-items" id="invdetails">
+        <thead>
+            <tr class="h4 text-dark">
+                <th id="cell-id" class="text-semibold">#</th>
+                <th id="cell-item" class="text-semibold">Item</th>
+                <th id="cell-price" class="text-center text-semibold">Price (@Model.CurrencySign)</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{int index = 1;}
+            @foreach (var item in Model.AgentNoteDetails)
+            {
+
+                <tr>
+                    <td>@index</td>
+                    <td class="text-semibold text-dark">@item.CostName</td>
+                    <td class="text-center"> @item.AgentNoteAmount</td>
+                </tr>
+                index++;
+            }
+
+        </tbody>
+    </table>
+</div>
+<div class="invoice-summary">
+    <div class="row">
+        <div class="col-sm-5 col-xs-5 col-sm-offset-7 col-xs-offset-7">
+            <table class="table h5 text-dark">
+                <tbody>
+                    @*<tr class="b-top-none">
+                        <td colspan="2">Subtotal</td>
+                        <td class="text-left">$73.00</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">Shipping</td>
+                        <td class="text-left">$0.00</td>
+                    </tr>*@
+
+                    <tr class="h4">
+                        <td colspan="2">Grand Total (@Model.CurrencySign)</td>
+                        <td class="text-left">
+                             @Model.TotalAmount 
+                        </td>
+                    </tr>
+
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div> 

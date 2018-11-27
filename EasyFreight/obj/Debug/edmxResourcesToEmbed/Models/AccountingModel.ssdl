@@ -1,0 +1,2167 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="AccountingModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="AccountingChart">
+    <Key>
+      <PropertyRef Name="AccountId" />
+    </Key>
+    <Property Name="AccountId" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="ParentAccountId" Type="varchar" MaxLength="15" />
+    <Property Name="AccountNameEn" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="AccountNameAr" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AccTransaction">
+    <Key>
+      <PropertyRef Name="TransId" />
+    </Key>
+    <Property Name="TransId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="CreateBy" Type="nvarchar" MaxLength="128" />
+    <Property Name="TransactionName" Type="varchar(max)" />
+    <Property Name="TransactionNameAr" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="AccTransactionDetail">
+    <Key>
+      <PropertyRef Name="TransDetailId" />
+    </Key>
+    <Property Name="TransDetailId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TransId" Type="int" Nullable="false" />
+    <Property Name="AccountId" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="DebitAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="CreditAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="CurrencyId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AgentNote">
+    <Key>
+      <PropertyRef Name="AgentNoteId" />
+    </Key>
+    <Property Name="AgentNoteId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AgentNoteType" Type="tinyint" Nullable="false" />
+    <Property Name="AgentNoteCode" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="AgentNoteDate" Type="datetime" Nullable="false" />
+    <Property Name="DueDate" Type="datetime" />
+    <Property Name="AgentId" Type="int" Nullable="false" />
+    <Property Name="OperationId" Type="int" Nullable="false" />
+    <Property Name="HouseBillId" Type="int" />
+    <Property Name="ShipperId" Type="int" />
+    <Property Name="ConsigneeId" Type="int" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="CreateBy" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Notes" Type="nvarchar(max)" />
+    <Property Name="BankAccId" Type="int" Nullable="false" />
+    <Property Name="BankId" Type="int" Nullable="false" />
+    <Property Name="TransId" Type="int" />
+    <Property Name="InvStatusId" Type="tinyint" />
+    <Property Name="TotalAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="CurrencyId" Type="int" Nullable="false" />
+    <Property Name="CurrencySign" Type="nvarchar" MaxLength="10" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AgentNoteDetail">
+    <Key>
+      <PropertyRef Name="AgentNoteDetailId" />
+    </Key>
+    <Property Name="AgentNoteDetailId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AgentNoteId" Type="int" Nullable="false" />
+    <Property Name="OperCostId" Type="int" Nullable="false" />
+    <Property Name="OperCostLibId" Type="int" Nullable="false" />
+    <Property Name="MainAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="MainCurrencyId" Type="int" Nullable="false" />
+    <Property Name="MainCurrencySign" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="ExchangeRate" Type="decimal" Precision="8" Scale="3" Nullable="false" />
+    <Property Name="AgentNoteAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="CurrencyId" Type="int" Nullable="false" />
+    <Property Name="CurrencySign" Type="nvarchar" MaxLength="10" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ArCashDeposit">
+    <Key>
+      <PropertyRef Name="ReceiptId" />
+    </Key>
+    <Property Name="ReceiptId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ReceiptCode" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="ReceiptDate" Type="datetime" Nullable="false" />
+    <Property Name="ShipperId" Type="int" />
+    <Property Name="ConsigneeId" Type="int" />
+    <Property Name="PaymentTermId" Type="tinyint" Nullable="false" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="CreateBy" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Notes" Type="nvarchar(max)" />
+    <Property Name="ReceiptAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="TransId" Type="int" />
+    <Property Name="CurrencyId" Type="int" />
+    <Property Name="BankId" Type="int" />
+    <Property Name="BankAccId" Type="int" />
+  </EntityType>
+  <EntityType Name="ArCashDepositBalance">
+    <Key>
+      <PropertyRef Name="BalanceId" />
+    </Key>
+    <Property Name="BalanceId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ShipperId" Type="int" />
+    <Property Name="ConsigneeId" Type="int" />
+    <Property Name="CurrencyId" Type="int" Nullable="false" />
+    <Property Name="BalanceAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetUsers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar(max)" />
+    <Property Name="PasswordHash" Type="nvarchar(max)" />
+    <Property Name="SecurityStamp" Type="nvarchar(max)" />
+    <Property Name="Discriminator" Type="nvarchar" MaxLength="128" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Bank">
+    <Key>
+      <PropertyRef Name="BankId" />
+    </Key>
+    <Property Name="BankId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BankNameEn" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="BankNameAr" Type="nvarchar" MaxLength="50" />
+    <Property Name="BankAddressEn" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="BankAddressAr" Type="nvarchar" MaxLength="50" />
+    <Property Name="SwiftCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="AccountId" Type="varchar" MaxLength="15" />
+  </EntityType>
+  <EntityType Name="BankAccount">
+    <Key>
+      <PropertyRef Name="BankAccId" />
+      <PropertyRef Name="BankId" />
+    </Key>
+    <Property Name="BankAccId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BankId" Type="int" Nullable="false" />
+    <Property Name="AccountName" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="AccountNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="AccountId" Type="varchar" MaxLength="15" />
+    <Property Name="CurrencyId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CashInReceipt">
+    <Key>
+      <PropertyRef Name="ReceiptId" />
+    </Key>
+    <Property Name="ReceiptId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ReceiptCode" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="ReceiptDate" Type="datetime" Nullable="false" />
+    <Property Name="ShipperId" Type="int" />
+    <Property Name="ConsigneeId" Type="int" />
+    <Property Name="AgentId" Type="int" />
+    <Property Name="PaymentTermId" Type="tinyint" Nullable="false" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="CreateBy" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Notes" Type="nvarchar(max)" />
+    <Property Name="ReceiptAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="DiscountAmount" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="TransId" Type="int" />
+    <Property Name="CurrencyId" Type="int" />
+    <Property Name="BankId" Type="int" />
+    <Property Name="BankAccId" Type="int" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+    <Property Name="DeletedBy" Type="nvarchar" MaxLength="128" />
+    <Property Name="DeleteReason" Type="nvarchar(max)" />
+    <Property Name="OperationId" Type="int" />
+    <Property Name="PartnerAccountId" Type="varchar" MaxLength="15" />
+  </EntityType>
+  <EntityType Name="CashInReceiptAgNote">
+    <Key>
+      <PropertyRef Name="ReceiptId" />
+      <PropertyRef Name="AgentNoteId" />
+    </Key>
+    <Property Name="ReceiptId" Type="int" Nullable="false" />
+    <Property Name="AgentNoteId" Type="int" Nullable="false" />
+    <Property Name="PaidAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="DiscountAmount" Type="decimal" Precision="18" Scale="2" />
+  </EntityType>
+  <EntityType Name="CashInReceiptCheck">
+    <Key>
+      <PropertyRef Name="CashInCheckId" />
+    </Key>
+    <Property Name="CashInCheckId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ReceiptId" Type="int" Nullable="false" />
+    <Property Name="CheckNumber" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="CheckDueDate" Type="datetime" Nullable="false" />
+    <Property Name="IsCollected" Type="bit" Nullable="false" />
+    <Property Name="TransId" Type="int" />
+    <Property Name="CollectDate" Type="datetime" />
+    <Property Name="CollectBy" Type="nvarchar" MaxLength="128" />
+    <Property Name="BankId" Type="int" />
+  </EntityType>
+  <EntityType Name="CashInReceiptInv">
+    <Key>
+      <PropertyRef Name="ReceiptId" />
+      <PropertyRef Name="InvoiceId" />
+    </Key>
+    <Property Name="ReceiptId" Type="int" Nullable="false" />
+    <Property Name="InvoiceId" Type="int" Nullable="false" />
+    <Property Name="PaidAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="DiscountAmount" Type="decimal" Precision="18" Scale="2" />
+  </EntityType>
+  <EntityType Name="CashOutCCCashDeposit">
+    <Key>
+      <PropertyRef Name="ReceiptId" />
+      <PropertyRef Name="OperationId" />
+    </Key>
+    <Property Name="ReceiptId" Type="int" Nullable="false" />
+    <Property Name="OperationId" Type="int" Nullable="false" />
+    <Property Name="DepositToUserEmpId" Type="int" />
+  </EntityType>
+  <EntityType Name="CashOutReceipt">
+    <Key>
+      <PropertyRef Name="ReceiptId" />
+    </Key>
+    <Property Name="ReceiptId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ReceiptCode" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="ReceiptDate" Type="datetime" Nullable="false" />
+    <Property Name="CarrierId" Type="int" />
+    <Property Name="ContractorId" Type="int" />
+    <Property Name="AgentId" Type="int" />
+    <Property Name="PaymentTermId" Type="tinyint" Nullable="false" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="CreateBy" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Notes" Type="nvarchar(max)" />
+    <Property Name="ReceiptAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="DiscountAmount" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="TransId" Type="int" />
+    <Property Name="CurrencyId" Type="int" />
+    <Property Name="BankId" Type="int" />
+    <Property Name="BankAccId" Type="int" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+    <Property Name="DeletedBy" Type="nvarchar" MaxLength="128" />
+    <Property Name="DeleteReason" Type="nvarchar(max)" />
+    <Property Name="OperationId" Type="int" />
+    <Property Name="PartnerAccountId" Type="varchar" MaxLength="15" />
+  </EntityType>
+  <EntityType Name="CashOutReceiptAgNote">
+    <Key>
+      <PropertyRef Name="ReceiptId" />
+      <PropertyRef Name="AgentNoteId" />
+    </Key>
+    <Property Name="ReceiptId" Type="int" Nullable="false" />
+    <Property Name="AgentNoteId" Type="int" Nullable="false" />
+    <Property Name="PaidAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="DiscountAmount" Type="decimal" Precision="18" Scale="2" />
+  </EntityType>
+  <EntityType Name="CashOutReceiptCheck">
+    <Key>
+      <PropertyRef Name="CashOutCheckId" />
+    </Key>
+    <Property Name="CashOutCheckId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ReceiptId" Type="int" Nullable="false" />
+    <Property Name="CheckNumber" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="CheckDueDate" Type="datetime" Nullable="false" />
+    <Property Name="IsCollected" Type="bit" Nullable="false" />
+    <Property Name="TransId" Type="int" />
+    <Property Name="CollectDate" Type="datetime" />
+    <Property Name="CollectBy" Type="nvarchar" MaxLength="128" />
+    <Property Name="BankId" Type="int" />
+  </EntityType>
+  <EntityType Name="CashOutReceiptExpense">
+    <Key>
+      <PropertyRef Name="ReceiptId" />
+      <PropertyRef Name="ExpenseId" />
+    </Key>
+    <Property Name="ReceiptId" Type="int" Nullable="false" />
+    <Property Name="ExpenseId" Type="int" Nullable="false" />
+    <Property Name="PaidAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CashOutReceiptInv">
+    <Key>
+      <PropertyRef Name="ReceiptId" />
+      <PropertyRef Name="InvoiceId" />
+    </Key>
+    <Property Name="ReceiptId" Type="int" Nullable="false" />
+    <Property Name="InvoiceId" Type="int" Nullable="false" />
+    <Property Name="PaidAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="DiscountAmount" Type="decimal" Precision="18" Scale="2" />
+  </EntityType>
+  <EntityType Name="Consignee">
+    <Key>
+      <PropertyRef Name="ConsigneeId" />
+    </Key>
+    <Property Name="ConsigneeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ConsigneeCode" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="ConsigneeNameEn" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="ConsigneeNameAr" Type="nvarchar" MaxLength="200" />
+    <Property Name="ConsigneeAddressEn" Type="nvarchar" MaxLength="200" />
+    <Property Name="ConsigneeAddressAr" Type="nvarchar" MaxLength="200" />
+    <Property Name="CountryId" Type="int" />
+    <Property Name="CityId" Type="int" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
+    <Property Name="WebSite" Type="nvarchar" MaxLength="50" />
+    <Property Name="PhoneNumber" Type="varchar" MaxLength="200" />
+    <Property Name="FaxNumber" Type="varchar" MaxLength="200" />
+    <Property Name="AccountId" Type="varchar" MaxLength="15" />
+    <Property Name="TaxDepositAccountId" Type="varchar" MaxLength="15" />
+    <Property Name="VatTaxAccountId" Type="varchar" MaxLength="15" />
+  </EntityType>
+  <EntityType Name="Currency">
+    <Key>
+      <PropertyRef Name="CurrencyId" />
+    </Key>
+    <Property Name="CurrencyId" Type="int" Nullable="false" />
+    <Property Name="CurrencySign" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="CurrencyName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="AccountId" Type="varchar" MaxLength="15" />
+  </EntityType>
+  <EntityType Name="ExpenseLib">
+    <Key>
+      <PropertyRef Name="ExpenseId" />
+    </Key>
+    <Property Name="ExpenseId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ExpenseNameEn" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="ExpenseNameAr" Type="nvarchar" MaxLength="150" />
+    <Property Name="AccountId" Type="varchar" MaxLength="15" />
+  </EntityType>
+  <EntityType Name="HouseBill">
+    <Key>
+      <PropertyRef Name="HouseBillId" />
+    </Key>
+    <Property Name="HouseBillId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="OrderFrom" Type="tinyint" Nullable="false" />
+    <Property Name="OperationId" Type="int" Nullable="false" />
+    <Property Name="OperationCode" Type="varchar" MaxLength="15" />
+    <Property Name="OperationDate" Type="datetime" />
+    <Property Name="HouseBL" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="FromPortId" Type="int" Nullable="false" />
+    <Property Name="ToPortId" Type="int" Nullable="false" />
+    <Property Name="ShipperId" Type="int" Nullable="false" />
+    <Property Name="ConsigneeId" Type="int" Nullable="false" />
+    <Property Name="NotifierId" Type="int" />
+    <Property Name="NotifierAsConsignee" Type="bit" />
+    <Property Name="DeliveryType" Type="tinyint" Nullable="false" />
+    <Property Name="AgentId" Type="int" />
+    <Property Name="GrossWeight" Type="decimal" Precision="18" Scale="3" />
+    <Property Name="NetWeight" Type="decimal" Precision="18" Scale="3" />
+    <Property Name="CBM" Type="decimal" Precision="18" Scale="3" />
+    <Property Name="NumberOfPackages" Type="int" />
+    <Property Name="PackageTypeId" Type="int" />
+    <Property Name="IsPrepaid" Type="bit" />
+    <Property Name="CollectedFreightCost" Type="decimal" Precision="18" Scale="3" />
+    <Property Name="FreighCurrencyId" Type="int" />
+    <Property Name="CollectedThcCost" Type="decimal" Precision="18" Scale="3" />
+    <Property Name="ThcCurrencyId" Type="int" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="CreateBy" Type="nvarchar" MaxLength="128" />
+    <Property Name="GoodsDescription" Type="nvarchar(max)" />
+    <Property Name="Marks" Type="nvarchar(max)" />
+    <Property Name="StatusId" Type="tinyint" Nullable="false" />
+    <Property Name="BookingNumber" Type="varchar" MaxLength="30" />
+    <Property Name="IsHazardous" Type="bit" />
+  </EntityType>
+  <EntityType Name="Invoice">
+    <Key>
+      <PropertyRef Name="InvoiceId" />
+    </Key>
+    <Property Name="InvoiceId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="InvoiceCode" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="InvoiceDate" Type="datetime" Nullable="false" />
+    <Property Name="DueDate" Type="datetime" />
+    <Property Name="OperationId" Type="int" Nullable="false" />
+    <Property Name="HouseBillId" Type="int" Nullable="false" />
+    <Property Name="ShipperId" Type="int" />
+    <Property Name="ConsigneeId" Type="int" />
+    <Property Name="OrderFrom" Type="tinyint" Nullable="false" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="CreateBy" Type="nvarchar" MaxLength="128" />
+    <Property Name="Notes" Type="nvarchar(max)" />
+    <Property Name="PaymentTermId" Type="tinyint" Nullable="false" />
+    <Property Name="InvoiceType" Type="tinyint" Nullable="false" />
+    <Property Name="InvStatusId" Type="tinyint" />
+    <Property Name="TransId" Type="int" />
+    <Property Name="InvCurrencyId" Type="int" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" />
+    <Property Name="DeletedBy" Type="nvarchar" MaxLength="128" />
+    <Property Name="DeleteReason" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="InvoiceAP">
+    <Key>
+      <PropertyRef Name="InvoiceId" />
+    </Key>
+    <Property Name="InvoiceId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="InvoiceCode" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="InvoiceDate" Type="datetime" Nullable="false" />
+    <Property Name="DueDate" Type="datetime" />
+    <Property Name="APInvoiceCode" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="OperationId" Type="int" Nullable="false" />
+    <Property Name="HouseBillId" Type="int" />
+    <Property Name="CarrierId" Type="int" />
+    <Property Name="ContractorId" Type="int" />
+    <Property Name="OrderFrom" Type="tinyint" Nullable="false" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="CreateBy" Type="nvarchar" MaxLength="128" />
+    <Property Name="Notes" Type="nvarchar(max)" />
+    <Property Name="PaymentTermId" Type="tinyint" Nullable="false" />
+    <Property Name="InvStatusId" Type="tinyint" />
+    <Property Name="TransId" Type="int" />
+    <Property Name="InvCurrencyId" Type="int" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" />
+    <Property Name="DeletedBy" Type="nvarchar" MaxLength="128" />
+    <Property Name="DeleteReason" Type="nvarchar(max)" />
+    <Property Name="InvoiceType" Type="tinyint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="InvoiceDetail">
+    <Key>
+      <PropertyRef Name="InvDetailId" />
+    </Key>
+    <Property Name="InvDetailId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="InvoiceId" Type="int" Nullable="false" />
+    <Property Name="CostFkId" Type="int" Nullable="false" />
+    <Property Name="FkType" Type="tinyint" Nullable="false" />
+    <Property Name="MainAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="MainCurrencyId" Type="int" Nullable="false" />
+    <Property Name="ExchangeRate" Type="decimal" Precision="8" Scale="3" Nullable="false" />
+    <Property Name="InvoiceAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="CurrencyId" Type="int" Nullable="false" />
+    <Property Name="ItemOrder" Type="int" />
+    <Property Name="PrintedTitle" Type="nvarchar" MaxLength="250" />
+  </EntityType>
+  <EntityType Name="InvoiceDetailAP">
+    <Key>
+      <PropertyRef Name="InvDetailId" />
+    </Key>
+    <Property Name="InvDetailId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="InvoiceId" Type="int" Nullable="false" />
+    <Property Name="CostFkId" Type="int" Nullable="false" />
+    <Property Name="FkType" Type="tinyint" Nullable="false" />
+    <Property Name="MainAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="MainCurrencyId" Type="int" Nullable="false" />
+    <Property Name="ExchangeRate" Type="decimal" Precision="8" Scale="3" Nullable="false" />
+    <Property Name="InvoiceAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="CurrencyId" Type="int" Nullable="false" />
+    <Property Name="ItemOrder" Type="int" />
+    <Property Name="PrintedTitle" Type="nvarchar" MaxLength="250" />
+  </EntityType>
+  <EntityType Name="InvoiceTotal">
+    <Key>
+      <PropertyRef Name="InvoiceId" />
+      <PropertyRef Name="CurrencyId" />
+    </Key>
+    <Property Name="InvoiceId" Type="int" Nullable="false" />
+    <Property Name="CurrencyId" Type="int" Nullable="false" />
+    <Property Name="CurrencySign" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="TotalAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="TaxDepositAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="TotalBeforeTax" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="VatTaxAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+  </EntityType>
+  <EntityType Name="InvoiceTotalAP">
+    <Key>
+      <PropertyRef Name="InvoiceId" />
+      <PropertyRef Name="CurrencyId" />
+    </Key>
+    <Property Name="InvoiceId" Type="int" Nullable="false" />
+    <Property Name="CurrencyId" Type="int" Nullable="false" />
+    <Property Name="CurrencySign" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="TotalAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+  </EntityType>
+  <EntityType Name="InvStatusLib">
+    <Key>
+      <PropertyRef Name="InvStatusId" />
+    </Key>
+    <Property Name="InvStatusId" Type="tinyint" Nullable="false" />
+    <Property Name="InvStatusNameEn" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="InvStatusNameAr" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="PaymentTerm">
+    <Key>
+      <PropertyRef Name="PaymentTermId" />
+    </Key>
+    <Property Name="PaymentTermId" Type="tinyint" Nullable="false" />
+    <Property Name="PaymentTermEn" Type="nvarchar" MaxLength="50" />
+    <Property Name="PaymentTermAr" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Shipper">
+    <Key>
+      <PropertyRef Name="ShipperId" />
+    </Key>
+    <Property Name="ShipperId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ShipperCode" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="ShipperNameEn" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="ShipperNameAr" Type="nvarchar" MaxLength="200" />
+    <Property Name="ShipperAddressEn" Type="nvarchar" MaxLength="200" />
+    <Property Name="ShipperAddressAr" Type="nvarchar" MaxLength="200" />
+    <Property Name="CountryId" Type="int" />
+    <Property Name="CityId" Type="int" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
+    <Property Name="WebSite" Type="nvarchar" MaxLength="50" />
+    <Property Name="PhoneNumber" Type="varchar" MaxLength="200" />
+    <Property Name="FaxNumber" Type="varchar" MaxLength="200" />
+    <Property Name="AccountId" Type="varchar" MaxLength="15" />
+    <Property Name="TaxDepositAccountId" Type="varchar" MaxLength="15" />
+    <Property Name="VatTaxAccountId" Type="varchar" MaxLength="15" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'EasyFreight2.dbo.AgentNoteView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="AgentNoteView">
+    <Key>
+      <PropertyRef Name="AgentNoteId" />
+      <PropertyRef Name="AgentNoteType" />
+      <PropertyRef Name="AgentNoteCode" />
+      <PropertyRef Name="AgentNoteDate" />
+      <PropertyRef Name="AgentId" />
+      <PropertyRef Name="OperationId" />
+      <PropertyRef Name="CreateDate" />
+      <PropertyRef Name="CreateBy" />
+      <PropertyRef Name="AgentNameEn" />
+      <PropertyRef Name="OrderFrom" />
+      <PropertyRef Name="OperationCode" />
+      <PropertyRef Name="BookingNumber" />
+      <PropertyRef Name="InvStatusNameEn" />
+      <PropertyRef Name="TotalAmount" />
+      <PropertyRef Name="CurrencyId" />
+      <PropertyRef Name="CurrencySign" />
+      <PropertyRef Name="BankNameEn" />
+      <PropertyRef Name="AccountName" />
+      <PropertyRef Name="AccountNumber" />
+    </Key>
+    <Property Name="AgentNoteId" Type="int" Nullable="false" />
+    <Property Name="AgentNoteType" Type="tinyint" Nullable="false" />
+    <Property Name="AgentNoteCode" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="AgentNoteDate" Type="datetime" Nullable="false" />
+    <Property Name="DueDate" Type="datetime" />
+    <Property Name="AgentId" Type="int" Nullable="false" />
+    <Property Name="OperationId" Type="int" Nullable="false" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="CreateBy" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Notes" Type="nvarchar(max)" />
+    <Property Name="AgentNameEn" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="AgentNameAr" Type="nvarchar" MaxLength="200" />
+    <Property Name="OrderFrom" Type="tinyint" Nullable="false" />
+    <Property Name="OperationCode" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="BookingNumber" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="MBL" Type="varchar" MaxLength="30" />
+    <Property Name="InvStatusNameEn" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="InvStatusNameAr" Type="nvarchar" MaxLength="50" />
+    <Property Name="InvStatusId" Type="tinyint" />
+    <Property Name="TotalAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="CurrencyId" Type="int" Nullable="false" />
+    <Property Name="CurrencySign" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="BankNameEn" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="AccountName" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="AccountNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'EasyFreight2.dbo.APInvoiceView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="APInvoiceView">
+    <Key>
+      <PropertyRef Name="InvoiceId" />
+      <PropertyRef Name="InvoiceCode" />
+      <PropertyRef Name="InvoiceDate" />
+      <PropertyRef Name="APInvoiceCode" />
+      <PropertyRef Name="OperationId" />
+      <PropertyRef Name="OperationCode" />
+      <PropertyRef Name="BookingNumber" />
+      <PropertyRef Name="CarrierType" />
+      <PropertyRef Name="CarrierNameEn" />
+      <PropertyRef Name="CurrencyId" />
+      <PropertyRef Name="TotalAmount" />
+      <PropertyRef Name="CurrencySign" />
+      <PropertyRef Name="InvStatusNameEn" />
+      <PropertyRef Name="CreateDate" />
+      <PropertyRef Name="PaymentTermId" />
+      <PropertyRef Name="InvCurrencyId" />
+      <PropertyRef Name="OrderFrom" />
+      <PropertyRef Name="InvoiceType" />
+      <PropertyRef Name="OperationDate" />
+    </Key>
+    <Property Name="InvoiceId" Type="int" Nullable="false" />
+    <Property Name="InvoiceCode" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="InvoiceDate" Type="datetime" Nullable="false" />
+    <Property Name="DueDate" Type="datetime" />
+    <Property Name="APInvoiceCode" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="OperationId" Type="int" Nullable="false" />
+    <Property Name="HouseBillId" Type="int" />
+    <Property Name="CarrierId" Type="int" />
+    <Property Name="ContractorId" Type="int" />
+    <Property Name="OperationCode" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="BookingNumber" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="CarrierType" Type="tinyint" Nullable="false" />
+    <Property Name="MBL" Type="varchar" MaxLength="30" />
+    <Property Name="CarrierNameEn" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="CarrierNameAr" Type="nvarchar" MaxLength="50" />
+    <Property Name="CurrencyId" Type="int" Nullable="false" />
+    <Property Name="TotalAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="CurrencySign" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="InvStatusId" Type="tinyint" />
+    <Property Name="InvStatusNameEn" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="InvStatusNameAr" Type="nvarchar" MaxLength="50" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="CreateBy" Type="nvarchar" MaxLength="128" />
+    <Property Name="Notes" Type="nvarchar(max)" />
+    <Property Name="PaymentTermId" Type="tinyint" Nullable="false" />
+    <Property Name="TransId" Type="int" />
+    <Property Name="InvCurrencyId" Type="int" Nullable="false" />
+    <Property Name="PaymentTermEn" Type="nvarchar" MaxLength="50" />
+    <Property Name="PaymentTermAr" Type="nvarchar" MaxLength="50" />
+    <Property Name="OrderFrom" Type="tinyint" Nullable="false" />
+    <Property Name="ContractorNameEn" Type="nvarchar" MaxLength="50" />
+    <Property Name="ContractorNameAr" Type="nvarchar" MaxLength="50" />
+    <Property Name="IsDeleted" Type="bit" />
+    <Property Name="DeletedBy" Type="nvarchar" MaxLength="128" />
+    <Property Name="DeleteReason" Type="nvarchar(max)" />
+    <Property Name="InvoiceType" Type="tinyint" Nullable="false" />
+    <Property Name="OperationDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'EasyFreight2.dbo.ArCashDepositView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="ArCashDepositView">
+    <Key>
+      <PropertyRef Name="ReceiptId" />
+      <PropertyRef Name="ReceiptCode" />
+      <PropertyRef Name="ReceiptDate" />
+      <PropertyRef Name="PaymentTermId" />
+      <PropertyRef Name="CreateDate" />
+      <PropertyRef Name="ReceiptAmount" />
+      <PropertyRef Name="CurrencySign" />
+      <PropertyRef Name="CurrencyName" />
+    </Key>
+    <Property Name="ReceiptId" Type="int" Nullable="false" />
+    <Property Name="ReceiptCode" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="ReceiptDate" Type="datetime" Nullable="false" />
+    <Property Name="ShipperId" Type="int" />
+    <Property Name="ConsigneeId" Type="int" />
+    <Property Name="PaymentTermId" Type="tinyint" Nullable="false" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar(max)" />
+    <Property Name="Notes" Type="nvarchar(max)" />
+    <Property Name="TransId" Type="int" />
+    <Property Name="CurrencyId" Type="int" />
+    <Property Name="BankId" Type="int" />
+    <Property Name="BankAccId" Type="int" />
+    <Property Name="ReceiptAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="ShipperNameEn" Type="nvarchar" MaxLength="200" />
+    <Property Name="ShipperNameAr" Type="nvarchar" MaxLength="200" />
+    <Property Name="ConsigneeNameEn" Type="nvarchar" MaxLength="200" />
+    <Property Name="ConsigneeNameAr" Type="nvarchar" MaxLength="200" />
+    <Property Name="PaymentTermEn" Type="nvarchar" MaxLength="50" />
+    <Property Name="PaymentTermAr" Type="nvarchar" MaxLength="50" />
+    <Property Name="CurrencySign" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="CurrencyName" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'EasyFreight2.dbo.CashInReceiptView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="CashInReceiptView">
+    <Key>
+      <PropertyRef Name="ReceiptId" />
+      <PropertyRef Name="ReceiptCode" />
+      <PropertyRef Name="ReceiptDate" />
+      <PropertyRef Name="ReceiptAmount" />
+      <PropertyRef Name="IsDeleted" />
+      <PropertyRef Name="CurrencySign" />
+      <PropertyRef Name="CreateDate" />
+      <PropertyRef Name="CreateBy" />
+      <PropertyRef Name="PaymentTermId" />
+    </Key>
+    <Property Name="ReceiptId" Type="int" Nullable="false" />
+    <Property Name="ReceiptCode" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="ReceiptDate" Type="datetime" Nullable="false" />
+    <Property Name="ShipperId" Type="int" />
+    <Property Name="ShipperNameEn" Type="nvarchar" MaxLength="200" />
+    <Property Name="ShipperNameAr" Type="nvarchar" MaxLength="200" />
+    <Property Name="ConsigneeId" Type="int" />
+    <Property Name="ConsigneeNameEn" Type="nvarchar" MaxLength="200" />
+    <Property Name="ConsigneeNameAr" Type="nvarchar" MaxLength="200" />
+    <Property Name="AgentId" Type="int" />
+    <Property Name="AgentNameEn" Type="nvarchar" MaxLength="200" />
+    <Property Name="AgentNameAr" Type="nvarchar" MaxLength="200" />
+    <Property Name="Notes" Type="nvarchar(max)" />
+    <Property Name="ReceiptAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+    <Property Name="DeletedBy" Type="nvarchar" MaxLength="128" />
+    <Property Name="DeleteReason" Type="nvarchar(max)" />
+    <Property Name="TransId" Type="int" />
+    <Property Name="CurrencySign" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="OperationId" Type="int" />
+    <Property Name="PaymentTermEn" Type="nvarchar" MaxLength="50" />
+    <Property Name="PaymentTermAr" Type="nvarchar" MaxLength="50" />
+    <Property Name="CheckNumber" Type="varchar" MaxLength="50" />
+    <Property Name="CheckDueDate" Type="datetime" />
+    <Property Name="IsCollected" Type="bit" />
+    <Property Name="CurrencyId" Type="int" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="CreateBy" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar(max)" />
+    <Property Name="PaymentTermId" Type="tinyint" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'EasyFreight2.dbo.CashOutReceiptView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="CashOutReceiptView">
+    <Key>
+      <PropertyRef Name="ReceiptId" />
+      <PropertyRef Name="ReceiptCode" />
+      <PropertyRef Name="ReceiptDate" />
+      <PropertyRef Name="PaymentTermId" />
+      <PropertyRef Name="CreateDate" />
+      <PropertyRef Name="CreateBy" />
+      <PropertyRef Name="ReceiptAmount" />
+      <PropertyRef Name="CurrencySign" />
+      <PropertyRef Name="IsDeleted" />
+      <PropertyRef Name="CheckNumber" />
+      <PropertyRef Name="CheckDueDate" />
+      <PropertyRef Name="IsCollected" />
+    </Key>
+    <Property Name="ReceiptId" Type="int" Nullable="false" />
+    <Property Name="ReceiptCode" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="ReceiptDate" Type="datetime" Nullable="false" />
+    <Property Name="CarrierId" Type="int" />
+    <Property Name="CarrierNameEn" Type="nvarchar" MaxLength="200" />
+    <Property Name="CarrierNameAr" Type="nvarchar" MaxLength="50" />
+    <Property Name="ContractorId" Type="int" />
+    <Property Name="ContractorNameEn" Type="nvarchar" MaxLength="50" />
+    <Property Name="ContractorNameAr" Type="nvarchar" MaxLength="50" />
+    <Property Name="AgentId" Type="int" />
+    <Property Name="AgentNameEn" Type="nvarchar" MaxLength="200" />
+    <Property Name="AgentNameAr" Type="nvarchar" MaxLength="200" />
+    <Property Name="PaymentTermId" Type="tinyint" Nullable="false" />
+    <Property Name="PaymentTermEn" Type="nvarchar" MaxLength="50" />
+    <Property Name="PaymentTermAr" Type="nvarchar" MaxLength="50" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="CreateBy" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Notes" Type="nvarchar(max)" />
+    <Property Name="ReceiptAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="TransId" Type="int" />
+    <Property Name="CurrencyId" Type="int" />
+    <Property Name="CurrencySign" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+    <Property Name="CheckNumber" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="CheckDueDate" Type="datetime" Nullable="false" />
+    <Property Name="IsCollected" Type="bit" Nullable="false" />
+    <Property Name="Expr1" Type="int" />
+    <Property Name="CollectDate" Type="datetime" />
+    <Property Name="CollectBy" Type="nvarchar" MaxLength="128" />
+    <Property Name="DeletedBy" Type="nvarchar" MaxLength="128" />
+    <Property Name="DeleteReason" Type="nvarchar(max)" />
+    <Property Name="BankId" Type="int" />
+    <Property Name="UserName" Type="nvarchar(max)" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'EasyFreight2.dbo.InvoiceView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="InvoiceView">
+    <Key>
+      <PropertyRef Name="InvoiceId" />
+      <PropertyRef Name="InvoiceCode" />
+      <PropertyRef Name="InvoiceDate" />
+      <PropertyRef Name="OperationId" />
+      <PropertyRef Name="HouseBillId" />
+      <PropertyRef Name="OrderFrom" />
+      <PropertyRef Name="CreateDate" />
+      <PropertyRef Name="PaymentTermId" />
+      <PropertyRef Name="InvoiceType" />
+      <PropertyRef Name="CurrencyId" />
+      <PropertyRef Name="CurrencySign" />
+      <PropertyRef Name="TotalAmount" />
+      <PropertyRef Name="InvStatusNameEn" />
+      <PropertyRef Name="InvCurrencyId" />
+      <PropertyRef Name="HouseBL" />
+      <PropertyRef Name="TaxDepositAmount" />
+      <PropertyRef Name="TotalBeforeTax" />
+    </Key>
+    <Property Name="InvoiceId" Type="int" Nullable="false" />
+    <Property Name="InvoiceCode" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="InvoiceDate" Type="datetime" Nullable="false" />
+    <Property Name="DueDate" Type="datetime" />
+    <Property Name="OperationId" Type="int" Nullable="false" />
+    <Property Name="HouseBillId" Type="int" Nullable="false" />
+    <Property Name="ShipperId" Type="int" />
+    <Property Name="ConsigneeId" Type="int" />
+    <Property Name="OrderFrom" Type="tinyint" Nullable="false" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="CreateBy" Type="nvarchar" MaxLength="128" />
+    <Property Name="Notes" Type="nvarchar(max)" />
+    <Property Name="PaymentTermId" Type="tinyint" Nullable="false" />
+    <Property Name="InvoiceType" Type="tinyint" Nullable="false" />
+    <Property Name="InvStatusId" Type="tinyint" />
+    <Property Name="PaymentTermEn" Type="nvarchar" MaxLength="50" />
+    <Property Name="ConsigneeNameEn" Type="nvarchar" MaxLength="200" />
+    <Property Name="ShipperNameEn" Type="nvarchar" MaxLength="200" />
+    <Property Name="CurrencyId" Type="int" Nullable="false" />
+    <Property Name="CurrencySign" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="TotalAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="TransId" Type="int" />
+    <Property Name="InvStatusNameEn" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="InvStatusNameAr" Type="nvarchar" MaxLength="50" />
+    <Property Name="ShipperNameAr" Type="nvarchar" MaxLength="200" />
+    <Property Name="ConsigneeNameAr" Type="nvarchar" MaxLength="200" />
+    <Property Name="PaymentTermAr" Type="nvarchar" MaxLength="50" />
+    <Property Name="InvCurrencyId" Type="int" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" />
+    <Property Name="DeletedBy" Type="nvarchar" MaxLength="128" />
+    <Property Name="DeleteReason" Type="nvarchar(max)" />
+    <Property Name="OperationCode" Type="varchar" MaxLength="15" />
+    <Property Name="OperationDate" Type="datetime" />
+    <Property Name="HouseBL" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="TaxDepositAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="TotalBeforeTax" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_AccountingChart_AccountingChart">
+    <End Role="AccountingChart" Type="Self.AccountingChart" Multiplicity="0..1" />
+    <End Role="AccountingChart1" Type="Self.AccountingChart" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AccountingChart">
+        <PropertyRef Name="AccountId" />
+      </Principal>
+      <Dependent Role="AccountingChart1">
+        <PropertyRef Name="ParentAccountId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AccTransactionDetail_AccountingChart">
+    <End Role="AccountingChart" Type="Self.AccountingChart" Multiplicity="1" />
+    <End Role="AccTransactionDetail" Type="Self.AccTransactionDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AccountingChart">
+        <PropertyRef Name="AccountId" />
+      </Principal>
+      <Dependent Role="AccTransactionDetail">
+        <PropertyRef Name="AccountId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AccTransactionDetail_AccTransaction">
+    <End Role="AccTransaction" Type="Self.AccTransaction" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AccTransactionDetail" Type="Self.AccTransactionDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AccTransaction">
+        <PropertyRef Name="TransId" />
+      </Principal>
+      <Dependent Role="AccTransactionDetail">
+        <PropertyRef Name="TransId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AccTransactionDetail_Currency">
+    <End Role="Currency" Type="Self.Currency" Multiplicity="1" />
+    <End Role="AccTransactionDetail" Type="Self.AccTransactionDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Currency">
+        <PropertyRef Name="CurrencyId" />
+      </Principal>
+      <Dependent Role="AccTransactionDetail">
+        <PropertyRef Name="CurrencyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AgentNote_BankAccount">
+    <End Role="BankAccount" Type="Self.BankAccount" Multiplicity="1" />
+    <End Role="AgentNote" Type="Self.AgentNote" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BankAccount">
+        <PropertyRef Name="BankAccId" />
+        <PropertyRef Name="BankId" />
+      </Principal>
+      <Dependent Role="AgentNote">
+        <PropertyRef Name="BankAccId" />
+        <PropertyRef Name="BankId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AgentNote_Consignee">
+    <End Role="Consignee" Type="Self.Consignee" Multiplicity="0..1" />
+    <End Role="AgentNote" Type="Self.AgentNote" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Consignee">
+        <PropertyRef Name="ConsigneeId" />
+      </Principal>
+      <Dependent Role="AgentNote">
+        <PropertyRef Name="ConsigneeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AgentNote_InvStatusLib">
+    <End Role="InvStatusLib" Type="Self.InvStatusLib" Multiplicity="0..1" />
+    <End Role="AgentNote" Type="Self.AgentNote" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="InvStatusLib">
+        <PropertyRef Name="InvStatusId" />
+      </Principal>
+      <Dependent Role="AgentNote">
+        <PropertyRef Name="InvStatusId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AgentNote_Shipper">
+    <End Role="Shipper" Type="Self.Shipper" Multiplicity="0..1" />
+    <End Role="AgentNote" Type="Self.AgentNote" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Shipper">
+        <PropertyRef Name="ShipperId" />
+      </Principal>
+      <Dependent Role="AgentNote">
+        <PropertyRef Name="ShipperId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AgentNoteDetail_AgentNote">
+    <End Role="AgentNote" Type="Self.AgentNote" Multiplicity="1" />
+    <End Role="AgentNoteDetail" Type="Self.AgentNoteDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AgentNote">
+        <PropertyRef Name="AgentNoteId" />
+      </Principal>
+      <Dependent Role="AgentNoteDetail">
+        <PropertyRef Name="AgentNoteId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ArCashDeposit_Consignee">
+    <End Role="Consignee" Type="Self.Consignee" Multiplicity="0..1" />
+    <End Role="ArCashDeposit" Type="Self.ArCashDeposit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Consignee">
+        <PropertyRef Name="ConsigneeId" />
+      </Principal>
+      <Dependent Role="ArCashDeposit">
+        <PropertyRef Name="ConsigneeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ArCashDeposit_Currency">
+    <End Role="Currency" Type="Self.Currency" Multiplicity="0..1" />
+    <End Role="ArCashDeposit" Type="Self.ArCashDeposit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Currency">
+        <PropertyRef Name="CurrencyId" />
+      </Principal>
+      <Dependent Role="ArCashDeposit">
+        <PropertyRef Name="CurrencyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ArCashDeposit_PaymentTerm">
+    <End Role="PaymentTerm" Type="Self.PaymentTerm" Multiplicity="1" />
+    <End Role="ArCashDeposit" Type="Self.ArCashDeposit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PaymentTerm">
+        <PropertyRef Name="PaymentTermId" />
+      </Principal>
+      <Dependent Role="ArCashDeposit">
+        <PropertyRef Name="PaymentTermId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ArCashDeposit_Shipper">
+    <End Role="Shipper" Type="Self.Shipper" Multiplicity="0..1" />
+    <End Role="ArCashDeposit" Type="Self.ArCashDeposit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Shipper">
+        <PropertyRef Name="ShipperId" />
+      </Principal>
+      <Dependent Role="ArCashDeposit">
+        <PropertyRef Name="ShipperId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ArCashDepositBalance_Consignee">
+    <End Role="Consignee" Type="Self.Consignee" Multiplicity="0..1" />
+    <End Role="ArCashDepositBalance" Type="Self.ArCashDepositBalance" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Consignee">
+        <PropertyRef Name="ConsigneeId" />
+      </Principal>
+      <Dependent Role="ArCashDepositBalance">
+        <PropertyRef Name="ConsigneeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ArCashDepositBalance_Currency">
+    <End Role="Currency" Type="Self.Currency" Multiplicity="1" />
+    <End Role="ArCashDepositBalance" Type="Self.ArCashDepositBalance" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Currency">
+        <PropertyRef Name="CurrencyId" />
+      </Principal>
+      <Dependent Role="ArCashDepositBalance">
+        <PropertyRef Name="CurrencyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ArCashDepositBalance_Shipper">
+    <End Role="Shipper" Type="Self.Shipper" Multiplicity="0..1" />
+    <End Role="ArCashDepositBalance" Type="Self.ArCashDepositBalance" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Shipper">
+        <PropertyRef Name="ShipperId" />
+      </Principal>
+      <Dependent Role="ArCashDepositBalance">
+        <PropertyRef Name="ShipperId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BankAccount_Bank">
+    <End Role="Bank" Type="Self.Bank" Multiplicity="1" />
+    <End Role="BankAccount" Type="Self.BankAccount" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Bank">
+        <PropertyRef Name="BankId" />
+      </Principal>
+      <Dependent Role="BankAccount">
+        <PropertyRef Name="BankId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BankAccount_Currency">
+    <End Role="Currency" Type="Self.Currency" Multiplicity="1" />
+    <End Role="BankAccount" Type="Self.BankAccount" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Currency">
+        <PropertyRef Name="CurrencyId" />
+      </Principal>
+      <Dependent Role="BankAccount">
+        <PropertyRef Name="CurrencyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CashInReceipt_AccTransaction">
+    <End Role="AccTransaction" Type="Self.AccTransaction" Multiplicity="0..1" />
+    <End Role="CashInReceipt" Type="Self.CashInReceipt" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AccTransaction">
+        <PropertyRef Name="TransId" />
+      </Principal>
+      <Dependent Role="CashInReceipt">
+        <PropertyRef Name="TransId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CashInReceipt_Bank">
+    <End Role="Bank" Type="Self.Bank" Multiplicity="0..1" />
+    <End Role="CashInReceipt" Type="Self.CashInReceipt" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Bank">
+        <PropertyRef Name="BankId" />
+      </Principal>
+      <Dependent Role="CashInReceipt">
+        <PropertyRef Name="BankId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CashInReceipt_BankAccount">
+    <End Role="BankAccount" Type="Self.BankAccount" Multiplicity="0..1" />
+    <End Role="CashInReceipt" Type="Self.CashInReceipt" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BankAccount">
+        <PropertyRef Name="BankAccId" />
+        <PropertyRef Name="BankId" />
+      </Principal>
+      <Dependent Role="CashInReceipt">
+        <PropertyRef Name="BankAccId" />
+        <PropertyRef Name="BankId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CashInReceipt_Consignee">
+    <End Role="Consignee" Type="Self.Consignee" Multiplicity="0..1" />
+    <End Role="CashInReceipt" Type="Self.CashInReceipt" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Consignee">
+        <PropertyRef Name="ConsigneeId" />
+      </Principal>
+      <Dependent Role="CashInReceipt">
+        <PropertyRef Name="ConsigneeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CashInReceipt_Currency">
+    <End Role="Currency" Type="Self.Currency" Multiplicity="0..1" />
+    <End Role="CashInReceipt" Type="Self.CashInReceipt" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Currency">
+        <PropertyRef Name="CurrencyId" />
+      </Principal>
+      <Dependent Role="CashInReceipt">
+        <PropertyRef Name="CurrencyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CashInReceipt_PaymentTerm">
+    <End Role="PaymentTerm" Type="Self.PaymentTerm" Multiplicity="1" />
+    <End Role="CashInReceipt" Type="Self.CashInReceipt" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PaymentTerm">
+        <PropertyRef Name="PaymentTermId" />
+      </Principal>
+      <Dependent Role="CashInReceipt">
+        <PropertyRef Name="PaymentTermId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CashInReceipt_Shipper">
+    <End Role="Shipper" Type="Self.Shipper" Multiplicity="0..1" />
+    <End Role="CashInReceipt" Type="Self.CashInReceipt" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Shipper">
+        <PropertyRef Name="ShipperId" />
+      </Principal>
+      <Dependent Role="CashInReceipt">
+        <PropertyRef Name="ShipperId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CashInReceiptAgNote_AgentNote">
+    <End Role="AgentNote" Type="Self.AgentNote" Multiplicity="1" />
+    <End Role="CashInReceiptAgNote" Type="Self.CashInReceiptAgNote" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AgentNote">
+        <PropertyRef Name="AgentNoteId" />
+      </Principal>
+      <Dependent Role="CashInReceiptAgNote">
+        <PropertyRef Name="AgentNoteId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CashInReceiptAgNote_CashInReceipt">
+    <End Role="CashInReceipt" Type="Self.CashInReceipt" Multiplicity="1" />
+    <End Role="CashInReceiptAgNote" Type="Self.CashInReceiptAgNote" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CashInReceipt">
+        <PropertyRef Name="ReceiptId" />
+      </Principal>
+      <Dependent Role="CashInReceiptAgNote">
+        <PropertyRef Name="ReceiptId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CashInReceiptCheck_AccTransaction">
+    <End Role="AccTransaction" Type="Self.AccTransaction" Multiplicity="0..1" />
+    <End Role="CashInReceiptCheck" Type="Self.CashInReceiptCheck" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AccTransaction">
+        <PropertyRef Name="TransId" />
+      </Principal>
+      <Dependent Role="CashInReceiptCheck">
+        <PropertyRef Name="TransId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CashInReceiptCheck_CashInReceipt">
+    <End Role="CashInReceipt" Type="Self.CashInReceipt" Multiplicity="1" />
+    <End Role="CashInReceiptCheck" Type="Self.CashInReceiptCheck" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CashInReceipt">
+        <PropertyRef Name="ReceiptId" />
+      </Principal>
+      <Dependent Role="CashInReceiptCheck">
+        <PropertyRef Name="ReceiptId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CashInReceiptInv_CashInReceipt">
+    <End Role="CashInReceipt" Type="Self.CashInReceipt" Multiplicity="1" />
+    <End Role="CashInReceiptInv" Type="Self.CashInReceiptInv" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CashInReceipt">
+        <PropertyRef Name="ReceiptId" />
+      </Principal>
+      <Dependent Role="CashInReceiptInv">
+        <PropertyRef Name="ReceiptId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CashInReceiptInv_Invoice">
+    <End Role="Invoice" Type="Self.Invoice" Multiplicity="1" />
+    <End Role="CashInReceiptInv" Type="Self.CashInReceiptInv" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Invoice">
+        <PropertyRef Name="InvoiceId" />
+      </Principal>
+      <Dependent Role="CashInReceiptInv">
+        <PropertyRef Name="InvoiceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CashOutCCCashDeposit_CashOutReceipt">
+    <End Role="CashOutReceipt" Type="Self.CashOutReceipt" Multiplicity="1" />
+    <End Role="CashOutCCCashDeposit" Type="Self.CashOutCCCashDeposit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CashOutReceipt">
+        <PropertyRef Name="ReceiptId" />
+      </Principal>
+      <Dependent Role="CashOutCCCashDeposit">
+        <PropertyRef Name="ReceiptId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CashOutReceipt_AccTransaction">
+    <End Role="AccTransaction" Type="Self.AccTransaction" Multiplicity="0..1" />
+    <End Role="CashOutReceipt" Type="Self.CashOutReceipt" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AccTransaction">
+        <PropertyRef Name="TransId" />
+      </Principal>
+      <Dependent Role="CashOutReceipt">
+        <PropertyRef Name="TransId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CashOutReceipt_Bank">
+    <End Role="Bank" Type="Self.Bank" Multiplicity="0..1" />
+    <End Role="CashOutReceipt" Type="Self.CashOutReceipt" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Bank">
+        <PropertyRef Name="BankId" />
+      </Principal>
+      <Dependent Role="CashOutReceipt">
+        <PropertyRef Name="BankId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CashOutReceipt_BankAccount">
+    <End Role="BankAccount" Type="Self.BankAccount" Multiplicity="0..1" />
+    <End Role="CashOutReceipt" Type="Self.CashOutReceipt" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BankAccount">
+        <PropertyRef Name="BankAccId" />
+        <PropertyRef Name="BankId" />
+      </Principal>
+      <Dependent Role="CashOutReceipt">
+        <PropertyRef Name="BankAccId" />
+        <PropertyRef Name="BankId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CashOutReceipt_Currency">
+    <End Role="Currency" Type="Self.Currency" Multiplicity="0..1" />
+    <End Role="CashOutReceipt" Type="Self.CashOutReceipt" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Currency">
+        <PropertyRef Name="CurrencyId" />
+      </Principal>
+      <Dependent Role="CashOutReceipt">
+        <PropertyRef Name="CurrencyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CashOutReceipt_PaymentTerm">
+    <End Role="PaymentTerm" Type="Self.PaymentTerm" Multiplicity="1" />
+    <End Role="CashOutReceipt" Type="Self.CashOutReceipt" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PaymentTerm">
+        <PropertyRef Name="PaymentTermId" />
+      </Principal>
+      <Dependent Role="CashOutReceipt">
+        <PropertyRef Name="PaymentTermId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CashOutReceiptAgNote_AgentNote">
+    <End Role="AgentNote" Type="Self.AgentNote" Multiplicity="1" />
+    <End Role="CashOutReceiptAgNote" Type="Self.CashOutReceiptAgNote" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AgentNote">
+        <PropertyRef Name="AgentNoteId" />
+      </Principal>
+      <Dependent Role="CashOutReceiptAgNote">
+        <PropertyRef Name="AgentNoteId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CashOutReceiptAgNote_CashOutReceipt">
+    <End Role="CashOutReceipt" Type="Self.CashOutReceipt" Multiplicity="1" />
+    <End Role="CashOutReceiptAgNote" Type="Self.CashOutReceiptAgNote" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CashOutReceipt">
+        <PropertyRef Name="ReceiptId" />
+      </Principal>
+      <Dependent Role="CashOutReceiptAgNote">
+        <PropertyRef Name="ReceiptId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CashOutReceiptCheck_AccTransaction">
+    <End Role="AccTransaction" Type="Self.AccTransaction" Multiplicity="0..1" />
+    <End Role="CashOutReceiptCheck" Type="Self.CashOutReceiptCheck" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AccTransaction">
+        <PropertyRef Name="TransId" />
+      </Principal>
+      <Dependent Role="CashOutReceiptCheck">
+        <PropertyRef Name="TransId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CashOutReceiptCheck_CashOutReceipt">
+    <End Role="CashOutReceipt" Type="Self.CashOutReceipt" Multiplicity="1" />
+    <End Role="CashOutReceiptCheck" Type="Self.CashOutReceiptCheck" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CashOutReceipt">
+        <PropertyRef Name="ReceiptId" />
+      </Principal>
+      <Dependent Role="CashOutReceiptCheck">
+        <PropertyRef Name="ReceiptId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CashOutReceiptExpense_CashOutReceipt">
+    <End Role="CashOutReceipt" Type="Self.CashOutReceipt" Multiplicity="1" />
+    <End Role="CashOutReceiptExpense" Type="Self.CashOutReceiptExpense" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CashOutReceipt">
+        <PropertyRef Name="ReceiptId" />
+      </Principal>
+      <Dependent Role="CashOutReceiptExpense">
+        <PropertyRef Name="ReceiptId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CashOutReceiptExpense_ExpenseLib">
+    <End Role="ExpenseLib" Type="Self.ExpenseLib" Multiplicity="1" />
+    <End Role="CashOutReceiptExpense" Type="Self.CashOutReceiptExpense" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ExpenseLib">
+        <PropertyRef Name="ExpenseId" />
+      </Principal>
+      <Dependent Role="CashOutReceiptExpense">
+        <PropertyRef Name="ExpenseId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CashOutReceiptInv_CashOutReceipt">
+    <End Role="CashOutReceipt" Type="Self.CashOutReceipt" Multiplicity="1" />
+    <End Role="CashOutReceiptInv" Type="Self.CashOutReceiptInv" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CashOutReceipt">
+        <PropertyRef Name="ReceiptId" />
+      </Principal>
+      <Dependent Role="CashOutReceiptInv">
+        <PropertyRef Name="ReceiptId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CashOutReceiptInv_InvoiceAP">
+    <End Role="InvoiceAP" Type="Self.InvoiceAP" Multiplicity="1" />
+    <End Role="CashOutReceiptInv" Type="Self.CashOutReceiptInv" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="InvoiceAP">
+        <PropertyRef Name="InvoiceId" />
+      </Principal>
+      <Dependent Role="CashOutReceiptInv">
+        <PropertyRef Name="InvoiceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_HouseBill_Consignee">
+    <End Role="Consignee" Type="Self.Consignee" Multiplicity="1" />
+    <End Role="HouseBill" Type="Self.HouseBill" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Consignee">
+        <PropertyRef Name="ConsigneeId" />
+      </Principal>
+      <Dependent Role="HouseBill">
+        <PropertyRef Name="ConsigneeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_HouseBill_Currency">
+    <End Role="Currency" Type="Self.Currency" Multiplicity="0..1" />
+    <End Role="HouseBill" Type="Self.HouseBill" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Currency">
+        <PropertyRef Name="CurrencyId" />
+      </Principal>
+      <Dependent Role="HouseBill">
+        <PropertyRef Name="ThcCurrencyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_HouseBill_Currency1">
+    <End Role="Currency" Type="Self.Currency" Multiplicity="0..1" />
+    <End Role="HouseBill" Type="Self.HouseBill" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Currency">
+        <PropertyRef Name="CurrencyId" />
+      </Principal>
+      <Dependent Role="HouseBill">
+        <PropertyRef Name="FreighCurrencyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_HouseBill_Shipper">
+    <End Role="Shipper" Type="Self.Shipper" Multiplicity="1" />
+    <End Role="HouseBill" Type="Self.HouseBill" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Shipper">
+        <PropertyRef Name="ShipperId" />
+      </Principal>
+      <Dependent Role="HouseBill">
+        <PropertyRef Name="ShipperId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Invoice_AccTransaction">
+    <End Role="AccTransaction" Type="Self.AccTransaction" Multiplicity="0..1" />
+    <End Role="Invoice" Type="Self.Invoice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AccTransaction">
+        <PropertyRef Name="TransId" />
+      </Principal>
+      <Dependent Role="Invoice">
+        <PropertyRef Name="TransId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Invoice_Consignee">
+    <End Role="Consignee" Type="Self.Consignee" Multiplicity="0..1" />
+    <End Role="Invoice" Type="Self.Invoice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Consignee">
+        <PropertyRef Name="ConsigneeId" />
+      </Principal>
+      <Dependent Role="Invoice">
+        <PropertyRef Name="ConsigneeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Invoice_Currency">
+    <End Role="Currency" Type="Self.Currency" Multiplicity="1" />
+    <End Role="Invoice" Type="Self.Invoice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Currency">
+        <PropertyRef Name="CurrencyId" />
+      </Principal>
+      <Dependent Role="Invoice">
+        <PropertyRef Name="InvCurrencyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Invoice_HouseBill">
+    <End Role="HouseBill" Type="Self.HouseBill" Multiplicity="1" />
+    <End Role="Invoice" Type="Self.Invoice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HouseBill">
+        <PropertyRef Name="HouseBillId" />
+      </Principal>
+      <Dependent Role="Invoice">
+        <PropertyRef Name="HouseBillId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Invoice_InvStatusLib">
+    <End Role="InvStatusLib" Type="Self.InvStatusLib" Multiplicity="0..1" />
+    <End Role="Invoice" Type="Self.Invoice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="InvStatusLib">
+        <PropertyRef Name="InvStatusId" />
+      </Principal>
+      <Dependent Role="Invoice">
+        <PropertyRef Name="InvStatusId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Invoice_PaymentTerm">
+    <End Role="PaymentTerm" Type="Self.PaymentTerm" Multiplicity="1" />
+    <End Role="Invoice" Type="Self.Invoice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PaymentTerm">
+        <PropertyRef Name="PaymentTermId" />
+      </Principal>
+      <Dependent Role="Invoice">
+        <PropertyRef Name="PaymentTermId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Invoice_Shipper">
+    <End Role="Shipper" Type="Self.Shipper" Multiplicity="0..1" />
+    <End Role="Invoice" Type="Self.Invoice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Shipper">
+        <PropertyRef Name="ShipperId" />
+      </Principal>
+      <Dependent Role="Invoice">
+        <PropertyRef Name="ShipperId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InvoiceAP_Currency">
+    <End Role="Currency" Type="Self.Currency" Multiplicity="1" />
+    <End Role="InvoiceAP" Type="Self.InvoiceAP" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Currency">
+        <PropertyRef Name="CurrencyId" />
+      </Principal>
+      <Dependent Role="InvoiceAP">
+        <PropertyRef Name="InvCurrencyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InvoiceAP_HouseBill">
+    <End Role="HouseBill" Type="Self.HouseBill" Multiplicity="0..1" />
+    <End Role="InvoiceAP" Type="Self.InvoiceAP" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HouseBill">
+        <PropertyRef Name="HouseBillId" />
+      </Principal>
+      <Dependent Role="InvoiceAP">
+        <PropertyRef Name="HouseBillId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InvoiceAP_InvStatusLib">
+    <End Role="InvStatusLib" Type="Self.InvStatusLib" Multiplicity="0..1" />
+    <End Role="InvoiceAP" Type="Self.InvoiceAP" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="InvStatusLib">
+        <PropertyRef Name="InvStatusId" />
+      </Principal>
+      <Dependent Role="InvoiceAP">
+        <PropertyRef Name="InvStatusId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InvoiceAP_PaymentTerm">
+    <End Role="PaymentTerm" Type="Self.PaymentTerm" Multiplicity="1" />
+    <End Role="InvoiceAP" Type="Self.InvoiceAP" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PaymentTerm">
+        <PropertyRef Name="PaymentTermId" />
+      </Principal>
+      <Dependent Role="InvoiceAP">
+        <PropertyRef Name="PaymentTermId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InvoiceDetail_Invoice">
+    <End Role="Invoice" Type="Self.Invoice" Multiplicity="1" />
+    <End Role="InvoiceDetail" Type="Self.InvoiceDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Invoice">
+        <PropertyRef Name="InvoiceId" />
+      </Principal>
+      <Dependent Role="InvoiceDetail">
+        <PropertyRef Name="InvoiceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InvoiceDetailAP_Currency">
+    <End Role="Currency" Type="Self.Currency" Multiplicity="1" />
+    <End Role="InvoiceDetailAP" Type="Self.InvoiceDetailAP" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Currency">
+        <PropertyRef Name="CurrencyId" />
+      </Principal>
+      <Dependent Role="InvoiceDetailAP">
+        <PropertyRef Name="CurrencyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InvoiceDetailAP_Currency1">
+    <End Role="Currency" Type="Self.Currency" Multiplicity="1" />
+    <End Role="InvoiceDetailAP" Type="Self.InvoiceDetailAP" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Currency">
+        <PropertyRef Name="CurrencyId" />
+      </Principal>
+      <Dependent Role="InvoiceDetailAP">
+        <PropertyRef Name="MainCurrencyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InvoiceDetailAP_InvoiceAP">
+    <End Role="InvoiceAP" Type="Self.InvoiceAP" Multiplicity="1" />
+    <End Role="InvoiceDetailAP" Type="Self.InvoiceDetailAP" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="InvoiceAP">
+        <PropertyRef Name="InvoiceId" />
+      </Principal>
+      <Dependent Role="InvoiceDetailAP">
+        <PropertyRef Name="InvoiceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InvoiceDetailInvCurr_Currency">
+    <End Role="Currency" Type="Self.Currency" Multiplicity="1" />
+    <End Role="InvoiceDetail" Type="Self.InvoiceDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Currency">
+        <PropertyRef Name="CurrencyId" />
+      </Principal>
+      <Dependent Role="InvoiceDetail">
+        <PropertyRef Name="CurrencyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InvoiceDetailMainCurrency_Currency">
+    <End Role="Currency" Type="Self.Currency" Multiplicity="1" />
+    <End Role="InvoiceDetail" Type="Self.InvoiceDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Currency">
+        <PropertyRef Name="CurrencyId" />
+      </Principal>
+      <Dependent Role="InvoiceDetail">
+        <PropertyRef Name="MainCurrencyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InvoiceTotal_Currency">
+    <End Role="Currency" Type="Self.Currency" Multiplicity="1" />
+    <End Role="InvoiceTotal" Type="Self.InvoiceTotal" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Currency">
+        <PropertyRef Name="CurrencyId" />
+      </Principal>
+      <Dependent Role="InvoiceTotal">
+        <PropertyRef Name="CurrencyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InvoiceTotal_Invoice">
+    <End Role="Invoice" Type="Self.Invoice" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="InvoiceTotal" Type="Self.InvoiceTotal" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Invoice">
+        <PropertyRef Name="InvoiceId" />
+      </Principal>
+      <Dependent Role="InvoiceTotal">
+        <PropertyRef Name="InvoiceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InvoiceTotalAP_Currency">
+    <End Role="Currency" Type="Self.Currency" Multiplicity="1" />
+    <End Role="InvoiceTotalAP" Type="Self.InvoiceTotalAP" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Currency">
+        <PropertyRef Name="CurrencyId" />
+      </Principal>
+      <Dependent Role="InvoiceTotalAP">
+        <PropertyRef Name="CurrencyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InvoiceTotalAP_InvoiceAP">
+    <End Role="InvoiceAP" Type="Self.InvoiceAP" Multiplicity="1" />
+    <End Role="InvoiceTotalAP" Type="Self.InvoiceTotalAP" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="InvoiceAP">
+        <PropertyRef Name="InvoiceId" />
+      </Principal>
+      <Dependent Role="InvoiceTotalAP">
+        <PropertyRef Name="InvoiceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="AccountingModelStoreContainer">
+    <EntitySet Name="AccountingChart" EntityType="Self.AccountingChart" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AccTransaction" EntityType="Self.AccTransaction" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AccTransactionDetail" EntityType="Self.AccTransactionDetail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AgentNote" EntityType="Self.AgentNote" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AgentNoteDetail" EntityType="Self.AgentNoteDetail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ArCashDeposit" EntityType="Self.ArCashDeposit" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ArCashDepositBalance" EntityType="Self.ArCashDepositBalance" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Bank" EntityType="Self.Bank" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BankAccount" EntityType="Self.BankAccount" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CashInReceipt" EntityType="Self.CashInReceipt" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CashInReceiptAgNote" EntityType="Self.CashInReceiptAgNote" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CashInReceiptCheck" EntityType="Self.CashInReceiptCheck" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CashInReceiptInv" EntityType="Self.CashInReceiptInv" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CashOutCCCashDeposit" EntityType="Self.CashOutCCCashDeposit" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CashOutReceipt" EntityType="Self.CashOutReceipt" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CashOutReceiptAgNote" EntityType="Self.CashOutReceiptAgNote" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CashOutReceiptCheck" EntityType="Self.CashOutReceiptCheck" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CashOutReceiptExpense" EntityType="Self.CashOutReceiptExpense" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CashOutReceiptInv" EntityType="Self.CashOutReceiptInv" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Consignee" EntityType="Self.Consignee" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Currency" EntityType="Self.Currency" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ExpenseLib" EntityType="Self.ExpenseLib" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="HouseBill" EntityType="Self.HouseBill" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Invoice" EntityType="Self.Invoice" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="InvoiceAP" EntityType="Self.InvoiceAP" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="InvoiceDetail" EntityType="Self.InvoiceDetail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="InvoiceDetailAP" EntityType="Self.InvoiceDetailAP" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="InvoiceTotal" EntityType="Self.InvoiceTotal" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="InvoiceTotalAP" EntityType="Self.InvoiceTotalAP" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="InvStatusLib" EntityType="Self.InvStatusLib" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PaymentTerm" EntityType="Self.PaymentTerm" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Shipper" EntityType="Self.Shipper" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AgentNoteView" EntityType="Self.AgentNoteView" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [AgentNoteView].[AgentNoteId] AS [AgentNoteId], 
+    [AgentNoteView].[AgentNoteType] AS [AgentNoteType], 
+    [AgentNoteView].[AgentNoteCode] AS [AgentNoteCode], 
+    [AgentNoteView].[AgentNoteDate] AS [AgentNoteDate], 
+    [AgentNoteView].[DueDate] AS [DueDate], 
+    [AgentNoteView].[AgentId] AS [AgentId], 
+    [AgentNoteView].[OperationId] AS [OperationId], 
+    [AgentNoteView].[CreateDate] AS [CreateDate], 
+    [AgentNoteView].[CreateBy] AS [CreateBy], 
+    [AgentNoteView].[Notes] AS [Notes], 
+    [AgentNoteView].[AgentNameEn] AS [AgentNameEn], 
+    [AgentNoteView].[AgentNameAr] AS [AgentNameAr], 
+    [AgentNoteView].[OrderFrom] AS [OrderFrom], 
+    [AgentNoteView].[OperationCode] AS [OperationCode], 
+    [AgentNoteView].[BookingNumber] AS [BookingNumber], 
+    [AgentNoteView].[MBL] AS [MBL], 
+    [AgentNoteView].[InvStatusNameEn] AS [InvStatusNameEn], 
+    [AgentNoteView].[InvStatusNameAr] AS [InvStatusNameAr], 
+    [AgentNoteView].[InvStatusId] AS [InvStatusId], 
+    [AgentNoteView].[TotalAmount] AS [TotalAmount], 
+    [AgentNoteView].[CurrencyId] AS [CurrencyId], 
+    [AgentNoteView].[CurrencySign] AS [CurrencySign], 
+    [AgentNoteView].[BankNameEn] AS [BankNameEn], 
+    [AgentNoteView].[AccountName] AS [AccountName], 
+    [AgentNoteView].[AccountNumber] AS [AccountNumber]
+    FROM [dbo].[AgentNoteView] AS [AgentNoteView]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="APInvoiceView" EntityType="Self.APInvoiceView" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [APInvoiceView].[InvoiceId] AS [InvoiceId], 
+    [APInvoiceView].[InvoiceCode] AS [InvoiceCode], 
+    [APInvoiceView].[InvoiceDate] AS [InvoiceDate], 
+    [APInvoiceView].[DueDate] AS [DueDate], 
+    [APInvoiceView].[APInvoiceCode] AS [APInvoiceCode], 
+    [APInvoiceView].[OperationId] AS [OperationId], 
+    [APInvoiceView].[HouseBillId] AS [HouseBillId], 
+    [APInvoiceView].[CarrierId] AS [CarrierId], 
+    [APInvoiceView].[ContractorId] AS [ContractorId], 
+    [APInvoiceView].[OperationCode] AS [OperationCode], 
+    [APInvoiceView].[BookingNumber] AS [BookingNumber], 
+    [APInvoiceView].[CarrierType] AS [CarrierType], 
+    [APInvoiceView].[MBL] AS [MBL], 
+    [APInvoiceView].[CarrierNameEn] AS [CarrierNameEn], 
+    [APInvoiceView].[CarrierNameAr] AS [CarrierNameAr], 
+    [APInvoiceView].[CurrencyId] AS [CurrencyId], 
+    [APInvoiceView].[TotalAmount] AS [TotalAmount], 
+    [APInvoiceView].[CurrencySign] AS [CurrencySign], 
+    [APInvoiceView].[InvStatusId] AS [InvStatusId], 
+    [APInvoiceView].[InvStatusNameEn] AS [InvStatusNameEn], 
+    [APInvoiceView].[InvStatusNameAr] AS [InvStatusNameAr], 
+    [APInvoiceView].[CreateDate] AS [CreateDate], 
+    [APInvoiceView].[CreateBy] AS [CreateBy], 
+    [APInvoiceView].[Notes] AS [Notes], 
+    [APInvoiceView].[PaymentTermId] AS [PaymentTermId], 
+    [APInvoiceView].[TransId] AS [TransId], 
+    [APInvoiceView].[InvCurrencyId] AS [InvCurrencyId], 
+    [APInvoiceView].[PaymentTermEn] AS [PaymentTermEn], 
+    [APInvoiceView].[PaymentTermAr] AS [PaymentTermAr], 
+    [APInvoiceView].[OrderFrom] AS [OrderFrom], 
+    [APInvoiceView].[ContractorNameEn] AS [ContractorNameEn], 
+    [APInvoiceView].[ContractorNameAr] AS [ContractorNameAr], 
+    [APInvoiceView].[IsDeleted] AS [IsDeleted], 
+    [APInvoiceView].[DeletedBy] AS [DeletedBy], 
+    [APInvoiceView].[DeleteReason] AS [DeleteReason], 
+    [APInvoiceView].[InvoiceType] AS [InvoiceType], 
+    [APInvoiceView].[OperationDate] AS [OperationDate]
+    FROM [dbo].[APInvoiceView] AS [APInvoiceView]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="ArCashDepositView" EntityType="Self.ArCashDepositView" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [ArCashDepositView].[ReceiptId] AS [ReceiptId], 
+    [ArCashDepositView].[ReceiptCode] AS [ReceiptCode], 
+    [ArCashDepositView].[ReceiptDate] AS [ReceiptDate], 
+    [ArCashDepositView].[ShipperId] AS [ShipperId], 
+    [ArCashDepositView].[ConsigneeId] AS [ConsigneeId], 
+    [ArCashDepositView].[PaymentTermId] AS [PaymentTermId], 
+    [ArCashDepositView].[CreateDate] AS [CreateDate], 
+    [ArCashDepositView].[UserName] AS [UserName], 
+    [ArCashDepositView].[Notes] AS [Notes], 
+    [ArCashDepositView].[TransId] AS [TransId], 
+    [ArCashDepositView].[CurrencyId] AS [CurrencyId], 
+    [ArCashDepositView].[BankId] AS [BankId], 
+    [ArCashDepositView].[BankAccId] AS [BankAccId], 
+    [ArCashDepositView].[ReceiptAmount] AS [ReceiptAmount], 
+    [ArCashDepositView].[ShipperNameEn] AS [ShipperNameEn], 
+    [ArCashDepositView].[ShipperNameAr] AS [ShipperNameAr], 
+    [ArCashDepositView].[ConsigneeNameEn] AS [ConsigneeNameEn], 
+    [ArCashDepositView].[ConsigneeNameAr] AS [ConsigneeNameAr], 
+    [ArCashDepositView].[PaymentTermEn] AS [PaymentTermEn], 
+    [ArCashDepositView].[PaymentTermAr] AS [PaymentTermAr], 
+    [ArCashDepositView].[CurrencySign] AS [CurrencySign], 
+    [ArCashDepositView].[CurrencyName] AS [CurrencyName]
+    FROM [dbo].[ArCashDepositView] AS [ArCashDepositView]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="CashInReceiptView" EntityType="Self.CashInReceiptView" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [CashInReceiptView].[ReceiptId] AS [ReceiptId], 
+    [CashInReceiptView].[ReceiptCode] AS [ReceiptCode], 
+    [CashInReceiptView].[ReceiptDate] AS [ReceiptDate], 
+    [CashInReceiptView].[ShipperId] AS [ShipperId], 
+    [CashInReceiptView].[ShipperNameEn] AS [ShipperNameEn], 
+    [CashInReceiptView].[ShipperNameAr] AS [ShipperNameAr], 
+    [CashInReceiptView].[ConsigneeId] AS [ConsigneeId], 
+    [CashInReceiptView].[ConsigneeNameEn] AS [ConsigneeNameEn], 
+    [CashInReceiptView].[ConsigneeNameAr] AS [ConsigneeNameAr], 
+    [CashInReceiptView].[AgentId] AS [AgentId], 
+    [CashInReceiptView].[AgentNameEn] AS [AgentNameEn], 
+    [CashInReceiptView].[AgentNameAr] AS [AgentNameAr], 
+    [CashInReceiptView].[Notes] AS [Notes], 
+    [CashInReceiptView].[ReceiptAmount] AS [ReceiptAmount], 
+    [CashInReceiptView].[IsDeleted] AS [IsDeleted], 
+    [CashInReceiptView].[DeletedBy] AS [DeletedBy], 
+    [CashInReceiptView].[DeleteReason] AS [DeleteReason], 
+    [CashInReceiptView].[TransId] AS [TransId], 
+    [CashInReceiptView].[CurrencySign] AS [CurrencySign], 
+    [CashInReceiptView].[OperationId] AS [OperationId], 
+    [CashInReceiptView].[PaymentTermEn] AS [PaymentTermEn], 
+    [CashInReceiptView].[PaymentTermAr] AS [PaymentTermAr], 
+    [CashInReceiptView].[CheckNumber] AS [CheckNumber], 
+    [CashInReceiptView].[CheckDueDate] AS [CheckDueDate], 
+    [CashInReceiptView].[IsCollected] AS [IsCollected], 
+    [CashInReceiptView].[CurrencyId] AS [CurrencyId], 
+    [CashInReceiptView].[CreateDate] AS [CreateDate], 
+    [CashInReceiptView].[CreateBy] AS [CreateBy], 
+    [CashInReceiptView].[UserName] AS [UserName], 
+    [CashInReceiptView].[PaymentTermId] AS [PaymentTermId]
+    FROM [dbo].[CashInReceiptView] AS [CashInReceiptView]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="CashOutReceiptView" EntityType="Self.CashOutReceiptView" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [CashOutReceiptView].[ReceiptId] AS [ReceiptId], 
+    [CashOutReceiptView].[ReceiptCode] AS [ReceiptCode], 
+    [CashOutReceiptView].[ReceiptDate] AS [ReceiptDate], 
+    [CashOutReceiptView].[CarrierId] AS [CarrierId], 
+    [CashOutReceiptView].[CarrierNameEn] AS [CarrierNameEn], 
+    [CashOutReceiptView].[CarrierNameAr] AS [CarrierNameAr], 
+    [CashOutReceiptView].[ContractorId] AS [ContractorId], 
+    [CashOutReceiptView].[ContractorNameEn] AS [ContractorNameEn], 
+    [CashOutReceiptView].[ContractorNameAr] AS [ContractorNameAr], 
+    [CashOutReceiptView].[AgentId] AS [AgentId], 
+    [CashOutReceiptView].[AgentNameEn] AS [AgentNameEn], 
+    [CashOutReceiptView].[AgentNameAr] AS [AgentNameAr], 
+    [CashOutReceiptView].[PaymentTermId] AS [PaymentTermId], 
+    [CashOutReceiptView].[PaymentTermEn] AS [PaymentTermEn], 
+    [CashOutReceiptView].[PaymentTermAr] AS [PaymentTermAr], 
+    [CashOutReceiptView].[CreateDate] AS [CreateDate], 
+    [CashOutReceiptView].[CreateBy] AS [CreateBy], 
+    [CashOutReceiptView].[Notes] AS [Notes], 
+    [CashOutReceiptView].[ReceiptAmount] AS [ReceiptAmount], 
+    [CashOutReceiptView].[TransId] AS [TransId], 
+    [CashOutReceiptView].[CurrencyId] AS [CurrencyId], 
+    [CashOutReceiptView].[CurrencySign] AS [CurrencySign], 
+    [CashOutReceiptView].[IsDeleted] AS [IsDeleted], 
+    [CashOutReceiptView].[CheckNumber] AS [CheckNumber], 
+    [CashOutReceiptView].[CheckDueDate] AS [CheckDueDate], 
+    [CashOutReceiptView].[IsCollected] AS [IsCollected], 
+    [CashOutReceiptView].[Expr1] AS [Expr1], 
+    [CashOutReceiptView].[CollectDate] AS [CollectDate], 
+    [CashOutReceiptView].[CollectBy] AS [CollectBy], 
+    [CashOutReceiptView].[DeletedBy] AS [DeletedBy], 
+    [CashOutReceiptView].[DeleteReason] AS [DeleteReason], 
+    [CashOutReceiptView].[BankId] AS [BankId], 
+    [CashOutReceiptView].[UserName] AS [UserName]
+    FROM [dbo].[CashOutReceiptView] AS [CashOutReceiptView]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="InvoiceView" EntityType="Self.InvoiceView" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [InvoiceView].[InvoiceId] AS [InvoiceId], 
+    [InvoiceView].[InvoiceCode] AS [InvoiceCode], 
+    [InvoiceView].[InvoiceDate] AS [InvoiceDate], 
+    [InvoiceView].[DueDate] AS [DueDate], 
+    [InvoiceView].[OperationId] AS [OperationId], 
+    [InvoiceView].[HouseBillId] AS [HouseBillId], 
+    [InvoiceView].[ShipperId] AS [ShipperId], 
+    [InvoiceView].[ConsigneeId] AS [ConsigneeId], 
+    [InvoiceView].[OrderFrom] AS [OrderFrom], 
+    [InvoiceView].[CreateDate] AS [CreateDate], 
+    [InvoiceView].[CreateBy] AS [CreateBy], 
+    [InvoiceView].[Notes] AS [Notes], 
+    [InvoiceView].[PaymentTermId] AS [PaymentTermId], 
+    [InvoiceView].[InvoiceType] AS [InvoiceType], 
+    [InvoiceView].[InvStatusId] AS [InvStatusId], 
+    [InvoiceView].[PaymentTermEn] AS [PaymentTermEn], 
+    [InvoiceView].[ConsigneeNameEn] AS [ConsigneeNameEn], 
+    [InvoiceView].[ShipperNameEn] AS [ShipperNameEn], 
+    [InvoiceView].[CurrencyId] AS [CurrencyId], 
+    [InvoiceView].[CurrencySign] AS [CurrencySign], 
+    [InvoiceView].[TotalAmount] AS [TotalAmount], 
+    [InvoiceView].[TransId] AS [TransId], 
+    [InvoiceView].[InvStatusNameEn] AS [InvStatusNameEn], 
+    [InvoiceView].[InvStatusNameAr] AS [InvStatusNameAr], 
+    [InvoiceView].[ShipperNameAr] AS [ShipperNameAr], 
+    [InvoiceView].[ConsigneeNameAr] AS [ConsigneeNameAr], 
+    [InvoiceView].[PaymentTermAr] AS [PaymentTermAr], 
+    [InvoiceView].[InvCurrencyId] AS [InvCurrencyId], 
+    [InvoiceView].[IsDeleted] AS [IsDeleted], 
+    [InvoiceView].[DeletedBy] AS [DeletedBy], 
+    [InvoiceView].[DeleteReason] AS [DeleteReason], 
+    [InvoiceView].[OperationCode] AS [OperationCode], 
+    [InvoiceView].[OperationDate] AS [OperationDate], 
+    [InvoiceView].[HouseBL] AS [HouseBL], 
+    [InvoiceView].[TaxDepositAmount] AS [TaxDepositAmount], 
+    [InvoiceView].[TotalBeforeTax] AS [TotalBeforeTax]
+    FROM [dbo].[InvoiceView] AS [InvoiceView]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_AccountingChart_AccountingChart" Association="Self.FK_AccountingChart_AccountingChart">
+      <End Role="AccountingChart" EntitySet="AccountingChart" />
+      <End Role="AccountingChart1" EntitySet="AccountingChart" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AccTransactionDetail_AccountingChart" Association="Self.FK_AccTransactionDetail_AccountingChart">
+      <End Role="AccountingChart" EntitySet="AccountingChart" />
+      <End Role="AccTransactionDetail" EntitySet="AccTransactionDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AccTransactionDetail_AccTransaction" Association="Self.FK_AccTransactionDetail_AccTransaction">
+      <End Role="AccTransaction" EntitySet="AccTransaction" />
+      <End Role="AccTransactionDetail" EntitySet="AccTransactionDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AccTransactionDetail_Currency" Association="Self.FK_AccTransactionDetail_Currency">
+      <End Role="Currency" EntitySet="Currency" />
+      <End Role="AccTransactionDetail" EntitySet="AccTransactionDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AgentNote_BankAccount" Association="Self.FK_AgentNote_BankAccount">
+      <End Role="BankAccount" EntitySet="BankAccount" />
+      <End Role="AgentNote" EntitySet="AgentNote" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AgentNote_Consignee" Association="Self.FK_AgentNote_Consignee">
+      <End Role="Consignee" EntitySet="Consignee" />
+      <End Role="AgentNote" EntitySet="AgentNote" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AgentNote_InvStatusLib" Association="Self.FK_AgentNote_InvStatusLib">
+      <End Role="InvStatusLib" EntitySet="InvStatusLib" />
+      <End Role="AgentNote" EntitySet="AgentNote" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AgentNote_Shipper" Association="Self.FK_AgentNote_Shipper">
+      <End Role="Shipper" EntitySet="Shipper" />
+      <End Role="AgentNote" EntitySet="AgentNote" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AgentNoteDetail_AgentNote" Association="Self.FK_AgentNoteDetail_AgentNote">
+      <End Role="AgentNote" EntitySet="AgentNote" />
+      <End Role="AgentNoteDetail" EntitySet="AgentNoteDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ArCashDeposit_Consignee" Association="Self.FK_ArCashDeposit_Consignee">
+      <End Role="Consignee" EntitySet="Consignee" />
+      <End Role="ArCashDeposit" EntitySet="ArCashDeposit" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ArCashDeposit_Currency" Association="Self.FK_ArCashDeposit_Currency">
+      <End Role="Currency" EntitySet="Currency" />
+      <End Role="ArCashDeposit" EntitySet="ArCashDeposit" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ArCashDeposit_PaymentTerm" Association="Self.FK_ArCashDeposit_PaymentTerm">
+      <End Role="PaymentTerm" EntitySet="PaymentTerm" />
+      <End Role="ArCashDeposit" EntitySet="ArCashDeposit" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ArCashDeposit_Shipper" Association="Self.FK_ArCashDeposit_Shipper">
+      <End Role="Shipper" EntitySet="Shipper" />
+      <End Role="ArCashDeposit" EntitySet="ArCashDeposit" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ArCashDepositBalance_Consignee" Association="Self.FK_ArCashDepositBalance_Consignee">
+      <End Role="Consignee" EntitySet="Consignee" />
+      <End Role="ArCashDepositBalance" EntitySet="ArCashDepositBalance" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ArCashDepositBalance_Currency" Association="Self.FK_ArCashDepositBalance_Currency">
+      <End Role="Currency" EntitySet="Currency" />
+      <End Role="ArCashDepositBalance" EntitySet="ArCashDepositBalance" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ArCashDepositBalance_Shipper" Association="Self.FK_ArCashDepositBalance_Shipper">
+      <End Role="Shipper" EntitySet="Shipper" />
+      <End Role="ArCashDepositBalance" EntitySet="ArCashDepositBalance" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BankAccount_Bank" Association="Self.FK_BankAccount_Bank">
+      <End Role="Bank" EntitySet="Bank" />
+      <End Role="BankAccount" EntitySet="BankAccount" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BankAccount_Currency" Association="Self.FK_BankAccount_Currency">
+      <End Role="Currency" EntitySet="Currency" />
+      <End Role="BankAccount" EntitySet="BankAccount" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CashInReceipt_AccTransaction" Association="Self.FK_CashInReceipt_AccTransaction">
+      <End Role="AccTransaction" EntitySet="AccTransaction" />
+      <End Role="CashInReceipt" EntitySet="CashInReceipt" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CashInReceipt_Bank" Association="Self.FK_CashInReceipt_Bank">
+      <End Role="Bank" EntitySet="Bank" />
+      <End Role="CashInReceipt" EntitySet="CashInReceipt" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CashInReceipt_BankAccount" Association="Self.FK_CashInReceipt_BankAccount">
+      <End Role="BankAccount" EntitySet="BankAccount" />
+      <End Role="CashInReceipt" EntitySet="CashInReceipt" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CashInReceipt_Consignee" Association="Self.FK_CashInReceipt_Consignee">
+      <End Role="Consignee" EntitySet="Consignee" />
+      <End Role="CashInReceipt" EntitySet="CashInReceipt" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CashInReceipt_Currency" Association="Self.FK_CashInReceipt_Currency">
+      <End Role="Currency" EntitySet="Currency" />
+      <End Role="CashInReceipt" EntitySet="CashInReceipt" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CashInReceipt_PaymentTerm" Association="Self.FK_CashInReceipt_PaymentTerm">
+      <End Role="PaymentTerm" EntitySet="PaymentTerm" />
+      <End Role="CashInReceipt" EntitySet="CashInReceipt" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CashInReceipt_Shipper" Association="Self.FK_CashInReceipt_Shipper">
+      <End Role="Shipper" EntitySet="Shipper" />
+      <End Role="CashInReceipt" EntitySet="CashInReceipt" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CashInReceiptAgNote_AgentNote" Association="Self.FK_CashInReceiptAgNote_AgentNote">
+      <End Role="AgentNote" EntitySet="AgentNote" />
+      <End Role="CashInReceiptAgNote" EntitySet="CashInReceiptAgNote" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CashInReceiptAgNote_CashInReceipt" Association="Self.FK_CashInReceiptAgNote_CashInReceipt">
+      <End Role="CashInReceipt" EntitySet="CashInReceipt" />
+      <End Role="CashInReceiptAgNote" EntitySet="CashInReceiptAgNote" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CashInReceiptCheck_AccTransaction" Association="Self.FK_CashInReceiptCheck_AccTransaction">
+      <End Role="AccTransaction" EntitySet="AccTransaction" />
+      <End Role="CashInReceiptCheck" EntitySet="CashInReceiptCheck" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CashInReceiptCheck_CashInReceipt" Association="Self.FK_CashInReceiptCheck_CashInReceipt">
+      <End Role="CashInReceipt" EntitySet="CashInReceipt" />
+      <End Role="CashInReceiptCheck" EntitySet="CashInReceiptCheck" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CashInReceiptInv_CashInReceipt" Association="Self.FK_CashInReceiptInv_CashInReceipt">
+      <End Role="CashInReceipt" EntitySet="CashInReceipt" />
+      <End Role="CashInReceiptInv" EntitySet="CashInReceiptInv" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CashInReceiptInv_Invoice" Association="Self.FK_CashInReceiptInv_Invoice">
+      <End Role="Invoice" EntitySet="Invoice" />
+      <End Role="CashInReceiptInv" EntitySet="CashInReceiptInv" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CashOutCCCashDeposit_CashOutReceipt" Association="Self.FK_CashOutCCCashDeposit_CashOutReceipt">
+      <End Role="CashOutReceipt" EntitySet="CashOutReceipt" />
+      <End Role="CashOutCCCashDeposit" EntitySet="CashOutCCCashDeposit" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CashOutReceipt_AccTransaction" Association="Self.FK_CashOutReceipt_AccTransaction">
+      <End Role="AccTransaction" EntitySet="AccTransaction" />
+      <End Role="CashOutReceipt" EntitySet="CashOutReceipt" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CashOutReceipt_Bank" Association="Self.FK_CashOutReceipt_Bank">
+      <End Role="Bank" EntitySet="Bank" />
+      <End Role="CashOutReceipt" EntitySet="CashOutReceipt" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CashOutReceipt_BankAccount" Association="Self.FK_CashOutReceipt_BankAccount">
+      <End Role="BankAccount" EntitySet="BankAccount" />
+      <End Role="CashOutReceipt" EntitySet="CashOutReceipt" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CashOutReceipt_Currency" Association="Self.FK_CashOutReceipt_Currency">
+      <End Role="Currency" EntitySet="Currency" />
+      <End Role="CashOutReceipt" EntitySet="CashOutReceipt" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CashOutReceipt_PaymentTerm" Association="Self.FK_CashOutReceipt_PaymentTerm">
+      <End Role="PaymentTerm" EntitySet="PaymentTerm" />
+      <End Role="CashOutReceipt" EntitySet="CashOutReceipt" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CashOutReceiptAgNote_AgentNote" Association="Self.FK_CashOutReceiptAgNote_AgentNote">
+      <End Role="AgentNote" EntitySet="AgentNote" />
+      <End Role="CashOutReceiptAgNote" EntitySet="CashOutReceiptAgNote" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CashOutReceiptAgNote_CashOutReceipt" Association="Self.FK_CashOutReceiptAgNote_CashOutReceipt">
+      <End Role="CashOutReceipt" EntitySet="CashOutReceipt" />
+      <End Role="CashOutReceiptAgNote" EntitySet="CashOutReceiptAgNote" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CashOutReceiptCheck_AccTransaction" Association="Self.FK_CashOutReceiptCheck_AccTransaction">
+      <End Role="AccTransaction" EntitySet="AccTransaction" />
+      <End Role="CashOutReceiptCheck" EntitySet="CashOutReceiptCheck" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CashOutReceiptCheck_CashOutReceipt" Association="Self.FK_CashOutReceiptCheck_CashOutReceipt">
+      <End Role="CashOutReceipt" EntitySet="CashOutReceipt" />
+      <End Role="CashOutReceiptCheck" EntitySet="CashOutReceiptCheck" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CashOutReceiptExpense_CashOutReceipt" Association="Self.FK_CashOutReceiptExpense_CashOutReceipt">
+      <End Role="CashOutReceipt" EntitySet="CashOutReceipt" />
+      <End Role="CashOutReceiptExpense" EntitySet="CashOutReceiptExpense" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CashOutReceiptExpense_ExpenseLib" Association="Self.FK_CashOutReceiptExpense_ExpenseLib">
+      <End Role="ExpenseLib" EntitySet="ExpenseLib" />
+      <End Role="CashOutReceiptExpense" EntitySet="CashOutReceiptExpense" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CashOutReceiptInv_CashOutReceipt" Association="Self.FK_CashOutReceiptInv_CashOutReceipt">
+      <End Role="CashOutReceipt" EntitySet="CashOutReceipt" />
+      <End Role="CashOutReceiptInv" EntitySet="CashOutReceiptInv" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CashOutReceiptInv_InvoiceAP" Association="Self.FK_CashOutReceiptInv_InvoiceAP">
+      <End Role="InvoiceAP" EntitySet="InvoiceAP" />
+      <End Role="CashOutReceiptInv" EntitySet="CashOutReceiptInv" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HouseBill_Consignee" Association="Self.FK_HouseBill_Consignee">
+      <End Role="Consignee" EntitySet="Consignee" />
+      <End Role="HouseBill" EntitySet="HouseBill" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HouseBill_Currency" Association="Self.FK_HouseBill_Currency">
+      <End Role="Currency" EntitySet="Currency" />
+      <End Role="HouseBill" EntitySet="HouseBill" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HouseBill_Currency1" Association="Self.FK_HouseBill_Currency1">
+      <End Role="Currency" EntitySet="Currency" />
+      <End Role="HouseBill" EntitySet="HouseBill" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HouseBill_Shipper" Association="Self.FK_HouseBill_Shipper">
+      <End Role="Shipper" EntitySet="Shipper" />
+      <End Role="HouseBill" EntitySet="HouseBill" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Invoice_AccTransaction" Association="Self.FK_Invoice_AccTransaction">
+      <End Role="AccTransaction" EntitySet="AccTransaction" />
+      <End Role="Invoice" EntitySet="Invoice" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Invoice_Consignee" Association="Self.FK_Invoice_Consignee">
+      <End Role="Consignee" EntitySet="Consignee" />
+      <End Role="Invoice" EntitySet="Invoice" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Invoice_Currency" Association="Self.FK_Invoice_Currency">
+      <End Role="Currency" EntitySet="Currency" />
+      <End Role="Invoice" EntitySet="Invoice" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Invoice_HouseBill" Association="Self.FK_Invoice_HouseBill">
+      <End Role="HouseBill" EntitySet="HouseBill" />
+      <End Role="Invoice" EntitySet="Invoice" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Invoice_InvStatusLib" Association="Self.FK_Invoice_InvStatusLib">
+      <End Role="InvStatusLib" EntitySet="InvStatusLib" />
+      <End Role="Invoice" EntitySet="Invoice" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Invoice_PaymentTerm" Association="Self.FK_Invoice_PaymentTerm">
+      <End Role="PaymentTerm" EntitySet="PaymentTerm" />
+      <End Role="Invoice" EntitySet="Invoice" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Invoice_Shipper" Association="Self.FK_Invoice_Shipper">
+      <End Role="Shipper" EntitySet="Shipper" />
+      <End Role="Invoice" EntitySet="Invoice" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InvoiceAP_Currency" Association="Self.FK_InvoiceAP_Currency">
+      <End Role="Currency" EntitySet="Currency" />
+      <End Role="InvoiceAP" EntitySet="InvoiceAP" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InvoiceAP_HouseBill" Association="Self.FK_InvoiceAP_HouseBill">
+      <End Role="HouseBill" EntitySet="HouseBill" />
+      <End Role="InvoiceAP" EntitySet="InvoiceAP" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InvoiceAP_InvStatusLib" Association="Self.FK_InvoiceAP_InvStatusLib">
+      <End Role="InvStatusLib" EntitySet="InvStatusLib" />
+      <End Role="InvoiceAP" EntitySet="InvoiceAP" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InvoiceAP_PaymentTerm" Association="Self.FK_InvoiceAP_PaymentTerm">
+      <End Role="PaymentTerm" EntitySet="PaymentTerm" />
+      <End Role="InvoiceAP" EntitySet="InvoiceAP" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InvoiceDetail_Invoice" Association="Self.FK_InvoiceDetail_Invoice">
+      <End Role="Invoice" EntitySet="Invoice" />
+      <End Role="InvoiceDetail" EntitySet="InvoiceDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InvoiceDetailAP_Currency" Association="Self.FK_InvoiceDetailAP_Currency">
+      <End Role="Currency" EntitySet="Currency" />
+      <End Role="InvoiceDetailAP" EntitySet="InvoiceDetailAP" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InvoiceDetailAP_Currency1" Association="Self.FK_InvoiceDetailAP_Currency1">
+      <End Role="Currency" EntitySet="Currency" />
+      <End Role="InvoiceDetailAP" EntitySet="InvoiceDetailAP" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InvoiceDetailAP_InvoiceAP" Association="Self.FK_InvoiceDetailAP_InvoiceAP">
+      <End Role="InvoiceAP" EntitySet="InvoiceAP" />
+      <End Role="InvoiceDetailAP" EntitySet="InvoiceDetailAP" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InvoiceDetailInvCurr_Currency" Association="Self.FK_InvoiceDetailInvCurr_Currency">
+      <End Role="Currency" EntitySet="Currency" />
+      <End Role="InvoiceDetail" EntitySet="InvoiceDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InvoiceDetailMainCurrency_Currency" Association="Self.FK_InvoiceDetailMainCurrency_Currency">
+      <End Role="Currency" EntitySet="Currency" />
+      <End Role="InvoiceDetail" EntitySet="InvoiceDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InvoiceTotal_Currency" Association="Self.FK_InvoiceTotal_Currency">
+      <End Role="Currency" EntitySet="Currency" />
+      <End Role="InvoiceTotal" EntitySet="InvoiceTotal" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InvoiceTotal_Invoice" Association="Self.FK_InvoiceTotal_Invoice">
+      <End Role="Invoice" EntitySet="Invoice" />
+      <End Role="InvoiceTotal" EntitySet="InvoiceTotal" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InvoiceTotalAP_Currency" Association="Self.FK_InvoiceTotalAP_Currency">
+      <End Role="Currency" EntitySet="Currency" />
+      <End Role="InvoiceTotalAP" EntitySet="InvoiceTotalAP" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InvoiceTotalAP_InvoiceAP" Association="Self.FK_InvoiceTotalAP_InvoiceAP">
+      <End Role="InvoiceAP" EntitySet="InvoiceAP" />
+      <End Role="InvoiceTotalAP" EntitySet="InvoiceTotalAP" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

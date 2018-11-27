@@ -1,0 +1,233 @@
+﻿@model EasyFreight.Models.CustomClearanceView
+
+      
+    <div class="row form-bordered" >
+          
+           <div class="col-sm-6 col-xs-6 form-group"> </div> 
+
+           <div class="col-sm-6 col-xs-6 form-group">
+            
+            <div class="col-md-7 col-xs-7 text-right">
+                <span class="text-dark"> </span>
+            </div>
+            <label class="col-md-5 col-xs-5 control-label"> : التاريخ</label>
+
+           </div> 
+
+        <div class="col-sm-6 col-xs-6 form-group"> </div> 
+
+           <div class="col-sm-6 col-xs-6 form-group">
+            
+            <div class="col-md-7 col-xs-7 text-right">
+              @(Model.OrderFrom == 1 ? Model.ShipperNameEn : Model.ConsigneeNameEn )
+            </div>
+            <label class="col-md-5 col-xs-5 control-label">  : اسم العميل</label>
+
+           </div>
+
+
+
+        <div @(Model.OrderFrom == 1 ? "style=display:block;" : "style=display:none;")>
+            <div class="col-sm-6 col-xs-6 form-group text-left">
+
+                <div class="col-md-7 col-xs-7 text-right ">
+                    <span class="text-dark">@(((DateTime)Model.DateOfDeparture).ToString("dd/MM/yyyy"))  </span>
+                </div>
+                <label class="col-md-3 col-xs-3 control-label">: ميعاد التحميل  </label>
+
+            </div>
+
+            <div class="col-sm-6 col-xs-6 form-group">
+                <div class="col-md-7 col-xs-7 text-right">
+                    @Model.FromPort
+                </div>
+                <label class="col-md-5 col-xs-5 control-label">: ميناء الشحن </label>
+            </div>
+
+            <div class="col-sm-6 col-xs-6 form-group">
+
+                <div class="col-md-7 col-xs-7 text-right">
+                    <span class="text-dark"></span>
+                </div>
+                <label class="col-md-5 col-xs-5 control-label"> </label>
+
+            </div>
+
+            <div class="col-sm-6 col-xs-6 form-group">
+                <div class="col-md-7 col-xs-7 text-right">
+                    @ViewBag.ContainersSummary
+                </div>
+                <label class="col-md-5 col-xs-5 control-label">: نوع الحاويات</label>
+            </div>
+       
+            <div class="col-sm-6 col-xs-6 form-group text-left">
+
+                <div class="col-md-7 col-xs-7 text-right">
+                    @(((DateTime)Model.DateOfDeparture).ToString("dd/MM/yyyy"))
+                </div>
+                <label class="col-md-3 col-xs-3 control-label">: تاريخ الرحلة</label>
+
+            </div>
+
+            <div class="col-sm-6 col-xs-6 form-group">
+                <div class="col-md-7 col-xs-7 text-right">
+                    @Model.CarrierNameEn
+                </div>
+                <label class="col-md-5 col-xs-5 control-label">: الخط الملاحي</label>
+            </div>
+            
+           
+             
+
+          </div>
+
+        <div  @(Model.OrderFrom == 1 ? "style=display:none;" : "style=display:block;")>
+
+            <div class="col-sm-6 col-xs-6 form-group">
+
+                <div class="col-md-7 col-xs-7 text-right">
+                    <span class="text-dark">@(Model.ArriveDate != null ? Model.ArriveDate.Value.ToString("dd/MM/yyyy") : "")</span>
+                </div>
+                <label class="col-md-5 col-xs-5 control-label">: تاريخ الوصول </label>
+
+            </div>
+
+            <div class="col-sm-6 col-xs-6 form-group">
+                <div class="col-md-7 col-xs-7 text-right">
+                    @Model.VesselName
+                </div>
+                <label class="col-md-5 col-xs-5 control-label">: اسم الباخرة</label>
+            </div>
+
+            <div class="col-sm-6 col-xs-6 form-group">
+
+                <div class="col-md-7 col-xs-7 text-right">
+                    <span class="text-dark"> </span>
+                </div>
+                <label class="col-md-5 col-xs-5 control-label">: بلد المنشأ  </label>
+
+            </div>
+
+            <div class="col-sm-6 col-xs-6 form-group">
+                <div class="col-md-7 col-xs-7 text-right">
+                    @Model.ToPort
+                </div>
+                <label class="col-md-5 col-xs-5 control-label">: ميناء الوصول</label>
+            </div>
+       
+             </div>
+
+          <div class="col-sm-6 col-xs-6 form-group text-left">
+                <div class="col-md-6 col-xs-6 text-right">
+                </div>
+                 <label class="col-md-6 col-xs-6 control-label ">: تاريخ استلام المستندات</label>
+            </div>
+
+            <div class="col-sm-6 col-xs-6 form-group">
+                <div class="col-md-7 col-xs-7 text-right">
+                </div> 
+                 <label class="col-md-5 col-xs-5 control-label">:  الصنف</label>
+            </div>
+
+             <div class="col-sm-6 col-xs-6 form-group">
+                <div class="col-md-7 col-xs-7 text-right"> 
+                </div>
+               
+            </div>
+
+            <div class="col-sm-6 col-xs-6 form-group">
+                <div class="col-md-7 col-xs-7 text-right checkbox-custom chekbox-primary   ">
+
+                    <label   > @(Model.OrderFrom == 1 ? "إعادة تصدير" : "ترانزيت")  </label>
+                                           <label > - </label>                    
+                    <label   >  دروباك   </label>
+                                                       <label > - </label>                
+                    <label   >  سماح  </label>
+                                                 <label > - </label>                      
+                    <label   >  نهائي  </label>
+                               
+                </div>
+                <label class="col-md-5 col-xs-5 control-label">: نظام التصدير</label>
+            </div>
+
+        
+
+            <div class="col-sm-6 col-xs-6 form-group">
+                <div class="col-md-7 col-xs-7 text-right">
+                </div> 
+             </div> 
+
+            <div class="col-sm-6 col-xs-6 form-group">
+                <div class="col-md-7 col-xs-7 text-right">
+                </div> 
+                 <label class="col-md-5 col-xs-5 control-label">:  مصاريف التخليص</label>
+            </div>
+
+
+            <div class="col-sm-6 col-xs-6 form-group">
+                <div class="col-md-7 col-xs-7 text-right">
+                </div> 
+                 <label class="col-md-5 col-xs-5 control-label"> </label>
+             </div>
+
+            <div class="col-sm-6 col-xs-6 form-group">
+                <div class="col-md-7 col-xs-7 text-right">
+                </div> 
+                 <label class="col-md-5 col-xs-5 control-label">:  ملاحظات</label>
+            </div>
+
+           <div class="col-sm-10 col-xs-10 form-group">
+
+               <div class="col-md-12 col-xs-12 text-right ">
+                <table class="table mb-none"> 
+                              <tbody>
+                                  <tr>  <td> <br /></td>  </tr>
+                                  <tr> <td> <br /></td>  </tr>
+                                  <tr>  <td> <br /></td>  </tr>
+                                  <tr>  <td> <br /></td>  </tr>
+                                  <tr>  <td> <br /></td>  </tr>
+                                  <tr>  <td> <br /></td>  </tr>
+                                   <tr>  <td> <br /></td>  </tr>
+                                  <tr>  <td> <br /></td>  </tr>
+                                  <tr>  <td> <br /></td>  </tr>
+                                   <tr>  <td> <br /></td>  </tr> 
+                                  
+                              </tbody>
+                          </table> 
+
+               </div> 
+                 
+            </div>
+              
+
+           <div class="col-sm-2 col-xs-2 form-group">
+                <div class="col-md-7 col-xs-7 text-right">
+                </div> 
+                 <label class="col-md-5 col-xs-5 control-label"> </label>
+            </div>
+
+
+            <div class="col-sm-4 col-xs-4 form-group">
+                <div class="col-md-7 col-xs-7 text-right">
+                </div>
+                <label class="col-md-5 col-xs-5 control-label">: قسم التخليص</label>
+            </div>
+            <div class="col-sm-3 col-xs-4 form-group">
+                <div class="col-md-7 col-xs-7 text-right">
+                </div>
+                <label class="col-md-5 col-xs-5 control-label">: قسم الحسابات </label>
+            </div>
+
+            <div class="col-sm-4 col-xs-4 form-group">
+                <div class="col-md-7 col-xs-7 text-right">
+                </div>
+                <label class="col-md-5 col-xs-5 control-label">
+                    @(Model.OrderFrom == 1 ? ": فسم الصادر" : ": قسم الوارد ")   
+                     </label>
+            </div>
+
+              
+        
+           </div>
+   <div class="row " style="height:175px"></div>
+ 

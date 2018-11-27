@@ -1,0 +1,19 @@
+﻿@model EasyFreight.ViewModel.AgentNoteVm
+@{
+    ViewBag.Title = "PrintNoteV";
+    Layout = "~/Views/Shared/_PrintLayout.cshtml";
+}
+
+@{Html.RenderPartial("~/Views/AgentNote/_ViewAgNote.cshtml", Model);}
+
+<div class="row">
+    <div class="col-md-4 col-xs-4">
+        <span class="text-dark">Accounting:</span>
+    </div>
+    <div class="col-md-4 col-xs-4">
+        <span class="text-dark">Financial Manager:</span>
+    </div>
+    <div class="col-md-4 col-xs-4">
+        <span class="text-dark">General Manager:</span>
+    </div>
+</div>

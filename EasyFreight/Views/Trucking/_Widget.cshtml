@@ -1,0 +1,124 @@
+﻿@model  List<EasyFreight.ViewModel.TurckingTopSummary>
+@{
+    int rowindex = 1;
+}
+
+  <div class="col-md-2 col-lg-2 col-xl-2">    </div>
+         
+ <div class="col-md-8 col-lg-8 col-xl-8">
+ 
+     <section class="panel-group mb-xlg">
+         <div class="widget-twitter-profile">
+
+             <div class="profile-info">
+                 <div class="profile-picture">
+                     <i class="fa fa-globe"></i>
+                 </div>
+                 <div class="profile-account">
+                     <h3 class="name text-semibold">Total Order('s)</h3>
+                     <a href="#" class="account">@(Model.Sum(a => a.OrdersCount)) Order('s) </a>
+                 </div>
+                 <ul class="profile-stats">
+                     
+                     <li>
+                         <h5 class="stat text-uppercase">Open</h5>
+                         <h4 class="count">@(Model.Where(a => a.StatusId == 2).Sum(a => a.OrdersCount))</h4>
+                     </li>
+                     <li>
+                         <h5 class="stat text-uppercase">Closed</h5>
+                         <h4 class="count">@(Model.Where(a => a.StatusId == 3).Sum(a => a.OrdersCount))</h4>
+                     </li>
+                     <li>
+                         <h5 class="stat text-uppercase">Contractors</h5>
+                         <h4 class="count">@(Model.GroupBy(a => a.ContractorId).Count())</h4>
+                     </li>
+
+                     @foreach (var item in Model.GroupBy(m => m.CurrencySign).Select((n) => new { CurrencySign = n.Key, Items = n.ToList() }).ToList())
+                     {  <li>
+                             <h5 class="stat text-uppercase">@item.CurrencySign (Net)</h5>
+                             <h4 class="count">@item.Items.Sum(a => a.TotalNetCost)</h4> 
+                         </li>  
+                     }
+
+                       @foreach (var item in Model.GroupBy(m => m.CurrencySign).Select((n) => new { CurrencySign = n.Key, Items = n.ToList() }).ToList())
+                     {  <li>
+                             <h5 class="stat text-uppercase">@item.CurrencySign (Selling)</h5>
+                             <h4 class="count">@item.Items.Sum(a => a.TotalSellingCost)</h4>
+                         </li>  
+                     }
+             
+     
+                 </ul>
+             </div>
+         </div>
+
+         <div id="accordion"> 
+             <div class="panel panel-accordion">
+                  @foreach (var item in Model.GroupBy(m => m.StatusName).Select((n) => new { StatusName = n.Key, Items = n.ToList() }).ToList())
+                   { 
+                    
+                      <div class="panel-heading panel-accordion-@item.StatusName">
+                     <h4 class="panel-title">
+                         <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#@("collapse"+@item.StatusName)" aria-expanded="false">
+                             <i class="fa fa-comment"></i>@item.StatusName
+                         </a>
+                     </h4>
+                 </div>
+                      <div id="@("collapse"+@item.StatusName)" class="accordion-body collapse " aria-expanded="true" style="">
+                     <div class="panel-body">
+                         <div class="table-responsive">
+											<table class="table mb-none">
+												<thead>
+													<tr>
+														<th>#</th>
+														<th>Contractor</th>
+														<th>Orders Count</th>
+														<th>Containers Count</th>
+                                                        <th>Net Cost</th>
+                                                        <th>Sell Cost</th>
+                                                        
+													</tr>
+												</thead>
+												<tbody>
+                                                    @foreach (var row in item.Items)
+	                                                {
+		                                                <tr>
+														<td>@(rowindex++)</td>
+														<td>@row.ContractorNameEn</td>
+														<td>@row.OrdersCount</td>
+														<td>@row.ContainersCount</td>
+                                                        <td>@row.TotalNetCost (@row.CurrencySign)</td>
+                                                        <td>@row.TotalSellingCost (@row.CurrencySign)</td>
+													    </tr>
+	                                                 }
+													 @{  rowindex = 1;}
+                                                     
+												</tbody>
+                                                <tfoot>
+                                                    <tr>
+                                                        <td colspan="2" style="font-weight:bold;">#Totals </td>
+                                                        
+                                                        <td style="font-weight:bold;">@item.Items.Sum(a => a.OrdersCount)</td>
+                                                        <td style="font-weight:bold;">@item.Items.Sum(a => a.ContainersCount)</td>
+                                                        <td style="font-weight:bold;">
+                                                            @foreach (var cell in item.Items.GroupBy(m => m.CurrencySign).Select((n) => new { CurrencySign = n.Key, Items = n.ToList() }).ToList())
+                                                            { @cell.Items.Sum(a => a.TotalNetCost) <span>(@cell.CurrencySign)</span><br />}
+                                                        </td>
+                                                         <td style="font-weight:bold;">
+                                                            @foreach (var cell in item.Items.GroupBy(m => m.CurrencySign).Select((n) => new { CurrencySign = n.Key, Items = n.ToList() }).ToList())
+                                                            { @cell.Items.Sum(a => a.TotalSellingCost) <span>(@cell.CurrencySign)</span><br />}
+                                                        </td>
+                                                    </tr>
+                                                </tfoot>
+											</table>
+										</div>
+                      </div>
+                 </div>
+                   
+               }
+                
+             </div>
+         </div>
+     </section>
+
+</div> 

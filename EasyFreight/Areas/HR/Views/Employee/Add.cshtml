@@ -1,0 +1,114 @@
+﻿@model EasyFreight.ViewModel.EmployeeVm
+@{
+    ViewBag.Title = "Add";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<header class="page-header">
+    <h2>Add Employee</h2>
+
+    <div class="right-wrapper pull-right">
+        <ol class="breadcrumbs">
+            <li>
+                <a href="@Url.Content("~/Home/Index")">
+                    <i class="fa fa-home"></i>
+                </a>
+            </li>
+            <li><span>HR</span></li>
+            <li><span>Add Employee</span></li>
+        </ol>
+
+        <a class="sidebar-right-toggle" data-open="sidebar-right"><i class="fa fa-chevron-left"></i></a>
+    </div>
+</header>
+<div class="row">
+    <div class="col-lg-12">
+        <section class="panel">
+
+            <div class="panel-body">
+                <form id="Form1">
+                    <div class="form-horizontal form-bordered">
+                        <div class="col-md-8 form-group">
+                            <label class="col-sm-3 control-label" for="w4-username">Employee Code <span class="required">*</span></label>
+                            <div class="col-sm-3">
+                                <input type="text" class="form-control" name="EmpCode"
+                                       id="EmpCode" value="@Model.EmpCode" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label class="col-sm-4 control-label" for="w4-username">Employee Name English <span class="required">*</span></label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="EmpNameEn"
+                                       id="EmpNameEn" value="@Model.EmpNameEn" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label class="col-sm-4 control-label" for="w4-username">الاسم بالعربي  <span class="required">*</span></label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="EmpNameAr"
+                                       id="EmpNameAr" value="@Model.EmpNameAr" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label class="col-sm-4 control-label" for="w4-username">Deparment <span class="required">*</span></label>
+                            <div class="col-sm-8">
+                                <select id="DepId" name="DepId" data-plugin-selecttwo
+                                        required class="form-control populate" data-placeholder= "Select deparment">
+                                    <option></option>
+                                    @foreach (var item in ViewBag.DepartmentList)
+                                    {
+                                        if (item.Key == Model.DepId)
+                                        {
+                                            <option selected value="@item.Key">@item.Value</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@item.Key">@item.Value</option>
+                                        }
+
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label class="col-sm-4 control-label">Email <span class="required">*</span></label>
+                            <div class="col-sm-8">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-envelope"></i>
+                                    </span>
+                                    <input type="email" required placeholder="eg.: email@email.com"
+                                           class="form-control" name="EmpEmail" value="@Model.EmpEmail">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label class="col-sm-4 control-label">Mobile Number </label>
+                            <div class="col-sm-8">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-phone"></i>
+                                    </span>
+                                    <input type="text" class="form-control"
+                                           name="EmpMobile" value="@Model.EmpMobile">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @Html.Hidden("EmpId", Model.EmpId)
+                </form>
+            </div>
+            <footer class="panel-footer">
+                <div id="SaveBtnDiv" class="row">
+                    <div class="col-sm-9 col-sm-offset-3">
+                        <button id="SaveForm" class="btn btn-primary">Submit</button>
+                        <a id="ResetForm" href="@Url.Content("~/HR/Employee")" class="btn btn-default">Reset</a>
+                    </div>
+                </div>
+            </footer>
+        </section>
+    </div>
+</div>
+
+@section scripts{
+    <script src="@Url.Content("~/Scripts/Employee/EmpAdd.js")"></script>
+}

@@ -1,0 +1,25 @@
+﻿@model List<EasyFreight.ViewModel.QuotationContainerVm>
+
+<div class="row col-sm-12 col-xs-12">
+    <div class="col-sm-6 col-xs-6">
+        <label class="control-label">Container Type</label>
+    </div>
+    <div class="col-sm-6 col-xs-6">
+        <label class="control-label">Containers Count</label>
+    </div>
+</div>
+@foreach (var item in Model)
+{
+    <div class="row col-sm-12 col-xs-12 contactform">
+        <div class="col-sm-6 col-xs-6">
+            <div class="form-group">
+                <span class="text-dark">@item.ContainerTypeName</span>
+            </div>
+        </div>
+        <div class="col-sm-6 col-xs-6">
+            <div class="form-group">
+                <span class="text-dark">@item.NumberOfContainers</span>
+            </div>
+        </div>
+    </div>
+}

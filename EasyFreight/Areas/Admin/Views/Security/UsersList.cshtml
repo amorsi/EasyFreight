@@ -1,0 +1,142 @@
+﻿@model List<EasyFreight.ViewModel.UserVm>
+@{
+    ViewBag.Title = "UsersList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<header class="page-header">
+    <h2>Users List <span id="empname"></span></h2>
+
+    <div class="right-wrapper pull-right">
+        <ol class="breadcrumbs">
+            <li>
+                <a href="@Url.Content("~/Home/Index")">
+                    <i class="fa fa-home"></i>
+                </a>
+            </li>
+            <li><span>Admin</span></li>
+            <li><span>Users List</span></li>
+        </ol>
+
+        <a class="sidebar-right-toggle" data-open="sidebar-right"><i class="fa fa-chevron-left"></i></a>
+    </div>
+</header>
+@{int index = 1;}
+
+<section class="panel">
+
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="mb-md">
+                    <a href="@Url.Content("~/Account/Register")" class="btn btn-primary" id="addToTable"> Add User <i class="fa fa-plus"></i></a>
+                </div>
+            </div>
+
+            <div class="col-sm-4">
+                <div class="mb-md">
+                    <a href="@Url.Content("~/Admin/Security")" class="btn btn-primary" id="addToTable"> Set Rights For User <i class="fa fa-plus"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <table class="table table-bordered table-striped mb-none" id="datatable-default">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>User Name</th>
+                    <th>Employee Name</th>
+                    <th>Department</th>
+                    <th style="width:150px;"></th>
+ 
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@index</td>
+                        <td>@item.UserName</td>
+                        <td>@item.EmpNameEn</td>
+                        <td>@item.DepNameEn</td>
+                        <td>
+                             <a href="@Url.Content("~/account/ResetPass?userId="+@item.Id)"   id="ResetPass">Reset Password <i class="fa fa-retweet"></i></a>
+                           </td>
+                    @* <td class="actions">
+                             <a   userId="@item.Id" title="Reset Password"  
+                         class="on-default resetpass modal-with-move-anim"><i class="fa fa-pencil"></i></a>
+
+                        </td>*@ 
+                    </tr>
+                    index++;
+                }
+            </tbody>
+        </table>
+    </div>
+</section>
+<input id="usrDele" type="hidden" />
+<div id="modelReset" class="modal-block mfp-hide">
+    <section class="panel">
+        <header class="panel-heading">
+            <h2 class="panel-title">Are you sure?</h2>
+        </header>
+        <div class="panel-body">
+            <div class="modal-wrapper">
+                <div class="modal-text">
+                    <p>Are you sure that you want to reset password for this user?</p>
+                </div>
+            </div>
+        </div>
+        <footer class="panel-footer">
+            <div class="row">
+                <div class="col-md-12 text-right">
+                    <button id="dialogConfirmReset" class="btn btn-primary modal-confirmReset">Confirm</button>
+                    <button id="dialogCancel" class="btn btn-default modal-dismiss">Cancel</button>
+                </div>
+            </div>
+        </footer>
+    </section>
+</div>
+
+
+@section scripts{
+    <script>
+        $(function () {
+            $("#datatable-default").dataTable();
+        });
+
+
+        (function ($) {
+
+            // Modal Dismiss
+            $(document).on('click', '.modal-dismiss', function (e) {
+                e.preventDefault();
+                $.magnificPopup.close();
+            });
+
+
+            $('#datatable-default tbody').on('click', '.resetpass', function () {
+                var userId = $(this).attr("userId");
+                $("#usrDele").val(userId);
+
+                $.magnificPopup.open({
+                    items: {
+                        src: '#modelReset',
+                        type: 'inline'
+                    },
+                    modal: true
+                });
+            });
+
+
+            $(document).on('click', '.modal-confirmReset', function (e) {
+                e.preventDefault();
+                $.magnificPopup.close();
+                var idToRoll = $("#usrDele").val()
+               
+                 
+            });
+
+
+        }).apply(this, [jQuery]);
+    </script>
+    }

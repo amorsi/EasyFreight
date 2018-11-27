@@ -1,0 +1,137 @@
+﻿@model List<EasyFreight.ViewModel.ConsigneeVm>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<header class="page-header">
+    <h2>View Consignees</h2>
+
+    <div class="right-wrapper pull-right">
+        <ol class="breadcrumbs">
+            <li>
+                <a href="@Url.Content("~/Home/Index")">
+                    <i class="fa fa-home"></i>
+                </a>
+            </li>
+            <li><span>Master Data</span></li>
+            <li><span>View Consignees</span></li>
+        </ol>
+
+        <a class="sidebar-right-toggle" data-open="sidebar-right"><i class="fa fa-chevron-left"></i></a>
+    </div>
+</header>
+
+<section class="panel">
+    <header class="panel-heading">
+        <div class="panel-actions">
+            <a href="#" class=""></a>
+            <a href="#" class=""></a>
+        </div>
+
+        <h2 class="panel-title"></h2>
+    </header>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="mb-md">
+                    <a href="@Url.Content("~/MasterData/Consignee/Add")" class="btn btn-primary" id="addToTable">Add <i class="fa fa-plus"></i></a>
+                </div>
+            </div>
+        </div>
+        <table class="table table-bordered table-striped mb-none" id="datatable-default">
+            <thead>
+                <tr>
+                    <th>Code</th>
+                    <th>Name</th>
+                    <th>Address</th>
+                    <th>Phone Number</th>
+                    <th>Email</th>
+                    <th>Website</th>
+                    <th>Actions</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr class="gradeX">
+                        <td>@item.ConsigneeCode</td>
+                        <td>@item.ConsigneeNameEn</td>
+                        <td>@item.ConsigneeAddressEn </td>
+                        <td>@item.PhoneNumber</td>
+                        <td>@item.Email</td>
+                        <td>@item.WebSite</td>
+
+                        <td class="actions">
+                            <a href="#modalAnim" consigneeId="@item.ConsigneeId" title="View Contacts"  
+                         class="on-default contactList modal-with-move-anim"><i class="fa fa-phone"></i></a>
+                            <a href="@Url.Content("~/MasterData/Consignee/Add?id=" + @item.ConsigneeId + "")" title="Edit"
+                                consigneeId="@item.ConsigneeId"  style="padding-left:5px"
+                         class="on-default edit-row"><i class="fa fa-pencil"></i></a>
+                            <a href="#dialog"  consigneeId="@item.ConsigneeId" title="Delete" style="padding-left:5px"
+                        class="on-default remove-row"><i class="fa fa-trash-o"></i></a>
+
+                        </td>
+                    </tr>
+                }
+
+
+            </tbody>
+        </table>
+    </div>
+</section>
+
+
+<input type="hidden" id="DelId" value="0" />
+
+<div id="modalAnim" class="zoom-anim-dialog modal-block modal-block-primary mfp-hide">
+    <section class="panel">
+        <header class="panel-heading">
+            <h2 class="panel-title">Contacts Persons</h2>
+        </header>
+        <div class="panel-body">
+            <div class="modal-wrapper">
+                <div id="ModalContent" class="modal-text">
+                </div>
+            </div>
+        </div>
+        <footer class="panel-footer">
+            <div class="row">
+                <div class="col-md-12 text-right">
+                    <button class="btn btn-default modal-dismiss">Close</button>
+                </div>
+            </div>
+        </footer>
+    </section>
+</div>
+
+<div id="dialog" class="modal-block mfp-hide">
+    <section class="panel">
+        <header class="panel-heading">
+            <h2 class="panel-title">Are you sure?</h2>
+        </header>
+        <div class="panel-body">
+            <div class="modal-wrapper">
+                <div class="modal-text">
+                    <p>Are you sure that you want to delete this row?</p>
+                </div>
+            </div>
+        </div>
+        <footer class="panel-footer">
+            <div class="row">
+                <div class="col-md-12 text-right">
+                    <button id="dialogConfirm" class="btn btn-primary modal-confirm">Confirm</button>
+                    <button id="dialogCancel" class="btn btn-default modal-dismiss">Cancel</button>
+                </div>
+            </div>
+        </footer>
+    </section>
+</div>
+
+
+
+
+@section scripts{
+    <script src="@Url.Content("~/Scripts/MasterData/Consignee/ConsigneeIndex.js")"></script>
+}

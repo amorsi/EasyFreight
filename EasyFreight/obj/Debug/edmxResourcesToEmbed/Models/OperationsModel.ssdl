@@ -1,0 +1,1349 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="OperationsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Currency">
+    <Key>
+      <PropertyRef Name="CurrencyId" />
+    </Key>
+    <Property Name="CurrencyId" Type="int" Nullable="false" />
+    <Property Name="CurrencySign" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="CurrencyName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="AccountId" Type="varchar" MaxLength="15" />
+  </EntityType>
+  <EntityType Name="CustomClearanceCostLib">
+    <Key>
+      <PropertyRef Name="CCCostId" />
+    </Key>
+    <Property Name="CCCostId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CostNameEn" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="CostNameAr" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="CustomClearanceDetail">
+    <Key>
+      <PropertyRef Name="CCDetailsId" />
+      <PropertyRef Name="CCId" />
+      <PropertyRef Name="CCCostId" />
+    </Key>
+    <Property Name="CCDetailsId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CCId" Type="int" Nullable="false" />
+    <Property Name="CCCostId" Type="int" Nullable="false" />
+    <Property Name="CCCostNet" Type="decimal" Precision="18" Scale="3" Nullable="false" />
+    <Property Name="CCCostSelling" Type="decimal" Precision="18" Scale="3" Nullable="false" />
+    <Property Name="CurrencyId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CustomClearanceOrder">
+    <Key>
+      <PropertyRef Name="CCId" />
+    </Key>
+    <Property Name="CCId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="OperationId" Type="int" Nullable="false" />
+    <Property Name="HouseBillId" Type="int" Nullable="false" />
+    <Property Name="NeedArriveDate" Type="datetime" Nullable="false" />
+    <Property Name="NeedArriveTime" Type="time" Precision="1" Nullable="false" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="CreateBy" Type="nvarchar" MaxLength="128" />
+    <Property Name="StatusId" Type="tinyint" Nullable="false" />
+    <Property Name="AssignToUserId" Type="nvarchar" MaxLength="128" />
+    <Property Name="Notes" Type="nvarchar(max)" />
+    <Property Name="CustomReleaseId" Type="int" />
+    <Property Name="Comment" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="HouseBill">
+    <Key>
+      <PropertyRef Name="HouseBillId" />
+    </Key>
+    <Property Name="HouseBillId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="OrderFrom" Type="tinyint" Nullable="false" />
+    <Property Name="OperationId" Type="int" Nullable="false" />
+    <Property Name="OperationCode" Type="varchar" MaxLength="15" />
+    <Property Name="OperationDate" Type="datetime" />
+    <Property Name="HouseBL" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="FromPortId" Type="int" Nullable="false" />
+    <Property Name="ToPortId" Type="int" Nullable="false" />
+    <Property Name="ShipperId" Type="int" Nullable="false" />
+    <Property Name="ConsigneeId" Type="int" Nullable="false" />
+    <Property Name="NotifierId" Type="int" />
+    <Property Name="NotifierAsConsignee" Type="bit" />
+    <Property Name="DeliveryType" Type="tinyint" Nullable="false" />
+    <Property Name="AgentId" Type="int" />
+    <Property Name="GrossWeight" Type="decimal" Precision="18" Scale="3" />
+    <Property Name="NetWeight" Type="decimal" Precision="18" Scale="3" />
+    <Property Name="CBM" Type="decimal" Precision="18" Scale="3" />
+    <Property Name="NumberOfPackages" Type="int" />
+    <Property Name="PackageTypeId" Type="int" />
+    <Property Name="IsPrepaid" Type="bit" />
+    <Property Name="CollectedFreightCost" Type="decimal" Precision="18" Scale="3" />
+    <Property Name="FreighCurrencyId" Type="int" />
+    <Property Name="CollectedThcCost" Type="decimal" Precision="18" Scale="3" />
+    <Property Name="ThcCurrencyId" Type="int" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="CreateBy" Type="nvarchar" MaxLength="128" />
+    <Property Name="GoodsDescription" Type="nvarchar(max)" />
+    <Property Name="Marks" Type="nvarchar(max)" />
+    <Property Name="StatusId" Type="tinyint" Nullable="false" />
+    <Property Name="BookingNumber" Type="varchar" MaxLength="30" />
+    <Property Name="IsHazardous" Type="bit" />
+  </EntityType>
+  <EntityType Name="Operation">
+    <Key>
+      <PropertyRef Name="OperationId" />
+    </Key>
+    <Property Name="OperationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="QuoteId" Type="int" />
+    <Property Name="OrderFrom" Type="tinyint" Nullable="false" />
+    <Property Name="OperationCode" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="OperationDate" Type="datetime" Nullable="false" />
+    <Property Name="IsConsolidation" Type="bit" Nullable="false" />
+    <Property Name="BookingNumber" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="CarrierType" Type="tinyint" Nullable="false" />
+    <Property Name="MBL" Type="varchar" MaxLength="30" />
+    <Property Name="FromPortId" Type="int" Nullable="false" />
+    <Property Name="ToPortId" Type="int" Nullable="false" />
+    <Property Name="ShipperId" Type="int" Nullable="false" />
+    <Property Name="IsCareOf" Type="bit" Nullable="false" />
+    <Property Name="ConsigneeId" Type="int" Nullable="false" />
+    <Property Name="NotifierId" Type="int" />
+    <Property Name="NotifierAsConsignee" Type="bit" Nullable="false" />
+    <Property Name="CarrierId" Type="int" Nullable="false" />
+    <Property Name="IncotermId" Type="int" />
+    <Property Name="VesselId" Type="int" />
+    <Property Name="DateOfDeparture" Type="datetime" />
+    <Property Name="ArriveDate" Type="datetime" />
+    <Property Name="GrossWeight" Type="decimal" Precision="18" Scale="3" />
+    <Property Name="NetWeight" Type="decimal" Precision="18" Scale="3" />
+    <Property Name="CBM" Type="decimal" Precision="18" Scale="3" />
+    <Property Name="NumberOfPackages" Type="int" />
+    <Property Name="IsHazardous" Type="bit" Nullable="false" />
+    <Property Name="IsPrepaid" Type="bit" Nullable="false" />
+    <Property Name="PickupNeeded" Type="bit" />
+    <Property Name="DeliveryNeeded" Type="bit" />
+    <Property Name="CustomClearanceNeeded" Type="bit" />
+    <Property Name="GoodsDescription" Type="nvarchar(max)" />
+    <Property Name="StatusId" Type="tinyint" Nullable="false" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="CreateBy" Type="nvarchar" MaxLength="128" />
+    <Property Name="FreightCostAmount" Type="decimal" Precision="18" Scale="3" />
+    <Property Name="FreighCurrencyId" Type="int" />
+    <Property Name="ThcCostAmount" Type="decimal" Precision="18" Scale="3" />
+    <Property Name="ThcCurrencyId" Type="int" />
+    <Property Name="FlightNumber" Type="varchar" MaxLength="10" />
+    <Property Name="TransitTime" Type="tinyint" />
+    <Property Name="FreeDays" Type="tinyint" />
+    <Property Name="AgentId" Type="int" />
+    <Property Name="IsFixedCost" Type="bit" />
+    <Property Name="FixedCost" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="FixedCostCurrencyId" Type="int" />
+    <Property Name="PercentageOfAmount" Type="decimal" Precision="5" Scale="2" />
+    <Property Name="CCCashDepAccountId" Type="varchar" MaxLength="15" />
+    <Property Name="DeliveryType" Type="tinyint" />
+  </EntityType>
+  <EntityType Name="OperationContainer">
+    <Key>
+      <PropertyRef Name="OperConId" />
+      <PropertyRef Name="OperationId" />
+      <PropertyRef Name="ContainerTypeId" />
+    </Key>
+    <Property Name="OperConId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="OperationId" Type="int" Nullable="false" />
+    <Property Name="ContainerTypeId" Type="int" Nullable="false" />
+    <Property Name="ContainerNumber" Type="varchar" MaxLength="30" />
+    <Property Name="SealNumber" Type="varchar" MaxLength="30" />
+    <Property Name="PackageTypeId" Type="int" />
+    <Property Name="NumberOfPackages" Type="int" />
+    <Property Name="GrossWeight" Type="decimal" Precision="18" Scale="3" />
+    <Property Name="NetWeight" Type="decimal" Precision="18" Scale="3" />
+    <Property Name="CBM" Type="decimal" Precision="18" Scale="3" />
+  </EntityType>
+  <EntityType Name="OperationCost">
+    <Key>
+      <PropertyRef Name="OperCostId" />
+      <PropertyRef Name="HouseBillId" />
+      <PropertyRef Name="OperCostLibId" />
+    </Key>
+    <Property Name="OperCostId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="HouseBillId" Type="int" Nullable="false" />
+    <Property Name="OperCostLibId" Type="int" Nullable="false" />
+    <Property Name="OperationId" Type="int" Nullable="false" />
+    <Property Name="OperationCostNet" Type="decimal" Precision="18" Scale="3" Nullable="false" />
+    <Property Name="OperationCostSelling" Type="decimal" Precision="18" Scale="3" Nullable="false" />
+    <Property Name="CurrencyId" Type="int" Nullable="false" />
+    <Property Name="IsAgentCost" Type="bit" Nullable="false" />
+    <Property Name="CurrencyIdSelling" Type="int" />
+    <Property Name="IsAccounting" Type="bit" />
+  </EntityType>
+  <EntityType Name="OperationCostLib">
+    <Key>
+      <PropertyRef Name="OperCostLibId" />
+    </Key>
+    <Property Name="OperCostLibId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="OperCostNameEn" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="OperCostNameAr" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Quotation">
+    <Key>
+      <PropertyRef Name="QuoteId" />
+    </Key>
+    <Property Name="QuoteId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="OrderFrom" Type="tinyint" Nullable="false" />
+    <Property Name="QuoteCode" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="QuoteDate" Type="datetime" />
+    <Property Name="CarrierType" Type="tinyint" Nullable="false" />
+    <Property Name="FromPortId" Type="int" />
+    <Property Name="ToPortId" Type="int" />
+    <Property Name="ShipperId" Type="int" />
+    <Property Name="ConsigneeId" Type="int" />
+    <Property Name="NotifierId" Type="int" />
+    <Property Name="NotifierAsConsignee" Type="bit" />
+    <Property Name="CarrierId" Type="int" />
+    <Property Name="IncotermId" Type="int" />
+    <Property Name="VesselId" Type="int" />
+    <Property Name="DateOfDeparture" Type="datetime" />
+    <Property Name="ArriveDate" Type="datetime" />
+    <Property Name="GrossWeight" Type="decimal" Precision="18" Scale="3" />
+    <Property Name="NetWeight" Type="decimal" Precision="18" Scale="3" />
+    <Property Name="CBM" Type="decimal" Precision="18" Scale="3" />
+    <Property Name="NumberOfPackages" Type="int" />
+    <Property Name="IsHazardous" Type="bit" Nullable="false" />
+    <Property Name="IsPrepaid" Type="bit" Nullable="false" />
+    <Property Name="PickupNeeded" Type="bit" />
+    <Property Name="DeliveryNeeded" Type="bit" />
+    <Property Name="CustomClearanceNeeded" Type="bit" />
+    <Property Name="GoodsDescription" Type="nvarchar(max)" />
+    <Property Name="StatusId" Type="tinyint" Nullable="false" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="CreateBy" Type="nvarchar" MaxLength="128" />
+    <Property Name="HasExpireDate" Type="bit" />
+    <Property Name="ExpirationInDays" Type="tinyint" />
+    <Property Name="FreightCostAmount" Type="decimal" Precision="18" Scale="3" />
+    <Property Name="FreighCurrencyId" Type="int" />
+    <Property Name="ThcCostAmount" Type="decimal" Precision="18" Scale="3" />
+    <Property Name="ThcCurrencyId" Type="int" />
+    <Property Name="FlightNumber" Type="varchar" MaxLength="10" />
+    <Property Name="IsCareOf" Type="bit" Nullable="false" />
+    <Property Name="AgentId" Type="int" />
+    <Property Name="TruckingCost" Type="decimal" Precision="18" Scale="3" />
+    <Property Name="TruckingCurrencyId" Type="int" />
+    <Property Name="CusClearanceCost" Type="decimal" Precision="18" Scale="3" />
+    <Property Name="CusClearanceCurrencyId" Type="int" />
+    <Property Name="TransitTime" Type="tinyint" />
+    <Property Name="FreeDays" Type="tinyint" />
+  </EntityType>
+  <EntityType Name="QuotationContainer">
+    <Key>
+      <PropertyRef Name="QuoteId" />
+      <PropertyRef Name="ContainerTypeId" />
+    </Key>
+    <Property Name="QuoteId" Type="int" Nullable="false" />
+    <Property Name="ContainerTypeId" Type="int" Nullable="false" />
+    <Property Name="NumberOfContainers" Type="tinyint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="StatusLib">
+    <Key>
+      <PropertyRef Name="StatusId" />
+    </Key>
+    <Property Name="StatusId" Type="tinyint" Nullable="false" />
+    <Property Name="StatusName" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'EasyFreight2.dbo.CustomClearanceView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="CustomClearanceView">
+    <Key>
+      <PropertyRef Name="OrderFrom" />
+      <PropertyRef Name="FromPort" />
+      <PropertyRef Name="ToPort" />
+      <PropertyRef Name="ShipperNameEn" />
+      <PropertyRef Name="ConsigneeNameEn" />
+      <PropertyRef Name="OperationId" />
+      <PropertyRef Name="NeedArriveDate" />
+      <PropertyRef Name="NeedArriveTime" />
+      <PropertyRef Name="StatusId" />
+      <PropertyRef Name="StatusName" />
+      <PropertyRef Name="CCId" />
+      <PropertyRef Name="CarrierType" />
+      <PropertyRef Name="CarrierId" />
+      <PropertyRef Name="CarrierNameEn" />
+      <PropertyRef Name="IsHazardous" />
+      <PropertyRef Name="BookingNumber" />
+      <PropertyRef Name="HouseBL" />
+      <PropertyRef Name="FromPortId" />
+      <PropertyRef Name="ToPortId" />
+      <PropertyRef Name="ShipperId" />
+      <PropertyRef Name="ConsigneeId" />
+    </Key>
+    <Property Name="OrderFrom" Type="tinyint" Nullable="false" />
+    <Property Name="OperationCode" Type="varchar" MaxLength="15" />
+    <Property Name="OperationDate" Type="datetime" />
+    <Property Name="FromPort" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ToPort" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ShipperNameEn" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="ConsigneeNameEn" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="GrossWeight" Type="decimal" Precision="18" Scale="3" />
+    <Property Name="NetWeight" Type="decimal" Precision="18" Scale="3" />
+    <Property Name="GoodsDescription" Type="nvarchar(max)" />
+    <Property Name="OperationId" Type="int" Nullable="false" />
+    <Property Name="NeedArriveDate" Type="datetime" Nullable="false" />
+    <Property Name="NeedArriveTime" Type="time" Precision="1" Nullable="false" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="StatusId" Type="tinyint" Nullable="false" />
+    <Property Name="StatusName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="CCId" Type="int" Nullable="false" />
+    <Property Name="AssignToUserId" Type="nvarchar" MaxLength="128" />
+    <Property Name="CarrierType" Type="tinyint" Nullable="false" />
+    <Property Name="MBL" Type="varchar" MaxLength="30" />
+    <Property Name="CarrierId" Type="int" Nullable="false" />
+    <Property Name="CarrierNameEn" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="DateOfDeparture" Type="datetime" />
+    <Property Name="ArriveDate" Type="datetime" />
+    <Property Name="IsHazardous" Type="bit" Nullable="false" />
+    <Property Name="FreeDays" Type="tinyint" />
+    <Property Name="FlightNumber" Type="varchar" MaxLength="10" />
+    <Property Name="VesselId" Type="int" />
+    <Property Name="VesselName" Type="nvarchar" MaxLength="50" />
+    <Property Name="BookingNumber" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="CBM" Type="decimal" Precision="18" Scale="3" />
+    <Property Name="NumberOfPackages" Type="int" />
+    <Property Name="HouseBL" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="CreateBy" Type="nvarchar" MaxLength="128" />
+    <Property Name="Notes" Type="nvarchar(max)" />
+    <Property Name="FromPortId" Type="int" Nullable="false" />
+    <Property Name="ToPortId" Type="int" Nullable="false" />
+    <Property Name="ShipperId" Type="int" Nullable="false" />
+    <Property Name="ConsigneeId" Type="int" Nullable="false" />
+    <Property Name="NotifierId" Type="int" />
+    <Property Name="AgentId" Type="int" />
+    <Property Name="Expr1" Type="datetime" />
+    <Property Name="Expr2" Type="datetime" />
+    <Property Name="Comment" Type="nvarchar(max)" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'EasyFreight2.dbo.HouseBillView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="HouseBillView">
+    <Key>
+      <PropertyRef Name="HouseBillId" />
+      <PropertyRef Name="OrderFrom" />
+      <PropertyRef Name="OperationId" />
+      <PropertyRef Name="HouseBL" />
+      <PropertyRef Name="FromPortId" />
+      <PropertyRef Name="FromPort" />
+      <PropertyRef Name="ToPortId" />
+      <PropertyRef Name="ToPort" />
+      <PropertyRef Name="ShipperId" />
+      <PropertyRef Name="ShipperNameEn" />
+      <PropertyRef Name="ConsigneeId" />
+      <PropertyRef Name="ConsigneeNameEn" />
+      <PropertyRef Name="DeliveryType" />
+      <PropertyRef Name="CreateDate" />
+      <PropertyRef Name="StatusId" />
+      <PropertyRef Name="StatusName" />
+      <PropertyRef Name="CarrierType" />
+      <PropertyRef Name="CarrierNameEn" />
+      <PropertyRef Name="CarrierId" />
+    </Key>
+    <Property Name="HouseBillId" Type="int" Nullable="false" />
+    <Property Name="OrderFrom" Type="tinyint" Nullable="false" />
+    <Property Name="OperationId" Type="int" Nullable="false" />
+    <Property Name="OperationCode" Type="varchar" MaxLength="15" />
+    <Property Name="OperationDate" Type="datetime" />
+    <Property Name="HouseBL" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="FromPortId" Type="int" Nullable="false" />
+    <Property Name="FromPort" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ToPortId" Type="int" Nullable="false" />
+    <Property Name="ToPort" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ShipperId" Type="int" Nullable="false" />
+    <Property Name="ShipperNameEn" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="ConsigneeId" Type="int" Nullable="false" />
+    <Property Name="ConsigneeNameEn" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="NotifierId" Type="int" />
+    <Property Name="NotifierNameEn" Type="nvarchar" MaxLength="50" />
+    <Property Name="NotifierAsConsignee" Type="bit" />
+    <Property Name="DeliveryType" Type="tinyint" Nullable="false" />
+    <Property Name="AgentId" Type="int" />
+    <Property Name="AgentNameEn" Type="nvarchar" MaxLength="200" />
+    <Property Name="GrossWeight" Type="decimal" Precision="18" Scale="3" />
+    <Property Name="NetWeight" Type="decimal" Precision="18" Scale="3" />
+    <Property Name="CBM" Type="decimal" Precision="18" Scale="3" />
+    <Property Name="NumberOfPackages" Type="int" />
+    <Property Name="IsPrepaid" Type="bit" />
+    <Property Name="CollectedFreightCost" Type="decimal" Precision="18" Scale="3" />
+    <Property Name="FreighCurrencyId" Type="int" />
+    <Property Name="FreighCurrency" Type="nvarchar" MaxLength="10" />
+    <Property Name="CollectedThcCost" Type="decimal" Precision="18" Scale="3" />
+    <Property Name="ThcCurrencyId" Type="int" />
+    <Property Name="ThcCurrency" Type="nvarchar" MaxLength="10" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="GoodsDescription" Type="nvarchar(max)" />
+    <Property Name="Marks" Type="nvarchar(max)" />
+    <Property Name="StatusId" Type="tinyint" Nullable="false" />
+    <Property Name="StatusName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="BookingNumber" Type="varchar" MaxLength="30" />
+    <Property Name="VesselName" Type="nvarchar" MaxLength="50" />
+    <Property Name="IncotermName" Type="nvarchar" MaxLength="50" />
+    <Property Name="DateOfDeparture" Type="datetime" />
+    <Property Name="ArriveDate" Type="datetime" />
+    <Property Name="CarrierType" Type="tinyint" Nullable="false" />
+    <Property Name="MBL" Type="varchar" MaxLength="30" />
+    <Property Name="CarrierNameEn" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="CreateBy" Type="nvarchar" MaxLength="128" />
+    <Property Name="CarrierId" Type="int" Nullable="false" />
+    <Property Name="VesselId" Type="int" />
+    <Property Name="ConsigneeAddressEn" Type="nvarchar" MaxLength="200" />
+    <Property Name="ConsigneePhoneNumber" Type="varchar" MaxLength="200" />
+    <Property Name="ConsigneeFaxNumber" Type="varchar" MaxLength="200" />
+    <Property Name="NotifierAddressEn" Type="nvarchar" MaxLength="200" />
+    <Property Name="NotifierPhoneNumber" Type="varchar" MaxLength="20" />
+    <Property Name="NotifierFaxNumber" Type="varchar" MaxLength="20" />
+    <Property Name="AgentAddressEn" Type="nvarchar" MaxLength="200" />
+    <Property Name="AgentPhoneNumber" Type="varchar" MaxLength="200" />
+    <Property Name="AgentFaxNumber" Type="varchar" MaxLength="200" />
+    <Property Name="FlightNumber" Type="varchar" MaxLength="10" />
+    <Property Name="PackageTypeNameEn" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'EasyFreight2.dbo.OperationView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="OperationView">
+    <Key>
+      <PropertyRef Name="OrderFrom" />
+      <PropertyRef Name="OperationCode" />
+      <PropertyRef Name="FromPort" />
+      <PropertyRef Name="ToPort" />
+      <PropertyRef Name="ShipperNameEn" />
+      <PropertyRef Name="ConsigneeNameEn" />
+      <PropertyRef Name="CarrierNameEn" />
+      <PropertyRef Name="IsHazardous" />
+      <PropertyRef Name="IsPrepaid" />
+      <PropertyRef Name="StatusId" />
+      <PropertyRef Name="CreateDate" />
+      <PropertyRef Name="StatusName" />
+      <PropertyRef Name="CarrierType" />
+      <PropertyRef Name="BookingNumber" />
+      <PropertyRef Name="IsCareOf" />
+      <PropertyRef Name="OperationId" />
+      <PropertyRef Name="FromPortId" />
+      <PropertyRef Name="ToPortId" />
+      <PropertyRef Name="ShipperId" />
+      <PropertyRef Name="ConsigneeId" />
+      <PropertyRef Name="CarrierId" />
+      <PropertyRef Name="IsConsolidation" />
+    </Key>
+    <Property Name="QuoteId" Type="int" />
+    <Property Name="OrderFrom" Type="tinyint" Nullable="false" />
+    <Property Name="OperationCode" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="OperationDate" Type="datetime" Nullable="false" />
+    <Property Name="FromPort" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ToPort" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ShipperNameEn" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="ConsigneeNameEn" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="NotifierNameEn" Type="nvarchar" MaxLength="50" />
+    <Property Name="CarrierNameEn" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="VesselName" Type="nvarchar" MaxLength="50" />
+    <Property Name="IncotermName" Type="nvarchar" MaxLength="50" />
+    <Property Name="DateOfDeparture" Type="datetime" />
+    <Property Name="GrossWeight" Type="decimal" Precision="18" Scale="3" />
+    <Property Name="NetWeight" Type="decimal" Precision="18" Scale="3" />
+    <Property Name="CBM" Type="decimal" Precision="18" Scale="3" />
+    <Property Name="NumberOfPackages" Type="int" />
+    <Property Name="IsHazardous" Type="bit" Nullable="false" />
+    <Property Name="IsPrepaid" Type="bit" Nullable="false" />
+    <Property Name="PickupNeeded" Type="bit" />
+    <Property Name="DeliveryNeeded" Type="bit" />
+    <Property Name="CustomClearanceNeeded" Type="bit" />
+    <Property Name="GoodsDescription" Type="nvarchar(max)" />
+    <Property Name="StatusId" Type="tinyint" Nullable="false" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="FreightCostAmount" Type="decimal" Precision="18" Scale="3" />
+    <Property Name="FreighCurrencyId" Type="int" />
+    <Property Name="ThcCostAmount" Type="decimal" Precision="18" Scale="3" />
+    <Property Name="ThcCurrencyId" Type="int" />
+    <Property Name="StatusName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="CarrierType" Type="tinyint" Nullable="false" />
+    <Property Name="NotifierAsConsignee" Type="bit" Nullable="false" />
+    <Property Name="MBL" Type="varchar" MaxLength="30" />
+    <Property Name="BookingNumber" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="IsCareOf" Type="bit" Nullable="false" />
+    <Property Name="OperationId" Type="int" Nullable="false" />
+    <Property Name="FromPortId" Type="int" Nullable="false" />
+    <Property Name="ToPortId" Type="int" Nullable="false" />
+    <Property Name="ShipperId" Type="int" Nullable="false" />
+    <Property Name="NotifierId" Type="int" />
+    <Property Name="ConsigneeId" Type="int" Nullable="false" />
+    <Property Name="CarrierId" Type="int" Nullable="false" />
+    <Property Name="IncotermId" Type="int" />
+    <Property Name="VesselId" Type="int" />
+    <Property Name="FlightNumber" Type="varchar" MaxLength="10" />
+    <Property Name="TransitTime" Type="tinyint" />
+    <Property Name="FreeDays" Type="tinyint" />
+    <Property Name="ArriveDate" Type="datetime" />
+    <Property Name="IsConsolidation" Type="bit" Nullable="false" />
+    <Property Name="AgentId" Type="int" />
+    <Property Name="IsFixedCost" Type="bit" />
+    <Property Name="FixedCost" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="FixedCostCurrencyId" Type="int" />
+    <Property Name="PercentageOfAmount" Type="decimal" Precision="5" Scale="2" />
+    <Property Name="AgentNameEn" Type="nvarchar" MaxLength="200" />
+    <Property Name="CreateBy" Type="nvarchar" MaxLength="128" />
+    <Property Name="ConsigneeAddressEn" Type="nvarchar" MaxLength="200" />
+    <Property Name="ConsigneePhoneNumber" Type="varchar" MaxLength="200" />
+    <Property Name="ConsigneeFaxNumber" Type="varchar" MaxLength="200" />
+    <Property Name="NotifierAddressEn" Type="nvarchar" MaxLength="200" />
+    <Property Name="NotifierPhoneNumber" Type="varchar" MaxLength="20" />
+    <Property Name="NotifierFaxNumber" Type="varchar" MaxLength="20" />
+    <Property Name="ShipperPhoneNumber" Type="varchar" MaxLength="200" />
+    <Property Name="ShipperFaxNumber" Type="varchar" MaxLength="200" />
+    <Property Name="ShipperAddressEn" Type="nvarchar" MaxLength="200" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'EasyFreight2.dbo.QuotationView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="QuotationView">
+    <Key>
+      <PropertyRef Name="QuoteId" />
+      <PropertyRef Name="OrderFrom" />
+      <PropertyRef Name="QuoteCode" />
+      <PropertyRef Name="FromPort" />
+      <PropertyRef Name="ToPort" />
+      <PropertyRef Name="ShipperNameEn" />
+      <PropertyRef Name="ConsigneeNameEn" />
+      <PropertyRef Name="CarrierNameEn" />
+      <PropertyRef Name="IsHazardous" />
+      <PropertyRef Name="IsPrepaid" />
+      <PropertyRef Name="StatusId" />
+      <PropertyRef Name="CreateDate" />
+      <PropertyRef Name="StatusName" />
+      <PropertyRef Name="CarrierType" />
+      <PropertyRef Name="IsCareOf" />
+    </Key>
+    <Property Name="QuoteId" Type="int" Nullable="false" />
+    <Property Name="OrderFrom" Type="tinyint" Nullable="false" />
+    <Property Name="QuoteCode" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="QuoteDate" Type="datetime" />
+    <Property Name="FromPort" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ToPort" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ShipperNameEn" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="ConsigneeNameEn" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="NotifierNameEn" Type="nvarchar" MaxLength="50" />
+    <Property Name="CarrierNameEn" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="VesselName" Type="nvarchar" MaxLength="50" />
+    <Property Name="IncotermName" Type="nvarchar" MaxLength="50" />
+    <Property Name="DateOfDeparture" Type="datetime" />
+    <Property Name="GrossWeight" Type="decimal" Precision="18" Scale="3" />
+    <Property Name="NetWeight" Type="decimal" Precision="18" Scale="3" />
+    <Property Name="CBM" Type="decimal" Precision="18" Scale="3" />
+    <Property Name="NumberOfPackages" Type="int" />
+    <Property Name="IsHazardous" Type="bit" Nullable="false" />
+    <Property Name="IsPrepaid" Type="bit" Nullable="false" />
+    <Property Name="PickupNeeded" Type="bit" />
+    <Property Name="DeliveryNeeded" Type="bit" />
+    <Property Name="CustomClearanceNeeded" Type="bit" />
+    <Property Name="GoodsDescription" Type="nvarchar(max)" />
+    <Property Name="StatusId" Type="tinyint" Nullable="false" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="HasExpireDate" Type="bit" />
+    <Property Name="ExpirationInDays" Type="tinyint" />
+    <Property Name="FreightCostAmount" Type="decimal" Precision="18" Scale="3" />
+    <Property Name="FreighCurrencyId" Type="int" />
+    <Property Name="ThcCostAmount" Type="decimal" Precision="18" Scale="3" />
+    <Property Name="ThcCurrencyId" Type="int" />
+    <Property Name="StatusName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="CarrierType" Type="tinyint" Nullable="false" />
+    <Property Name="NotifierAsConsignee" Type="bit" />
+    <Property Name="FlightNumber" Type="varchar" MaxLength="10" />
+    <Property Name="IsCareOf" Type="bit" Nullable="false" />
+    <Property Name="TruckingCost" Type="decimal" Precision="18" Scale="3" />
+    <Property Name="TruckingCurrencyId" Type="int" />
+    <Property Name="CusClearanceCost" Type="decimal" Precision="18" Scale="3" />
+    <Property Name="CusClearanceCurrencyId" Type="int" />
+    <Property Name="AgentNameEn" Type="nvarchar" MaxLength="200" />
+    <Property Name="ConsigneeAddressEn" Type="nvarchar" MaxLength="200" />
+    <Property Name="ConsigneePhoneNumber" Type="varchar" MaxLength="200" />
+    <Property Name="ConsigneeFaxNumber" Type="varchar" MaxLength="200" />
+    <Property Name="ConsigneeId" Type="int" />
+    <Property Name="NotifierId" Type="int" />
+    <Property Name="NotifierAddressEn" Type="nvarchar" MaxLength="200" />
+    <Property Name="NotifierPhoneNumber" Type="varchar" MaxLength="20" />
+    <Property Name="NotifierFaxNumber" Type="varchar" MaxLength="20" />
+    <Property Name="ArriveDate" Type="datetime" />
+    <Property Name="TransitTime" Type="tinyint" />
+    <Property Name="FreeDays" Type="tinyint" />
+    <Property Name="AgentId" Type="int" />
+    <Property Name="CarrierId" Type="int" />
+    <Property Name="IncotermId" Type="int" />
+    <Property Name="VesselId" Type="int" />
+    <Property Name="ShipperId" Type="int" />
+    <Property Name="ToPortId" Type="int" />
+    <Property Name="FromPortId" Type="int" />
+    <Property Name="CreateBy" Type="nvarchar" MaxLength="128" />
+    <Property Name="ShipperPhoneNumber" Type="varchar" MaxLength="200" />
+    <Property Name="ShipperFaxNumber" Type="varchar" MaxLength="200" />
+    <Property Name="ShipperAddressEn" Type="nvarchar" MaxLength="200" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'EasyFreight2.dbo.TruckingOrdersView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="TruckingOrdersView">
+    <Key>
+      <PropertyRef Name="TruckingOrderId" />
+      <PropertyRef Name="OperationId" />
+      <PropertyRef Name="OperationCode" />
+      <PropertyRef Name="OrderFrom" />
+      <PropertyRef Name="FromAreaName" />
+      <PropertyRef Name="ToAreaName" />
+      <PropertyRef Name="FromCityName" />
+      <PropertyRef Name="ToCityName" />
+      <PropertyRef Name="NeedArriveDate" />
+      <PropertyRef Name="NeedArriveTime" />
+      <PropertyRef Name="StatusName" />
+      <PropertyRef Name="StatusId" />
+      <PropertyRef Name="FromAreaId" />
+      <PropertyRef Name="ToAreaId" />
+    </Key>
+    <Property Name="TruckingOrderId" Type="int" Nullable="false" />
+    <Property Name="OperationId" Type="int" Nullable="false" />
+    <Property Name="OperationCode" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="OrderFrom" Type="tinyint" Nullable="false" />
+    <Property Name="BookingNo" Type="varchar" MaxLength="30" />
+    <Property Name="ShipperNameEn" Type="nvarchar" MaxLength="200" />
+    <Property Name="ConsigneeNameEn" Type="nvarchar" MaxLength="200" />
+    <Property Name="CarrierNameEn" Type="nvarchar" MaxLength="200" />
+    <Property Name="FromAreaName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ToAreaName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="FromCityName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ToCityName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="NeedArriveDate" Type="datetime" Nullable="false" />
+    <Property Name="NeedArriveTime" Type="time" Precision="1" Nullable="false" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="ContractorNameEn" Type="nvarchar" MaxLength="50" />
+    <Property Name="DriverName" Type="nvarchar" MaxLength="50" />
+    <Property Name="DriverMobile" Type="varchar" MaxLength="50" />
+    <Property Name="ArriveDate" Type="datetime" />
+    <Property Name="ArriveTime" Type="time" Precision="1" />
+    <Property Name="LoadedDate" Type="datetime" />
+    <Property Name="LoadedTime" Type="time" Precision="1" />
+    <Property Name="Notes" Type="nvarchar" MaxLength="500" />
+    <Property Name="StatusName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="StatusId" Type="tinyint" Nullable="false" />
+    <Property Name="FromAreaId" Type="int" Nullable="false" />
+    <Property Name="ToAreaId" Type="int" Nullable="false" />
+    <Property Name="ShipperId" Type="int" />
+    <Property Name="CarrierId" Type="int" />
+    <Property Name="ConsigneeId" Type="int" />
+    <Property Name="FromCityId" Type="int" />
+    <Property Name="ToCityId" Type="int" />
+    <Property Name="ContractorId" Type="int" />
+    <Property Name="LeaveDate" Type="datetime" />
+    <Property Name="LeaveTime" Type="time" Precision="1" />
+    <Property Name="FollowUpDate" Type="datetime" />
+    <Property Name="CostCurrencyId" Type="int" />
+    <Property Name="ShipFromAddress" Type="nvarchar" MaxLength="500" />
+    <Property Name="HouseBillId" Type="int" />
+    <Property Name="HouseBL" Type="varchar" MaxLength="30" />
+    <Property Name="TruckingOrderCode" Type="varchar" MaxLength="10" />
+    <Property Name="CreateBy" Type="nvarchar" MaxLength="128" />
+    <Property Name="AssignToUserId" Type="nvarchar" MaxLength="128" />
+    <Property Name="FollowUpBy" Type="nvarchar" MaxLength="128" />
+    <Property Name="ContactName" Type="nvarchar" MaxLength="150" />
+    <Property Name="ContactPhone" Type="nvarchar" MaxLength="150" />
+  </EntityType>
+  <Association Name="FK_CustomClearanceDetail_Currency">
+    <End Role="Currency" Type="Self.Currency" Multiplicity="1" />
+    <End Role="CustomClearanceDetail" Type="Self.CustomClearanceDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Currency">
+        <PropertyRef Name="CurrencyId" />
+      </Principal>
+      <Dependent Role="CustomClearanceDetail">
+        <PropertyRef Name="CurrencyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CustomClearanceDetail_CustomClearanceCostLib">
+    <End Role="CustomClearanceCostLib" Type="Self.CustomClearanceCostLib" Multiplicity="1" />
+    <End Role="CustomClearanceDetail" Type="Self.CustomClearanceDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CustomClearanceCostLib">
+        <PropertyRef Name="CCCostId" />
+      </Principal>
+      <Dependent Role="CustomClearanceDetail">
+        <PropertyRef Name="CCCostId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CustomClearanceDetail_CustomClearanceOrder">
+    <End Role="CustomClearanceOrder" Type="Self.CustomClearanceOrder" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="CustomClearanceDetail" Type="Self.CustomClearanceDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CustomClearanceOrder">
+        <PropertyRef Name="CCId" />
+      </Principal>
+      <Dependent Role="CustomClearanceDetail">
+        <PropertyRef Name="CCId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CustomClearanceOrder_HouseBill">
+    <End Role="HouseBill" Type="Self.HouseBill" Multiplicity="1" />
+    <End Role="CustomClearanceOrder" Type="Self.CustomClearanceOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HouseBill">
+        <PropertyRef Name="HouseBillId" />
+      </Principal>
+      <Dependent Role="CustomClearanceOrder">
+        <PropertyRef Name="HouseBillId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CustomClearanceOrder_Operation">
+    <End Role="Operation" Type="Self.Operation" Multiplicity="1" />
+    <End Role="CustomClearanceOrder" Type="Self.CustomClearanceOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Operation">
+        <PropertyRef Name="OperationId" />
+      </Principal>
+      <Dependent Role="CustomClearanceOrder">
+        <PropertyRef Name="OperationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_HouseBill_Currency">
+    <End Role="Currency" Type="Self.Currency" Multiplicity="0..1" />
+    <End Role="HouseBill" Type="Self.HouseBill" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Currency">
+        <PropertyRef Name="CurrencyId" />
+      </Principal>
+      <Dependent Role="HouseBill">
+        <PropertyRef Name="ThcCurrencyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_HouseBill_Currency1">
+    <End Role="Currency" Type="Self.Currency" Multiplicity="0..1" />
+    <End Role="HouseBill" Type="Self.HouseBill" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Currency">
+        <PropertyRef Name="CurrencyId" />
+      </Principal>
+      <Dependent Role="HouseBill">
+        <PropertyRef Name="FreighCurrencyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_HouseBill_StatusLib">
+    <End Role="StatusLib" Type="Self.StatusLib" Multiplicity="1" />
+    <End Role="HouseBill" Type="Self.HouseBill" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StatusLib">
+        <PropertyRef Name="StatusId" />
+      </Principal>
+      <Dependent Role="HouseBill">
+        <PropertyRef Name="StatusId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Operation_Currency">
+    <End Role="Currency" Type="Self.Currency" Multiplicity="0..1" />
+    <End Role="Operation" Type="Self.Operation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Currency">
+        <PropertyRef Name="CurrencyId" />
+      </Principal>
+      <Dependent Role="Operation">
+        <PropertyRef Name="FreighCurrencyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Operation_Currency1">
+    <End Role="Currency" Type="Self.Currency" Multiplicity="0..1" />
+    <End Role="Operation" Type="Self.Operation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Currency">
+        <PropertyRef Name="CurrencyId" />
+      </Principal>
+      <Dependent Role="Operation">
+        <PropertyRef Name="ThcCurrencyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Operation_Currency2">
+    <End Role="Currency" Type="Self.Currency" Multiplicity="0..1" />
+    <End Role="Operation" Type="Self.Operation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Currency">
+        <PropertyRef Name="CurrencyId" />
+      </Principal>
+      <Dependent Role="Operation">
+        <PropertyRef Name="FixedCostCurrencyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Operation_Quotation">
+    <End Role="Quotation" Type="Self.Quotation" Multiplicity="0..1" />
+    <End Role="Operation" Type="Self.Operation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Quotation">
+        <PropertyRef Name="QuoteId" />
+      </Principal>
+      <Dependent Role="Operation">
+        <PropertyRef Name="QuoteId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Operation_StatusLib">
+    <End Role="StatusLib" Type="Self.StatusLib" Multiplicity="1" />
+    <End Role="Operation" Type="Self.Operation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StatusLib">
+        <PropertyRef Name="StatusId" />
+      </Principal>
+      <Dependent Role="Operation">
+        <PropertyRef Name="StatusId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OperationCost_Currency">
+    <End Role="Currency" Type="Self.Currency" Multiplicity="1" />
+    <End Role="OperationCost" Type="Self.OperationCost" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Currency">
+        <PropertyRef Name="CurrencyId" />
+      </Principal>
+      <Dependent Role="OperationCost">
+        <PropertyRef Name="CurrencyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OperationCost_CurrencySelling">
+    <End Role="Currency" Type="Self.Currency" Multiplicity="0..1" />
+    <End Role="OperationCost" Type="Self.OperationCost" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Currency">
+        <PropertyRef Name="CurrencyId" />
+      </Principal>
+      <Dependent Role="OperationCost">
+        <PropertyRef Name="CurrencyIdSelling" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OperationCost_HouseBill">
+    <End Role="HouseBill" Type="Self.HouseBill" Multiplicity="1" />
+    <End Role="OperationCost" Type="Self.OperationCost" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HouseBill">
+        <PropertyRef Name="HouseBillId" />
+      </Principal>
+      <Dependent Role="OperationCost">
+        <PropertyRef Name="HouseBillId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OperationCost_Operation">
+    <End Role="Operation" Type="Self.Operation" Multiplicity="1" />
+    <End Role="OperationCost" Type="Self.OperationCost" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Operation">
+        <PropertyRef Name="OperationId" />
+      </Principal>
+      <Dependent Role="OperationCost">
+        <PropertyRef Name="OperationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OperationCost_OperationCostLib">
+    <End Role="OperationCostLib" Type="Self.OperationCostLib" Multiplicity="1" />
+    <End Role="OperationCost" Type="Self.OperationCost" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OperationCostLib">
+        <PropertyRef Name="OperCostLibId" />
+      </Principal>
+      <Dependent Role="OperationCost">
+        <PropertyRef Name="OperCostLibId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Quotation_Currency">
+    <End Role="Currency" Type="Self.Currency" Multiplicity="0..1" />
+    <End Role="Quotation" Type="Self.Quotation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Currency">
+        <PropertyRef Name="CurrencyId" />
+      </Principal>
+      <Dependent Role="Quotation">
+        <PropertyRef Name="ThcCurrencyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Quotation_Currency1">
+    <End Role="Currency" Type="Self.Currency" Multiplicity="0..1" />
+    <End Role="Quotation" Type="Self.Quotation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Currency">
+        <PropertyRef Name="CurrencyId" />
+      </Principal>
+      <Dependent Role="Quotation">
+        <PropertyRef Name="FreighCurrencyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Quotation_Currency2">
+    <End Role="Currency" Type="Self.Currency" Multiplicity="0..1" />
+    <End Role="Quotation" Type="Self.Quotation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Currency">
+        <PropertyRef Name="CurrencyId" />
+      </Principal>
+      <Dependent Role="Quotation">
+        <PropertyRef Name="TruckingCurrencyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Quotation_Currency3">
+    <End Role="Currency" Type="Self.Currency" Multiplicity="0..1" />
+    <End Role="Quotation" Type="Self.Quotation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Currency">
+        <PropertyRef Name="CurrencyId" />
+      </Principal>
+      <Dependent Role="Quotation">
+        <PropertyRef Name="CusClearanceCurrencyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Quotation_StatusLib">
+    <End Role="StatusLib" Type="Self.StatusLib" Multiplicity="1" />
+    <End Role="Quotation" Type="Self.Quotation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StatusLib">
+        <PropertyRef Name="StatusId" />
+      </Principal>
+      <Dependent Role="Quotation">
+        <PropertyRef Name="StatusId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_QuotationContainer_Quotation">
+    <End Role="Quotation" Type="Self.Quotation" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="QuotationContainer" Type="Self.QuotationContainer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Quotation">
+        <PropertyRef Name="QuoteId" />
+      </Principal>
+      <Dependent Role="QuotationContainer">
+        <PropertyRef Name="QuoteId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="GetContractorRate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="getValidOnly" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="GetOperationStatistics" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="OrderFrom" Type="int" Mode="In" />
+    <Parameter Name="StartDate" Type="date" Mode="In" />
+    <Parameter Name="EndDate" Type="date" Mode="In" />
+  </Function>
+  <EntityContainer Name="OperationsModelStoreContainer">
+    <EntitySet Name="Currency" EntityType="Self.Currency" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CustomClearanceCostLib" EntityType="Self.CustomClearanceCostLib" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CustomClearanceDetail" EntityType="Self.CustomClearanceDetail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CustomClearanceOrder" EntityType="Self.CustomClearanceOrder" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="HouseBill" EntityType="Self.HouseBill" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Operation" EntityType="Self.Operation" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OperationContainer" EntityType="Self.OperationContainer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OperationCost" EntityType="Self.OperationCost" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OperationCostLib" EntityType="Self.OperationCostLib" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Quotation" EntityType="Self.Quotation" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="QuotationContainer" EntityType="Self.QuotationContainer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="StatusLib" EntityType="Self.StatusLib" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CustomClearanceView" EntityType="Self.CustomClearanceView" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [CustomClearanceView].[OrderFrom] AS [OrderFrom], 
+    [CustomClearanceView].[OperationCode] AS [OperationCode], 
+    [CustomClearanceView].[OperationDate] AS [OperationDate], 
+    [CustomClearanceView].[FromPort] AS [FromPort], 
+    [CustomClearanceView].[ToPort] AS [ToPort], 
+    [CustomClearanceView].[ShipperNameEn] AS [ShipperNameEn], 
+    [CustomClearanceView].[ConsigneeNameEn] AS [ConsigneeNameEn], 
+    [CustomClearanceView].[GrossWeight] AS [GrossWeight], 
+    [CustomClearanceView].[NetWeight] AS [NetWeight], 
+    [CustomClearanceView].[GoodsDescription] AS [GoodsDescription], 
+    [CustomClearanceView].[OperationId] AS [OperationId], 
+    [CustomClearanceView].[NeedArriveDate] AS [NeedArriveDate], 
+    [CustomClearanceView].[NeedArriveTime] AS [NeedArriveTime], 
+    [CustomClearanceView].[CreateDate] AS [CreateDate], 
+    [CustomClearanceView].[StatusId] AS [StatusId], 
+    [CustomClearanceView].[StatusName] AS [StatusName], 
+    [CustomClearanceView].[CCId] AS [CCId], 
+    [CustomClearanceView].[AssignToUserId] AS [AssignToUserId], 
+    [CustomClearanceView].[CarrierType] AS [CarrierType], 
+    [CustomClearanceView].[MBL] AS [MBL], 
+    [CustomClearanceView].[CarrierId] AS [CarrierId], 
+    [CustomClearanceView].[CarrierNameEn] AS [CarrierNameEn], 
+    [CustomClearanceView].[DateOfDeparture] AS [DateOfDeparture], 
+    [CustomClearanceView].[ArriveDate] AS [ArriveDate], 
+    [CustomClearanceView].[IsHazardous] AS [IsHazardous], 
+    [CustomClearanceView].[FreeDays] AS [FreeDays], 
+    [CustomClearanceView].[FlightNumber] AS [FlightNumber], 
+    [CustomClearanceView].[VesselId] AS [VesselId], 
+    [CustomClearanceView].[VesselName] AS [VesselName], 
+    [CustomClearanceView].[BookingNumber] AS [BookingNumber], 
+    [CustomClearanceView].[CBM] AS [CBM], 
+    [CustomClearanceView].[NumberOfPackages] AS [NumberOfPackages], 
+    [CustomClearanceView].[HouseBL] AS [HouseBL], 
+    [CustomClearanceView].[CreateBy] AS [CreateBy], 
+    [CustomClearanceView].[Notes] AS [Notes], 
+    [CustomClearanceView].[FromPortId] AS [FromPortId], 
+    [CustomClearanceView].[ToPortId] AS [ToPortId], 
+    [CustomClearanceView].[ShipperId] AS [ShipperId], 
+    [CustomClearanceView].[ConsigneeId] AS [ConsigneeId], 
+    [CustomClearanceView].[NotifierId] AS [NotifierId], 
+    [CustomClearanceView].[AgentId] AS [AgentId], 
+    [CustomClearanceView].[Expr1] AS [Expr1], 
+    [CustomClearanceView].[Expr2] AS [Expr2], 
+    [CustomClearanceView].[Comment] AS [Comment]
+    FROM [dbo].[CustomClearanceView] AS [CustomClearanceView]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="HouseBillView" EntityType="Self.HouseBillView" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [HouseBillView].[HouseBillId] AS [HouseBillId], 
+    [HouseBillView].[OrderFrom] AS [OrderFrom], 
+    [HouseBillView].[OperationId] AS [OperationId], 
+    [HouseBillView].[OperationCode] AS [OperationCode], 
+    [HouseBillView].[OperationDate] AS [OperationDate], 
+    [HouseBillView].[HouseBL] AS [HouseBL], 
+    [HouseBillView].[FromPortId] AS [FromPortId], 
+    [HouseBillView].[FromPort] AS [FromPort], 
+    [HouseBillView].[ToPortId] AS [ToPortId], 
+    [HouseBillView].[ToPort] AS [ToPort], 
+    [HouseBillView].[ShipperId] AS [ShipperId], 
+    [HouseBillView].[ShipperNameEn] AS [ShipperNameEn], 
+    [HouseBillView].[ConsigneeId] AS [ConsigneeId], 
+    [HouseBillView].[ConsigneeNameEn] AS [ConsigneeNameEn], 
+    [HouseBillView].[NotifierId] AS [NotifierId], 
+    [HouseBillView].[NotifierNameEn] AS [NotifierNameEn], 
+    [HouseBillView].[NotifierAsConsignee] AS [NotifierAsConsignee], 
+    [HouseBillView].[DeliveryType] AS [DeliveryType], 
+    [HouseBillView].[AgentId] AS [AgentId], 
+    [HouseBillView].[AgentNameEn] AS [AgentNameEn], 
+    [HouseBillView].[GrossWeight] AS [GrossWeight], 
+    [HouseBillView].[NetWeight] AS [NetWeight], 
+    [HouseBillView].[CBM] AS [CBM], 
+    [HouseBillView].[NumberOfPackages] AS [NumberOfPackages], 
+    [HouseBillView].[IsPrepaid] AS [IsPrepaid], 
+    [HouseBillView].[CollectedFreightCost] AS [CollectedFreightCost], 
+    [HouseBillView].[FreighCurrencyId] AS [FreighCurrencyId], 
+    [HouseBillView].[FreighCurrency] AS [FreighCurrency], 
+    [HouseBillView].[CollectedThcCost] AS [CollectedThcCost], 
+    [HouseBillView].[ThcCurrencyId] AS [ThcCurrencyId], 
+    [HouseBillView].[ThcCurrency] AS [ThcCurrency], 
+    [HouseBillView].[CreateDate] AS [CreateDate], 
+    [HouseBillView].[GoodsDescription] AS [GoodsDescription], 
+    [HouseBillView].[Marks] AS [Marks], 
+    [HouseBillView].[StatusId] AS [StatusId], 
+    [HouseBillView].[StatusName] AS [StatusName], 
+    [HouseBillView].[BookingNumber] AS [BookingNumber], 
+    [HouseBillView].[VesselName] AS [VesselName], 
+    [HouseBillView].[IncotermName] AS [IncotermName], 
+    [HouseBillView].[DateOfDeparture] AS [DateOfDeparture], 
+    [HouseBillView].[ArriveDate] AS [ArriveDate], 
+    [HouseBillView].[CarrierType] AS [CarrierType], 
+    [HouseBillView].[MBL] AS [MBL], 
+    [HouseBillView].[CarrierNameEn] AS [CarrierNameEn], 
+    [HouseBillView].[CreateBy] AS [CreateBy], 
+    [HouseBillView].[CarrierId] AS [CarrierId], 
+    [HouseBillView].[VesselId] AS [VesselId], 
+    [HouseBillView].[ConsigneeAddressEn] AS [ConsigneeAddressEn], 
+    [HouseBillView].[ConsigneePhoneNumber] AS [ConsigneePhoneNumber], 
+    [HouseBillView].[ConsigneeFaxNumber] AS [ConsigneeFaxNumber], 
+    [HouseBillView].[NotifierAddressEn] AS [NotifierAddressEn], 
+    [HouseBillView].[NotifierPhoneNumber] AS [NotifierPhoneNumber], 
+    [HouseBillView].[NotifierFaxNumber] AS [NotifierFaxNumber], 
+    [HouseBillView].[AgentAddressEn] AS [AgentAddressEn], 
+    [HouseBillView].[AgentPhoneNumber] AS [AgentPhoneNumber], 
+    [HouseBillView].[AgentFaxNumber] AS [AgentFaxNumber], 
+    [HouseBillView].[FlightNumber] AS [FlightNumber], 
+    [HouseBillView].[PackageTypeNameEn] AS [PackageTypeNameEn]
+    FROM [dbo].[HouseBillView] AS [HouseBillView]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="OperationView" EntityType="Self.OperationView" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [OperationView].[QuoteId] AS [QuoteId], 
+    [OperationView].[OrderFrom] AS [OrderFrom], 
+    [OperationView].[OperationCode] AS [OperationCode], 
+    [OperationView].[OperationDate] AS [OperationDate], 
+    [OperationView].[FromPort] AS [FromPort], 
+    [OperationView].[ToPort] AS [ToPort], 
+    [OperationView].[ShipperNameEn] AS [ShipperNameEn], 
+    [OperationView].[ConsigneeNameEn] AS [ConsigneeNameEn], 
+    [OperationView].[NotifierNameEn] AS [NotifierNameEn], 
+    [OperationView].[CarrierNameEn] AS [CarrierNameEn], 
+    [OperationView].[VesselName] AS [VesselName], 
+    [OperationView].[IncotermName] AS [IncotermName], 
+    [OperationView].[DateOfDeparture] AS [DateOfDeparture], 
+    [OperationView].[GrossWeight] AS [GrossWeight], 
+    [OperationView].[NetWeight] AS [NetWeight], 
+    [OperationView].[CBM] AS [CBM], 
+    [OperationView].[NumberOfPackages] AS [NumberOfPackages], 
+    [OperationView].[IsHazardous] AS [IsHazardous], 
+    [OperationView].[IsPrepaid] AS [IsPrepaid], 
+    [OperationView].[PickupNeeded] AS [PickupNeeded], 
+    [OperationView].[DeliveryNeeded] AS [DeliveryNeeded], 
+    [OperationView].[CustomClearanceNeeded] AS [CustomClearanceNeeded], 
+    [OperationView].[GoodsDescription] AS [GoodsDescription], 
+    [OperationView].[StatusId] AS [StatusId], 
+    [OperationView].[CreateDate] AS [CreateDate], 
+    [OperationView].[FreightCostAmount] AS [FreightCostAmount], 
+    [OperationView].[FreighCurrencyId] AS [FreighCurrencyId], 
+    [OperationView].[ThcCostAmount] AS [ThcCostAmount], 
+    [OperationView].[ThcCurrencyId] AS [ThcCurrencyId], 
+    [OperationView].[StatusName] AS [StatusName], 
+    [OperationView].[CarrierType] AS [CarrierType], 
+    [OperationView].[NotifierAsConsignee] AS [NotifierAsConsignee], 
+    [OperationView].[MBL] AS [MBL], 
+    [OperationView].[BookingNumber] AS [BookingNumber], 
+    [OperationView].[IsCareOf] AS [IsCareOf], 
+    [OperationView].[OperationId] AS [OperationId], 
+    [OperationView].[FromPortId] AS [FromPortId], 
+    [OperationView].[ToPortId] AS [ToPortId], 
+    [OperationView].[ShipperId] AS [ShipperId], 
+    [OperationView].[NotifierId] AS [NotifierId], 
+    [OperationView].[ConsigneeId] AS [ConsigneeId], 
+    [OperationView].[CarrierId] AS [CarrierId], 
+    [OperationView].[IncotermId] AS [IncotermId], 
+    [OperationView].[VesselId] AS [VesselId], 
+    [OperationView].[FlightNumber] AS [FlightNumber], 
+    [OperationView].[TransitTime] AS [TransitTime], 
+    [OperationView].[FreeDays] AS [FreeDays], 
+    [OperationView].[ArriveDate] AS [ArriveDate], 
+    [OperationView].[IsConsolidation] AS [IsConsolidation], 
+    [OperationView].[AgentId] AS [AgentId], 
+    [OperationView].[IsFixedCost] AS [IsFixedCost], 
+    [OperationView].[FixedCost] AS [FixedCost], 
+    [OperationView].[FixedCostCurrencyId] AS [FixedCostCurrencyId], 
+    [OperationView].[PercentageOfAmount] AS [PercentageOfAmount], 
+    [OperationView].[AgentNameEn] AS [AgentNameEn], 
+    [OperationView].[CreateBy] AS [CreateBy], 
+    [OperationView].[ConsigneeAddressEn] AS [ConsigneeAddressEn], 
+    [OperationView].[ConsigneePhoneNumber] AS [ConsigneePhoneNumber], 
+    [OperationView].[ConsigneeFaxNumber] AS [ConsigneeFaxNumber], 
+    [OperationView].[NotifierAddressEn] AS [NotifierAddressEn], 
+    [OperationView].[NotifierPhoneNumber] AS [NotifierPhoneNumber], 
+    [OperationView].[NotifierFaxNumber] AS [NotifierFaxNumber], 
+    [OperationView].[ShipperPhoneNumber] AS [ShipperPhoneNumber], 
+    [OperationView].[ShipperFaxNumber] AS [ShipperFaxNumber], 
+    [OperationView].[ShipperAddressEn] AS [ShipperAddressEn]
+    FROM [dbo].[OperationView] AS [OperationView]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="QuotationView" EntityType="Self.QuotationView" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [QuotationView].[QuoteId] AS [QuoteId], 
+    [QuotationView].[OrderFrom] AS [OrderFrom], 
+    [QuotationView].[QuoteCode] AS [QuoteCode], 
+    [QuotationView].[QuoteDate] AS [QuoteDate], 
+    [QuotationView].[FromPort] AS [FromPort], 
+    [QuotationView].[ToPort] AS [ToPort], 
+    [QuotationView].[ShipperNameEn] AS [ShipperNameEn], 
+    [QuotationView].[ConsigneeNameEn] AS [ConsigneeNameEn], 
+    [QuotationView].[NotifierNameEn] AS [NotifierNameEn], 
+    [QuotationView].[CarrierNameEn] AS [CarrierNameEn], 
+    [QuotationView].[VesselName] AS [VesselName], 
+    [QuotationView].[IncotermName] AS [IncotermName], 
+    [QuotationView].[DateOfDeparture] AS [DateOfDeparture], 
+    [QuotationView].[GrossWeight] AS [GrossWeight], 
+    [QuotationView].[NetWeight] AS [NetWeight], 
+    [QuotationView].[CBM] AS [CBM], 
+    [QuotationView].[NumberOfPackages] AS [NumberOfPackages], 
+    [QuotationView].[IsHazardous] AS [IsHazardous], 
+    [QuotationView].[IsPrepaid] AS [IsPrepaid], 
+    [QuotationView].[PickupNeeded] AS [PickupNeeded], 
+    [QuotationView].[DeliveryNeeded] AS [DeliveryNeeded], 
+    [QuotationView].[CustomClearanceNeeded] AS [CustomClearanceNeeded], 
+    [QuotationView].[GoodsDescription] AS [GoodsDescription], 
+    [QuotationView].[StatusId] AS [StatusId], 
+    [QuotationView].[CreateDate] AS [CreateDate], 
+    [QuotationView].[HasExpireDate] AS [HasExpireDate], 
+    [QuotationView].[ExpirationInDays] AS [ExpirationInDays], 
+    [QuotationView].[FreightCostAmount] AS [FreightCostAmount], 
+    [QuotationView].[FreighCurrencyId] AS [FreighCurrencyId], 
+    [QuotationView].[ThcCostAmount] AS [ThcCostAmount], 
+    [QuotationView].[ThcCurrencyId] AS [ThcCurrencyId], 
+    [QuotationView].[StatusName] AS [StatusName], 
+    [QuotationView].[CarrierType] AS [CarrierType], 
+    [QuotationView].[NotifierAsConsignee] AS [NotifierAsConsignee], 
+    [QuotationView].[FlightNumber] AS [FlightNumber], 
+    [QuotationView].[IsCareOf] AS [IsCareOf], 
+    [QuotationView].[TruckingCost] AS [TruckingCost], 
+    [QuotationView].[TruckingCurrencyId] AS [TruckingCurrencyId], 
+    [QuotationView].[CusClearanceCost] AS [CusClearanceCost], 
+    [QuotationView].[CusClearanceCurrencyId] AS [CusClearanceCurrencyId], 
+    [QuotationView].[AgentNameEn] AS [AgentNameEn], 
+    [QuotationView].[ConsigneeAddressEn] AS [ConsigneeAddressEn], 
+    [QuotationView].[ConsigneePhoneNumber] AS [ConsigneePhoneNumber], 
+    [QuotationView].[ConsigneeFaxNumber] AS [ConsigneeFaxNumber], 
+    [QuotationView].[ConsigneeId] AS [ConsigneeId], 
+    [QuotationView].[NotifierId] AS [NotifierId], 
+    [QuotationView].[NotifierAddressEn] AS [NotifierAddressEn], 
+    [QuotationView].[NotifierPhoneNumber] AS [NotifierPhoneNumber], 
+    [QuotationView].[NotifierFaxNumber] AS [NotifierFaxNumber], 
+    [QuotationView].[ArriveDate] AS [ArriveDate], 
+    [QuotationView].[TransitTime] AS [TransitTime], 
+    [QuotationView].[FreeDays] AS [FreeDays], 
+    [QuotationView].[AgentId] AS [AgentId], 
+    [QuotationView].[CarrierId] AS [CarrierId], 
+    [QuotationView].[IncotermId] AS [IncotermId], 
+    [QuotationView].[VesselId] AS [VesselId], 
+    [QuotationView].[ShipperId] AS [ShipperId], 
+    [QuotationView].[ToPortId] AS [ToPortId], 
+    [QuotationView].[FromPortId] AS [FromPortId], 
+    [QuotationView].[CreateBy] AS [CreateBy], 
+    [QuotationView].[ShipperPhoneNumber] AS [ShipperPhoneNumber], 
+    [QuotationView].[ShipperFaxNumber] AS [ShipperFaxNumber], 
+    [QuotationView].[ShipperAddressEn] AS [ShipperAddressEn]
+    FROM [dbo].[QuotationView] AS [QuotationView]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="TruckingOrdersView" EntityType="Self.TruckingOrdersView" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [TruckingOrdersView].[TruckingOrderId] AS [TruckingOrderId], 
+    [TruckingOrdersView].[OperationId] AS [OperationId], 
+    [TruckingOrdersView].[OperationCode] AS [OperationCode], 
+    [TruckingOrdersView].[OrderFrom] AS [OrderFrom], 
+    [TruckingOrdersView].[BookingNo] AS [BookingNo], 
+    [TruckingOrdersView].[ShipperNameEn] AS [ShipperNameEn], 
+    [TruckingOrdersView].[ConsigneeNameEn] AS [ConsigneeNameEn], 
+    [TruckingOrdersView].[CarrierNameEn] AS [CarrierNameEn], 
+    [TruckingOrdersView].[FromAreaName] AS [FromAreaName], 
+    [TruckingOrdersView].[ToAreaName] AS [ToAreaName], 
+    [TruckingOrdersView].[FromCityName] AS [FromCityName], 
+    [TruckingOrdersView].[ToCityName] AS [ToCityName], 
+    [TruckingOrdersView].[NeedArriveDate] AS [NeedArriveDate], 
+    [TruckingOrdersView].[NeedArriveTime] AS [NeedArriveTime], 
+    [TruckingOrdersView].[CreateDate] AS [CreateDate], 
+    [TruckingOrdersView].[ContractorNameEn] AS [ContractorNameEn], 
+    [TruckingOrdersView].[DriverName] AS [DriverName], 
+    [TruckingOrdersView].[DriverMobile] AS [DriverMobile], 
+    [TruckingOrdersView].[ArriveDate] AS [ArriveDate], 
+    [TruckingOrdersView].[ArriveTime] AS [ArriveTime], 
+    [TruckingOrdersView].[LoadedDate] AS [LoadedDate], 
+    [TruckingOrdersView].[LoadedTime] AS [LoadedTime], 
+    [TruckingOrdersView].[Notes] AS [Notes], 
+    [TruckingOrdersView].[StatusName] AS [StatusName], 
+    [TruckingOrdersView].[StatusId] AS [StatusId], 
+    [TruckingOrdersView].[FromAreaId] AS [FromAreaId], 
+    [TruckingOrdersView].[ToAreaId] AS [ToAreaId], 
+    [TruckingOrdersView].[ShipperId] AS [ShipperId], 
+    [TruckingOrdersView].[CarrierId] AS [CarrierId], 
+    [TruckingOrdersView].[ConsigneeId] AS [ConsigneeId], 
+    [TruckingOrdersView].[FromCityId] AS [FromCityId], 
+    [TruckingOrdersView].[ToCityId] AS [ToCityId], 
+    [TruckingOrdersView].[ContractorId] AS [ContractorId], 
+    [TruckingOrdersView].[LeaveDate] AS [LeaveDate], 
+    [TruckingOrdersView].[LeaveTime] AS [LeaveTime], 
+    [TruckingOrdersView].[FollowUpDate] AS [FollowUpDate], 
+    [TruckingOrdersView].[CostCurrencyId] AS [CostCurrencyId], 
+    [TruckingOrdersView].[ShipFromAddress] AS [ShipFromAddress], 
+    [TruckingOrdersView].[HouseBillId] AS [HouseBillId], 
+    [TruckingOrdersView].[HouseBL] AS [HouseBL], 
+    [TruckingOrdersView].[TruckingOrderCode] AS [TruckingOrderCode], 
+    [TruckingOrdersView].[CreateBy] AS [CreateBy], 
+    [TruckingOrdersView].[AssignToUserId] AS [AssignToUserId], 
+    [TruckingOrdersView].[FollowUpBy] AS [FollowUpBy], 
+    [TruckingOrdersView].[ContactName] AS [ContactName], 
+    [TruckingOrdersView].[ContactPhone] AS [ContactPhone]
+    FROM [dbo].[TruckingOrdersView] AS [TruckingOrdersView]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_CustomClearanceDetail_Currency" Association="Self.FK_CustomClearanceDetail_Currency">
+      <End Role="Currency" EntitySet="Currency" />
+      <End Role="CustomClearanceDetail" EntitySet="CustomClearanceDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CustomClearanceDetail_CustomClearanceCostLib" Association="Self.FK_CustomClearanceDetail_CustomClearanceCostLib">
+      <End Role="CustomClearanceCostLib" EntitySet="CustomClearanceCostLib" />
+      <End Role="CustomClearanceDetail" EntitySet="CustomClearanceDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CustomClearanceDetail_CustomClearanceOrder" Association="Self.FK_CustomClearanceDetail_CustomClearanceOrder">
+      <End Role="CustomClearanceOrder" EntitySet="CustomClearanceOrder" />
+      <End Role="CustomClearanceDetail" EntitySet="CustomClearanceDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CustomClearanceOrder_HouseBill" Association="Self.FK_CustomClearanceOrder_HouseBill">
+      <End Role="HouseBill" EntitySet="HouseBill" />
+      <End Role="CustomClearanceOrder" EntitySet="CustomClearanceOrder" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CustomClearanceOrder_Operation" Association="Self.FK_CustomClearanceOrder_Operation">
+      <End Role="Operation" EntitySet="Operation" />
+      <End Role="CustomClearanceOrder" EntitySet="CustomClearanceOrder" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HouseBill_Currency" Association="Self.FK_HouseBill_Currency">
+      <End Role="Currency" EntitySet="Currency" />
+      <End Role="HouseBill" EntitySet="HouseBill" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HouseBill_Currency1" Association="Self.FK_HouseBill_Currency1">
+      <End Role="Currency" EntitySet="Currency" />
+      <End Role="HouseBill" EntitySet="HouseBill" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HouseBill_StatusLib" Association="Self.FK_HouseBill_StatusLib">
+      <End Role="StatusLib" EntitySet="StatusLib" />
+      <End Role="HouseBill" EntitySet="HouseBill" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Operation_Currency" Association="Self.FK_Operation_Currency">
+      <End Role="Currency" EntitySet="Currency" />
+      <End Role="Operation" EntitySet="Operation" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Operation_Currency1" Association="Self.FK_Operation_Currency1">
+      <End Role="Currency" EntitySet="Currency" />
+      <End Role="Operation" EntitySet="Operation" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Operation_Currency2" Association="Self.FK_Operation_Currency2">
+      <End Role="Currency" EntitySet="Currency" />
+      <End Role="Operation" EntitySet="Operation" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Operation_Quotation" Association="Self.FK_Operation_Quotation">
+      <End Role="Quotation" EntitySet="Quotation" />
+      <End Role="Operation" EntitySet="Operation" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Operation_StatusLib" Association="Self.FK_Operation_StatusLib">
+      <End Role="StatusLib" EntitySet="StatusLib" />
+      <End Role="Operation" EntitySet="Operation" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OperationCost_Currency" Association="Self.FK_OperationCost_Currency">
+      <End Role="Currency" EntitySet="Currency" />
+      <End Role="OperationCost" EntitySet="OperationCost" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OperationCost_CurrencySelling" Association="Self.FK_OperationCost_CurrencySelling">
+      <End Role="Currency" EntitySet="Currency" />
+      <End Role="OperationCost" EntitySet="OperationCost" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OperationCost_HouseBill" Association="Self.FK_OperationCost_HouseBill">
+      <End Role="HouseBill" EntitySet="HouseBill" />
+      <End Role="OperationCost" EntitySet="OperationCost" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OperationCost_Operation" Association="Self.FK_OperationCost_Operation">
+      <End Role="Operation" EntitySet="Operation" />
+      <End Role="OperationCost" EntitySet="OperationCost" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OperationCost_OperationCostLib" Association="Self.FK_OperationCost_OperationCostLib">
+      <End Role="OperationCostLib" EntitySet="OperationCostLib" />
+      <End Role="OperationCost" EntitySet="OperationCost" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Quotation_Currency" Association="Self.FK_Quotation_Currency">
+      <End Role="Currency" EntitySet="Currency" />
+      <End Role="Quotation" EntitySet="Quotation" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Quotation_Currency1" Association="Self.FK_Quotation_Currency1">
+      <End Role="Currency" EntitySet="Currency" />
+      <End Role="Quotation" EntitySet="Quotation" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Quotation_Currency2" Association="Self.FK_Quotation_Currency2">
+      <End Role="Currency" EntitySet="Currency" />
+      <End Role="Quotation" EntitySet="Quotation" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Quotation_Currency3" Association="Self.FK_Quotation_Currency3">
+      <End Role="Currency" EntitySet="Currency" />
+      <End Role="Quotation" EntitySet="Quotation" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Quotation_StatusLib" Association="Self.FK_Quotation_StatusLib">
+      <End Role="StatusLib" EntitySet="StatusLib" />
+      <End Role="Quotation" EntitySet="Quotation" />
+    </AssociationSet>
+    <AssociationSet Name="FK_QuotationContainer_Quotation" Association="Self.FK_QuotationContainer_Quotation">
+      <End Role="Quotation" EntitySet="Quotation" />
+      <End Role="QuotationContainer" EntitySet="QuotationContainer" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

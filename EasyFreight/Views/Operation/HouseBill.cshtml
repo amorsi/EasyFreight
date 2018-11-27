@@ -1,0 +1,203 @@
+﻿@model EasyFreight.Models.OperationView
+
+@{
+    ViewBag.Title = "HouseBill";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="@Url.Content("~/assets/vendor/bootstrap-timepicker/css/bootstrap-timepicker.css")" />
+
+<header class="page-header">
+    <h2>Process @ViewBag.OperationType</h2>
+
+    <div class="right-wrapper pull-right">
+        <ol class="breadcrumbs">
+            <li>
+                <a href="@Url.Content("~/Home/Index")">
+                    <i class="fa fa-home"></i>
+                </a>
+            </li>
+            <li><span>@ViewBag.OperationType</span></li>
+            <li><span>Process @ViewBag.OperationType</span></li>
+        </ol>
+        <a class="sidebar-right-toggle" data-open="sidebar-right"><i class="fa fa-chevron-left"></i></a>
+    </div>
+</header>
+<section class="panel">
+    <div class="panel-body">
+        <div class="col-md-12">
+            <div class="tabs tabs-primary">
+                <ul class="nav nav-tabs col-md-11">
+                    <li class="active">
+                        <a data-toggle="tab" href="#bol" aria-expanded="true">Bill of lading</a>
+                    </li>
+                    <li class="">
+                        <a data-toggle="tab" id="hblink" href="#hb" aria-expanded="false">House Bill</a>
+                    </li>
+                    <li class="">
+                        <a data-toggle="tab" id="trucklink" href="#truck" aria-expanded="false">Trucking Order</a>
+                    </li>
+                    <li class="">
+                        <a data-toggle="tab" id="cclink" href="#cs" aria-expanded="false">Custom Clearance Order</a>
+                    </li>
+                </ul>
+                @if (Model.IsConsolidation)
+                {
+                    <i title="Consolidation" class="fa fa-users fa-3x pull-right"></i>
+                }
+                else
+                {
+                    <i title="Single Client" class="fa fa-user fa-3x pull-right"></i>
+                }
+                <div class="tab-content col-md-12">
+                    <div class="tab-pane active" id="bol"> 
+                        <div class="btn-group btn-group-justified0">
+                        <a class="editop btn btn-primary" href="javascript:void(0)"><i class="fa fa-pencil"></i>Edit</a>
+                        <a class="shippingdeclink btn btn-primary" href="javascript:void(0)" title="Shipping Declaration" id="@Model.OperationId" optype="@ViewBag.OperationType"><i class="fa fa-file-text"></i>  Shipping Decl.</a>
+                        <a class="oper_cost btn btn-primary" href="javascript:void(0)" id="@Model.OperationId"  ><i class="fa fa-usd" ></i> Operation cost</a>
+                            @if (Model.StatusId > 2)
+                            { 
+                        <a class="aStatus btn btn-success" href="javascript:void(0)"  ><i class="fa fa-cog" ></i> Status @Model.StatusName  </a>}
+                            else
+                            { <a class="cancelOp btn btn-info" href="javascript:void(0)" id="@Model.OperationId"  ><i class="fa fa-lock" ></i> Close Operaion </a>
+                            <label class="aStatus btn btn-default"    ><i class="fa fa-cog" ></i> Status @Model.StatusName  </label>}
+                          
+
+                        </div> <br /><br />
+                        @{Html.RenderPartial("~/Views/Operation/_MoreDetails.cshtml", Model);}
+                    </div>
+                    <div class="tab-pane" id="hb">
+                    </div>
+                    <div class="tab-pane" id="truck">
+
+                    </div>
+                    <div class="tab-pane" id="cs">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        @Html.Hidden("oprId", Model.OperationId)
+        @Html.Hidden("oprOrderFrom", Model.OrderFrom)
+        <input type="hidden" name="hbcount" id="hbcount" value="@ViewBag.HBCount">
+         
+
+    </div>
+
+</section>
+
+<div id="modalAnim" class="modal-block modal-block-lg mfp-hide">
+    <section class="panel">
+        <header class="panel-heading">
+            <div class="panel-actions">
+                <button class="modal-dismiss" data-dismiss="modal"><i class="fa fa-times"></i></button>
+            </div>
+            <h2 id="modalheader" class="panel-title"></h2>
+        </header>
+        <div class="panel-body">
+            <div class="modal-wrapper">
+                <div id="ModalContent" class="modal-text">
+                </div>
+            </div>
+        </div>
+        <footer class="panel-footer">
+            <div class="row">
+                <div class="col-md-12 text-right">
+                    <a id="printtrucking" class="btn btn-info" role="button" href="@Url.Action("PrintDetails", "Trucking")">Print</a>
+                    <button class="btn btn-default modal-dismiss" data-dismiss="modal">Close</button>
+
+                </div>
+            </div>
+        </footer>
+    </section>
+</div>
+
+<div id="shippingdeclmodal" class="modal-block modal-block-lg mfp-hide">
+    <section class="panel">
+        <header class="panel-heading">
+            <h2 class="panel-title">Shipping Declaration</h2>
+            <div class="panel-actions">
+                <button class="modal-dismiss" data-dismiss="modal"><i class="fa fa-times"></i></button>
+            </div>
+        </header>
+        <div class="panel-body">
+            <div class="modal-wrapper">
+                <div id="shippingdeclcontent" class="modal-text">
+                </div>
+            </div>
+        </div>
+        <footer class="panel-footer">
+            <div class="row">
+                <div class="col-md-12 text-right">
+                    <a class="btn btn-info" role="button">Print</a>
+                    <button class="btn btn-default modal-dismiss" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </footer>
+    </section>
+</div>
+
+
+<input type="hidden" id="IdToClose" />
+<input type="hidden" id="ModelType" />
+<input type="hidden" id="operIdToClose" />
+ <input type="hidden" id="orderFrom" name="orderFrom" value="@ViewBag.OrderFrom" />
+<div id="modelClose" class="modal-block mfp-hide">
+    <section class="panel">
+        <header class="panel-heading">
+            <h2 class="panel-title">Are you sure?</h2>
+            <div class="panel-actions">
+                <button class="modal-dismiss" data-dismiss="modal"><i class="fa fa-times"></i></button>
+            </div>
+        </header>
+        <div class="panel-body">
+            <div class="modal-wrapper">
+                <div class="modal-text">
+                    <p id="p1"></p>
+                    <p id="p2"></p>
+                </div>
+            </div>
+        </div>
+        <footer class="panel-footer">
+            <div class="row">
+                <div class="col-md-12 text-right">
+                    <button id="closeHbConfirm" class="btn btn-primary modal-confirm">Confirm</button>
+                    <button id="closeHbCancel" class="btn btn-default modal-dismiss">Cancel</button>
+                </div>
+            </div>
+        </footer>
+    </section>
+</div>
+
+<div id="modelCloseOp" class="modal-block modal-header-color modal-block-info mfp-hide">
+    <section class="panel">
+        <header class="panel-heading">
+            <h2 class="panel-title">Are you sure?</h2>
+            <div class="panel-actions">
+                <button class="modal-dismiss" data-dismiss="modal"><i class="fa fa-times"></i></button>
+            </div>
+        </header>
+        <div class="panel-body">
+            <div class="modal-wrapper">
+                <div class="modal-text">
+                    <p>Are you sure that you want to close this Operation and all related House Bill?</p>
+                    <p>You will be not able to edit the Operation or any HB Info and cost details</p>
+                </div>
+            </div>
+        </div>
+        <footer class="panel-footer">
+            <div class="row">
+                <div class="col-md-12 text-right">
+                    <button id="closeConfirmOP" class="btn btn-info modal-confirm">Confirm</button>
+                    <button id="closeCancel" class="btn btn-default modal-dismiss">Cancel</button>
+                </div>
+            </div>
+        </footer>
+    </section>
+</div>
+
+@section scripts{
+    <script src="@Url.Content("~/assets/vendor/bootstrap-timepicker/js/bootstrap-timepicker.js")"></script>
+    <script src="@Url.Content("~/Scripts/Operation/HouseBill.js")"></script>
+
+}

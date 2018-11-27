@@ -1,0 +1,110 @@
+﻿@model EasyFreight.ViewModel.CashInVm
+
+@{
+    string inOrOut = Model.CashType == "cashin" ? "In" : "out";
+    string suppOrCus = Model.CashType == "cashin" ? "Customer" : "Supplier";
+}
+
+
+<section class="panel">
+    <div class="panel-body" >
+        <div class="invoice">
+            <header class="clearfix">
+                <div class="row">
+                    <div class="col-sm-4 col-xs-4 mt-md">
+                        <h3 class="h3 mt-none mb-sm text-dark">Cash @inOrOut Receipt:</h3>
+                    </div>
+
+                    <div class="col-sm-2 col-xs-2 mt-md">
+                        <h3 class="h3 mt-none mb-sm text-dark text-bold"> @Model.ReceiptCode</h3>
+                    </div>
+
+                    <div class="col-sm-3 col-xs-3 mt-md PaymentTerm">
+                        <h3 class="mt-none mb-sm text-dark"> Payment Term:</h3>
+                    </div>
+                    <div class="col-sm-3 col-xs-3 mt-md PaymentTerm">
+                        <h3 class="h3 mt-none mb-sm text-dark text-bold"> @Model.PaymentTermName</h3>
+                    </div>
+
+                </div>
+            </header>
+            <div class="bill-info">
+                <div class="row">
+
+                    <div class="col-md-6 col-xs-6 form-group">
+                        <span class="text-dark">Receipt Date:</span>
+                        <span class="value">@Model.ReceiptDate.Value.ToString("dd/MM/yyyy")</span>
+                    </div>
+                    <div class="col-sm-6 col-xs-6 form-group">
+                        <span class="text-dark">Receipt Amount:</span>
+                        <span class="value"> @Model.ReceiptAmount @Model.CurrencySign </span>
+                    </div>
+                </div>
+                <div class="row" style="padding-bottom: 10px">
+                    <div class="col-md-12 col-xs-12">
+                        <span class="text-dark">@suppOrCus Name:</span>
+                        <span class="value">@Model.CustomerName</span>
+                    </div>
+                </div>
+                @if (!string.IsNullOrEmpty(Model.InvCodeListString))
+                {
+                    <div class="row" style="padding-bottom: 15px">
+                        <div class="col-md-12 col-xs-12">
+                            <span class="text-dark">For Invoice(s):</span>
+                            <span class="value">@Model.InvCodeListString</span>
+                        </div>
+
+                    </div>
+                }             
+                <div class="row" style="padding-bottom: 15px">
+                    <div class="col-md-12 col-xs-12">
+                        <span class="text-dark">Notes:</span>
+                        <span class="value">@Model.Notes</span>
+                    </div>
+
+                </div>
+                @if (Model.PaymentTermId == (byte)PaymentTermEnum.BankCashDeposit)
+                {
+                    <div class="row" id="bankdetails" style="margin-top:15px;margin-bottom:15px;">
+                        <div class="col-sm-6 col-xs-6 form-group">
+                            <span class="text-dark">Bank Name:</span>
+                            <span id="bankname" class="value">@Model.BankDetailsVm.BankNameEn</span>
+                        </div>
+
+                        <div class="col-sm-6 col-xs-6 form-group">
+                            <span class="text-dark">Bank Address:</span>
+                            <span id="bankaddress" class="value">@Model.BankDetailsVm.BankAddressEn</span>
+                        </div>
+
+                        <div class="col-sm-6 col-xs-6 form-group">
+                            <span class="text-dark">Account Name:</span>
+                            <span id="accountname" class="value">@Model.BankDetailsVm.AccountName</span>
+                        </div>
+
+                        <div class="col-sm-6 col-xs-6 form-group">
+                            <span class="text-dark">Account Number:</span>
+                            <span id="accountnum" class="value">@Model.BankDetailsVm.AccountNumber</span>
+                        </div>
+
+                    </div>
+                }
+                else if (Model.PaymentTermId == (byte)PaymentTermEnum.Check)
+                {
+                    <div class="row" id="bankdetails" style="margin-top:15px;margin-bottom:15px;">
+                        <div class="col-sm-6 col-xs-6 form-group">
+                            <span class="text-dark">Check Number:</span>
+                            <span id="bankname" class="value">@Model.CashInReceiptChecks.FirstOrDefault().CheckNumber</span>
+                        </div>
+
+                        <div class="col-sm-6 col-xs-6 form-group">
+                            <span class="text-dark">Check Due Date:</span>
+                            <span id="bankaddress" class="value">@Model.CashInReceiptChecks.FirstOrDefault().CheckDueDate.Value.ToString("dd/MM/yyyy")</span>
+                        </div>
+                    </div>
+                }
+
+            </div>
+
+        </div>
+    </div>
+</section>

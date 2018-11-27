@@ -1,0 +1,275 @@
+﻿@model EasyFreight.Models.HouseBillView
+@{
+    Layout = null;
+    ViewBag.Title = "Pre-Alert";
+    int isNotifier = (int)ViewBag.isNotifie ;  
+ }
+
+<!DOCTYPE html> 
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>_PrintLayout</title>
+    <link rel="stylesheet" href="@Url.Content("~/assets/vendor/bootstrap/css/bootstrap.css")" />
+    <link rel="stylesheet" href="@Url.Content("~/Content/theme-custom.css")" />
+    <link rel="stylesheet" href="@Url.Content("~/assets/vendor/font-awesome/css/font-awesome.min.css")" />
+     <style>
+   .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+    border:  none;
+     
+} 
+    
+</style>
+
+</head>
+<body>
+    <div id="wrap">
+        <div id="header" class="col-xs-12">
+            <div class="col-xs-6">
+                <img src="@Url.Content("~/images/EnglishLogo.png")" height="100" width="250" />
+            </div>
+            <div class="col-xs-6" style="text-align: right;">
+                <img src="@Url.Content("~/images/ArabicLogo.png")" height="100" width="250" />
+            </div>
+        </div>
+
+
+        <div id="main" style="direction: ltr">
+            <div class="modal-block modal-block-lg" style="min-height: 1200px; font-size: 16px">
+                <div class="col-sm-12 col-xs-12 form-group ">
+                    <h2 class="text-dark text-center">PRE-ALERT @(Model.CarrierType == 1 ? "SEA" : "AIR")</h2>
+                </div> 
+                <div class="col-md-1"></div>
+                <div class="col-md-12 form-group ">
+                    <table class="table">
+                        <tr>
+                            <td class="col-md-1 " style="text-align: right;">Date :</td>
+                            <td class="col-md-11"><span class="text-dark">@Model.OperationDate.Value.ToString("dd/MM/yyyy")</span></td>
+                        </tr>
+
+                         <tr>
+                            <td class="col-md-1 " style="text-align: right;">From :</td>
+                            <td class="col-md-11"><span class="text-dark">A.M CARGO FOR WORLD TRANSPORTATION</span></td>
+                        </tr>
+
+                         <tr>
+                            <td class="col-md-1 " style="text-align: right;">TO :</td>
+                            <td class="col-md-11"><span class="text-dark">@(isNotifier == 0 ? Model.ConsigneeNameEn : Model.NotifierNameEn) </span></td>
+                        </tr>
+                         <tr>
+                            <td class="col-md-1 " style="text-align: right;">ATTN :</td>
+                            <td class="col-md-11">Import Department<span class="text-dark"> </span></td>
+                        </tr>
+                         <tr>
+                            <td class="col-md-1 " style="text-align: right;">ETD :</td>
+                            <td class="col-md-11"><span class="text-dark">@(Model.DateOfDeparture != null ? Model.DateOfDeparture.Value.ToString("dd/MM/yyyy"):"") </span></td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-1 " style="text-align: right;">ETA :</td>
+                            <td class="col-md-11"><span class="text-dark">@(Model.ArriveDate != null ? Model.ArriveDate.Value.ToString("dd/MM/yyyy") : "") </span></td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-1 "> </td>
+                            <td class="col-md-11">Please kindly find the enclosed documents as per listed below :<span class="text-dark"></span></td>
+                        </tr>
+                        
+                         <tr>
+                            <td class="col-md-1 "> </td>
+                            <td class="col-md-11 "   >  
+                                                        
+                            <table class="table" style=" width:30% ;margin-left: 70%;">
+                                <thead>
+                                    <tr style="text-align:left;">
+                                        <th>Document</th>
+                                        <th>Remarks</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                      <tr style="text-align:left;">
+                                        <td>AWBL</td>
+                                        <td>1</td>
+                                    </tr>
+                                     <tr style="text-align:left;">
+                                        <td>Notice</td>
+                                        <td>1</td>
+                                    </tr>
+                                     <tr style="text-align:left;">
+                                        <td>Others</td>
+                                        <td>1</td>
+                                    </tr>
+                                     <tr style="text-align:left;">
+                                         <td colspan="2">Total Pages: (3) 
+                                         </td>
+                                     </tr>
+                                </tbody>
+                            </table>
+                            
+                       
+
+                            </td>
+                        </tr>
+                         <tr>
+                            <td class="col-md-1 "> </td>
+                            <td class="col-md-11"> <span class="text-dark"></span></td>
+                        </tr>
+
+                        </table>
+                     <div class="col-md-12 form-group">
+                        <span class="text-dark">Thanks and Best Regards,</span><br />
+                         <span class="text-dark">Opreation Dept.</span>
+                </div>
+
+                    
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="footer">
+        @{Html.RenderAction("GetPrintFooter", "Home");}
+    </div>
+
+  @*  page 2*@
+     <div id="wrap">
+        <div id="header" class="col-xs-12">
+            <div class="col-xs-6">
+                <img src="@Url.Content("~/images/EnglishLogo.png")" height="100" width="250" />
+            </div>
+            <div class="col-xs-6" style="text-align: right;">
+                <img src="@Url.Content("~/images/ArabicLogo.png")" height="100" width="250" />
+            </div>
+        </div>
+
+                 <div id="main" style="direction: rtl">
+            <div class="modal-block modal-block-lg" style="min-height: 1200px; font-size: 16px;font-weight:bold;">
+
+                 <div class="col-sm-12 col-xs-12 form-group ">
+                    <h2 class="text-dark text-center"> <br /></h2>
+                </div> 
+                <div class="col-md-1"></div>
+
+
+                <div class="col-md-12 form-group ">
+                    <table class="table" style="width:60%" >
+                        <tr>
+                            <td class="col-md-2 col-sm-2 col-lg-2  " style="text-align: left;">الاسكندرية في :</td>
+                            <td class="col-md-10 col-sm-10 col-lg-10 " style="text-align:right"><span class="text-dark">@Model.OperationDate.Value.ToString("dd/MM/yyyy")</span></td>
+                            
+                        </tr> 
+                         <tr>
+                            <td class="col-md-1 " style="text-align: left;">السادة/ شركة :</td>
+                            <td class="col-md-11" style="text-align:right"><span class="text-dark">@(isNotifier == 0 ? Model.ConsigneeNameEn : Model.NotifierNameEn) </span></td>
+                        </tr>
+                         <tr>
+                            <td class="col-md-1 " style="text-align: left;">عناية :</td>
+                            <td class="col-md-11" style="text-align:right">Import Department<span class="text-dark"> </span></td>
+                        </tr>
+                         <tr>
+                            <td class="col-md-1 " style="text-align: left;">الموضوع :</td>
+                            <td class="col-md-11" style="text-align:right"><span class="text-dark"> رسالة وارد @(Model.CarrierType == 1 ? " بحري " : " طيران ")
+                                @Model.FromPort </span></td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-1 " style="text-align: left;">بوليصة رقم :</td>
+                            <td class="col-md-11" style="text-align:right"><span class="text-dark">@ViewBag.houseBL </span></td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-1 " colspan="2">تحية طيبة وبعد ؛؛؛؛؛  </td>
+                            
+                        </tr>
+                        
+                         <tr>
+                            <td class="col-md-1 " colspan="2">نحيطكم علما بأنه سترد لكم رسالة واردة من  @Model.FromPort
+                                <br />
+                                متوقع الوصول @(Model.ArriveDate != null ? Model.ArriveDate.Value.ToString("dd/MM/yyyy") : "") بيانها كالتالي   </td>
+                            
+                        </tr>
+                        
+                        </table> 
+                    <table class="table" >
+                         <tr>
+                            <td class="col-md-1 " colspan="2">
+                                <table class="table" style="direction:ltr;  ">
+
+                                    <tbody>
+                                        <tr >
+                                            <td class="col-md-1 " style="text-align: right;">Shipper :</td>
+                                            <td style="text-align: left;">@Model.ShipperNameEn</td>
+                                        </tr>
+                                        <tr >
+                                            <td class="col-md-1 " style="text-align: right;">Cnee :</td>
+                                            <td style="text-align: left;">@Model.ConsigneeNameEn</td>
+                                        </tr>
+                                        <tr >
+                                            <td class="col-md-1 " style="text-align: right;">Weight :</td>
+                                            <td style="text-align: left;">@Model.NetWeight KGS   
+                                                @(Model.CarrierType == 1 ? "": ("Chargable Weight : "+Model.GrossWeight.Value.ToString()+ " KGS"))</td>
+                                        </tr>
+                                        
+                                    </tbody>
+                                </table>
+
+                            </td>
+                        </tr>
+
+                         <tr>
+                            <td class="col-md-1 " colspan="2">
+                                لذا نرجو من سيادتكم إرسال مندوبكم لاستلام مستندات الشحن الخاصة بكم
+                                @((!Model.IsPrepaid.Value && 
+                                ((Model.CollectedFreightCost.HasValue&&Model.CollectedFreightCost.Value >0) ||
+                                ( Model.CollectedThcCost.HasValue&&Model.CollectedThcCost.Value > 0))) ? " وسداد المبلغ التالي :" : "")
+                            </td> 
+                        </tr>
+                       @if(!Model.IsPrepaid.Value)
+                       {
+                           if (Model.CollectedFreightCost.HasValue)
+                           {
+                               if (Model.CollectedFreightCost.Value > 0)
+                           {
+                            <tr> 
+                            <td class="col-md-1 " > نولون شحن </td>
+                             <td class="col-md-11 " >@Model.CollectedFreightCost.Value  @(Model.FreighCurrencyId == 1 ? "EGP" : Model.FreighCurrencyId == 2 ? "USD" : "EUR")</td>
+                            </tr>
+                         }
+                         }
+                           if (Model.CollectedThcCost.HasValue)
+                           {
+                               if (Model.CollectedThcCost.Value > 0)
+                           {
+                            <tr> 
+                            <td class="col-md-1 " colspan="2"> مصاريف ادارية وخطاب تنازل  
+                              @Model.CollectedThcCost.Value  @(Model.ThcCurrencyId == 1 ? "EGP" : Model.ThcCurrencyId == 2 ? "USD" : "EUR")</td>
+                            </tr>
+                         } 
+                         }
+                       }
+
+                         <tr>
+                            <td class="col-md-1" colspan="2" style="direction:ltr;text-align:center  ">
+                            ،،،،،،،،،  وتفضلوا بقبول فائق الاحترام  
+                            </td> 
+                        </tr>
+
+                         <tr>
+                             <td class="col-md-1" colspan="2" style="direction:ltr;text-align:left  ">
+                              شركة ايه ام كارجو للنقل الدولي
+                                
+                            </td> 
+                        </tr>
+
+
+                        </table> 
+                </div>
+            </div>
+        </div>
+
+ 
+    </div>
+
+    <div id="footer">
+        @{Html.RenderAction("GetPrintFooter", "Home");}
+    </div>
+</body>
+</html>

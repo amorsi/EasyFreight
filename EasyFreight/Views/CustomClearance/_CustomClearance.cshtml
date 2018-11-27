@@ -1,0 +1,158 @@
+﻿@model EasyFreight.Models.HouseBillView
+
+@{
+    EasyFreight.ViewModel.CustomClearVm CustomClearObj = ViewBag.customClearObj;
+}
+
+<section id="ccsection" class="panel panel-primary">
+    <header class="panel-heading">
+        <div class="panel-actions">
+            <a href="#"></a>
+            <a href="#"></a>
+        </div>
+        <h2 class="panel-title">Operation Details</h2>
+    </header>
+    <div class="panel-body">
+        <div class="col-sm-6 form-group">
+            <label class="col-md-5 control-label">Operation Code</label>
+            <div class="col-md-7">
+                <span class="text-dark">@Model.OperationCode</span>
+            </div>
+        </div>
+        <div class="col-sm-6 form-group">
+            <label class="col-md-5 control-label">Operation Date</label>
+            <div class="col-md-7">
+                <span class="text-dark">
+                    @Model.OperationDate.Value.ToString("dd/MM/yyyy")
+                </span>
+            </div>
+        </div>
+        <div class="col-sm-6 form-group">
+            <label class="col-md-5 control-label">Department</label>
+            <div class="col-md-7">
+                @if (Model.OrderFrom == 1)
+                {
+                    <span class="text-dark">Export</span>
+                }
+                else
+                {
+                    <span class="text-dark">Import</span>
+                }
+
+            </div>
+        </div>
+        <div class="col-sm-6 form-group">
+            <label class="col-md-5 control-label">Shipper</label>
+            <div class="col-md-7">
+                <span class="text-dark">@Model.ShipperNameEn</span>
+            </div>
+        </div>
+        <div class="col-sm-6 form-group">
+            <label class="col-md-5 control-label">Consignee</label>
+            <div class="col-md-7">
+                <span class="text-dark">@Model.ConsigneeNameEn</span>
+            </div>
+        </div>
+        <div class="col-sm-6 form-group">
+            <label class="col-md-5 control-label">Carrier</label>
+            <div class="col-md-7">
+                <span class="text-dark">@Model.CarrierNameEn</span>
+            </div>
+        </div>
+        <div class="col-sm-6 form-group">
+            <label class="col-md-5 control-label">Port of loading</label>
+            <div class="col-md-7">
+                <span class="text-dark">@Model.FromPort</span>
+            </div>
+        </div>
+        <div class="col-sm-6 form-group">
+            <label class="col-md-5 control-label">Port of discharge</label>
+            <div class="col-md-7">
+                <span class="text-dark">@Model.ToPort</span>
+            </div>
+        </div>
+        <div class="col-sm-6 form-group">
+            <label class="col-md-5 control-label">Containers</label>
+            <div class="col-md-7">
+                <span class="text-dark">@ViewBag.ContainerSummary</span>
+            </div>
+        </div>
+        <div class="col-sm-12 form-group">
+            <label class="col-md-3 control-label">Description of goods</label>
+            <div class="col-md-9">
+                <span class="text-dark">@Model.GoodsDescription</span>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="panel">
+    <header class="panel-heading">
+        <div class="panel-actions">
+            <a href="#"></a>
+            <a href="#"></a>
+        </div>
+        <h2 class="panel-title">Custom Clearance Details</h2>
+    </header>
+    <div class="panel-body">
+        <form id="ccform">
+            @Html.AntiForgeryToken()
+            <div class="col-md-6 form-group">
+                <label class="col-sm-4 control-label" for="w4-username">Need Arrive Date<span class="required">*</span></label>
+                <div class="col-sm-8">
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </span>
+                        <input type="text"
+                               value="@(CustomClearObj.NeedArriveDate == null ? "" : CustomClearObj.NeedArriveDate.Value.ToString("dd/MM/yyyy"))"
+                               class="form-control date" required
+                               data-date-format="dd/MM/yyyy" name="NeedArriveDate"
+                               data-plugin-datepicker=""
+                                >
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-md-6 form-group">
+                <label class="col-sm-4 control-label" for="w4-username">Need Arrived Time </label>
+                <div class="col-sm-8">
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="fa fa-clock-o"></i>
+                        </span>
+                        <input id="ArriveTime" name="NeedArriveTime" type="text" required class="form-control time24"
+                               value="@CustomClearObj.NeedArriveTime.ToString()" />
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 form-group">
+                <label class="col-sm-2 control-label" for="w4-username">Notes</label>
+                <div class="col-sm-6">
+
+                    <textarea id="Notes" name="Notes" type="text" class="form-control"
+                         rows="5">@CustomClearObj.Notes</textarea>
+
+                </div>
+<div class="col-sm-4"></div>
+            </div>
+
+            @Html.Hidden("OperationId", Model.OperationId)
+            @Html.Hidden("HouseBillId", CustomClearObj.HouseBillId)
+            @Html.HiddenFor(x => x.StatusId)
+            @Html.HiddenFor(x => x.CreateDate)
+            @Html.HiddenFor(x => x.CreateBy)
+            <input type="hidden" name="CCId" value="@CustomClearObj.CCId" />
+        </form>
+    </div>
+    <footer class="panel-footer">
+        <div id="SaveBtnDiv" class="row">
+            <div class="col-sm-9 col-sm-offset-3">
+                <input type="button" id="SaveCcForm" class="btn btn-primary" value="Submit" />
+                <a id="ResetCCForm" href="javascript:void(0)" class="btn btn-default">Reset</a>
+            </div>
+        </div>
+    </footer>
+</section>
+

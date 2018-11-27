@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ReportsAccounting.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <Function Name="AccRpt_TopViewBalance" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="FromDate" Type="datetime" Mode="In" />
+          <Parameter Name="ToDate" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="GetAccountDetailsByAccId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="AccId" Type="varchar" Mode="In" />
+          <Parameter Name="FromDate" Type="nvarchar" Mode="In" />
+          <Parameter Name="ToDate" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="GetAccountSummaryByParentAccId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ParentAccId" Type="varchar" Mode="In" />
+          <Parameter Name="FromDate" Type="datetime" Mode="In" />
+          <Parameter Name="ToDate" Type="datetime" Mode="In" />
+        </Function>
+        <EntityContainer Name="ReportsAccountingStoreContainer" />
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ReportsAccounting" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="ReportsAccountingEntities" annotation:LazyLoadingEnabled="true" >
+          <FunctionImport Name="GetAccountSummaryByParentAccId" ReturnType="Collection(ReportsAccounting.GetAccountSummaryByParentAccId_Result)">
+            <Parameter Name="ParentAccId" Mode="In" Type="String" />
+            <Parameter Name="FromDate" Mode="In" Type="DateTime" />
+            <Parameter Name="ToDate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="GetAccountDetailsByAccId" ReturnType="Collection(ReportsAccounting.GetAccountDetailsByAccId_Result)">
+            <Parameter Name="AccId" Mode="In" Type="String" />
+            <Parameter Name="FromDate" Mode="In" Type="String" />
+            <Parameter Name="ToDate" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="AccRpt_TopViewBalance2" ReturnType="Collection(ReportsAccounting.AccRpt_TopViewBalance2_Result)">
+            <Parameter Name="FromDate" Mode="In" Type="DateTime" />
+            <Parameter Name="ToDate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="GetAccountSummaryByParentAccId_Result">
+          <Property Type="String" Name="AccountId" Nullable="false" MaxLength="15" />
+          <Property Type="String" Name="AccountNameAr" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="AccountNameEn" Nullable="false" MaxLength="100" />
+          <Property Type="Decimal" Name="DebitAmout" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="Decimal" Name="CreditAmount" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="String" Name="CurrencySign" Nullable="false" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="GetAccountDetailsByAccId_Result">
+          <Property Type="String" Name="AccountId" Nullable="false" MaxLength="15" />
+          <Property Type="String" Name="AccountNameAr" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="AccountNameEn" Nullable="false" MaxLength="100" />
+          <Property Type="Decimal" Name="DebitAmount" Nullable="false" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="CreditAmount" Nullable="false" Precision="18" Scale="2" />
+          <Property Type="String" Name="CurrencySign" Nullable="false" MaxLength="10" />
+          <Property Type="DateTime" Name="CreateDate" Nullable="false" Precision="23" />
+          <Property Type="String" Name="CreateBy" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="TransactionName" Nullable="true" />
+          <Property Type="String" Name="TransactionNameAr" Nullable="true" />
+          <Property Type="String" Name="UserName" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="AccRpt_TopViewBalance2_Result">
+          <Property Type="String" Name="ParentAccountId" Nullable="true" MaxLength="15" />
+          <Property Type="String" Name="AccountNameEn" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="AccountNameAr" Nullable="true" MaxLength="100" />
+          <Property Type="Decimal" Name="EGP" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="Decimal" Name="USD" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="Decimal" Name="EUR" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="Decimal" Name="GBP" Nullable="true" Precision="38" Scale="2" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ReportsAccountingStoreContainer" CdmEntityContainer="ReportsAccountingEntities" >
+          <FunctionImportMapping FunctionImportName="GetAccountSummaryByParentAccId" FunctionName="ReportsAccounting.Store.GetAccountSummaryByParentAccId">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ReportsAccounting.GetAccountSummaryByParentAccId_Result">
+                <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+                <ScalarProperty Name="AccountNameAr" ColumnName="AccountNameAr" />
+                <ScalarProperty Name="AccountNameEn" ColumnName="AccountNameEn" />
+                <ScalarProperty Name="DebitAmout" ColumnName="DebitAmout" />
+                <ScalarProperty Name="CreditAmount" ColumnName="CreditAmount" />
+                <ScalarProperty Name="CurrencySign" ColumnName="CurrencySign" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetAccountDetailsByAccId" FunctionName="ReportsAccounting.Store.GetAccountDetailsByAccId">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ReportsAccounting.GetAccountDetailsByAccId_Result">
+                <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+                <ScalarProperty Name="AccountNameAr" ColumnName="AccountNameAr" />
+                <ScalarProperty Name="AccountNameEn" ColumnName="AccountNameEn" />
+                <ScalarProperty Name="DebitAmount" ColumnName="DebitAmount" />
+                <ScalarProperty Name="CreditAmount" ColumnName="CreditAmount" />
+                <ScalarProperty Name="CurrencySign" ColumnName="CurrencySign" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="TransactionName" ColumnName="TransactionName" />
+                <ScalarProperty Name="TransactionNameAr" ColumnName="TransactionNameAr" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="AccRpt_TopViewBalance2" FunctionName="ReportsAccounting.Store.AccRpt_TopViewBalance">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ReportsAccounting.AccRpt_TopViewBalance2_Result">
+                <ScalarProperty Name="ParentAccountId" ColumnName="ParentAccountId" />
+                <ScalarProperty Name="AccountNameEn" ColumnName="AccountNameEn" />
+                <ScalarProperty Name="AccountNameAr" ColumnName="AccountNameAr" />
+                <ScalarProperty Name="EGP" ColumnName="EGP" />
+                <ScalarProperty Name="USD" ColumnName="USD" />
+                <ScalarProperty Name="EUR" ColumnName="EUR" />
+                <ScalarProperty Name="GBP" ColumnName="GBP" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

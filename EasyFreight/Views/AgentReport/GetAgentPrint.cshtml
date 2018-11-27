@@ -1,0 +1,57 @@
+﻿@model List<EasyFreight.ViewModel.AgentVm > 
+ @{
+    Layout = "~/Views/Shared/_PrintLayout.cshtml";
+}
+<style>
+    .panel-title {
+    text-align: center;
+    font-size: 25px;
+    }
+</style>
+<div id="modalAnim" class="modal-block modal-block-lg">
+    <section class="panel">
+        <header class="panel-heading">
+            <h2 class="panel-title">Agents Report</h2>
+        </header>
+        <div class="panel-body">
+            <div class="modal-wrapper">
+                <div id="ModalContent" class="modal-text">
+                           <table class="table table-bordered table-striped mb-none" id="datatable-default">
+            <thead>
+                <tr>
+                    <th>Code</th>
+                    <th>Name</th>
+                    <th>Address</th>
+                    <th>Phone Number</th>
+                    <th>Email</th>
+                    <th>Website</th>
+                     
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr  id="@item.AgentId" class="gradeX">
+                        <td>@item.AgentCode</td>
+                        <td>@item.AgentNameEn</td>
+                        <td>@item.AgentAddressEn </td>
+                        <td>@item.PhoneNumber</td>
+                        <td>@item.Email</td>
+                        <td>@item.WebSite</td> 
+                    </tr>
+                }
+
+
+            </tbody>
+        </table>
+
+                </div>
+            </div>
+        </div>
+        <footer class="panel-footer">
+        </footer>
+    </section>
+</div>
+
+ 

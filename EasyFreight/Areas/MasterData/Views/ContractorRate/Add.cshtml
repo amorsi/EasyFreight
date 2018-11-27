@@ -1,0 +1,206 @@
+﻿@model EasyFreight.ViewModel.ContractorRateVm
+@{
+    ViewBag.Title = "Add";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<header class="page-header">
+    <h2>Add Contractor Rate</h2>
+
+    <div class="right-wrapper pull-right">
+        <ol class="breadcrumbs">
+            <li>
+                <a href="@Url.Content("~/Home/Index")">
+                    <i class="fa fa-home"></i>
+                </a>
+            </li>
+            <li><span>Master Data</span></li>
+            <li><span>Add Contractor Rate</span></li>
+        </ol>
+
+        <a class="sidebar-right-toggle" data-open="sidebar-right"><i class="fa fa-chevron-left"></i></a>
+    </div>
+</header>
+<div class="row">
+    <div class="col-lg-12">
+        <section class="panel">
+            
+            <div class="panel-body">
+                <form id="Form1">
+                    <div class="form-horizontal form-bordered">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="w4-username">Contractor <span class="required">*</span></label>
+                            <div class="col-sm-4">
+                                <select id="ContractorId" data-placeholder="Select Contractor" name="ContractorId" data-plugin-selecttwo
+                                    required class="form-control populate">
+                                    <option></option>
+                                    @foreach (var item in ViewBag.ContractorList)
+                                    {
+                                        if (item.Key == Model.ContractorId)
+                                        {
+                                        <option selected value="@item.Key">@item.Value</option>
+                                        }
+                                        else
+                                        { 
+                                        <option  value="@item.Key">@item.Value</option>
+                                        }
+
+                                    }
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="w4-username">Container Type <span class="required">*</span></label>
+                            <div class="col-sm-4">
+                                <select id="ContainerTypeId" name="ContainerTypeId" data-plugin-selecttwo
+                                    required class="form-control populate" data-placeholder="Select Container">
+                                    <option></option>
+                                    @foreach (var item in ViewBag.ContainerList)
+                                    {
+                                        if (item.Key == Model.ContainerTypeId)
+                                        {
+                                        <option selected value="@item.Key">@item.Value</option>
+                                        }
+                                        else
+                                        { 
+                                        <option  value="@item.Key">@item.Value</option>
+                                        }
+
+                                    }
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 form-group">
+                            <label class="col-sm-2 control-label">
+                            </label>
+
+                            <div class=" radio-custom radio-primary   checkbox-inline">
+                                <input type="radio" name="prepaidradio"  id="selectByArea"  
+                                    @((Model.FromAreaId == null && Model.FromCityId == 0) ? "checked" : (Model.FromAreaId == null ? "" : "checked"))>
+                                <label for="radioExample2">By Area </label>
+                            </div>
+
+                            <div class=" radio-custom radio-primary checkbox-inline">
+                                <input type="radio" name="prepaidradio" id="selectByCity" 
+                                    @((Model.FromAreaId == null && Model.FromCityId == 0) ? "" : (Model.FromAreaId == null ? "checked" : ""))>
+                                <label for="radioExample2">By City </label>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 form-group" id="divByArea" style='@((Model.FromAreaId == null && Model.FromCityId == 0) ? "display: block;" : (Model.FromAreaId == null ? "display: none" : "display:block ;"))'>
+                            <div class="col-md-6 form-group">
+
+                                <label class="col-sm-4 control-label">From Area <span class="required">*</span></label>
+                                <div class="col-sm-8">
+                                    @Html.Partial("~/Views/Shared/_AreaGrouped.cshtml",
+                                    ViewData["AreaList"] as List<EasyFreight.ViewModel.CityAreaList>,
+                                    new ViewDataDictionary { { "ddlName", "FromAreaId" }, 
+                                    { "selectedVal", @Model.FromAreaId },{"required","required"} })
+                                </div>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label class="col-sm-4 control-label">To Area <span class="required">*</span></label>
+                                <div class="col-sm-8">
+                                    @Html.Partial("~/Views/Shared/_AreaGrouped.cshtml",
+                                    ViewData["AreaList"] as List<EasyFreight.ViewModel.CityAreaList>,
+                                    new ViewDataDictionary { { "ddlName", "ToAreaId" }, 
+                                    { "selectedVal", @Model.ToAreaId },{"required","required"} })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 form-group" id="divByCity" style='@((Model.FromAreaId == null && Model.FromCityId == 0) ? "display: none;" : (Model.FromAreaId == null ? "display: block" : "display:none ;"))'>
+
+                            <div class="col-md-6 form-group">
+
+                                <label class="col-sm-4 control-label">From City <span class="required">*</span></label>
+                                <div class="col-sm-8">
+                                    @Html.Partial("~/Views/Shared/_CityGrouped.cshtml",
+                                    ViewData["CityList"] as List<EasyFreight.ViewModel.CountryCityList>,
+                                    new ViewDataDictionary { { "ddlName", "ddlFromCityId" }, 
+                                    { "selectedVal", @Model.FromCityId },{"required","required"} })
+                                </div>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label class="col-sm-4 control-label">To City <span class="required">*</span></label>
+                                <div class="col-sm-8">
+                                    @Html.Partial("~/Views/Shared/_CityGrouped.cshtml",
+                                    ViewData["CityList"] as List<EasyFreight.ViewModel.CountryCityList>,
+                                    new ViewDataDictionary { { "ddlName", "ddlToCityId" }, 
+                                    { "selectedVal", @Model.ToCityId },{"required","required"} })
+                                </div>
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="col-md-12 form-group">
+                            <label class="col-sm-2 control-label" for="w4-password">Trucking Cost <span class="required">*</span></label>
+                            <div class="col-sm-4">
+                                @Html.Partial("~/Views/Shared/_InputWithCurrencySelect.cshtml",
+                                    ViewData["CurrencyList"] as Dictionary<int, string>,
+                                    new ViewDataDictionary 
+                                    { 
+                                    { "inputName", "CostAmount" }, 
+                                    { "inputValue", @Model.CostAmount }, 
+                                    { "selectedCurrencyId", @Model.CurrencyId },
+                                    { "ddlCurrencyIdName", "CurrencyId" },
+                                    { "defaultCurrencyId", 1 }  ,{"required","required"}
+                                    })
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 form-group">
+                            <label class="col-md-4 control-label"></label>
+                            <div class="col-md-8">
+                                <div class="checkbox-custom checkbox-default">
+                                    <input type="checkbox" id="isValidCheck" checked>
+                                    <label for="checkboxExample1">Is Valid</label>
+                                </div>
+
+                            </div>
+                        </div>
+                        <input type="hidden" id="IsValid" name="IsValid" value="@Model.IsValid.ToString()" />
+
+                        <div id="dateExp" class="col-md-6 form-group">
+                            <label class="col-sm-4 control-label">Expire Date</label>
+                            <div class="col-sm-8">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </span>
+                                    <input type="text" data-plugin-datepicker name ="ValidToDate"
+                                        data-date-format="dd/mm/yyyy" class="form-control" value="@(Model.ValidToDate == null ? "" : Model.ValidToDate.Value.ToString("dd/MM/yyyy")) " >
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <input type="hidden" id="FromCityId" name="FromCityId"  value="@Model.FromCityId" />
+                    <input type="hidden" id="ToCityId" name="ToCityId"  value="@Model.ToCityId" />
+                    <input type="hidden" id="ContractorRateId" name="ContractorRateId" value="@Model.ContractorRateId" />
+                      <input type="hidden" id="isbyArea" name="isbyArea" value="true" />
+                </form>
+            </div>
+
+            <footer class="panel-footer">
+                <div id="SaveBtnDiv" class="row">
+                    <div class="col-sm-9 col-sm-offset-3">
+                        <button id="SaveForm" class="btn btn-primary">Submit</button>
+                        <a id="ResetForm" href="@Url.Content("~/MasterData/ContractorRate")" class="btn btn-default" >Reset</a>
+                    </div>
+                </div>
+            </footer>
+        </section>
+    </div>
+</div>
+
+@section scripts{
+    <script src="@Url.Content("~/Scripts/MasterData/ContractorRate/ContractorRateAdd.js")"></script>
+
+}

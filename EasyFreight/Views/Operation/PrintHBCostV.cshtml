@@ -1,0 +1,143 @@
+﻿@model EasyFreight.ViewModel.OperationCostMainVm
+@{
+    ViewBag.Title = "PrintHBCostV";
+    Layout = "~/Views/Shared/_PrintLayout.cshtml";
+
+    EasyFreight.ViewModel.HouseBillListVm hbObj = ViewBag.HbObj as EasyFreight.ViewModel.HouseBillListVm;
+}
+<section class="panel panel-primary">
+    <header class="panel-heading">
+        <h2 class="panel-title">Operation Details</h2>
+    </header>
+    <div class="panel-body">
+        <div class="col-sm-4 col-xs-4  form-group">
+            <label class="col-md-5 col-xs-6 control-label">House Bill</label>
+            <div class="col-md-7 col-xs-6">
+                <span class="text-dark">@hbObj.HouseBL</span>
+            </div>
+        </div>
+
+        <div class="col-sm-4 col-xs-4  form-group">
+            <label class="col-md-5 col-xs-6 control-label">Operation Code</label>
+            <div class="col-md-7 col-xs-6">
+                <span class="text-dark">@hbObj.OperationCode</span>
+            </div>
+        </div>
+        <div class="col-sm-4 col-xs-4  form-group">
+            <label class="col-md-5 col-xs-6 control-label">Operation Date</label>
+            <div class="col-md-7 col-xs-6">
+                <span class="text-dark">@(hbObj.OperationDate == null ? "" : hbObj.OperationDate.Value.ToString("dd/MM/yyyy"))</span>
+            </div>
+        </div>
+        
+
+        <div class="col-sm-4 col-xs-4  form-group">
+            <label class="col-md-5 col-xs-6 control-label">Client</label>
+            <div class="col-md-7 col-xs-6">
+                <span class="text-dark">@hbObj.ClientName</span>
+            </div>
+        </div>
+        <div class="col-sm-4 col-xs-4  form-group">
+            <label class="col-md-5 col-xs-6 control-label">Packages #</label>
+            <div class="col-md-7 col-xs-6">
+                <span class="text-dark">@hbObj.NumberOfPackages</span>
+            </div>
+        </div>
+    </div>
+
+
+</section>
+
+<section class="panel panel-info">
+    <header class="panel-heading">
+        <h2 class="panel-title">Operation Cost</h2>
+    </header>
+    <div class="panel-body">
+        <div class="row col-sm-12 col-xs-12">
+            <div class="col-sm-3 col-xs-3 ">
+                <div class="form-group">
+                    <label class="control-label">Cost Name</label>
+                </div>
+            </div>
+            <div class="col-sm-3 col-xs-3 ">
+                <div class="form-group">
+                    <label class="control-label">Net Price</label>
+                </div>
+            </div>
+            <div class="col-sm-3 col-xs-3 ">
+                <div class="form-group">
+                    <label class="control-label">Selling Price</label>
+                </div>
+            </div>
+
+            <div class="col-sm-3 col-xs-3 ">
+                <div class="form-group">
+                    <label class="control-label">Currency</label>
+                </div>
+            </div>
+
+            @foreach (var item in Model.OperationCosts)
+            {
+                <div class="col-sm-3 col-xs-3">
+                    <div class="form-group">
+                        <span class="text-dark">@item.OperCostNameEn</span>
+                    </div>
+                </div>
+                <div class="col-sm-3 col-xs-3 ">
+                    <div class="form-group">
+                        <span class="text-dark">@item.OperationCostNet</span>
+                    </div>
+                </div>
+                <div class="col-sm-3 col-xs-3 ">
+                    <div class="form-group">
+                        <span class="text-dark">@item.OperationCostSelling</span>
+                    </div>
+                </div>
+
+                <div class="col-sm-3 col-xs-3 ">
+                    <div class="form-group">
+                        <span class="text-dark">@item.CurrencySign</span>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    <footer class="panel-footer">
+        <div class="row col-sm-12 col-xs-12" style="padding-top:15px">
+            <div class="col-sm-12 col-xs-12 ">
+                <h3>
+                    <span class="label label-info">Total</span>
+                </h3>
+            </div>
+            <div class="col-sm-4 col-xs-4 ">
+                <h4>
+                    <span class="label label-info">Currency</span>
+                </h4>
+            </div>
+            <div class="col-sm-4 col-xs-4 ">
+                <h4>
+                    <span class="label label-info">Net Rate</span>
+                </h4>
+            </div>
+            <div class="col-sm-4 col-xs-4 ">
+                <h4>
+                    <span class="label label-info">Selling Rate</span>
+                </h4>
+            </div>
+            
+            @foreach (var item in Model.Totals)
+            {
+                <div class="col-sm-4 col-xs-4">
+                    <h4><span class="label label-default">@item.CurrencySign</span></h4>
+                </div>
+                <div class="col-sm-4 col-xs-4">
+                    <h4><span class="label label-default">@item.TotalCostNet</span></h4>
+                </div>
+                <div class="col-sm-4 col-xs-4">
+                    <h4><span class="label label-default">@item.TotalCostSelling</span></h4>
+                </div>
+            }
+
+        </div>
+    </footer>
+</section>

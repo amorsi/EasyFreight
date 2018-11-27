@@ -1,0 +1,305 @@
+﻿@model EasyFreight.ViewModel.OperationCostMainVm
+@{
+    ViewBag.Title = "AddOperationCost";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    int index = 0;
+    int lastIndex = 0;
+
+    if (Model != null)
+    {
+        lastIndex = Model.OperationCosts.Count() - 1;
+    }
+
+    EasyFreight.ViewModel.HouseBillListVm hbObj = ViewBag.HbObj as EasyFreight.ViewModel.HouseBillListVm;
+}
+
+
+<header class="page-header">
+    <h2>Add Cost </h2>
+
+    <div class="right-wrapper pull-right">
+        <ol class="breadcrumbs">
+            <li>
+                <a href="index.html">
+                    <i class="fa fa-home"></i>
+                </a>
+            </li>
+            <li><span>Accounting</span></li>
+            <li><span>Add Cost</span></li>
+        </ol>
+
+        <a class="sidebar-right-toggle" data-open="sidebar-right"><i class="fa fa-chevron-left"></i></a>
+    </div>
+</header>
+
+<!-- start: page -->
+
+<section class="panel">
+    <div class="panel-body">
+
+         <div class="invoice">
+                <header class="clearfix">
+                    <div class="row">
+                        <div class="col-sm-6 mt-md">
+                            <h2 class="h2 mt-none mb-sm text-dark text-bold">Adding Cost to House Bill</h2>
+                        </div>
+
+                    </div>
+                </header>
+             </div>
+        <section class="panel hblist">
+    <div class="panel-body" style="border-left: solid #0088cc">
+
+        <div class="col-sm-4 form-group">
+            <label class="col-md-5 control-label">House Bill</label>
+            <div class="col-md-7">
+                <span class="text-dark">@hbObj.HouseBL</span>
+            </div>
+        </div>
+
+        <div class="col-sm-4 form-group">
+            <label class="col-md-5 control-label">Operation Code</label>
+            <div class="col-md-7">
+                <span class="text-dark">@hbObj.OperationCode</span>
+            </div>
+        </div>
+
+        <div class="col-sm-4 form-group">
+            <label class="col-md-5 control-label">Operation Date</label>
+            <div class="col-md-7">
+                <span class="text-dark">@(hbObj.OperationDate == null ? "" : hbObj.OperationDate.Value.ToString("dd/MM/yyyy"))</span>
+            </div>
+        </div>
+        
+
+        <div class="col-sm-10 form-group">
+            <label class="col-md-2 control-label">Client</label>
+            <div class="col-md-10">
+                <span class="text-dark">@hbObj.ClientName</span>
+            </div>
+        </div>
+        
+     
+           <input type="hidden"   value="@hbObj.AgentId" class="agentId"/>
+
+
+    </div>
+</section>
+
+<form id="opercostform">
+    <div class="col-sm-12">
+        <div class="col-sm-2">
+            <div class="form-group">
+                <label class="control-label">Cost Name</label>
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div class="form-group">
+                <label class="control-label">Net Price</label>
+            </div>
+        </div>
+
+        <div class="col-sm-2">
+            <div class="form-group">
+                <label class="control-label">Net Currency</label>
+            </div>
+        </div>
+
+        <div class="col-sm-2">
+            <div class="form-group">
+                <label class="control-label">Selling Price</label>
+            </div>
+        </div>
+
+        <div class="col-sm-2">
+            <div class="form-group">
+                <label class="control-label">Selling Currency</label>
+            </div>
+        </div>
+
+        <div class="col-sm-1">
+            <div class="form-group">
+                <label class="control-label">Agent Cost</label>
+            </div>
+        </div>
+
+        <div class="row contactform form-template" style="display: none;">
+
+            <div class="col-sm-2">
+                <label class="control-label"></label>
+                <div class="form-group">
+                    <select name="OperationCosts[-1].OperCostLibId"
+                            required class="form-control populate" data-placeholder="Select">
+                        <option></option>
+                        @foreach (var item in ViewBag.OperationCostNameList)
+                        {
+                            <option value="@item.Key">@item.Value</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <label class="control-label"></label>
+                <div class="form-group">
+                    <input type="text" name="OperationCosts[-1].OperationCostNet" class="form-control costnet onlyNumbers">
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <label class="control-label"></label>
+                <div class="form-group">
+                    <select name="OperationCosts[-1].CurrencyId"
+                            required class="form-control populate" data-placeholder="Select">
+                        <option></option>
+                        @foreach (var item in ViewBag.CurrencyList)
+                        {
+                            <option value="@item.Key">@item.Value</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <label class="control-label"></label>
+                <div class="form-group">
+                    <input type="text" name="OperationCosts[-1].OperationCostSelling" class="form-control costsell onlyNumbers">
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <label class="control-label"></label>
+                <div class="form-group">
+                    <select name="OperationCosts[-1].CurrencyIdSelling"
+                            required class="form-control populate" data-placeholder="Select">
+                        <option></option>
+                        @foreach (var item in ViewBag.CurrencyList)
+                        {
+                            <option value="@item.Key">@item.Value</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-1">
+                <label class="control-label"></label>
+                <div class="form-group">
+                    <input type="checkbox" class="form-control isagentcheck">
+                    <input type="hidden" name="OperationCosts[-1].IsAgentCost">
+                </div>
+            </div>
+            <div class="col-sm-1" style="margin-top: 25px">
+                <div class="form-group">
+                    <label class="control-label"></label>
+                    <a class="on-default remove-contact" href="javascript:void(0)"><i class="fa fa-trash-o fa-2x"></i></a>
+                </div>
+            </div>
+            <input type="hidden" name="OperationCosts[-1].OperCostId" />
+            <input type="hidden" name="OperationCosts[-1].HouseBillId" value="@hbObj.HouseBillId" />
+            <input type="hidden" name="OperationCosts[-1].OperationId" value="@hbObj.OperationId" />
+            <input type="hidden"   name="OperationCosts[-1].IsAccounting" value="true" />
+
+        </div>
+        @foreach (var item in Model.OperationCosts)
+        {
+            <div class="row contactform" style="margin-top: 30px">
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <select name="OperationCosts[@index].OperCostLibId" data-plugin-selecttwo
+                                required class="form-control populate" data-placeholder="Select">
+                            <option></option>
+                            @foreach (var costName in ViewBag.OperationCostNameList)
+                            {
+                                <option @(costName.Key == item.OperCostLibId ? "selected" : "")
+                                        value="@costName.Key">
+                                    @costName.Value
+                                </option>
+                            }
+                        </select>
+
+
+                    </div>
+                </div>
+                <div class="col-sm-2">
+
+                    <div class="form-group">
+                        <input type="text" name="OperationCosts[@index].OperationCostNet" required
+                               class="form-control costnet onlyNumbers" value="@item.OperationCostNet">
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <select name="OperationCosts[@index].CurrencyId"
+                                required class="form-control populate">
+                            @foreach (var curr in ViewBag.CurrencyList)
+                            {
+                                <option @(item.CurrencyId == curr.Key ? "selected" : "") value="@curr.Key">@curr.Value</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <input type="text" required
+                               class="form-control costsell onlyNumbers"
+                               name="OperationCosts[@index].OperationCostSelling" value="@item.OperationCostSelling">
+                    </div>
+                </div>
+
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <select name="OperationCosts[@index].CurrencyIdSelling"
+                                required class="form-control populate">
+                            @foreach (var curr in ViewBag.CurrencyList)
+                            {
+                                <option @(item.CurrencyIdSelling == curr.Key ? "selected" : "") value="@curr.Key">@curr.Value</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-sm-1">
+                    <div class="form-group">
+                        <input type="checkbox" @(item.IsAgentCost ? "checked" : "")  class="form-control isagentcheck">
+                        <input type="hidden" name="OperationCosts[@index].IsAgentCost" value="@item.IsAgentCost.ToString()">
+                    </div>
+                </div>
+
+                @if (index > 0)
+                {
+                    <div class="col-sm-1" style="margin-top: 5px">
+                        <div class="form-group">
+                            <a class="on-default remove-contact" href="javascript:void(0)"><i class="fa fa-trash-o fa-2x"></i></a>
+                        </div>
+                    </div>
+                }
+                <input type="hidden" name="OperationCosts[@index].OperCostId" value="@item.OperCostId" />
+                <input type="hidden" name="OperationCosts[@index].HouseBillId" value="@item.HouseBillId" />
+                <input type="hidden" name="OperationCosts[@index].OperationId" value="@hbObj.OperationId" />
+                <input type="hidden" name="OperationCosts[@index].IsAccounting" value="true" />
+            </div>
+                index++;
+        }
+        <div class="form-group" style="margin-top: 5px">
+            <div class="col-sm-offset-9 col-sm-3">
+                <a href="javascript:void(0)" lastindex="@lastIndex" class="btnAdd">Add Cost</a>
+            </div>
+        </div>
+
+    </div>
+</form>
+<div id="SaveBtnDiv" class="row">
+    <div class="col-sm-9 col-sm-offset-3">
+        <input type="button" id="SaveHBCostForm" class="btn btn-primary" value="Submit" /> 
+        <a id="ResetHbForm" href="javascript:void(0)" class="btn btn-default">Reset</a>
+    </div>
+</div>
+
+
+
+         </div>
+</section>
+
+@section scripts{
+    <script src="@Url.Content("~/Scripts/MasterData/ContactPerson.js")"></script>
+     <script src="@Url.Content("~/Scripts/AddCostCommon.js")"></script>
+     <script src="@Url.Content("~/Scripts/Accounting/HbCost.js")"></script>
+    
+}
+

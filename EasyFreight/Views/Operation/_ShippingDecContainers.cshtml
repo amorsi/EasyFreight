@@ -1,0 +1,36 @@
+﻿@model List<EasyFreight.ViewModel.OperationContainerVm>
+@{
+var items=
+Model.GroupBy(g => g.ContainerTypeName)
+    .Select(t => new {count= t.Count(), key= t.Key });
+}
+<div class="row col-sm-12 col-xs-12">
+    <div class="col-sm-6 col-xs-6">
+        <label class="control-label">Container Type</label>
+    </div>
+    <div class="col-sm-6 col-xs-6">
+        <label class="control-label"> Count</label>
+    </div>
+</div>
+@foreach (var item in items)
+{
+ 
+    <div class="row col-sm-12 col-xs-12 contactform">
+        <div class="col-sm-6 col-xs-6">
+            <div class="form-group">
+@if(!string.IsNullOrEmpty(item.key) )
+{
+                <span class="text-dark">@item.key</span>
+}
+else{
+<span class="text-dark">Air</span>
+}
+            </div>
+        </div>
+        <div class="col-sm-6 col-xs-6">
+            <div class="form-group">
+                <span class="text-dark">@item.count</span>
+            </div>
+        </div>
+    </div>
+}

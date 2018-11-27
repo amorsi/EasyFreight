@@ -1,0 +1,51 @@
+﻿@model List<EasyFreight.ViewModel.ModuleVm>
+@{int index = 0;}
+
+<div class="form-group mb-lg" style="background-color:lightgreen">
+    <label class="col-md-1 control-label"></label>
+    <div style="padding-top: 8px" class="col-md-11">
+        <div class="checkbox-custom checkbox-default">
+            <input type="checkbox"  @(Model.FirstOrDefault().IsSuperUser == true ? "checked" : "")  id="issuperusercheck">
+            <label class="text-bold" for="checkboxExample1">Is Super User "Allow to edit closed operations"</label>
+        </div>
+        <input type="hidden" id="IsSuperUser" name="IsSuperUser" value="@Model.FirstOrDefault().IsSuperUser.ToString()" />
+    </div>
+</div>
+
+@foreach (var module in Model)
+{
+    <section class="panel">
+        <header class="panel-heading">
+            <div class="panel-actions">
+                <a class="fa fa-caret-down" href="javascript:void(0)"></a>
+            </div>
+            <h2 class="panel-title">@module.ModuleName</h2>
+        </header>
+        <div class="panel-body">
+            @foreach (var screen in module.ModuleScreens)
+            {
+                <div class="row">
+                    <h3> <span class="label label-default">@screen.ScreenName Secreen</span></h3>
+                    <div class="col-md-8 form-group">
+                        <label class="col-sm-3 control-label" for="w4-username">Actions Rights</label>
+                        <div class="col-sm-8">
+                            <select id="ActionId" name="ActionId[@index]" multiple  class="form-control populate">
+                                <option value=""></option>
+                                @foreach (var action in screen.ScreenActions)
+                                {
+                                    <option @action.Selected value="@action.ActionId">@action.ActionName</option>
+                                }
+                            </select>
+                            <input type="hidden"  name="ScreenId[@index]" value="@screen.ScreenId" />
+                        </div>
+                    </div>
+                </div>
+                
+                index++;
+            }
+
+        </div>
+    </section>
+}
+
+

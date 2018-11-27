@@ -1,0 +1,96 @@
+﻿@model EasyFreight.ViewModel.BankVm
+    @{
+        ViewBag.Title = "Add";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+    <header class="page-header">
+        <h2>Add Bank</h2>
+
+        <div class="right-wrapper pull-right">
+            <ol class="breadcrumbs">
+                <li>
+                    <a href="@Url.Content("~/Home/Index")">
+                        <i class="fa fa-home"></i>
+                    </a>
+                </li>
+                <li><span>Master Data</span></li>
+                <li><span>Add Bank</span></li>
+            </ol>
+
+            <a class="sidebar-right-toggle" data-open="sidebar-right"><i class="fa fa-chevron-left"></i></a>
+        </div>
+    </header>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <section class="panel">
+
+                <div class="panel-body">
+                    <form id="Form1">
+                        <div class="form-horizontal form-bordered">
+                            <div class="col-md-6 form-group">
+                                <label class="col-sm-4 control-label" for="w4-username">Name <span class="required">*</span></label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="BankNameEn"
+                                           id="BankNameEn" value="@Model.BankNameEn" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label class="col-sm-4 control-label" for="w4-password">Name Arabic</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control"
+                                           name="BankNameAr" id="BankNameAr" value="@Model.BankNameAr">
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 form-group">
+                                <label class="col-sm-4 control-label" for="w4-username">Address <span class="required">*</span></label>
+                                <div class="col-sm-8">
+                                    <textarea id="BankAddressEn" rows="3" class="form-control"
+                                              name="BankAddressEn" required>@Model.BankAddressEn</textarea>
+                                        
+                                
+                            </div>
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label class="col-sm-4 control-label" for="w4-password">Address Arabic</label>
+                            <div class="col-sm-8">
+                                <textarea id="BankAddressAr" rows="3" class="form-control"
+                                          name="BankAddressAr">@Model.BankAddressAr</textarea>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 form-group">
+                                <label class="col-sm-4 control-label" for="w4-username">Swift Code <span class="required">*</span></label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="SwiftCode"
+                                           id="SwiftCode" value="@Model.SwiftCode" required>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        @Html.Partial("~/Areas/MasterData/Views/Bank/_AddBankAccount.cshtml",Model.BankAccounts)
+
+                        <input type="hidden" id="BankId" name="BankId" value="@Model.BankId" />
+                        <input type="hidden" id="AccountId" name="AccountId" value="@Model.AccountId" />
+                    </form>
+                </div>
+
+                <footer class="panel-footer">
+                    <div id="SaveBtnDiv" class="row">
+                        <div class="col-sm-9 col-sm-offset-3">
+                            <button id="SaveForm" class="btn btn-primary">Submit</button>
+                            <a id="ResetForm" href="@Url.Content("~/MasterData/Bank")" class="btn btn-default">Reset</a>
+                        </div>
+                    </div>
+                </footer>
+            </section>
+        </div>
+    </div>
+
+    @section scripts{
+        <script src="@Url.Content("~/Scripts/MasterData/Bank/BankAdd.js")"></script>
+        <script src="@Url.Content("~/Scripts/MasterData/ContactPerson.js")"></script>
+
+    }

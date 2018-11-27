@@ -1,0 +1,108 @@
+﻿@model List<EasyFreight.ViewModel.InvoiceVm>
+@{
+    ViewBag.Title = "ManageOrder";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<header class="page-header">
+    <h2>Process @ViewBag.OperationType (@ViewBag.OperationCode)</h2>
+
+    <div class="right-wrapper pull-right">
+        <ol class="breadcrumbs">
+            <li>
+                <a href="@Url.Content("~/Home/Index")">
+                    <i class="fa fa-home"></i>
+                </a>
+            </li>
+            <li><span>Accounting </span></li>
+            <li><span>Process @ViewBag.OperationType</span></li>
+        </ol>
+        <a class="sidebar-right-toggle" data-open="sidebar-right"><i class="fa fa-chevron-left"></i></a>
+    </div>
+</header>
+
+<section class="panel">
+    <div class="panel-body">
+        <div class="col-md-12">
+            <div class="tabs tabs-primary">
+                <ul class="nav nav-tabs col-md-11">
+                    <li class="active">
+                        <a data-toggle="tab" href="#accrec" aria-expanded="true">A/R Invoices</a>
+                    </li>
+                    <li class="">
+                        <a data-toggle="tab" id="aplink" href="#accpayable" aria-expanded="false">A/P Invoices</a>
+                    </li>
+                    <li class="">
+                        <a data-toggle="tab" id="agentnotelink" href="#agentnote" aria-expanded="false">Agent Note</a>
+                    </li>
+                    <li class="">
+                        <a data-toggle="tab" id="cccashlink" href="#cccash" aria-expanded="false">CC Cash Deposit</a>
+                    </li>
+                    @*<li class="">
+                            <a data-toggle="tab" id="cashinlink" href="#cashin" aria-expanded="false">Cash In</a>
+                        </li>
+                        <li class="">
+                            <a data-toggle="tab" id="cashoutlink" href="#cashout" aria-expanded="false">Cash Out</a>
+                        </li>*@
+                </ul>
+
+                <div class="tab-content col-md-12">
+                    <div class="tab-pane active" id="accrec">
+                        <h3>Invoices List</h3>
+                        @{Html.RenderPartial("~/Views/Accounting/_InvListForOperation.cshtml", Model);}
+                        <h3>House Bill List</h3>
+                        @{Html.RenderPartial("~/Views/Accounting/_HouseBillList.cshtml", ViewBag.HbList as List<EasyFreight.ViewModel.HouseBillListVm>);}
+                    </div>
+                    <div class="tab-pane" id="accpayable">
+                    </div>
+                    <div class="tab-pane" id="agentnote">
+                    </div>
+                    <div class="tab-pane" id="cccash">
+                    </div>
+                    @*<div class="tab-pane" id="cashin">
+
+                        </div>
+                        <div class="tab-pane" id="cashout">
+
+                        </div>*@
+                </div>
+            </div>
+        </div>
+
+        <input type="hidden" id="operationid" value="@ViewBag.OperationId">
+
+    </div>
+
+
+</section>
+
+<div id="modalAnim" class="modal-block modal-block-lg mfp-hide">
+    <section class="panel">
+        <header class="panel-heading">
+            <div class="panel-actions">
+                <button class="modal-dismiss" data-dismiss="modal"><i class="fa fa-times"></i></button>
+            </div>
+            <h2 id="modalheader" class="panel-title">Operation Details</h2>
+        </header>
+        <div class="panel-body">
+            <div class="modal-wrapper">
+                <div id="ModalContent" class="modal-text">
+                </div>
+            </div>
+        </div>
+        <footer class="panel-footer">
+            <div class="row">
+                <div class="col-md-12 text-right">
+                    <a class="btn btn-info" id="printopercost" role="button" href="javascript:void(0)">Print</a>
+                    <button class="btn btn-default modal-dismiss" data-dismiss="modal">Close</button>
+
+                </div>
+            </div>
+        </footer>
+    </section>
+</div>
+
+@section scripts{
+    <script src="@Url.Content("~/Scripts/Accounting/ManageOrder.js")"></script>
+
+}

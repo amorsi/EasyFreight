@@ -1,0 +1,164 @@
+﻿@model List<EasyFreight.ViewModel.CustomClearanceDetailVm>
+
+@{
+    int index = 0;
+    int lastIndex = 0;
+
+    if (Model != null)
+    {
+        lastIndex = Model.Count() - 1;
+    }
+}
+
+<div class="col-sm-10">
+    <div class="col-sm-4">
+        <div class="form-group">
+            <label class="control-label">Cost Name</label>
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="form-group">
+            <label class="control-label">Net Price</label>
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="form-group">
+            <label class="control-label">Selling Price</label>
+        </div>
+    </div>
+
+    <div class="row contactform form-template" style="display: none;">
+
+        <div class="col-sm-4">
+            <label class="control-label"></label>
+            <div class="form-group">
+                <select name="CustomClearanceDetailVms[-1].CCCostId" 
+                        required class="form-control populate costname" data-placeholder="Select">
+                    <option></option>
+                    @foreach (var item in ViewBag.CCCostNameList)
+                    {
+
+                        <option value="@item.Key">@item.Value</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <label class="control-label"></label>
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon currncySign">
+                        EGP
+                    </span>
+                    <input type="text" name="CustomClearanceDetailVms[-1].CCCostNet" class="form-control costnet onlyNumbers">
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <label class="control-label"></label>
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon currncySign">
+                        EGP
+                    </span>
+                    <input type="text" name="CustomClearanceDetailVms[-1].CCCostSelling" class="form-control costsell onlyNumbers">
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-1" style="margin-top: 25px">
+            <div class="form-group">
+                <label class="control-label"></label>
+                <a class="on-default remove-contact" href="javascript:void(0)"><i class="fa fa-trash-o fa-2x"></i></a>
+            </div>
+        </div>
+        <input type="hidden" name="CustomClearanceDetailVms[-1].CCDetailsId" />
+        <input type="hidden" class="ccid" name="CustomClearanceDetailVms[-1].CCId" value="@ViewBag.ccId" />
+        <input type="hidden" class="currencyid" name="CustomClearanceDetailVms[-1].CurrencyId" />
+        
+
+
+    </div>
+    @foreach (var item in Model)
+{
+    <div class="row contactform" style="margin-top: 30px">
+        <div class="col-sm-4">
+
+            <div class="form-group">
+                <select name="CustomClearanceDetailVms[@index].CCCostId"
+                        required class="form-control populate costname" data-placeholder="Select" data-plugin-selecttwo>
+                    <option></option>
+                    @foreach (var costItem in ViewBag.CCCostNameList)
+                    {
+                        if (costItem.Key == item.CCCostId)
+                        {
+                            <option selected value="@costItem.Key">@costItem.Value</option>
+                        }
+                        else
+                        {
+                            <option value="@costItem.Key">@costItem.Value</option>}
+                    }
+                </select>
+
+
+
+            </div>
+        </div>
+        <div class="col-sm-3">
+
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon currncySign">
+                        EGP
+                    </span>
+                    <input type="text" name="CustomClearanceDetailVms[@index].CCCostNet"
+                           class="form-control costnet onlyNumbers" value="@item.CCCostNet">
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon currncySign">
+                        EGP
+                    </span>
+                    <input type="text"
+                           class="form-control costsell onlyNumbers" name="CustomClearanceDetailVms[@index].CCCostSelling" value="@item.CCCostSelling">
+                </div>
+            </div>
+        </div>
+
+        @if (index > 0)
+        {
+            <div class="col-sm-1" style="margin-top: 5px">
+                <div class="form-group">
+                    <a class="on-default remove-contact" href="javascript:void(0)"><i class="fa fa-trash-o fa-2x"></i></a>
+                </div>
+            </div>
+        }
+        <input type="hidden" name="CustomClearanceDetailVms[@index].CCDetailsId" value="@item.CCDetailsId" />
+        <input type="hidden" class="ccid" name="CustomClearanceDetailVms[@index].CCId" value="@item.CCId" />
+        <input type="hidden" class="currencyid" name="CustomClearanceDetailVms[@index].CurrencyId" value="@item.CurrencyId" />
+    </div>
+        index++;
+}
+    <div class="form-group">
+        <div class="col-sm-offset-9 col-sm-3">
+            <a href="javascript:void(0)" lastindex="@lastIndex" class="btnAdd">Add Cost</a>
+        </div>
+    </div>
+
+</div>
+<div class="col-sm-2">
+    <div class="well info">
+        Total Net:
+
+        <h3><span class="number sumnet">0 </span> <span class="currncySign">EGP</span></h3>
+    </div>
+
+    <div class="well success">
+        Total Selling:
+
+        <h3><span class="number sumsell">0</span> <span class="currncySign">EGP</span></h3>
+    </div>
+</div>

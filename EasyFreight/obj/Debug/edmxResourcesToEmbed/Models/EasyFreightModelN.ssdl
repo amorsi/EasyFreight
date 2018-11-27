@@ -1,0 +1,1304 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="EasyFreightModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Agent">
+    <Key>
+      <PropertyRef Name="AgentId" />
+    </Key>
+    <Property Name="AgentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AgentCode" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="AgentNameEn" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="AgentNameAr" Type="nvarchar" MaxLength="200" />
+    <Property Name="AgentAddressEn" Type="nvarchar" MaxLength="200" />
+    <Property Name="AgentAddressAr" Type="nvarchar" MaxLength="200" />
+    <Property Name="CountryId" Type="int" />
+    <Property Name="CityId" Type="int" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
+    <Property Name="WebSite" Type="nvarchar" MaxLength="75" />
+    <Property Name="PhoneNumber" Type="varchar" MaxLength="200" />
+    <Property Name="FaxNumber" Type="varchar" MaxLength="200" />
+    <Property Name="AccountId" Type="varchar" MaxLength="15" />
+  </EntityType>
+  <EntityType Name="AgentContact">
+    <Key>
+      <PropertyRef Name="ContactId" />
+    </Key>
+    <Property Name="ContactId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AgentId" Type="int" />
+    <Property Name="ContactName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="PhoneNumber" Type="varchar" MaxLength="20" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Area">
+    <Key>
+      <PropertyRef Name="AreaId" />
+    </Key>
+    <Property Name="AreaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CountryId" Type="int" Nullable="false" />
+    <Property Name="CityId" Type="int" Nullable="false" />
+    <Property Name="AreaNameEn" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="AreaNameAr" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Carrier">
+    <Key>
+      <PropertyRef Name="CarrierId" />
+    </Key>
+    <Property Name="CarrierId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CarrierCode" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="CarrierNameEn" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="CarrierNameAr" Type="nvarchar" MaxLength="50" />
+    <Property Name="CarrierAddressEn" Type="nvarchar" MaxLength="200" />
+    <Property Name="CarrierAddressAr" Type="nvarchar" MaxLength="200" />
+    <Property Name="CountryId" Type="int" />
+    <Property Name="CityId" Type="int" />
+    <Property Name="CarrierType" Type="tinyint" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
+    <Property Name="WebSite" Type="nvarchar" MaxLength="75" />
+    <Property Name="PhoneNumber" Type="varchar" MaxLength="20" />
+    <Property Name="FaxNumber" Type="varchar" MaxLength="20" />
+    <Property Name="AccountId" Type="varchar" MaxLength="15" />
+  </EntityType>
+  <EntityType Name="CarrierContact">
+    <Key>
+      <PropertyRef Name="ContactId" />
+    </Key>
+    <Property Name="ContactId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CarrierId" Type="int" />
+    <Property Name="ContactName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="PhoneNumber" Type="varchar" MaxLength="20" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="CarrierRate">
+    <Key>
+      <PropertyRef Name="CarrierRateId" />
+    </Key>
+    <Property Name="CarrierRateId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CarrierId" Type="int" Nullable="false" />
+    <Property Name="FromPortId" Type="int" Nullable="false" />
+    <Property Name="ToPortId" Type="int" Nullable="false" />
+    <Property Name="FromCountryId" Type="int" Nullable="false" />
+    <Property Name="ToCountryId" Type="int" Nullable="false" />
+    <Property Name="ContainerTypeId" Type="int" Nullable="false" />
+    <Property Name="FreightCostAmount" Type="decimal" Precision="18" Scale="3" />
+    <Property Name="FreighCurrencyId" Type="int" />
+    <Property Name="ThcCostAmount" Type="decimal" Precision="18" Scale="3" />
+    <Property Name="ThcCurrencyId" Type="int" />
+    <Property Name="IsValid" Type="bit" />
+    <Property Name="ValidToChecked" Type="bit" />
+    <Property Name="ValidToDate" Type="date" />
+  </EntityType>
+  <EntityType Name="CarrierRateTransit">
+    <Key>
+      <PropertyRef Name="CarrierRateId" />
+      <PropertyRef Name="TransitPortId" />
+    </Key>
+    <Property Name="CarrierRateId" Type="int" Nullable="false" />
+    <Property Name="TransitPortId" Type="int" Nullable="false" />
+    <Property Name="TransitCountryId" Type="int" />
+  </EntityType>
+  <EntityType Name="City">
+    <Key>
+      <PropertyRef Name="CityId" />
+    </Key>
+    <Property Name="CityId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CountryId" Type="int" Nullable="false" />
+    <Property Name="CityNameEn" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="CityNameAr" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="CompanySetup">
+    <Key>
+      <PropertyRef Name="CompanyId" />
+    </Key>
+    <Property Name="CompanyId" Type="int" Nullable="false" />
+    <Property Name="CompanyNameEn" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="CompanyNameAr" Type="nvarchar" MaxLength="50" />
+    <Property Name="CompanyAddressEn" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="CompanyAddressAr" Type="nvarchar" MaxLength="200" />
+    <Property Name="CountryId" Type="int" />
+    <Property Name="CityId" Type="int" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
+    <Property Name="WebSite" Type="nvarchar" MaxLength="50" />
+    <Property Name="EnglishLogoUrl" Type="varchar" MaxLength="500" />
+    <Property Name="ArabicLogoUrl" Type="varchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="CompanySetupContact">
+    <Key>
+      <PropertyRef Name="CompanyId" />
+    </Key>
+    <Property Name="CompanyId" Type="int" Nullable="false" />
+    <Property Name="PhoneNumber1" Type="nvarchar" MaxLength="50" />
+    <Property Name="PhoneNumber2" Type="nvarchar" MaxLength="50" />
+    <Property Name="PhoneNumber3" Type="nvarchar" MaxLength="50" />
+    <Property Name="FaxNumber" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Consignee">
+    <Key>
+      <PropertyRef Name="ConsigneeId" />
+    </Key>
+    <Property Name="ConsigneeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ConsigneeCode" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="ConsigneeNameEn" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="ConsigneeNameAr" Type="nvarchar" MaxLength="200" />
+    <Property Name="ConsigneeAddressEn" Type="nvarchar" MaxLength="200" />
+    <Property Name="ConsigneeAddressAr" Type="nvarchar" MaxLength="200" />
+    <Property Name="CountryId" Type="int" />
+    <Property Name="CityId" Type="int" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
+    <Property Name="WebSite" Type="nvarchar" MaxLength="50" />
+    <Property Name="PhoneNumber" Type="varchar" MaxLength="200" />
+    <Property Name="FaxNumber" Type="varchar" MaxLength="200" />
+    <Property Name="AccountId" Type="varchar" MaxLength="15" />
+    <Property Name="TaxDepositAccountId" Type="varchar" MaxLength="15" />
+  </EntityType>
+  <EntityType Name="ConsigneeContact">
+    <Key>
+      <PropertyRef Name="ContactId" />
+    </Key>
+    <Property Name="ContactId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ConsigneeId" Type="int" />
+    <Property Name="ContactName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="PhoneNumber" Type="varchar" MaxLength="20" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="ContainerType">
+    <Key>
+      <PropertyRef Name="ContainerTypeId" />
+    </Key>
+    <Property Name="ContainerTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ContainerTypeName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="MaxWeight" Type="decimal" Precision="18" Scale="5" Nullable="false" />
+    <Property Name="MaxCBM" Type="decimal" Precision="18" Scale="5" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Contractor">
+    <Key>
+      <PropertyRef Name="ContractorId" />
+    </Key>
+    <Property Name="ContractorId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ContractorCode" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="ContractorNameEn" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ContractorNameAr" Type="nvarchar" MaxLength="50" />
+    <Property Name="ContractorAddressEn" Type="nvarchar" MaxLength="200" />
+    <Property Name="ContractorAddressAr" Type="nvarchar" MaxLength="200" />
+    <Property Name="CountryId" Type="int" />
+    <Property Name="CityId" Type="int" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
+    <Property Name="WebSite" Type="nvarchar" MaxLength="50" />
+    <Property Name="PhoneNumber" Type="varchar" MaxLength="20" />
+    <Property Name="FaxNumber" Type="varchar" MaxLength="20" />
+    <Property Name="AccountId" Type="varchar" MaxLength="15" />
+  </EntityType>
+  <EntityType Name="ContractorContact">
+    <Key>
+      <PropertyRef Name="ContactId" />
+    </Key>
+    <Property Name="ContactId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ContractorId" Type="int" />
+    <Property Name="ContactName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="PhoneNumber" Type="varchar" MaxLength="20" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="ContractorRate">
+    <Key>
+      <PropertyRef Name="ContractorRateId" />
+    </Key>
+    <Property Name="ContractorRateId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ContractorId" Type="int" Nullable="false" />
+    <Property Name="FromAreaId" Type="int" />
+    <Property Name="ToAreaId" Type="int" />
+    <Property Name="FromCityId" Type="int" Nullable="false" />
+    <Property Name="ToCityId" Type="int" Nullable="false" />
+    <Property Name="ContainerTypeId" Type="int" Nullable="false" />
+    <Property Name="CostAmount" Type="decimal" Precision="18" Scale="3" Nullable="false" />
+    <Property Name="CurrencyId" Type="int" Nullable="false" />
+    <Property Name="IsValid" Type="bit" />
+    <Property Name="ValidToChecked" Type="bit" />
+    <Property Name="ValidToDate" Type="date" />
+  </EntityType>
+  <EntityType Name="Country">
+    <Key>
+      <PropertyRef Name="CountryId" />
+    </Key>
+    <Property Name="CountryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CountryNameEn" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="CountryNameAr" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Currency">
+    <Key>
+      <PropertyRef Name="CurrencyId" />
+    </Key>
+    <Property Name="CurrencyId" Type="int" Nullable="false" />
+    <Property Name="CurrencySign" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="CurrencyName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="AccountId" Type="varchar" MaxLength="15" />
+  </EntityType>
+  <EntityType Name="CurrencyExchage">
+    <Key>
+      <PropertyRef Name="CurrencyExchageId" />
+    </Key>
+    <Property Name="CurrencyExchageId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FromCurrencyId" Type="int" Nullable="false" />
+    <Property Name="ToCurrencyId" Type="int" Nullable="false" />
+    <Property Name="ExchangeRate" Type="decimal" Precision="10" Scale="5" Nullable="false" />
+    <Property Name="ValidFrom" Type="date" Nullable="false" />
+    <Property Name="ValidTo" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Department">
+    <Key>
+      <PropertyRef Name="DepId" />
+    </Key>
+    <Property Name="DepId" Type="int" Nullable="false" />
+    <Property Name="DepNameEn" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="DepNameAr" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="IncotermLib">
+    <Key>
+      <PropertyRef Name="IncotermId" />
+    </Key>
+    <Property Name="IncotermId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IncotermCode" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="IncotermName" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Notifier">
+    <Key>
+      <PropertyRef Name="NotifierId" />
+    </Key>
+    <Property Name="NotifierId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NotifierCode" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="NotifierNameEn" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="NotifierNameAr" Type="nvarchar" MaxLength="50" />
+    <Property Name="NotifierAddressEn" Type="nvarchar" MaxLength="200" />
+    <Property Name="NotifierAddressAr" Type="nvarchar" MaxLength="200" />
+    <Property Name="CountryId" Type="int" />
+    <Property Name="CityId" Type="int" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
+    <Property Name="WebSite" Type="nvarchar" MaxLength="50" />
+    <Property Name="PhoneNumber" Type="varchar" MaxLength="20" />
+    <Property Name="FaxNumber" Type="varchar" MaxLength="20" />
+    <Property Name="ConsigneeId" Type="int" />
+  </EntityType>
+  <EntityType Name="NotifierContact">
+    <Key>
+      <PropertyRef Name="ContactId" />
+    </Key>
+    <Property Name="ContactId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NotifierId" Type="int" />
+    <Property Name="ContactName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="PhoneNumber" Type="varchar" MaxLength="20" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="PackageType">
+    <Key>
+      <PropertyRef Name="PackageTypeId" />
+    </Key>
+    <Property Name="PackageTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PackageTypeNameEn" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="PackageTypeNameAr" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Port">
+    <Key>
+      <PropertyRef Name="PortId" />
+    </Key>
+    <Property Name="PortId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CountryId" Type="int" Nullable="false" />
+    <Property Name="CityId" Type="int" Nullable="false" />
+    <Property Name="PortType" Type="tinyint" Nullable="false" />
+    <Property Name="PortNameEn" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="PortNameAr" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Shipper">
+    <Key>
+      <PropertyRef Name="ShipperId" />
+    </Key>
+    <Property Name="ShipperId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ShipperCode" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="ShipperNameEn" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="ShipperNameAr" Type="nvarchar" MaxLength="200" />
+    <Property Name="ShipperAddressEn" Type="nvarchar" MaxLength="200" />
+    <Property Name="ShipperAddressAr" Type="nvarchar" MaxLength="200" />
+    <Property Name="CountryId" Type="int" />
+    <Property Name="CityId" Type="int" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
+    <Property Name="WebSite" Type="nvarchar" MaxLength="50" />
+    <Property Name="PhoneNumber" Type="varchar" MaxLength="200" />
+    <Property Name="FaxNumber" Type="varchar" MaxLength="200" />
+    <Property Name="AccountId" Type="varchar" MaxLength="15" />
+    <Property Name="TaxDepositAccountId" Type="varchar" MaxLength="15" />
+  </EntityType>
+  <EntityType Name="ShipperContact">
+    <Key>
+      <PropertyRef Name="ContactId" />
+    </Key>
+    <Property Name="ContactId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ShipperId" Type="int" />
+    <Property Name="ContactName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="PhoneNumber" Type="varchar" MaxLength="20" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="StaticText">
+    <Key>
+      <PropertyRef Name="StaticTextId" />
+    </Key>
+    <Property Name="StaticTextId" Type="int" Nullable="false" />
+    <Property Name="ScreenName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="StaticTextEn1" Type="nvarchar(max)" />
+    <Property Name="StaticTextAr1" Type="nvarchar(max)" />
+    <Property Name="StaticTextEn2" Type="nvarchar(max)" />
+    <Property Name="StaticTextAr2" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="StaticTextLabel">
+    <Key>
+      <PropertyRef Name="LblId" />
+      <PropertyRef Name="StaticTextId" />
+    </Key>
+    <Property Name="LblId" Type="int" Nullable="false" />
+    <Property Name="StaticTextId" Type="int" Nullable="false" />
+    <Property Name="FieldPrefix" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="TextEn" Type="nvarchar(max)" />
+    <Property Name="TextAr" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="StatusLib">
+    <Key>
+      <PropertyRef Name="StatusId" />
+    </Key>
+    <Property Name="StatusId" Type="tinyint" Nullable="false" />
+    <Property Name="StatusName" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SystemSetup">
+    <Key>
+      <PropertyRef Name="CompanyId" />
+    </Key>
+    <Property Name="CompanyId" Type="int" Nullable="false" />
+    <Property Name="CarrierPrefix" Type="varchar" MaxLength="5" />
+    <Property Name="ShipperPrefix" Type="varchar" MaxLength="5" />
+    <Property Name="ConsigneePrefix" Type="varchar" MaxLength="5" />
+    <Property Name="NotifierPrefix" Type="varchar" MaxLength="5" />
+    <Property Name="ContractorPrefix" Type="varchar" MaxLength="5" />
+    <Property Name="ImportPrefix" Type="varchar" MaxLength="5" />
+    <Property Name="ExportPrefix" Type="varchar" MaxLength="5" />
+    <Property Name="DefaultCurrencyId" Type="int" />
+  </EntityType>
+  <EntityType Name="TruckingCostLib">
+    <Key>
+      <PropertyRef Name="TruckingCostId" />
+    </Key>
+    <Property Name="TruckingCostId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TruckingCostName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="TruckingCostNameAr" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="TruckingOrder">
+    <Key>
+      <PropertyRef Name="TruckingOrderId" />
+    </Key>
+    <Property Name="TruckingOrderId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TruckingOrderCode" Type="varchar" MaxLength="15" />
+    <Property Name="OperationId" Type="int" Nullable="false" />
+    <Property Name="OrderFrom" Type="tinyint" Nullable="false" />
+    <Property Name="HouseBillId" Type="int" />
+    <Property Name="OperationCode" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="HouseBL" Type="varchar" MaxLength="30" />
+    <Property Name="BookingNo" Type="varchar" MaxLength="30" />
+    <Property Name="FromAreaId" Type="int" Nullable="false" />
+    <Property Name="ToAreaId" Type="int" Nullable="false" />
+    <Property Name="FromCityId" Type="int" />
+    <Property Name="ToCityId" Type="int" />
+    <Property Name="ShipperId" Type="int" />
+    <Property Name="CarrierId" Type="int" />
+    <Property Name="ConsigneeId" Type="int" />
+    <Property Name="NeedArriveDate" Type="datetime" Nullable="false" />
+    <Property Name="NeedArriveTime" Type="time" Precision="1" Nullable="false" />
+    <Property Name="ShipFromAddress" Type="nvarchar" MaxLength="500" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="CreateBy" Type="nvarchar" MaxLength="128" />
+    <Property Name="StatusId" Type="tinyint" Nullable="false" />
+    <Property Name="AssignToUserId" Type="nvarchar" MaxLength="128" />
+  </EntityType>
+  <EntityType Name="TruckingOrderCost">
+    <Key>
+      <PropertyRef Name="TruckingOrderCostId" />
+      <PropertyRef Name="TruckingOrderId" />
+      <PropertyRef Name="TruckingCostId" />
+    </Key>
+    <Property Name="TruckingOrderCostId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TruckingOrderId" Type="int" Nullable="false" />
+    <Property Name="TruckingCostId" Type="int" Nullable="false" />
+    <Property Name="ContractorId" Type="int" Nullable="false" />
+    <Property Name="TruckingCostNet" Type="decimal" Precision="18" Scale="3" Nullable="false" />
+    <Property Name="TruckingCostSelling" Type="decimal" Precision="18" Scale="3" Nullable="false" />
+    <Property Name="CurrencyId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TruckingOrderDetail">
+    <Key>
+      <PropertyRef Name="TruckingOrderId" />
+    </Key>
+    <Property Name="TruckingOrderId" Type="int" Nullable="false" />
+    <Property Name="ContractorId" Type="int" Nullable="false" />
+    <Property Name="TruckingOrderCode" Type="varchar" MaxLength="10" />
+    <Property Name="DriverName" Type="nvarchar" MaxLength="50" />
+    <Property Name="DriverMobile" Type="varchar" MaxLength="50" />
+    <Property Name="ArriveDate" Type="datetime" />
+    <Property Name="ArriveTime" Type="time" Precision="1" />
+    <Property Name="LeaveDate" Type="datetime" />
+    <Property Name="LeaveTime" Type="time" Precision="1" />
+    <Property Name="LoadedDate" Type="datetime" />
+    <Property Name="LoadedTime" Type="time" Precision="1" />
+    <Property Name="Notes" Type="nvarchar" MaxLength="500" />
+    <Property Name="FollowUpDate" Type="datetime" />
+    <Property Name="FollowUpBy" Type="nvarchar" MaxLength="128" />
+    <Property Name="CostCurrencyId" Type="int" />
+  </EntityType>
+  <EntityType Name="Vessel">
+    <Key>
+      <PropertyRef Name="VesselId" />
+    </Key>
+    <Property Name="VesselId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="VesselName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="CarrierId" Type="int" />
+  </EntityType>
+  <Association Name="FK_Agent_City">
+    <End Role="City" Type="Self.City" Multiplicity="0..1" />
+    <End Role="Agent" Type="Self.Agent" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="City">
+        <PropertyRef Name="CityId" />
+      </Principal>
+      <Dependent Role="Agent">
+        <PropertyRef Name="CityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Agent_Country">
+    <End Role="Country" Type="Self.Country" Multiplicity="0..1" />
+    <End Role="Agent" Type="Self.Agent" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country">
+        <PropertyRef Name="CountryId" />
+      </Principal>
+      <Dependent Role="Agent">
+        <PropertyRef Name="CountryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AgentContact_Agent">
+    <End Role="Agent" Type="Self.Agent" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AgentContact" Type="Self.AgentContact" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Agent">
+        <PropertyRef Name="AgentId" />
+      </Principal>
+      <Dependent Role="AgentContact">
+        <PropertyRef Name="AgentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Area_City">
+    <End Role="City" Type="Self.City" Multiplicity="1" />
+    <End Role="Area" Type="Self.Area" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="City">
+        <PropertyRef Name="CityId" />
+      </Principal>
+      <Dependent Role="Area">
+        <PropertyRef Name="CityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Area_Country">
+    <End Role="Country" Type="Self.Country" Multiplicity="1" />
+    <End Role="Area" Type="Self.Area" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country">
+        <PropertyRef Name="CountryId" />
+      </Principal>
+      <Dependent Role="Area">
+        <PropertyRef Name="CountryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Carrier_City">
+    <End Role="City" Type="Self.City" Multiplicity="0..1" />
+    <End Role="Carrier" Type="Self.Carrier" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="City">
+        <PropertyRef Name="CityId" />
+      </Principal>
+      <Dependent Role="Carrier">
+        <PropertyRef Name="CityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Carrier_Country">
+    <End Role="Country" Type="Self.Country" Multiplicity="0..1" />
+    <End Role="Carrier" Type="Self.Carrier" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country">
+        <PropertyRef Name="CountryId" />
+      </Principal>
+      <Dependent Role="Carrier">
+        <PropertyRef Name="CountryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CarrierContact_Carrier">
+    <End Role="Carrier" Type="Self.Carrier" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="CarrierContact" Type="Self.CarrierContact" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Carrier">
+        <PropertyRef Name="CarrierId" />
+      </Principal>
+      <Dependent Role="CarrierContact">
+        <PropertyRef Name="CarrierId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CarrierRate_Carrier">
+    <End Role="Carrier" Type="Self.Carrier" Multiplicity="1" />
+    <End Role="CarrierRate" Type="Self.CarrierRate" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Carrier">
+        <PropertyRef Name="CarrierId" />
+      </Principal>
+      <Dependent Role="CarrierRate">
+        <PropertyRef Name="CarrierId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CarrierRate_ContainerType">
+    <End Role="ContainerType" Type="Self.ContainerType" Multiplicity="1" />
+    <End Role="CarrierRate" Type="Self.CarrierRate" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ContainerType">
+        <PropertyRef Name="ContainerTypeId" />
+      </Principal>
+      <Dependent Role="CarrierRate">
+        <PropertyRef Name="ContainerTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CarrierRate_Country">
+    <End Role="Country" Type="Self.Country" Multiplicity="1" />
+    <End Role="CarrierRate" Type="Self.CarrierRate" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country">
+        <PropertyRef Name="CountryId" />
+      </Principal>
+      <Dependent Role="CarrierRate">
+        <PropertyRef Name="FromCountryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CarrierRate_Country1">
+    <End Role="Country" Type="Self.Country" Multiplicity="1" />
+    <End Role="CarrierRate" Type="Self.CarrierRate" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country">
+        <PropertyRef Name="CountryId" />
+      </Principal>
+      <Dependent Role="CarrierRate">
+        <PropertyRef Name="ToCountryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CarrierRate_Currency">
+    <End Role="Currency" Type="Self.Currency" Multiplicity="0..1" />
+    <End Role="CarrierRate" Type="Self.CarrierRate" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Currency">
+        <PropertyRef Name="CurrencyId" />
+      </Principal>
+      <Dependent Role="CarrierRate">
+        <PropertyRef Name="FreighCurrencyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CarrierRate_Currency1">
+    <End Role="Currency" Type="Self.Currency" Multiplicity="0..1" />
+    <End Role="CarrierRate" Type="Self.CarrierRate" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Currency">
+        <PropertyRef Name="CurrencyId" />
+      </Principal>
+      <Dependent Role="CarrierRate">
+        <PropertyRef Name="ThcCurrencyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CarrierRate_Port">
+    <End Role="Port" Type="Self.Port" Multiplicity="1" />
+    <End Role="CarrierRate" Type="Self.CarrierRate" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Port">
+        <PropertyRef Name="PortId" />
+      </Principal>
+      <Dependent Role="CarrierRate">
+        <PropertyRef Name="FromPortId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CarrierRate_Port1">
+    <End Role="Port" Type="Self.Port" Multiplicity="1" />
+    <End Role="CarrierRate" Type="Self.CarrierRate" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Port">
+        <PropertyRef Name="PortId" />
+      </Principal>
+      <Dependent Role="CarrierRate">
+        <PropertyRef Name="ToPortId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CarrierRateTransit_CarrierRate">
+    <End Role="CarrierRate" Type="Self.CarrierRate" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="CarrierRateTransit" Type="Self.CarrierRateTransit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CarrierRate">
+        <PropertyRef Name="CarrierRateId" />
+      </Principal>
+      <Dependent Role="CarrierRateTransit">
+        <PropertyRef Name="CarrierRateId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CarrierRateTransit_Port">
+    <End Role="Port" Type="Self.Port" Multiplicity="1" />
+    <End Role="CarrierRateTransit" Type="Self.CarrierRateTransit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Port">
+        <PropertyRef Name="PortId" />
+      </Principal>
+      <Dependent Role="CarrierRateTransit">
+        <PropertyRef Name="TransitPortId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_City_Country">
+    <End Role="Country" Type="Self.Country" Multiplicity="1" />
+    <End Role="City" Type="Self.City" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country">
+        <PropertyRef Name="CountryId" />
+      </Principal>
+      <Dependent Role="City">
+        <PropertyRef Name="CountryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Consignee_City">
+    <End Role="City" Type="Self.City" Multiplicity="0..1" />
+    <End Role="Consignee" Type="Self.Consignee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="City">
+        <PropertyRef Name="CityId" />
+      </Principal>
+      <Dependent Role="Consignee">
+        <PropertyRef Name="CityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Consignee_Country">
+    <End Role="Country" Type="Self.Country" Multiplicity="0..1" />
+    <End Role="Consignee" Type="Self.Consignee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country">
+        <PropertyRef Name="CountryId" />
+      </Principal>
+      <Dependent Role="Consignee">
+        <PropertyRef Name="CountryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ConsigneeContact_Consignee">
+    <End Role="Consignee" Type="Self.Consignee" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="ConsigneeContact" Type="Self.ConsigneeContact" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Consignee">
+        <PropertyRef Name="ConsigneeId" />
+      </Principal>
+      <Dependent Role="ConsigneeContact">
+        <PropertyRef Name="ConsigneeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Contractor_City">
+    <End Role="City" Type="Self.City" Multiplicity="0..1" />
+    <End Role="Contractor" Type="Self.Contractor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="City">
+        <PropertyRef Name="CityId" />
+      </Principal>
+      <Dependent Role="Contractor">
+        <PropertyRef Name="CityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Contractor_Country">
+    <End Role="Country" Type="Self.Country" Multiplicity="0..1" />
+    <End Role="Contractor" Type="Self.Contractor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country">
+        <PropertyRef Name="CountryId" />
+      </Principal>
+      <Dependent Role="Contractor">
+        <PropertyRef Name="CountryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ContractorContact_Contractor">
+    <End Role="Contractor" Type="Self.Contractor" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="ContractorContact" Type="Self.ContractorContact" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Contractor">
+        <PropertyRef Name="ContractorId" />
+      </Principal>
+      <Dependent Role="ContractorContact">
+        <PropertyRef Name="ContractorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ContractorRate_Area">
+    <End Role="Area" Type="Self.Area" Multiplicity="0..1" />
+    <End Role="ContractorRate" Type="Self.ContractorRate" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Area">
+        <PropertyRef Name="AreaId" />
+      </Principal>
+      <Dependent Role="ContractorRate">
+        <PropertyRef Name="FromAreaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ContractorRate_Area1">
+    <End Role="Area" Type="Self.Area" Multiplicity="0..1" />
+    <End Role="ContractorRate" Type="Self.ContractorRate" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Area">
+        <PropertyRef Name="AreaId" />
+      </Principal>
+      <Dependent Role="ContractorRate">
+        <PropertyRef Name="ToAreaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ContractorRate_City">
+    <End Role="City" Type="Self.City" Multiplicity="1" />
+    <End Role="ContractorRate" Type="Self.ContractorRate" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="City">
+        <PropertyRef Name="CityId" />
+      </Principal>
+      <Dependent Role="ContractorRate">
+        <PropertyRef Name="FromCityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ContractorRate_City1">
+    <End Role="City" Type="Self.City" Multiplicity="1" />
+    <End Role="ContractorRate" Type="Self.ContractorRate" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="City">
+        <PropertyRef Name="CityId" />
+      </Principal>
+      <Dependent Role="ContractorRate">
+        <PropertyRef Name="ToCityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ContractorRate_ContainerType">
+    <End Role="ContainerType" Type="Self.ContainerType" Multiplicity="1" />
+    <End Role="ContractorRate" Type="Self.ContractorRate" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ContainerType">
+        <PropertyRef Name="ContainerTypeId" />
+      </Principal>
+      <Dependent Role="ContractorRate">
+        <PropertyRef Name="ContainerTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ContractorRate_Contractor">
+    <End Role="Contractor" Type="Self.Contractor" Multiplicity="1" />
+    <End Role="ContractorRate" Type="Self.ContractorRate" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Contractor">
+        <PropertyRef Name="ContractorId" />
+      </Principal>
+      <Dependent Role="ContractorRate">
+        <PropertyRef Name="ContractorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ContractorRate_Currency">
+    <End Role="Currency" Type="Self.Currency" Multiplicity="1" />
+    <End Role="ContractorRate" Type="Self.ContractorRate" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Currency">
+        <PropertyRef Name="CurrencyId" />
+      </Principal>
+      <Dependent Role="ContractorRate">
+        <PropertyRef Name="CurrencyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CurrencyExchage_Currency">
+    <End Role="Currency" Type="Self.Currency" Multiplicity="1" />
+    <End Role="CurrencyExchage" Type="Self.CurrencyExchage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Currency">
+        <PropertyRef Name="CurrencyId" />
+      </Principal>
+      <Dependent Role="CurrencyExchage">
+        <PropertyRef Name="FromCurrencyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CurrencyExchage_Currency1">
+    <End Role="Currency" Type="Self.Currency" Multiplicity="1" />
+    <End Role="CurrencyExchage" Type="Self.CurrencyExchage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Currency">
+        <PropertyRef Name="CurrencyId" />
+      </Principal>
+      <Dependent Role="CurrencyExchage">
+        <PropertyRef Name="ToCurrencyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Notifier_City">
+    <End Role="City" Type="Self.City" Multiplicity="0..1" />
+    <End Role="Notifier" Type="Self.Notifier" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="City">
+        <PropertyRef Name="CityId" />
+      </Principal>
+      <Dependent Role="Notifier">
+        <PropertyRef Name="CityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Notifier_Country">
+    <End Role="Country" Type="Self.Country" Multiplicity="0..1" />
+    <End Role="Notifier" Type="Self.Notifier" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country">
+        <PropertyRef Name="CountryId" />
+      </Principal>
+      <Dependent Role="Notifier">
+        <PropertyRef Name="CountryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_NotifierContact_Notifier">
+    <End Role="Notifier" Type="Self.Notifier" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="NotifierContact" Type="Self.NotifierContact" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Notifier">
+        <PropertyRef Name="NotifierId" />
+      </Principal>
+      <Dependent Role="NotifierContact">
+        <PropertyRef Name="NotifierId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Port_City">
+    <End Role="City" Type="Self.City" Multiplicity="1" />
+    <End Role="Port" Type="Self.Port" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="City">
+        <PropertyRef Name="CityId" />
+      </Principal>
+      <Dependent Role="Port">
+        <PropertyRef Name="CityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Port_Country">
+    <End Role="Country" Type="Self.Country" Multiplicity="1" />
+    <End Role="Port" Type="Self.Port" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country">
+        <PropertyRef Name="CountryId" />
+      </Principal>
+      <Dependent Role="Port">
+        <PropertyRef Name="CountryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Shipper_City">
+    <End Role="City" Type="Self.City" Multiplicity="0..1" />
+    <End Role="Shipper" Type="Self.Shipper" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="City">
+        <PropertyRef Name="CityId" />
+      </Principal>
+      <Dependent Role="Shipper">
+        <PropertyRef Name="CityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Shipper_Country">
+    <End Role="Country" Type="Self.Country" Multiplicity="0..1" />
+    <End Role="Shipper" Type="Self.Shipper" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country">
+        <PropertyRef Name="CountryId" />
+      </Principal>
+      <Dependent Role="Shipper">
+        <PropertyRef Name="CountryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ShipperContact_Shipper">
+    <End Role="Shipper" Type="Self.Shipper" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="ShipperContact" Type="Self.ShipperContact" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Shipper">
+        <PropertyRef Name="ShipperId" />
+      </Principal>
+      <Dependent Role="ShipperContact">
+        <PropertyRef Name="ShipperId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StaticTextLabel_StaticText">
+    <End Role="StaticText" Type="Self.StaticText" Multiplicity="1" />
+    <End Role="StaticTextLabel" Type="Self.StaticTextLabel" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StaticText">
+        <PropertyRef Name="StaticTextId" />
+      </Principal>
+      <Dependent Role="StaticTextLabel">
+        <PropertyRef Name="StaticTextId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TruckingOrderCost_Currency">
+    <End Role="Currency" Type="Self.Currency" Multiplicity="1" />
+    <End Role="TruckingOrderCost" Type="Self.TruckingOrderCost" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Currency">
+        <PropertyRef Name="CurrencyId" />
+      </Principal>
+      <Dependent Role="TruckingOrderCost">
+        <PropertyRef Name="CurrencyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TruckingOrderCost_TruckingCostLib">
+    <End Role="TruckingCostLib" Type="Self.TruckingCostLib" Multiplicity="1" />
+    <End Role="TruckingOrderCost" Type="Self.TruckingOrderCost" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TruckingCostLib">
+        <PropertyRef Name="TruckingCostId" />
+      </Principal>
+      <Dependent Role="TruckingOrderCost">
+        <PropertyRef Name="TruckingCostId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TruckingOrderCost_TruckingOrderDetail">
+    <End Role="TruckingOrderDetail" Type="Self.TruckingOrderDetail" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="TruckingOrderCost" Type="Self.TruckingOrderCost" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TruckingOrderDetail">
+        <PropertyRef Name="TruckingOrderId" />
+      </Principal>
+      <Dependent Role="TruckingOrderCost">
+        <PropertyRef Name="TruckingOrderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TruckingOrderDetail_Contractor">
+    <End Role="Contractor" Type="Self.Contractor" Multiplicity="1" />
+    <End Role="TruckingOrderDetail" Type="Self.TruckingOrderDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Contractor">
+        <PropertyRef Name="ContractorId" />
+      </Principal>
+      <Dependent Role="TruckingOrderDetail">
+        <PropertyRef Name="ContractorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TruckingOrderDetail_TruckingOrder">
+    <End Role="TruckingOrder" Type="Self.TruckingOrder" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="TruckingOrderDetail" Type="Self.TruckingOrderDetail" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="TruckingOrder">
+        <PropertyRef Name="TruckingOrderId" />
+      </Principal>
+      <Dependent Role="TruckingOrderDetail">
+        <PropertyRef Name="TruckingOrderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Vessel_Carrier">
+    <End Role="Carrier" Type="Self.Carrier" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Vessel" Type="Self.Vessel" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Carrier">
+        <PropertyRef Name="CarrierId" />
+      </Principal>
+      <Dependent Role="Vessel">
+        <PropertyRef Name="CarrierId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="GetCarrierRate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="getValidOnly" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="GetContractorRate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="getValidOnly" Type="bit" Mode="In" />
+  </Function>
+  <EntityContainer Name="EasyFreightModelStoreContainer">
+    <EntitySet Name="Agent" EntityType="Self.Agent" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AgentContact" EntityType="Self.AgentContact" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Area" EntityType="Self.Area" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Carrier" EntityType="Self.Carrier" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CarrierContact" EntityType="Self.CarrierContact" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CarrierRate" EntityType="Self.CarrierRate" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CarrierRateTransit" EntityType="Self.CarrierRateTransit" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="City" EntityType="Self.City" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CompanySetup" EntityType="Self.CompanySetup" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CompanySetupContact" EntityType="Self.CompanySetupContact" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Consignee" EntityType="Self.Consignee" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ConsigneeContact" EntityType="Self.ConsigneeContact" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ContainerType" EntityType="Self.ContainerType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Contractor" EntityType="Self.Contractor" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ContractorContact" EntityType="Self.ContractorContact" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ContractorRate" EntityType="Self.ContractorRate" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Country" EntityType="Self.Country" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Currency" EntityType="Self.Currency" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CurrencyExchage" EntityType="Self.CurrencyExchage" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="IncotermLib" EntityType="Self.IncotermLib" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Notifier" EntityType="Self.Notifier" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="NotifierContact" EntityType="Self.NotifierContact" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PackageType" EntityType="Self.PackageType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Port" EntityType="Self.Port" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Shipper" EntityType="Self.Shipper" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ShipperContact" EntityType="Self.ShipperContact" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="StaticText" EntityType="Self.StaticText" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="StaticTextLabel" EntityType="Self.StaticTextLabel" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="StatusLib" EntityType="Self.StatusLib" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SystemSetup" EntityType="Self.SystemSetup" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TruckingCostLib" EntityType="Self.TruckingCostLib" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TruckingOrder" EntityType="Self.TruckingOrder" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TruckingOrderCost" EntityType="Self.TruckingOrderCost" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TruckingOrderDetail" EntityType="Self.TruckingOrderDetail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Vessel" EntityType="Self.Vessel" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Agent_City" Association="Self.FK_Agent_City">
+      <End Role="City" EntitySet="City" />
+      <End Role="Agent" EntitySet="Agent" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Agent_Country" Association="Self.FK_Agent_Country">
+      <End Role="Country" EntitySet="Country" />
+      <End Role="Agent" EntitySet="Agent" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AgentContact_Agent" Association="Self.FK_AgentContact_Agent">
+      <End Role="Agent" EntitySet="Agent" />
+      <End Role="AgentContact" EntitySet="AgentContact" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Area_City" Association="Self.FK_Area_City">
+      <End Role="City" EntitySet="City" />
+      <End Role="Area" EntitySet="Area" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Area_Country" Association="Self.FK_Area_Country">
+      <End Role="Country" EntitySet="Country" />
+      <End Role="Area" EntitySet="Area" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Carrier_City" Association="Self.FK_Carrier_City">
+      <End Role="City" EntitySet="City" />
+      <End Role="Carrier" EntitySet="Carrier" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Carrier_Country" Association="Self.FK_Carrier_Country">
+      <End Role="Country" EntitySet="Country" />
+      <End Role="Carrier" EntitySet="Carrier" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CarrierContact_Carrier" Association="Self.FK_CarrierContact_Carrier">
+      <End Role="Carrier" EntitySet="Carrier" />
+      <End Role="CarrierContact" EntitySet="CarrierContact" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CarrierRate_Carrier" Association="Self.FK_CarrierRate_Carrier">
+      <End Role="Carrier" EntitySet="Carrier" />
+      <End Role="CarrierRate" EntitySet="CarrierRate" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CarrierRate_ContainerType" Association="Self.FK_CarrierRate_ContainerType">
+      <End Role="ContainerType" EntitySet="ContainerType" />
+      <End Role="CarrierRate" EntitySet="CarrierRate" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CarrierRate_Country" Association="Self.FK_CarrierRate_Country">
+      <End Role="Country" EntitySet="Country" />
+      <End Role="CarrierRate" EntitySet="CarrierRate" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CarrierRate_Country1" Association="Self.FK_CarrierRate_Country1">
+      <End Role="Country" EntitySet="Country" />
+      <End Role="CarrierRate" EntitySet="CarrierRate" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CarrierRate_Currency" Association="Self.FK_CarrierRate_Currency">
+      <End Role="Currency" EntitySet="Currency" />
+      <End Role="CarrierRate" EntitySet="CarrierRate" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CarrierRate_Currency1" Association="Self.FK_CarrierRate_Currency1">
+      <End Role="Currency" EntitySet="Currency" />
+      <End Role="CarrierRate" EntitySet="CarrierRate" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CarrierRate_Port" Association="Self.FK_CarrierRate_Port">
+      <End Role="Port" EntitySet="Port" />
+      <End Role="CarrierRate" EntitySet="CarrierRate" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CarrierRate_Port1" Association="Self.FK_CarrierRate_Port1">
+      <End Role="Port" EntitySet="Port" />
+      <End Role="CarrierRate" EntitySet="CarrierRate" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CarrierRateTransit_CarrierRate" Association="Self.FK_CarrierRateTransit_CarrierRate">
+      <End Role="CarrierRate" EntitySet="CarrierRate" />
+      <End Role="CarrierRateTransit" EntitySet="CarrierRateTransit" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CarrierRateTransit_Port" Association="Self.FK_CarrierRateTransit_Port">
+      <End Role="Port" EntitySet="Port" />
+      <End Role="CarrierRateTransit" EntitySet="CarrierRateTransit" />
+    </AssociationSet>
+    <AssociationSet Name="FK_City_Country" Association="Self.FK_City_Country">
+      <End Role="Country" EntitySet="Country" />
+      <End Role="City" EntitySet="City" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Consignee_City" Association="Self.FK_Consignee_City">
+      <End Role="City" EntitySet="City" />
+      <End Role="Consignee" EntitySet="Consignee" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Consignee_Country" Association="Self.FK_Consignee_Country">
+      <End Role="Country" EntitySet="Country" />
+      <End Role="Consignee" EntitySet="Consignee" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ConsigneeContact_Consignee" Association="Self.FK_ConsigneeContact_Consignee">
+      <End Role="Consignee" EntitySet="Consignee" />
+      <End Role="ConsigneeContact" EntitySet="ConsigneeContact" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Contractor_City" Association="Self.FK_Contractor_City">
+      <End Role="City" EntitySet="City" />
+      <End Role="Contractor" EntitySet="Contractor" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Contractor_Country" Association="Self.FK_Contractor_Country">
+      <End Role="Country" EntitySet="Country" />
+      <End Role="Contractor" EntitySet="Contractor" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ContractorContact_Contractor" Association="Self.FK_ContractorContact_Contractor">
+      <End Role="Contractor" EntitySet="Contractor" />
+      <End Role="ContractorContact" EntitySet="ContractorContact" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ContractorRate_Area" Association="Self.FK_ContractorRate_Area">
+      <End Role="Area" EntitySet="Area" />
+      <End Role="ContractorRate" EntitySet="ContractorRate" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ContractorRate_Area1" Association="Self.FK_ContractorRate_Area1">
+      <End Role="Area" EntitySet="Area" />
+      <End Role="ContractorRate" EntitySet="ContractorRate" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ContractorRate_City" Association="Self.FK_ContractorRate_City">
+      <End Role="City" EntitySet="City" />
+      <End Role="ContractorRate" EntitySet="ContractorRate" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ContractorRate_City1" Association="Self.FK_ContractorRate_City1">
+      <End Role="City" EntitySet="City" />
+      <End Role="ContractorRate" EntitySet="ContractorRate" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ContractorRate_ContainerType" Association="Self.FK_ContractorRate_ContainerType">
+      <End Role="ContainerType" EntitySet="ContainerType" />
+      <End Role="ContractorRate" EntitySet="ContractorRate" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ContractorRate_Contractor" Association="Self.FK_ContractorRate_Contractor">
+      <End Role="Contractor" EntitySet="Contractor" />
+      <End Role="ContractorRate" EntitySet="ContractorRate" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ContractorRate_Currency" Association="Self.FK_ContractorRate_Currency">
+      <End Role="Currency" EntitySet="Currency" />
+      <End Role="ContractorRate" EntitySet="ContractorRate" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CurrencyExchage_Currency" Association="Self.FK_CurrencyExchage_Currency">
+      <End Role="Currency" EntitySet="Currency" />
+      <End Role="CurrencyExchage" EntitySet="CurrencyExchage" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CurrencyExchage_Currency1" Association="Self.FK_CurrencyExchage_Currency1">
+      <End Role="Currency" EntitySet="Currency" />
+      <End Role="CurrencyExchage" EntitySet="CurrencyExchage" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Notifier_City" Association="Self.FK_Notifier_City">
+      <End Role="City" EntitySet="City" />
+      <End Role="Notifier" EntitySet="Notifier" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Notifier_Country" Association="Self.FK_Notifier_Country">
+      <End Role="Country" EntitySet="Country" />
+      <End Role="Notifier" EntitySet="Notifier" />
+    </AssociationSet>
+    <AssociationSet Name="FK_NotifierContact_Notifier" Association="Self.FK_NotifierContact_Notifier">
+      <End Role="Notifier" EntitySet="Notifier" />
+      <End Role="NotifierContact" EntitySet="NotifierContact" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Port_City" Association="Self.FK_Port_City">
+      <End Role="City" EntitySet="City" />
+      <End Role="Port" EntitySet="Port" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Port_Country" Association="Self.FK_Port_Country">
+      <End Role="Country" EntitySet="Country" />
+      <End Role="Port" EntitySet="Port" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Shipper_City" Association="Self.FK_Shipper_City">
+      <End Role="City" EntitySet="City" />
+      <End Role="Shipper" EntitySet="Shipper" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Shipper_Country" Association="Self.FK_Shipper_Country">
+      <End Role="Country" EntitySet="Country" />
+      <End Role="Shipper" EntitySet="Shipper" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ShipperContact_Shipper" Association="Self.FK_ShipperContact_Shipper">
+      <End Role="Shipper" EntitySet="Shipper" />
+      <End Role="ShipperContact" EntitySet="ShipperContact" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StaticTextLabel_StaticText" Association="Self.FK_StaticTextLabel_StaticText">
+      <End Role="StaticText" EntitySet="StaticText" />
+      <End Role="StaticTextLabel" EntitySet="StaticTextLabel" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TruckingOrderCost_Currency" Association="Self.FK_TruckingOrderCost_Currency">
+      <End Role="Currency" EntitySet="Currency" />
+      <End Role="TruckingOrderCost" EntitySet="TruckingOrderCost" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TruckingOrderCost_TruckingCostLib" Association="Self.FK_TruckingOrderCost_TruckingCostLib">
+      <End Role="TruckingCostLib" EntitySet="TruckingCostLib" />
+      <End Role="TruckingOrderCost" EntitySet="TruckingOrderCost" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TruckingOrderCost_TruckingOrderDetail" Association="Self.FK_TruckingOrderCost_TruckingOrderDetail">
+      <End Role="TruckingOrderDetail" EntitySet="TruckingOrderDetail" />
+      <End Role="TruckingOrderCost" EntitySet="TruckingOrderCost" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TruckingOrderDetail_Contractor" Association="Self.FK_TruckingOrderDetail_Contractor">
+      <End Role="Contractor" EntitySet="Contractor" />
+      <End Role="TruckingOrderDetail" EntitySet="TruckingOrderDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TruckingOrderDetail_TruckingOrder" Association="Self.FK_TruckingOrderDetail_TruckingOrder">
+      <End Role="TruckingOrder" EntitySet="TruckingOrder" />
+      <End Role="TruckingOrderDetail" EntitySet="TruckingOrderDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Vessel_Carrier" Association="Self.FK_Vessel_Carrier">
+      <End Role="Carrier" EntitySet="Carrier" />
+      <End Role="Vessel" EntitySet="Vessel" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,7 @@
+﻿@model EasyFreight.ViewModel.CashInVm
+@{
+    ViewBag.Title = "PrintReceipt";
+    Layout = "~/Views/Shared/_PrintLayout.cshtml";
+}
+
+@{Html.RenderPartial("~/Views/CashOutExpense/_ViewReceipt.cshtml", Model);}

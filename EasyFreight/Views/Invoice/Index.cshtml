@@ -1,0 +1,272 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .select2-drop {
+        z-index: 99959;
+    }
+
+    .datepicker-dropdown {
+        z-index: 99959 !important;
+    }
+
+    .border {
+        border: 1px solid #888;
+        padding-top: 2px;
+        text-align: center;
+        vertical-align: central;
+    }
+
+    .default-icon {
+        color: #777;
+    }
+
+    .clicked-icon {
+        color: #0088cc;
+    }
+
+</style>
+
+<header class="page-header">
+    <h2>A/R Invoices</h2>
+
+    <div class="right-wrapper pull-right">
+        <ol class="breadcrumbs">
+            <li>
+                <a href="@Url.Content("~/Home/Index")">
+                    <i class="fa fa-home"></i>
+                </a>
+            </li>
+            <li><span>Accounting</span></li>
+            <li><span>A/R Invoices</span></li>
+        </ol>
+
+        <a class="sidebar-right-toggle" data-open="sidebar-right"><i class="fa fa-chevron-left"></i></a>
+    </div>
+</header>
+
+<section class="panel">
+    <header class="panel-heading">
+        <div class="panel-actions">
+            <a href="#" class=""></a>
+            <a href="#" class=""></a>
+        </div>
+
+        <h2 class="panel-title"></h2>
+    </header>
+
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="mb-md">
+                    <a href="javascript:void(0)" class="modal-with-form" id="advsearchlink">
+                        <i class="fa fa-search fa-2x"></i><span style="padding-left: 8px">Advanced Search</span>
+                    </a>
+                </div>
+            </div>
+            <div class=" col-sm-1">
+                <div class="col-sm-12 border">
+                    <a id="ClearSearch" class="filter0 default-icon" title="Clear Search" href="javascript:void(0)">
+                        <i class="fa fa-eraser fa-2x"></i>
+                    </a>
+                </div>
+            </div>
+            <div class=" col-sm-2">
+                <div class="col-sm-4 border">
+                    <a id="AllType" class="filter1 clicked-icon" orderfrom="0" title="All" href="javascript:void(0)">
+                        <i class="fa fa-bars fa-2x"></i>
+                    </a>
+                </div>
+                <div class="col-sm-4 border">
+                    <a id="AirOnly" class="filter1 default-icon" orderfrom="1" title="Export" href="javascript:void(0)">
+                        <i class="fa fa-level-up fa-2x "></i>
+                    </a>
+                </div>
+                <div class="col-sm-4 border">
+                    <a id="shipOnly" href="javascript:void(0)" orderfrom="2" class="filter1 default-icon" title="Import">
+                        <i class="fa fa-level-down fa-2x"></i>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+        <div id="tbResult">
+            @Html.Partial("~/Views/Invoice/_ResultTable.cshtml")
+        </div>
+
+
+    </div>
+
+
+</section>
+
+<div id="modalForm" class="modal-block modal-block-lg mfp-hide">
+    <section class="panel">
+        <header class="panel-heading">
+            <div class="panel-actions">
+                <button class="modal-dismiss" data-dismiss="modal"><i class="fa fa-times"></i></button>
+            </div>
+            <h2 class="panel-title">Advanced Search</h2>
+        </header>
+        <div id="searchdiv" class="panel-body">
+        </div>
+        <footer class="panel-footer">
+            <div class="row">
+                <div class="col-md-12 text-right">
+                    <input type="button" class="btn btn-primary search-modal-confirm" value="Search" />
+                    <button class="btn btn-default modal-dismiss">Cancel</button>
+                </div>
+            </div>
+        </footer>
+    </section>
+</div>
+
+<div id="modalAnim" class="modal-block modal-block-lg mfp-hide">
+    <section class="panel">
+        <header class="panel-heading">
+            <div class="panel-actions">
+                <button class="modal-dismiss" data-dismiss="modal"><i class="fa fa-times"></i></button>
+            </div>
+            <h2 id="modalheader" class="panel-title">View Invoice</h2>
+        </header>
+        <div class="panel-body">
+            <div class="modal-wrapper">
+                <div id="ModalContent" class="modal-text">
+                </div>
+            </div>
+        </div>
+        <footer class="panel-footer">
+            <div class="row">
+                <div class="col-md-12 text-right">
+                    <a id="printbtn" class="btn btn-info" role="button" href="@Url.Action("PrintInvoice", "Invoice")">Print</a>
+                    <button class="btn btn-default modal-dismiss" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </footer>
+    </section>
+</div>
+
+
+<div id="modalDelete" class="modal-block mfp-hide" >
+    <section class="panel">
+        <form class="form-horizontal mb-lg" id="Form1">
+            <header class="panel-heading">
+                <div class="panel-actions">
+                    <button class="modal-dismiss" data-dismiss="modal"><i class="fa fa-times"></i></button>
+                </div>
+                <h2 class="panel-title">Delete Invoice</h2>
+            </header>
+            <div class="panel-body">
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <label class="col-sm-3 control-label" for="w4-username">Delete Reason <span class="required">*</span></label>
+                        <div class="col-sm-8">
+                            <textarea id="DeleteReason" rows="5" class="form-control" required placeholder="Enter the reason for delete"
+                                name="DeleteReason"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer class="panel-footer">
+                <div class="row">
+                    <div class="col-md-12 text-right">
+                        <input type="button" class="btn btn-primary delete-modal-confirm" value="Submit" />
+                        <button class="btn btn-default modal-dismiss">Cancel</button>
+                    </div>
+                </div>
+            </footer>
+        </form>
+    </section>
+</div>
+
+<div id="modelConfirmDelete" class="modal-block mfp-hide deleteInv">
+    <section class="panel">
+        <header class="panel-heading">
+            <h2 class="panel-title">Are you sure?</h2>
+        </header>
+        <div class="panel-body">
+            <div class="modal-wrapper">
+                <div class="modal-text">
+                    <p>Are you sure that you want to delete this Invoice?</p>
+                </div>
+            </div>
+        </div>
+        <footer class="panel-footer">
+            <div class="row">
+                <div class="col-md-12 text-right">
+                    <button id="btnConfirmDelete" class="btn btn-primary modal-confirm">Confirm</button>
+                    <button id="dialogCancel" class="btn btn-default modal-dismiss">Cancel</button>
+                </div>
+            </div>
+        </footer>
+    </section>
+</div>
+
+<div id="modelConfirmDeleteReceipt" class="modal-block mfp-hide deleteInv">
+    <section class="panel">
+        <header class="panel-heading">
+            <h2 class="panel-title">Are you sure?</h2>
+        </header>
+        <div class="panel-body">
+            <div class="modal-wrapper">
+                <div class="modal-text">
+                    <p>Are you sure that you want to delete this receipt?</p>
+                </div>
+            </div>
+        </div>
+        <footer class="panel-footer">
+            <div class="row">
+                <div class="col-md-12 text-right">
+                    <button id="btnConfirmDelete" class="btn btn-primary modal-confirmReceipt">Confirm</button>
+                    <button id="dialogCancel" class="btn btn-default modal-dismiss">Cancel</button>
+                </div>
+            </div>
+        </footer>
+    </section>
+</div>
+
+
+<div id="modalDeleteReceipt" class="modal-block mfp-hide" >
+    <section class="panel">
+        <form class="form-horizontal mb-lg" id="Form1">
+            <header class="panel-heading">
+                <div class="panel-actions">
+                    <button class="modal-dismiss" data-dismiss="modal"><i class="fa fa-times"></i></button>
+                </div>
+                <h2 class="panel-title">Delete Receipt</h2>
+            </header>
+            <div class="panel-body">
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <label class="col-sm-3 control-label" for="w4-username">Delete Reason <span class="required">*</span></label>
+                        <div class="col-sm-8">
+                            <textarea id="DeleteReasonReceipt" rows="5" class="form-control" required placeholder="Enter the reason for delete"
+                                name="DeleteReason"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer class="panel-footer">
+                <div class="row">
+                    <div class="col-md-12 text-right">
+                        <input type="button" class="btn btn-primary delete-modal-confirmReceipt" value="Submit" />
+                        <button class="btn btn-default modal-dismiss">Cancel</button>
+                    </div>
+                </div>
+            </footer>
+        </form>
+    </section>
+</div>
+
+<input type="hidden" id="ivnDele" />
+<input type="hidden" id="receiptIdDele" />
+<input type="hidden" id="receiptIvn" />
+
+
+
+@section scripts{
+    <script src="@Url.Content("~/Scripts/Invoice/IndexScript.js")"></script>
+    <script src="@Url.Content("~/Scripts/CashManagement/CashInListCommon.js")"></script>
+}

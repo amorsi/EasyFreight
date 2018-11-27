@@ -1,0 +1,26 @@
+﻿@model List<EasyFreight.ViewModel.CashOutExpense>
+<table id="serviceusage" style="margin-right:30px;width:70%" class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>Item Number</th>
+            <th>Expense Name</th>
+            <th>Amount</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{  int i = 1;}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@i</td>
+                <td>
+                    @item.ExpenseName
+                </td>
+                <td>
+                    @item.PaidAmount   @item.CurrencySign
+                </td>
+            </tr>
+            i++;
+        }
+    </tbody>
+</table>

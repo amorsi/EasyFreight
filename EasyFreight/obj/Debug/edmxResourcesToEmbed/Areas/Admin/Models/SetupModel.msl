@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="SetupModelStoreContainer" CdmEntityContainer="SetupEntities">
+    <EntitySetMapping Name="PrefixSetups">
+      <EntityTypeMapping TypeName="SetupModel.PrefixSetup">
+        <MappingFragment StoreEntitySet="PrefixSetup">
+          <ScalarProperty Name="PrefixForId" ColumnName="PrefixForId" />
+          <ScalarProperty Name="PrefixFor" ColumnName="PrefixFor" />
+          <ScalarProperty Name="PrefixChar" ColumnName="PrefixChar" />
+          <ScalarProperty Name="NumberAfterChar" ColumnName="NumberAfterChar" />
+          <ScalarProperty Name="IncludeMonth" ColumnName="IncludeMonth" />
+          <ScalarProperty Name="IncludeYear" ColumnName="IncludeYear" />
+          <ScalarProperty Name="Delimiter" ColumnName="Delimiter" />
+          <ScalarProperty Name="ResetNumberEvery" ColumnName="ResetNumberEvery" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PrefixLastIds">
+      <EntityTypeMapping TypeName="SetupModel.PrefixLastId">
+        <MappingFragment StoreEntitySet="PrefixLastId">
+          <ScalarProperty Name="LastUpdateDate" ColumnName="LastUpdateDate" />
+          <ScalarProperty Name="LastId" ColumnName="LastId" />
+          <ScalarProperty Name="PrefixForId" ColumnName="PrefixForId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Modules">
+      <EntityTypeMapping TypeName="SetupModel.Module">
+        <MappingFragment StoreEntitySet="Module">
+          <ScalarProperty Name="ModuleNameAr" ColumnName="ModuleNameAr" />
+          <ScalarProperty Name="ModuleName" ColumnName="ModuleName" />
+          <ScalarProperty Name="ModuleId" ColumnName="ModuleId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ModuleScreens">
+      <EntityTypeMapping TypeName="SetupModel.ModuleScreen">
+        <MappingFragment StoreEntitySet="ModuleScreen">
+          <ScalarProperty Name="ScreenNameAr" ColumnName="ScreenNameAr" />
+          <ScalarProperty Name="ScreenName" ColumnName="ScreenName" />
+          <ScalarProperty Name="ModuleId" ColumnName="ModuleId" />
+          <ScalarProperty Name="ScreenId" ColumnName="ScreenId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ScreenActions">
+      <EntityTypeMapping TypeName="SetupModel.ScreenAction">
+        <MappingFragment StoreEntitySet="ScreenAction">
+          <ScalarProperty Name="TempCol" ColumnName="TempCol" />
+          <ScalarProperty Name="ActionId" ColumnName="ActionId" />
+          <ScalarProperty Name="ScreenId" ColumnName="ScreenId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ScreenActionDeps">
+      <EntityTypeMapping TypeName="SetupModel.ScreenActionDep">
+        <MappingFragment StoreEntitySet="ScreenActionDep">
+          <ScalarProperty Name="TempCol" ColumnName="TempCol" />
+          <ScalarProperty Name="DepId" ColumnName="DepId" />
+          <ScalarProperty Name="ActionId" ColumnName="ActionId" />
+          <ScalarProperty Name="ScreenId" ColumnName="ScreenId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ScreenActionUsers">
+      <EntityTypeMapping TypeName="SetupModel.ScreenActionUser">
+        <MappingFragment StoreEntitySet="ScreenActionUser">
+          <ScalarProperty Name="TempCol" ColumnName="TempCol" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="ActionId" ColumnName="ActionId" />
+          <ScalarProperty Name="ScreenId" ColumnName="ScreenId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SecActionLibs">
+      <EntityTypeMapping TypeName="SetupModel.SecActionLib">
+        <MappingFragment StoreEntitySet="SecActionLib">
+          <ScalarProperty Name="ActionNameAr" ColumnName="ActionNameAr" />
+          <ScalarProperty Name="ActionName" ColumnName="ActionName" />
+          <ScalarProperty Name="ActionId" ColumnName="ActionId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserEmployees">
+      <EntityTypeMapping TypeName="SetupModel.UserEmployee">
+        <MappingFragment StoreEntitySet="UserEmployee">
+          <ScalarProperty Name="TempCol" ColumnName="TempCol" />
+          <ScalarProperty Name="EmpId" ColumnName="EmpId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetUsers">
+      <EntityTypeMapping TypeName="SetupModel.AspNetUser">
+        <MappingFragment StoreEntitySet="AspNetUsers">
+          <ScalarProperty Name="Discriminator" ColumnName="Discriminator" />
+          <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+          <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetUserRoles">
+      <EntityTypeMapping TypeName="SetupModel.AspNetUserRole">
+        <MappingFragment StoreEntitySet="AspNetUserRoles">
+          <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

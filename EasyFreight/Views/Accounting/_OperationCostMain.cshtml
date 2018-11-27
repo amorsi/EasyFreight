@@ -1,0 +1,106 @@
+﻿@model EasyFreight.ViewModel.OperationCostAccMainVm
+
+<section class="panel panel-info">
+    <header class="panel-heading">
+        <div class="panel-actions">
+            <a href="#"></a>
+            <a href="#"></a>
+        </div>
+        <h2 class="panel-title">Operation Details</h2>
+    </header>
+    <div class="panel-body">
+        <div class="col-sm-6 col-xs-6  form-group">
+            <label class="col-md-5 col-xs-5 control-label">Operation Code</label>
+            <div class="col-md-7 col-xs-7">
+                <span class="text-dark">@Model.OperationCode</span>
+            </div>
+        </div>
+        <div class="col-sm-6 col-xs-6 form-group">
+            <label class="col-md-5 col-xs-5 control-label">Print Date</label>
+            <div class="col-md-7 col-xs-7">
+                <span class="text-dark">@DateTime.Now.ToString("dd/MM/yyyy")</span>
+            </div>
+        </div>
+        
+        <div class="col-sm-6 col-xs-6 form-group">
+            <label class="col-md-5 col-xs-5 control-label">Shipper</label>
+            <div class="col-md-7 col-xs-7">
+                <span class="text-dark">@Model.ShipperName</span>
+            </div>
+        </div>
+        <div class="col-sm-6 col-xs-6 form-group">
+            <label class="col-md-5 col-xs-5 control-label">Containers</label>
+            <div class="col-md-7 col-xs-7">
+                <span class="text-dark">@Model.ContainerSummary</span>
+            </div>
+        </div>
+
+        <div class="col-sm-6 col-xs-6 form-group">
+            <label class="col-md-5 col-xs-5 control-label">Consignee</label>
+            <div class="col-md-7 col-xs-7">
+                <span class="text-dark">@Model.ConsigneeName</span>
+            </div>
+        </div>
+        <div class="col-sm-6 col-xs-6 form-group">
+            <label class="col-md-5 col-xs-5 control-label">From Port</label>
+            <div class="col-md-7 col-xs-7">
+                <span class="text-dark">@Model.FromPort</span>
+            </div>
+        </div>
+
+        <div class="col-sm-6 col-xs-6 form-group">
+            <label class="col-md-5 col-xs-5 control-label">Agent</label>
+            <div class="col-md-7 col-xs-7">
+                <span class="text-dark">@Model.AgentName</span>
+            </div>
+        </div>
+        <div class="col-sm-6 col-xs-6 form-group">
+            <label class="col-md-5 col-xs-5 control-label">To Port</label>
+            <div class="col-md-7 col-xs-7">
+                <span class="text-dark">@Model.ToPort</span>
+            </div>
+        </div>
+
+        <div class="col-sm-6 col-xs-6 form-group">
+            <label class="col-md-5 col-xs-5 control-label">Clearance By</label>
+            <div class="col-md-7 col-xs-7">
+                <span class="text-dark">@Model.ClearanceByName</span>
+            </div>
+        </div>
+        <div class="col-sm-6 col-xs-6 form-group">
+            <label class="col-md-5 col-xs-5 control-label">Carrier</label>
+            <div class="col-md-7 col-xs-7">
+                <span class="text-dark">@Model.CarrierName</span>
+            </div>
+        </div>
+
+        <div class="col-sm-6 col-xs-6 form-group">
+            <label class="col-md-5 col-xs-5 control-label">Truck By</label>
+            <div class="col-md-7 col-xs-7">
+                <span class="text-dark">@Model.TruckByName</span>
+            </div>
+        </div>
+        <div class="col-sm-6 col-xs-6 form-group">
+            <label class="col-md-5 col-xs-5 control-label">MBL</label>
+            <div class="col-md-7 col-xs-7">
+                <span class="text-dark">@Model.MBL</span>
+            </div>
+        </div>
+        
+
+        <div class="col-sm-6 col-xs-6 form-group">
+            <label class="col-md-5 col-xs-5 control-label">Vessel Name</label>
+            <div class="col-md-7 col-xs-7">
+                <span class="text-dark">@Model.VesselName</span>
+            </div>
+        </div>
+        <div class="col-sm-6 col-xs-6 form-group">
+            <label class="col-md-5 col-xs-5 control-label">HBL</label>
+            <div class="col-md-7 col-xs-7">
+                <span class="text-dark">@Model.HouseBL</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+@{Html.RenderPartial("~/Views/Accounting/_OperationCostDet.cshtml", Model);}

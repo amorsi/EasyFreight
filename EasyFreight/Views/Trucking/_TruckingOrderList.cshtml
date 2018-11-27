@@ -1,0 +1,65 @@
+﻿@model List<EasyFreight.ViewModel.TruckingOrderListVm>
+@foreach (var item in Model)
+{
+    <section class="panel trucklist">
+        <div class="panel-body" style="border-left: solid #0088cc">
+
+            <div class="col-sm-4 form-group">
+                <label class="col-md-5 control-label">Operation Code</label>
+                <div class="col-md-7">
+                    <span class="text-dark">@item.OperationCode</span>
+                </div>
+            </div>
+
+            <div class="col-sm-4 form-group">
+                <label class="col-md-5 control-label">House Bill</label>
+                <div class="col-md-7">
+                    <span class="text-dark">@item.HouseBL</span>
+                </div>
+            </div>
+
+            <div class="col-sm-4 form-group">
+                <label class="col-md-5 control-label">Need Arrive</label>
+                <div class="col-md-7">
+                    <span class="text-dark">@item.NeedArriveDate.ToString("dd/MM/yyyy")  @item.NeedArriveTime.ToString(@"h\:mm")</span>
+                </div>
+            </div>
+
+            <div class="col-sm-4 form-group">
+                <label class="col-md-5 control-label">Client</label>
+                <div class="col-md-7">
+                    <span class="text-dark">@item.ClientName</span>
+                </div>
+            </div>
+            <div class="col-sm-4 form-group">
+                <label class="col-md-5 control-label">Packages #</label>
+                <div class="col-md-7">
+                    <span class="text-dark">@item.NumberOfPackages</span>
+                </div>
+            </div>
+            <div class="col-sm-4 form-group">
+                <div class="btn-group btn-group-justified">
+                    <a role="button" class="btn btn-info viewtruck" truckid="@item.TruckingOrderId">View</a>
+                    <a role="button" class="btn btn-primary edittruck" hbid="@item.HouseBillId" statusid="@item.StatusId"
+                       truckid="@item.TruckingOrderId">Edit</a>
+                    <a href="@Url.Content("~/Trucking/PrintDetails?truckingOrderId=" + item.TruckingOrderId + "")" 
+                       class="btn btn-default printtruck" truckid="@item.TruckingOrderId">Print</a>
+                    @if(item.StatusId == 1) //only if new can cancel it
+                    {
+                        <a role="button" class="btn btn-danger canceltruck" truckid="@item.TruckingOrderId">Cancel</a>
+                    }
+                    
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+}
+
+@if (Model.Count == 0)
+{
+    <div class="well warning">
+        No Truncking orders. To add one please go to House Bill tabe and click add trucking odrer.
+    </div>
+}

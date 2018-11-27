@@ -1,0 +1,83 @@
+﻿@model EasyFreight.ViewModel.InvoiceVm
+
+<div class="table-responsive">
+    <table class="table invoice-items" id="invdetails">
+        <thead>
+            <tr class="h4 text-dark">
+                <th id="cell-id" class="text-semibold">#</th>
+                <th id="cell-item" class="text-semibold">Item</th>
+                <th id="cell-price" class="text-center text-semibold">Price (@Model.CurrencySign)</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{int index = 1, totalIndex = 0;}
+            @foreach (var item in Model.InvoiceDetails)
+            {
+
+                <tr>
+                    <td>@index</td>
+                    <td class="text-semibold text-dark">@(string.IsNullOrEmpty(item.PrintedTitle) ? item.CostName : item.PrintedTitle)</td>
+                    <td class="text-center"> @item.InvoiceAmount</td>
+                </tr>
+                index++;
+            }
+
+        </tbody>
+    </table>
+</div>
+<div class="invoice-summary">
+    <div class="row">
+        <div class="col-sm-5 col-sm-offset-7">
+            <table class="table h5 text-dark">
+                <tbody>
+                    @*<tr class="b-top-none">
+                            <td colspan="2">Subtotal</td>
+                            <td class="text-left">$73.00</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">Shipping</td>
+                            <td class="text-left">$0.00</td>
+                        </tr>*@
+                    @foreach (var item in Model.InvoiceTotals)
+                    {
+                        if(Model.InvoiceType == 0) // AR Invoice .. not AP
+                        {
+                            <tr class="b-top-none">
+                            <td colspan="2">Subtotal</td>
+                            <td class="text-left suminv">@item.TotalBeforeTax</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">Tax </td>
+                            <td class="text-left">
+                             -  @item.TaxDepositAmount
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">VAT </td>
+                            <td class="text-left">
+                                @item.VatTaxAmount
+                            </td>
+                        </tr>
+                        }
+
+                        <tr class="h4">
+                            <td colspan="2">Grand Total (@item.CurrencySign)</td>
+                            <td class="text-left">
+                                @item.TotalAmount 
+
+                                <input type="hidden" class="suminvhiddenaftertax" 
+                                       value="@item.TotalAmount">
+                              
+                                <input type="hidden" class="suminvhidden" 
+                                       value="@item.TotalBeforeTax">
+                            </td>
+                        </tr>
+                        
+                        totalIndex++;
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

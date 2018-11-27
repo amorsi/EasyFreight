@@ -1,0 +1,121 @@
+﻿@model EasyFreight.ViewModel.CurrencyExchangeVm
+@{
+    ViewBag.Title = "CurrencyExchange";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<header class="page-header">
+    <h2>Cash Movement</h2>
+
+    <div class="right-wrapper pull-right">
+        <ol class="breadcrumbs">
+            <li>
+                <a href="@Url.Content("~/Home/Index")">
+                    <i class="fa fa-home"></i>
+                </a>
+            </li>
+            <li><span>Accounting</span></li>
+            <li><span>Cash Movement</span></li>
+        </ol>
+
+        <a class="sidebar-right-toggle" data-open="sidebar-right"><i class="fa fa-chevron-left"></i></a>
+    </div>
+</header>
+
+<section class="panel">
+    <header class="panel-heading">
+        <h2 class="panel-title">
+            Currency Exchange
+        </h2>
+    </header>
+    <div class="panel-body">
+        <form id="invform">
+
+             <section class="panel">
+            <header class="panel-heading" style="padding-bottom: 30px">
+                <h2 class="panel-title col-md-6">Current Cash Balance</h2>
+            </header>
+            <div class="panel-body"> 
+                <div id="tbResult">
+                    <table class="table table-bordered table-striped mb-none" id="datatable-default">
+                         <thead>
+                            <tr>
+                                 <th>Account Name EN </th>
+                                 <th>EGP</th>
+                                <th>USD</th>
+                                <th>EUR</th>
+                                <th>GBP</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in  ViewBag.CashBalance as List<EasyFreight.ViewModel.CashBankRptVm>)
+                            {
+                                <tr    class="gradeX"> 
+                                    <td>@item.AccountNameEn</td> 
+                                    <td>@item.EGP </td>
+                                    <td>@item.USD</td>
+                                    <td>@item.EUR</td>
+                                    <td>@item.GBP</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div> 
+            </div>
+         </section>
+
+            <div class="col-sm-4 form-group">
+                <label class="col-sm-4 control-label" for="w4-username">From<span class="required">*</span></label>
+                <div class="col-sm-8">
+                    @Html.Partial("~/Views/Shared/_InputWithCurrencySelect.cshtml",
+                                    Model.CurrencyList,
+                                    new ViewDataDictionary
+                                    {
+                                    { "inputName", "CurrentAmount" },
+                                    { "inputValue", Model.CurrentAmount },
+                                    { "selectedCurrencyId", Model.CurrentCurrencyId },
+                                    { "ddlCurrencyIdName", "CurrentCurrencyId" },
+                                    { "defaultCurrencyId", 2 },{"required","required"}
+                                    })
+                </div>
+            </div>
+
+            <div class="col-sm-4 form-group">
+                <label class="col-sm-4 control-label" for="w4-username">To<span class="required">*</span></label>
+                <div class="col-sm-8">
+                    @Html.Partial("~/Views/Shared/_InputWithCurrencySelect.cshtml",
+                                   Model.CurrencyList,
+                                    new ViewDataDictionary
+                                    {
+                                    { "inputName", "NewAmount" },
+                                    { "inputValue", Model.NewAmount },
+                                    { "selectedCurrencyId", Model.NewCurrencyId },
+                                    { "ddlCurrencyIdName", "NewCurrencyId" },
+                                    { "defaultCurrencyId", 1 },{"required","required"}
+                                    })
+                </div>
+            </div>
+
+            <div class="col-sm-8 form-group">
+                <label for="textareaDefault" class="col-md-2 control-label">Notes</label>
+                <div class="col-md-7">
+                    <textarea id="textareaDefault" name="Notes" rows="3" class="form-control">@Model.Notes</textarea>
+                </div>
+            </div>
+
+            @Html.HiddenFor(x => x.CreateDate)
+            @Html.HiddenFor(x => x.CreateBy)
+
+        </form>
+        <div class="col-sm-10 text-right mr-lg">
+            <a href="javascript:void(0)" id="saveexchange" class="btn btn-default">Confirm Exchange</a>
+            <a href="@Url.Content("~/CashMovement/index")" class="btn btn-danger">Cancel</a>
+        </div>
+    </div>
+</section>
+
+@section scripts{
+    <script src="@Url.Content("~/Scripts/CurrencyWithSelect.js")"></script>
+    <script src="@Url.Content("~/Scripts/CashMovement/CurrencyExchange.js")"></script>
+}

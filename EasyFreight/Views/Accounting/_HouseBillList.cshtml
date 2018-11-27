@@ -1,0 +1,81 @@
+﻿@model List<EasyFreight.ViewModel.HouseBillListVm>
+
+<section class="panel">
+
+    <div class="panel-body">
+        <div class="table-responsive">
+            <table id="tbinvlist" class="table table-striped mb-none">
+                <thead>
+                    <tr>
+                        <th>House Bill</th>
+                        <th>HB Date</th>
+                        <th>Client</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @item.HouseBL
+                            </td>
+                            <td>
+                                @(item.OperationDate == null ? "" : item.OperationDate.Value.ToString("dd/MM/yyyy"))
+                            </td>
+                            <td>
+                                @item.ClientName
+                            </td>
+                            
+                            <td>
+                                <div class="btn-group" role="group">
+                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Actions
+                                        <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a role="button" href="javascript:void(0)" class="hbdetails"
+                                               oprid="@item.OperationId" hbid="@item.HouseBillId"><i class="fa fa-info-circle"></i>Details</a>
+                                        </li>
+                                        <li>
+                                            <a role="button" href="javascript:void(0)" class="hbcost"
+                                               oprid="@item.OperationId" hbid="@item.HouseBillId"><i class="fa fa-usd"></i>HBL Cost</a>
+                                        </li>
+
+                                        <li role="separator" class="divider"></li>
+                                       
+                                        <li>
+                                            <a href="@Url.Content("~/Accounting/AddOperationCost?hbId=" + item.HouseBillId)"  class="hbAddcost"
+                                               oprid="@item.OperationId" hbid="@item.HouseBillId"><i class="fa fa-usd"></i>Add Cost</a>
+                                        </li>
+                                               
+                                        <li>
+                                            <a href="@Url.Content("~/Invoice/AddInvoice?hbId=" + item.HouseBillId)"
+                                               class="invoice">
+                                                <i class="fa fa-newspaper-o"></i> Add Invoice
+                                            </a>
+                                        </li>
+                                        @*<li>
+                                            <a href="@Url.Content("~/APInvoice/AddInvoice?hbId=" + item.HouseBillId + "&invFor=1")"
+                                               class="invoice">
+                                                <i class="fa fa-newspaper-o"></i>(A/P) Add Carrier Invoice
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="@Url.Content("~/APInvoice/AddInvoice?hbId=" + item.HouseBillId + "&invFor=2")"
+                                               class="invoice">
+                                                <i class="fa fa-newspaper-o"></i>(A/P) Add Contractor Invoice
+                                            </a>
+                                        </li>*@
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+

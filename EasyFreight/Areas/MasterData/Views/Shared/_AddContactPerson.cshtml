@@ -1,0 +1,93 @@
+﻿@model List<EasyFreight.ViewModel.ContactPersonVm>
+
+@{
+    int index = 0;
+    int lastIndex = Model.Count() - 1;
+}
+
+<div class="col-md-12">
+    <h3>Contact persons</h3>
+</div>
+<div class="row contactform form-template" style="display: none;">
+    <div class="col-sm-4">
+        <div class="form-group">
+            <label class="control-label">Contact Name</label>
+            <input type="text" name="ContactPersons[-1].ContactName" class="form-control notReq">
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="form-group">
+            <label class="control-label">Phone Number</label>
+            <input type="text" name="ContactPersons[-1].PhoneNumber" class="form-control notReq">
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="form-group">
+            <label class="control-label">Email</label>
+            <div class="input-group">
+                <span class="input-group-addon">
+                    <i class="fa fa-envelope"></i>
+                </span>
+                <input type="email" placeholder="eg.: email@email.com"
+                    class="form-control notReq" name="ContactPersons[-1].Email">
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-1" style="margin-top: 30px">
+        <div class="form-group">
+            <label class="control-label"></label>
+            <a class="on-default remove-contact" href="javascript:void(0)"><i class="fa fa-trash-o fa-2x"></i></a>
+        </div>
+    </div>
+
+    <input type="hidden" name="ContactPersons[-1].ContactId" />
+    <input type="hidden" name="ContactPersons[-1].FkValue" />
+</div>
+@foreach (var item in Model)
+{
+    <div class="row contactform">
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label class="control-label">Contact Name</label>
+                <input type="text" name="ContactPersons[@index].ContactName" 
+                    class="form-control" value="@item.ContactName">
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="form-group">
+                <label class="control-label">Phone Number</label>
+                <input type="text" name="ContactPersons[@index].PhoneNumber" 
+                    class="form-control" value="@item.PhoneNumber">
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label class="control-label">Email</label>
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <i class="fa fa-envelope"></i>
+                    </span>
+                    <input type="email" placeholder="eg.: email@email.com" 
+                       class="form-control" name="ContactPersons[@index].Email" value="@item.Email">
+                </div>
+            </div>
+        </div>
+        @if (index > 0)
+        { 
+            <div class="col-sm-1" style="margin-top: 30px">
+                <div class="form-group">
+                    <a class="on-default remove-contact" href="javascript:void(0)"><i class="fa fa-trash-o fa-2x"></i></a>
+                </div>
+            </div>
+        }
+        <input type="hidden" name="ContactPersons[@index].ContactId" value="@item.ContactId" />
+        <input type="hidden" name="ContactPersons[@index].FkValue" value="@item.FkValue" />
+    </div>
+        index++;
+}
+<div class="form-group">
+    <div class="col-sm-offset-10 col-sm-2">
+        <a href="javascript:void(0)" lastIndex="@lastIndex" class="btnAdd">Add Contact</a>
+    </div>
+</div>
+

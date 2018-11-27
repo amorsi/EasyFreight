@@ -1,0 +1,38 @@
+﻿@model List<EasyFreight.ViewModel.BankAccountVm>
+@{
+    int index = 1;
+}
+<section class="panel">
+
+    <div class="panel-body">
+        <div class="table-responsive">
+            <table class="table table-striped mb-none">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Account Name</th>
+                        <th>Account Number</th>
+                        <th>Currency</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@index</td>
+                            <td>@item.AccountName</td>
+                            <td>@item.AccountNumber</td>
+                            <td>@item.CurrencySign</td>
+                        </tr>
+                        index++;
+
+                    }
+
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+

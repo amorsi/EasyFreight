@@ -1,0 +1,215 @@
+﻿@model EasyFreight.ViewModel.CarrierRateVm
+@{
+    ViewBag.Title = "Add";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<header class="page-header">
+    <h2>Add Carrier Rate</h2>
+
+    <div class="right-wrapper pull-right">
+        <ol class="breadcrumbs">
+            <li>
+                <a href="@Url.Content("~/Home/Index")">
+                    <i class="fa fa-home"></i>
+                </a>
+            </li>
+            <li><span>Master Data</span></li>
+            <li><span>Add Carrier Rate</span></li>
+        </ol>
+
+        <a class="sidebar-right-toggle" data-open="sidebar-right"><i class="fa fa-chevron-left"></i></a>
+    </div>
+</header>
+<div class="row">
+    <div class="col-lg-12">
+        <section class="panel">
+            <header class="panel-heading">
+                <div class="panel-actions">
+                    <a href="#"></a>
+                    <a href="#"></a>
+                </div>
+
+                <h2 class="panel-title"></h2>
+            </header>
+            <div class="panel-body">
+                <form id="Form1">
+                    <div class="form-horizontal form-bordered">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="w4-username">Carrier <span class="required">*</span></label>
+                            <div class="col-sm-4">
+                                <select id="CarrierId" data-placeholder="Select Carrier" name="CarrierId" data-plugin-selecttwo
+                                    required class="form-control populate">
+                                    <option></option>
+                                    @foreach (var item in ViewBag.CarrierList)
+                                    {
+                                        if (item.Key == Model.CarrierId)
+                                        {
+                                        <option selected value="@item.Key">@item.Value</option>
+                                        }
+                                        else
+                                        { 
+                                        <option  value="@item.Key">@item.Value</option>
+                                        }
+
+                                    }
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="w4-username">Container Type <span class="required">*</span></label>
+                            <div class="col-sm-4">
+                                <select id="ContainerTypeId" name="ContainerTypeId" data-plugin-selecttwo
+                                    required class="form-control populate" data-placeholder="Select Container">
+                                    <option></option>
+                                    @foreach (var item in ViewBag.ContainerList)
+                                    {
+                                        if (item.Key == Model.ContainerTypeId)
+                                        {
+                                        <option selected value="@item.Key">@item.Value</option>
+                                        }
+                                        else
+                                        { 
+                                        <option  value="@item.Key">@item.Value</option>
+                                        }
+
+                                    }
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 form-group">
+                            <label class="col-sm-4 control-label">From Port <span class="required">*</span></label>
+                            <div class="col-sm-8">
+                                @Html.Partial("~/Views/Shared/_PortGrouped.cshtml",
+                                    ViewData["PortList"] as List<EasyFreight.ViewModel.CountryPortList>,
+                                    new ViewDataDictionary { { "ddlName", "FromPortId" }, 
+                                    { "selectedVal", @Model.FromPortId },{"required","required"} })
+                            </div>
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label class="col-sm-4 control-label">To Port <span class="required">*</span></label>
+                            <div class="col-sm-8">
+                                @Html.Partial("~/Views/Shared/_PortGrouped.cshtml",
+                                    ViewData["PortList"] as List<EasyFreight.ViewModel.CountryPortList>,
+                                    new ViewDataDictionary { { "ddlName", "ToPortId" }, 
+                                    { "selectedVal", @Model.ToPortId },{"required","required"} })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Transit Ports</label>
+                            <div class="col-sm-4">
+                                @Html.Partial("~/Views/Shared/_PortGrouped.cshtml",
+                                    ViewData["PortList"] as List<EasyFreight.ViewModel.CountryPortList>,
+                                    new ViewDataDictionary { { "ddlName", "TransitPortId" }, 
+                                    { "selectedVal", 0 },{"multiple","multiple"},{"required",""}
+                                    })
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-6 form-group">
+                            <label class="col-sm-4 control-label" for="w4-username">Freight Cost <span class="required">*</span></label>
+                            <div class="col-sm-8">
+                                @Html.Partial("~/Views/Shared/_InputWithCurrencySelect.cshtml",
+                                    ViewData["CurrencyList"] as Dictionary<int, string>,
+                                    new ViewDataDictionary 
+                                    { 
+                                    { "inputName", "FreightCostAmount" }, 
+                                    { "inputValue", @Model.FreightCostAmount }, 
+                                    { "selectedCurrencyId", @Model.FreighCurrencyId },
+                                    { "ddlCurrencyIdName", "FreighCurrencyId" },
+                                    { "defaultCurrencyId", 2 },{"required","required"}  
+                                    })
+                            </div>
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label class="col-sm-4 control-label" for="w4-password">THC Cost <span class="required">*</span></label>
+                            <div class="col-sm-8">
+                                @Html.Partial("~/Views/Shared/_InputWithCurrencySelect.cshtml",
+                                    ViewData["CurrencyList"] as Dictionary<int, string>,
+                                    new ViewDataDictionary 
+                                    { 
+                                    { "inputName", "ThcCostAmount" }, 
+                                    { "inputValue", @Model.ThcCostAmount }, 
+                                    { "selectedCurrencyId", @Model.ThcCurrencyId },
+                                    { "ddlCurrencyIdName", "ThcCurrencyId" },
+                                    { "defaultCurrencyId", 1 }  
+                                    })
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 form-group">
+                            <label class="col-md-4 control-label"></label>
+                            <div class="col-md-8">
+                                <div class="checkbox-custom checkbox-default">
+                                    <input type="checkbox" id="isValidCheck" checked>
+                                    <label for="checkboxExample1">Is Valid</label>
+                                </div>
+
+                            </div>
+                        </div>
+                        <input type="hidden" id="IsValid" name="IsValid" value="@Model.IsValid.ToString()" />
+
+@*                        <div id="hasExp" class="col-md-6 form-group">
+                            <label class="col-sm-4 control-label"></label>
+                            <div class="col-sm-8">
+                                <div class="checkbox-custom checkbox-default">
+                                    <input type="checkbox" id="checkExp">
+                                    <label for="checkboxExample1">Has Expire Date</label>
+                                </div>
+
+                            </div>
+                        </div>
+                        <input type="hidden" id="ValidToChecked" name="ValidToChecked" value="@Model.ValidToChecked.ToString()" />
+                        *@
+                        <div id="dateExp" class="col-md-6 form-group">
+                            <label class="col-sm-4 control-label">Expire Date</label>
+                            <div class="col-sm-8">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </span>
+                                    <input type="text" data-plugin-datepicker name ="ValidToDate"
+                                        data-date-format="dd/mm/yyyy" class="form-control" value="@(Model.ValidToDate == null ? "" : Model.ValidToDate.Value.ToString("dd/MM/yyyy")) " >
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <input type="hidden" id="FromCountryId" name="FromCountryId"  value="@Model.FromCountryId" />
+                    <input type="hidden" id="ToCountryId" name="ToCountryId"  value="@Model.ToCountryId" />
+                    <input type="hidden" id="CarrierRateId" name="CarrierRateId" value="@Model.CarrierRateId" />
+                    @if (Model.TransitPortId != null)
+                    {
+                        <input type="hidden" id="TransitList" name="TransitList" 
+                        value="@string.Join(",", Model.TransitPortId)" />
+                    }
+                    else
+                    {
+                        <input type="hidden" id="TransitList" name="TransitList"
+                            value="" />
+                    }
+                </form>
+            </div>
+
+            <footer class="panel-footer">
+                <div id="SaveBtnDiv" class="row">
+                    <div class="col-sm-9 col-sm-offset-3">
+                        <button id="SaveForm" class="btn btn-primary">Submit</button>
+                        <a id="ResetForm" href="@Url.Content("~/MasterData/CarrierRate")" class="btn btn-default" >Reset</a>
+                    </div>
+                </div>
+            </footer>
+        </section>
+    </div>
+</div>
+
+@section scripts{
+    <script src="@Url.Content("~/Scripts/MasterData/CarrierRate/CarrierRateAdd.js")"></script>
+
+}

@@ -1,0 +1,44 @@
+﻿@model EasyFreight.ViewModel.CashInVm
+<section class="panel">
+    <div class="panel-body">
+        <div class="invoice">
+            <header class="clearfix">
+                <div class="row">
+                    <div class="col-sm-5 col-xs-5 mt-md">
+                        <h2 class="h2 mt-none mb-sm text-dark text-bold">Cash Out Receipt</h2>
+                    </div>
+
+                    <div class="col-sm-4 col-xs-4 mt-md">
+                        <h2 class="h2 mt-none mb-sm text-dark text-bold"> @Model.ReceiptCode</h2>
+                    </div>
+
+                    <div class="col-sm-3 col-xs-3 mt-md">
+                        <h3 class="mt-none mb-sm text-dark"> @Model.PaymentTermName</h3>
+                    </div>
+                </div>
+            </header>
+            <div class="bill-info">
+                <div class="row">
+
+                    <div class="col-md-6 col-xs-6 form-group">
+                        <span class="text-dark">Receipt Date:</span>
+                        <span class="value">@Model.ReceiptDate.Value.ToString("dd/MM/yyyy")</span>
+                    </div>
+                    <div class="col-sm-6 col-xs-6 form-group">
+                        <span class="text-dark">Receipt Amount:</span>
+                        <span class="value"> @Model.ReceiptAmount @Model.CurrencySign </span>
+                    </div>
+                </div>
+                <div class="row" style="padding-bottom: 10px">
+                    <div class="col-md-12 col-xs-12">
+                        <span class="text-dark">Supplier Name:</span>
+                        <span class="value">Cash Out For Expenses</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="margin-top:15px;margin-bottom:15px;">
+                @{ Html.RenderPartial("~/Views/CashOutExpense/_ExpenseListTb.cshtml",Model.CashOutReceiptExpenses);}
+            </div>
+        </div>
+    </div>
+</section>

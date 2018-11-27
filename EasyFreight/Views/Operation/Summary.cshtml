@@ -1,0 +1,57 @@
+﻿
+@{
+    ViewBag.Title = "Summary";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+var fromDate= DateTime.Now.AddDays(-7).ToString("dd/MM/yyyy");
+var toDate= DateTime.Now.AddDays(1).ToString("dd/MM/yyyy");
+}
+
+<header class="page-header">
+    <h2>@ViewBag.OperationType Dashboard</h2>
+
+    <div class="right-wrapper pull-right">
+        <ol class="breadcrumbs">
+            <li>
+                <a href="@Url.Content("~/Home/Index")">
+                    <i class="fa fa-home"></i>
+                </a>
+            </li>
+            <li><span>@ViewBag.OperationType Dashboard</span></li>
+        </ol>
+
+        <a class="sidebar-right-toggle" data-open="sidebar-right"><i class="fa fa-chevron-left"></i></a>
+    </div>
+</header>
+ 
+ <form class="form-horizontal form-bordered" id="searchform"> 
+<section class="panel">
+  
+    <div class="panel-body">
+       
+            <div class="form-group form-inline">
+                <label class="col-md-3 control-label">Date range</label>
+                <div class="col-md-4 btn-group  ">
+                     <div data-plugin-datepicker="" data-date-format="dd/mm/yyyy" class="input-daterange input-group">
+                        <span class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </span>
+                        <input type="text" class="form-control" id="FromDate" value="@fromDate">
+                        <span class="input-group-addon">to</span>
+                        <input type="text" class="form-control" id="ToDate"  value="@toDate">
+                    </div>
+                 </div>
+                 <div class="col-md-3 pull-left"><button type="button" class="filter btn btn-primary"><i class="fa fa-search"></i> Submit</button></div>
+            </div>
+        
+    </div>
+</section>
+ <div id="Widget"></div>
+
+						
+
+  <input type="hidden" id="orderFrom" name="OrderFrom" value="@ViewBag.OrderFrom" />
+      </form>
+@section scripts{
+    <script src="@Url.Content("~/Scripts/Operation/Summary.js")"></script>
+  
+}

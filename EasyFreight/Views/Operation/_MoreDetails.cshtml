@@ -1,0 +1,252 @@
+﻿@model EasyFreight.Models.OperationView
+
+<section class="panel panel-primary">
+    <header class="panel-heading">
+        <div class="panel-actions">
+            <a href="#"></a>
+            <a href="#"></a>
+        </div>
+        <h2 class="panel-title">Operation Order</h2>
+    </header>
+    <div class="panel-body">
+        <div class="col-sm-6 form-group">
+            <label class="col-md-5 control-label">Operation Code</label>
+            <div class="col-md-7">
+                <span class="text-dark">@Model.OperationCode</span>
+            </div>
+        </div>
+        <div class="col-sm-6 form-group">
+            <label class="col-md-5 control-label">Operation Date</label>
+            <div class="col-md-7">
+                <span class="text-dark">@Model.OperationDate.ToString("dd/MM/yyyy")</span>
+            </div>
+        </div>
+        <div class="col-sm-6 form-group">
+            <label class="col-md-5 control-label">Department</label>
+            <div class="col-md-7">
+                @if (Model.OrderFrom == 1)
+                {
+                    <span class="text-dark">Export</span>
+                }
+                else
+                {
+                    <span class="text-dark">Import</span>
+                }
+
+            </div>
+        </div>
+        <div class="col-sm-6 form-group">
+            <label class="col-md-5 control-label">Shipper</label>
+            <div class="col-md-7">
+                <span class="text-dark">@Model.ShipperNameEn</span>
+            </div>
+        </div>
+        <div class="col-sm-6 form-group">
+            <label class="col-md-5 control-label">Consignee</label>
+            <div class="col-md-7">
+                <span class="text-dark">@Model.ConsigneeNameEn</span>
+            </div>
+        </div>
+        <div class="col-sm-6 form-group">
+            <label class="col-md-5 control-label">Notifier</label>
+            <div class="col-md-7">
+                <span class="text-dark">@(Model.NotifierAsConsignee ?  Model.ConsigneeNameEn : Model.NotifierNameEn)</span>
+            </div>
+        </div>
+        @if (Model.AgentId != null)
+        {
+            <div class="col-sm-6 form-group">
+                <label class="col-md-5 control-label">Agent</label>
+                <div class="col-md-7">
+                    <span class="text-dark">@Model.AgentNameEn</span>
+                </div>
+            </div>
+
+            <div class="col-sm-6 form-group">
+                <label class="col-md-5 control-label">Agent Cost</label>
+                <div class="col-md-7">
+                    @if (Model.IsFixedCost != null && Model.IsFixedCost.Value)
+                {
+                <span class="text-dark">@Model.FixedCost <span class="sign">@(((Dictionary<int, string>)ViewData["CurrecyList"]).Where(x => x.Key == Model.FixedCostCurrencyId).FirstOrDefault().Value)</span></span>
+                }
+                else
+                {
+                <span class="text-dark">@Model.PercentageOfAmount <span class="sign">%</span></span>
+                }
+                </div>
+            </div>
+        }
+
+
+        <div class="col-sm-6 form-group">
+            <label class="col-md-5 control-label">MBL</label>
+            <div class="col-md-7">  
+                <span class="text-dark">@Model.MBL</span>
+            </div>
+        </div>
+        <div class="col-sm-6 form-group">
+            <label class="col-md-5 control-label">Booking Number</label>
+            <div class="col-md-7">
+                <span class="text-dark">@Model.BookingNumber</span>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<section class="panel">
+    <header class="panel-heading">
+        <div class="panel-actions">
+            <a href="#"></a>
+            <a href="#"></a>
+        </div>
+        <h2 class="panel-title">Carrier Details</h2>
+    </header>
+    <div class="panel-body">
+        <div class="col-sm-6 form-group">
+            <label class="col-md-5 control-label">Carrier Type</label>
+            <div class="col-md-7">
+                <span class="text-dark">@(Model.CarrierType == 1 ? "Sea" : "Air")</span>
+            </div>
+        </div>
+        <div class="col-sm-6 form-group">
+            <label class="col-md-5 control-label">Carrier</label>
+            <div class="col-md-7">
+                <span class="text-dark">@Model.CarrierNameEn</span>
+            </div>
+        </div>
+        <div class="col-sm-6 form-group">
+            <label class="col-md-5 control-label">Port of loading</label>
+            <div class="col-md-7">
+                <span class="text-dark">@Model.FromPort</span>
+            </div>
+        </div>
+        <div class="col-sm-6 form-group">
+            <label class="col-md-5 control-label">Port of discharge</label>
+            <div class="col-md-7">
+                <span class="text-dark">@Model.ToPort</span>
+            </div>
+        </div>
+        <div class="col-sm-6 form-group">
+            <label class="col-md-5 control-label">Vessel</label>
+            <div class="col-md-7">
+                <span class="text-dark">@Model.VesselName</span>
+            </div>
+        </div>
+        <div class="col-sm-6 form-group">
+            <label class="col-md-5 control-label">Incoterm</label>
+            <div class="col-md-7">
+                <span class="text-dark">@Model.IncotermName</span>
+            </div>
+        </div>
+        <div class="col-sm-6 form-group">
+            <label class="col-md-5 control-label">Departure Date</label>
+            <div class="col-md-7">
+                <span class="text-dark">@(Model.DateOfDeparture == null ? "" : Model.DateOfDeparture.Value.ToString("dd/MM/yyyy"))</span>
+            </div>
+        </div>
+        <div class="col-sm-6 form-group">
+            <label class="col-md-5 control-label">Arrive Date</label>
+            <div class="col-md-7">
+                <span class="text-dark">@(Model.ArriveDate == null ? "" : Model.ArriveDate.Value.ToString("dd/MM/yyyy"))</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="panel panel-info">
+    <header class="panel-heading">
+        <div class="panel-actions">
+            <a href="#"></a>
+            <a href="#"></a>
+        </div>
+        <h2 class="panel-title">Container Details</h2>
+    </header>
+    <div class="panel-body">
+ <div class="col-sm-12 form-group">
+            <label class="col-md-2 control-label">Containers Count</label>
+            <div class="col-md-2">
+                <span class="text-dark">@ViewBag.OperContainers.Count #</span>
+            </div>
+        </div>
+        @{Html.RenderPartial("~/Views/Operation/_ViewContainers.cshtml", ViewBag.OperContainers as List<EasyFreight.ViewModel.OperationContainerVm>);}
+    </div>
+</section>
+
+<section class="panel">
+    <header class="panel-heading">
+        <div class="panel-actions">
+            <a href="#"></a>
+            <a href="#"></a>
+        </div>
+        <h2 class="panel-title">Cargo Summary</h2>
+    </header>
+    <div class="panel-body">
+        <div class="col-sm-3 form-group">
+            <label class="col-md-5 control-label">G.W</label>
+            <div class="col-md-7 input-group mb-md">
+                <span class="text-dark">@Model.GrossWeight <span class="sign">KG</span></span>
+
+            </div>
+        </div>
+        <div class="col-sm-3 form-group">
+            <label class="col-md-5 control-label">N.W</label>
+            <div class="col-md-7 input-group mb-md">
+                <span class="text-dark">@Model.NetWeight <span class="sign">KG</span></span>
+            </div>
+        </div>
+        <div class="col-sm-3 form-group">
+            <label class="col-md-6 control-label">Packages#</label>
+            <div class="col-md-6 input-group mb-md">
+                <span class="text-dark">@Model.NumberOfPackages <span class="sign">Item</span></span>
+            </div>
+        </div>
+        <div class="col-sm-3 form-group">
+            <label class="col-md-5 control-label">CBM</label>
+            <div class="col-md-7 input-group mb-md">
+                <span class="text-dark">@Model.CBM <span class="sign">m3</span></span>
+            </div>
+        </div>
+
+        <div class="col-sm-4 form-group">
+            <label class="col-md-5 control-label">Freight Amount</label>
+            <div class="col-md-7 input-group mb-md">
+                <span class="text-dark">@Model.FreightCostAmount <span class="sign">@(((Dictionary<int, string>)ViewData["CurrecyList"]).Where(x => x.Key == Model.FreighCurrencyId).FirstOrDefault().Value)</span></span>
+            </div>
+        </div>
+        <div class="col-sm-4 form-group">
+            <label class="col-md-5 control-label">THC Cost</label>
+            <div class="col-md-7 input-group mb-md">
+                <span class="text-dark">@Model.ThcCostAmount <span class="sign">@(((Dictionary<int, string>)ViewData["CurrecyList"]).Where(x => x.Key == Model.ThcCurrencyId).FirstOrDefault().Value)</span></span>
+            </div>
+        </div>
+
+        <div class="col-sm-4 form-group">
+            <label class="col-sm-6 control-label">Freight Payment</label>
+            <div class="col-sm-6">
+                <span class="text-dark">@(Model.IsPrepaid ? "Prepaid" : "Collect")</span>
+            </div>
+        </div>
+        <div class="col-sm-6 form-group">
+            <label class="col-sm-5 control-label">Transportation</label>
+            <div class="col-sm-7">
+                <span class="text-dark">@(Model.PickupNeeded.Value ? "Yes" : "No")</span>
+            </div>
+        </div>
+
+        <div class="col-sm-6 form-group">
+            <label class="col-sm-7 control-label">Custom Clearance</label>
+            <div class="col-sm-5">
+                <span class="text-dark">@(Model.CustomClearanceNeeded.Value ? "Yes" : "No")</span>
+            </div>
+        </div>
+
+        <div class="col-sm-12 form-group">
+            <label class="col-md-3 control-label">Description of goods</label>
+            <div class="col-md-9">
+                <span class="text-dark" style="white-space: pre-wrap;">@Model.GoodsDescription</span>
+            </div>
+        </div>
+
+    </div>
+</section>

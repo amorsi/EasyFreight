@@ -1,0 +1,62 @@
+﻿
+<form id="searchform" class="form-horizontal mb-lg" novalidate="novalidate">
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Payment Term</label>
+        <div class="col-sm-4">
+            <select id="PaymentTermId" name="PaymentTermId" data-plugin-selecttwo data-placeholder="Select"
+                    class="form-control populate">
+                <option></option>
+                @foreach (var item in ViewBag.PaymentTerm)
+                {
+                    <option value="@item.Key">@item.Value</option>
+                }
+            </select>
+
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Currency</label>
+        <div class="col-sm-4">
+            <select id="CurrencyId" name="CurrencyId" data-plugin-selecttwo data-placeholder="Select"
+                    class="form-control populate">
+                <option></option>
+                @foreach (var item in ViewBag.Currency)
+                {
+                    <option value="@item.Key">@item.Value</option>
+                }
+            </select>
+
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Receipt Date</label>
+        <div class="col-md-10">
+            <div data-plugin-datepicker="" data-date-format="dd/mm/yyyy" class="input-daterange input-group">
+                <span class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                </span>
+                <input type="text" name="ReceiptDateStart" class="form-control date">
+                <span class="input-group-addon">to</span>
+                <input type="text" name="ReceiptDateEnd" class="form-control date">
+            </div>
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Create Date</label>
+        <div class="col-md-10">
+            <div data-plugin-datepicker="" class="input-daterange input-group">
+                <span class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                </span>
+                <input type="text" name="CreateDateStart" class="form-control date">
+                <span class="input-group-addon">to</span>
+                <input type="text" name="CreateDateEnd" class="form-control date">
+            </div>
+        </div>
+    </div>
+
+</form>

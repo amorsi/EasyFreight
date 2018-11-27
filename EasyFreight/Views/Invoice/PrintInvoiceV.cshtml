@@ -1,0 +1,254 @@
+﻿@model EasyFreight.ViewModel.InvoiceVm
+ @{
+    ViewBag.Title = "PrintInvoiceV";
+    Layout = null;
+}
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>_PrintLayout</title>
+
+     <!-- Bootstrap -->
+    <link href="@Url.Content("~/assets/print/css/bootstrap.min.css")" rel="stylesheet">
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+    <!-- Font-awesome -->
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/assets/print/css/font-awesome.min.css")">
+    <!-- Style -->
+    <link href="@Url.Content("~/assets/print/css/style.css")" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]-->
+       <script src="@Url.Content("~/assets/print/js/html5shiv.min.js")"></script>
+      <script src="@Url.Content("~/assets/print/js/respond.min.js")"></script>
+    <!--[endif]--> 
+    <style>
+        tfoot { display: table-footer-group; }
+     </style>
+</head>
+<body>
+      <div class="container">
+        <div id="header" class="col-xs-12">
+            <div class="col-xs-6">
+                <img src="@Url.Content("~/images/EnglishLogo.png")" height="100" width="250" />
+            </div>
+            <div class="col-xs-6" style="text-align: right;">
+                <img src="@Url.Content("~/images/ArabicLogo.png")" height="100" width="250" />
+            </div>
+              <div class="row"><p></p></div>
+        </div>
+
+
+        <div id="main" style="min-height:1200px;" class="content">
+          <div class="row"><p></p> </div>
+
+            <div class="row dirtl" style="padding: 5px;">
+                <h4>ملف ضريبي رقم   5/01344/555  مأمورية ضرائب الشركات المساهمة بالقاهرة 
+                         <br />
+                    رقم التسجيل بضرائب المبيعات  200/271/210  مأمورية ضرائب مبيعات النزهة بالقاهرة. 
+                </h4>
+            </div>
+            <div class="row dirtl">
+
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 text-bold left">
+                    <h1 class=" mt-none mb-sm text-dark text-bold"><strong>رقم :  @Model.InvoiceCode  </strong></h1>
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 text-bold right">
+                    <h1 class=" mt-none mb-sm text-dark text-bold"><strong>فـــاتــــــورة</strong></h1>
+                </div>
+
+            </div>
+            
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 dirtl">
+
+                <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10  right">
+                    <p class="value">@Model.InvoiceDate.Value.ToString("dd/MM/yyyy") </p>
+                </div>
+                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 head-info right">
+                    <p>الاسكندريـــة في  :</p>
+                </div>
+                <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10  right">
+                    <p class="value">@Model.OperationCode </p>
+                </div>
+                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 head-info right">
+                    <p>رقـم العمليــــة  :</p>
+                </div>
+
+                @if (!string.IsNullOrEmpty(Model.APInvoiceCode))
+                { 
+                    <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10  right">
+                        <p class="value">@Model.APInvoiceCode </p>
+                    </div>
+                    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 head-info right">
+                        <p>A/P Invoice  :</p>
+
+                    </div> }
+
+                <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10  right">
+                    <p class="value">@Model.CustomerName </p>
+                </div>
+                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 head-info right">
+                    <p>الســادة شركـــة :</p>
+                </div>
+
+                <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10  right">
+                    <p class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+                        <hr />
+                    </p>
+                </div>
+                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 head-info right">
+                    <p>عنايـة الاســــتاذ /</p>
+                </div>
+
+
+            </div>
+
+            <div class="row dirtl" style="padding-bottom: 15px">
+                <div class="col-md-3 col-xs-3">
+                    <span class=" head-info"></span>
+                    <span class="value"></span>
+                </div>
+                <div class="col-md-3 col-xs-3">
+                    <span class=" head-info">ميناء الوصول:</span>
+                    <span class="value">@Model.ToPort</span>
+                </div>
+                <div class="col-md-3 col-xs-3">
+                    <span class=" head-info">ميناء الشحن:</span>
+                    <span class="value">@Model.FromPort</span>
+                </div>
+                <div class="col-md-3 col-xs-3">
+                    <span class=" head-info">رقم البوليصة :</span>
+                    <span class="value">@Model.HouseBL</span>
+                </div>
+
+
+            </div>
+
+            <div class="table-info">
+                <div class="row">
+
+
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered table-hover invoice-items dirtl" id="invdetails">
+                            <thead>
+                                <tr class="h4 text-dark">
+                                    <th id="cell-id" class="text-semibold">#</th>
+                                    <th id="cell-item" class="text-semibold">بيـــــــــــان</th>
+                                    <th id="cell-price" class="text-center text-semibold">السعر (@Model.CurrencySign)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{int index = 1, totalIndex = 0;}
+                                @foreach (var item in Model.InvoiceDetails)
+                                {
+
+                                    <tr>
+                                        <td>@index</td>
+                                        <td class="text-semibold text-dark">@item.PrintedTitle</td>
+                                        <td class="text-center">@item.InvoiceAmount </td>
+                                    </tr>
+                                index++;
+                            }
+
+                                @if (Model.InvoiceTotals.Count > 0)
+                                {
+                                    
+                                    <tr class="h4 text-dark">
+                                         
+                                        <td colspan="2" class="Total-amo" style="background-color:#ddd">اجمالي قبل الضريبة </td>
+                                        <td class="Total-amo" style="background-color:#ddd">@Model.InvoiceTotals[0].TotalBeforeTax </td>
+                                    </tr>
+
+                                    if (Model.InvoiceType == 0) // AR Invoice .. not AP
+                                    {
+                                    <tr>
+                                        <td>@index</td>
+                                        <td class="text-semibold text-dark">ضريبة </td>
+                                        <td class="text-center">@Model.InvoiceTotals[0].TaxDepositAmount - </td>
+                                    </tr>
+                                    <tr>
+                                        <td>@(index + 1)</td>
+                                        <td class="text-semibold text-dark">ضريبة القيمة المضافة 14%  </td>
+                                        <td class="text-center">@Model.InvoiceTotals[0].VatTaxAmount</td>
+                                    </tr> 
+                                }
+                            }
+                            </tbody>
+                            <tfoot>
+                                <tr class="h4 text-dark">
+                                    <td colspan="2" class="Total-amo">الاجمــالــــــــــي (@Model.InvoiceTotals[0].CurrencySign)</td>
+                                    <td class="Total-amo">@Model.InvoiceTotals[0].TotalAmount  </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 head-info right">
+                    فقط ماعدا السهو والخطأ
+                <br />
+                    @Model.InvoiceTotals[0].TotalAmount  (@Model.InvoiceTotals[0].CurrencySign)
+                </div>
+            </div>
+            
+             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 head-info  " >
+                 <p></p>
+             </div>
+              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 head-info  " style="text-align:center">
+                  لايعتد بها كسند دفع
+                  </div>
+             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 head-info  " >
+                 <p></p>
+             </div>
+           <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 head-info " style="text-align:center">
+
+                 <div class="row dirtl" style="padding-bottom: 15px">
+                
+                <div class="col-lg-4 col-sm-4 col-md-4 col-xs-4">
+                    <span class=" head-info">المديـــر العـــام </span>
+                    
+                </div>
+               <div class="col-lg-4 col-sm-4 col-md-4 col-xs-4">
+                    <span class=" head-info">المديــر المــالـــي</span>
+                    
+                </div>
+               <div class="col-lg-4 col-sm-4 col-md-4 col-xs-4">
+                    <span class=" head-info"> الحســــابـــات</span>
+                  
+                </div>
+
+
+            </div>
+             
+            </div>
+        </div>
+
+
+ <input type="hidden" class="suminvhiddenaftertax"  value="@Model.InvoiceTotals[0].TotalAmount">
+  <input type="hidden" class="suminvhidden"  value="@Model.InvoiceTotals[0].TotalBeforeTax">
+
+
+          <div id="footer"> 
+        @{Html.RenderAction("GetPrintFooter", "Home");} 
+    </div>
+
+ </div>
+     <script src="@Url.Content("~/assets/print/js/bootstrap.min.js")"  ></script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+ 

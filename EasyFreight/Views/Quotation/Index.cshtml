@@ -1,0 +1,241 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .select2-drop {
+        z-index: 99959;
+    }
+
+    .datepicker-dropdown {
+        z-index: 99959 !important;
+    }
+
+    .border {
+        border: 1px solid #888;
+        padding-top: 2px;
+        text-align: center;
+        vertical-align: central;
+    }
+
+    .default-icon {
+        color: #777;
+    }
+
+    .clicked-icon {
+        color: #0088cc;
+    }
+
+    .sign {
+        font-weight: bold;
+    }
+
+    #shippingdeclcontent .control-label {
+        font-size: 15px;
+        text-decoration: underline;
+    }
+</style>
+
+<header class="page-header">
+    <h2>@ViewBag.OrderFromText Quotations</h2>
+
+    <div class="right-wrapper pull-right">
+        <ol class="breadcrumbs">
+            <li>
+                <a href="@Url.Content("~/Home/Index")">
+                    <i class="fa fa-home"></i>
+                </a>
+            </li>
+            <li><span>@ViewBag.OrderFromText Quotations</span></li>
+        </ol>
+
+        <a class="sidebar-right-toggle" data-open="sidebar-right"><i class="fa fa-chevron-left"></i></a>
+    </div>
+</header>
+<section class="panel">
+    <header class="panel-heading">
+        <div class="panel-actions">
+            <a href="#" class=""></a>
+            <a href="#" class=""></a>
+        </div>
+
+        <h2 class="panel-title"></h2>
+    </header>
+
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-sm-2 mb-md">
+                <a href="javascript:void(0)" class="modal-with-form" id="advsearchlink">
+                    <i class="fa fa-search fa-2x"></i><span style="padding-left: 8px">Advanced Search</span>
+                </a>
+            </div>
+            <div class="col-sm-2 mb-md">
+                <a href="@Url.Content("~/Quotation/Add?orderFrom=" + ViewBag.OrderFrom)" class="btn btn-primary">Add <i class="fa fa-plus"></i></a>
+            </div>
+            <div class=" col-sm-1">
+                <div class="col-sm-12 border">
+                    <a id="ClearSearch" class="filter0 default-icon" title="Clear Search" href="javascript:void(0)">
+                        <i class="fa fa-eraser fa-2x"></i>
+                    </a>
+                </div>
+            </div>
+            <div class=" col-sm-3">
+                <div class="col-sm-3 border">
+                    <a id="AllType" class="filter1 clicked-icon" carriertype="0" title="All" href="javascript:void(0)">
+                        <i class="fa fa-bars fa-2x"></i>
+                    </a>
+                </div>
+                <div class="col-sm-3 border">
+                    <a id="AirOnly" class="filter1 default-icon" title="Air" carriertype="2" href="javascript:void(0)">
+                        <i class="fa fa-plane fa-2x "></i>
+                    </a>
+                </div>
+                <div class="col-sm-3 border">
+                    <a id="shipOnly" href="javascript:void(0)" carriertype="1" class="filter1 default-icon" title="Ship">
+                        <i class="fa fa-ship fa-2x"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div id="tbResult">
+            @Html.Partial("~/Views/Quotation/_ResultTable.cshtml")
+        </div>
+
+
+    </div>
+
+
+</section>
+
+<div id="modalAnim" class="modal-block modal-block-lg mfp-hide">
+    <section class="panel">
+        <header class="panel-heading">
+            <h2 class="panel-title">Quotation Information</h2>
+            <div class="panel-actions">
+                <button class="modal-dismiss" data-dismiss="modal"><i class="fa fa-times"></i></button>
+            </div>
+        </header>
+        <div class="panel-body">
+            <div class="modal-wrapper">
+                <div id="ModalContent" class="modal-text">
+                </div>
+            </div>
+        </div>
+        <footer class="panel-footer">
+            <div class="row">
+                <div class="col-md-12 text-right">
+                    <button class="btn btn-default modal-dismiss" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </footer>
+    </section>
+</div>
+
+
+<div id="shippingdeclmodal" class="modal-block modal-block-lg mfp-hide">
+    <section class="panel">
+        <header class="panel-heading">
+            <h2 class="panel-title">Shipping Declaration</h2>
+            <div class="panel-actions">
+                <button class="modal-dismiss" data-dismiss="modal"><i class="fa fa-times"></i></button>
+            </div>
+        </header>
+        <div class="panel-body">
+            <div class="modal-wrapper">
+                <div id="shippingdeclcontent" class="modal-text">
+                </div>
+            </div>
+        </div>
+        <footer class="panel-footer">
+            <div class="row">
+                <div class="col-md-12 text-right">
+                    <a class="btn btn-info" role="button" href="@Url.Action("PrintShippingDecl", "Quotation")">Print</a>
+                    <button class="btn btn-default modal-dismiss" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </footer>
+    </section>
+</div>
+
+
+<div id="modelDelete" class="modal-block mfp-hide">
+    <section class="panel">
+        <header class="panel-heading">
+            <h2 class="panel-title">Are you sure?</h2>
+            <div class="panel-actions">
+                <button class="modal-dismiss" data-dismiss="modal"><i class="fa fa-times"></i></button>
+            </div>
+        </header>
+        <div class="panel-body">
+            <div class="modal-wrapper">
+                <div class="modal-text">
+                    <p>Are you sure that you want to cancel this quotation?</p>
+                </div>
+            </div>
+        </div>
+        <footer class="panel-footer">
+            <div class="row">
+                <div class="col-md-12 text-right">
+                    <button id="dialogConfirm" class="btn btn-primary modal-confirm">Confirm</button>
+                    <button id="dialogCancel" class="btn btn-default modal-dismiss">Cancel</button>
+                </div>
+            </div>
+        </footer>
+    </section>
+</div>
+
+<div id="modelUnavailable" class="modal-block mfp-hide">
+    <section class="panel">
+        <header class="panel-heading">
+            <h2 class="panel-title">Error </h2>
+            <div class="panel-actions">
+                <button class="modal-dismiss" data-dismiss="modal"><i class="fa fa-times"></i></button>
+            </div>
+        </header>
+        <div class="panel-body">
+            <div class="modal-wrapper">
+                <div class="modal-text">
+                    <p>Cannot cancel this quotation it's status is closed </p>
+                </div>
+            </div>
+        </div>
+        <footer class="panel-footer">
+            <div class="row">
+                <div class="col-md-12 text-right">
+                    <button id="dialogUnavailable" class="btn btn-default modal-dismiss">Cancel</button>
+                </div>
+            </div>
+        </footer>
+    </section>
+</div>
+<input id="deletedId" type="hidden" />
+
+<input type="hidden" id="OrderFrom" value="@ViewBag.OrderFrom">
+
+
+<div id="modalForm" class="modal-block modal-block-lg mfp-hide">
+
+    <section class="panel">
+        <header class="panel-heading">
+            <div class="panel-actions">
+                <button class="modal-dismiss" data-dismiss="modal"><i class="fa fa-times"></i></button>
+            </div>
+            <h2 class="panel-title">Advanced Search</h2>
+        </header>
+        <div id="searchdiv" class="panel-body">
+        </div>
+        <footer class="panel-footer">
+            <div class="row">
+                <div class="col-md-12 text-right">
+                    <input type="button" class="btn btn-primary search-modal-confirm" value="Search" />
+                    <button class="btn btn-default modal-dismiss">Cancel</button>
+                </div>
+            </div>
+        </footer>
+    </section>
+</div>
+
+
+@section scripts{
+    <script src="@Url.Content("~/Scripts/Quotation/IndexScript.js")"></script>
+}

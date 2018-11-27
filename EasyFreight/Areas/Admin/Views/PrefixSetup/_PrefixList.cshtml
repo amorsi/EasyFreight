@@ -1,0 +1,84 @@
+﻿@model List<EasyFreight.Areas.Admin.Models.PrefixSetup>
+@{
+    int index = 0;
+}
+
+@foreach (var item in Model)
+{
+    <section class="panel">
+        <header class="panel-heading">
+            <div class="panel-actions">
+                <a href="#" class="fa fa-caret-down"></a>
+            </div>
+
+            <h2 class="panel-title">@item.PrefixFor</h2>
+        </header>
+        <div class="panel-body">
+            <div class="col-md-6 form-group">
+                <label class="col-sm-5 control-label" for="w4-username">Prefix Char <span class="required">*</span></label>
+                <div class="col-sm-7">
+                    <input type="text" maxlength="4" class="form-control" name="PrefixSetup[@index].PrefixChar" value="@item.PrefixChar" />
+                </div>
+            </div>
+
+            <div class="col-md-6 form-group">
+                <label class="col-sm-5 control-label" for="w4-username">Number After/ Before Char <span class="required">*</span></label>
+                <div class="col-sm-7">
+                    <select id="NumberAfterChar" name="PrefixSetup[@index].NumberAfterChar">
+                        <option @(item.NumberAfterChar.Value == false ? "selected" : "" ) value="false">Before Char</option>
+                        <option @(item.NumberAfterChar.Value == true ? "selected" : "") value="true">After Char</option>
+
+                    </select>
+
+                </div>
+            </div>
+
+            <div class="col-md-6 form-group">
+                <label class="col-sm-5 control-label" for="w4-username">Include Month <span class="required">*</span></label>
+                <div class="col-sm-7">
+                    <select id="IncludeMonth" name="PrefixSetup[@index].IncludeMonth">
+                        <option @(item.IncludeMonth.Value == false ? "selected" : "") value="false">No</option>
+                        <option @(item.IncludeMonth.Value == true ? "selected" : "") value="true">Yes</option>
+                    </select>
+
+                </div>
+            </div>
+
+            <div class="col-md-6 form-group">
+                <label class="col-sm-5 control-label" for="w4-username">Include Year <span class="required">*</span></label>
+                <div class="col-sm-7">
+                    <select id="IncludeYear" name="PrefixSetup[@index].IncludeYear">
+                        <option @(item.IncludeYear.Value == false ? "selected" : "") value="false">No</option>
+                        <option @(item.IncludeYear.Value == true ? "selected" : "") value="true">Yes</option>
+                    </select>
+
+                </div>
+            </div>
+
+            <div class="col-md-6 form-group">
+                <label class="col-sm-5 control-label" for="w4-username">Delimiter <span class="required">*</span></label>
+                <div class="col-sm-7">
+                    <select id="Delimiter" name="PrefixSetup[@index].Delimiter">
+                        <option @(item.Delimiter == "/" ? "selected" : "") value="/">/</option>
+                        <option @(item.Delimiter == "-" ? "selected" : "") value="-">-</option>
+                    </select>
+
+                </div>
+            </div>
+
+            <div class="col-md-6 form-group">
+                <label class="col-sm-5 control-label" for="w4-username">Reset Number Every <span class="required">*</span></label>
+                <div class="col-sm-7">
+                    <select id="ResetNumberEvery" name="PrefixSetup[@index].ResetNumberEvery">
+                        <option @(item.ResetNumberEvery == "never" ? "selected" : "")  value="never">nerver</option>
+                        <option @(item.ResetNumberEvery == "month" ? "selected": "") value="month">month</option>
+                        <option @(item.ResetNumberEvery == "year" ? "selected" : "") value="year">year</option>
+                    </select>
+
+                </div>
+            </div>
+            <input type="hidden" name="PrefixSetup[@index].PrefixForId" value="@item.PrefixForId" />
+        </div>
+    </section>
+    index++;
+}

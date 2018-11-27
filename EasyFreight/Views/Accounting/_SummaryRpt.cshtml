@@ -1,0 +1,46 @@
+﻿@model List<EasyFreight.ViewModel.AccountSummary>
+<table class="table table-striped mb-none">
+    <thead>
+        <tr>
+
+            <th>Account Number</th>
+            <th>A/R Name</th>
+            @foreach (string cur in Enum.GetNames(typeof(UsedCurrencies)))
+            {
+                <th>@cur</th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Select(x => new { x.AccountId, x.AccountNameEn, x.AccountNameAr }).Distinct())
+        {
+            <tr>
+                <td>@item.AccountId</td>
+                <td>
+                    <a href="@Url.Content("~/AccountingRpt/AccTransByAccId?accId="+item.AccountId)"> @item.AccountNameEn</a>
+                </td>
+
+                @foreach (string cur in Enum.GetNames(typeof(UsedCurrencies)))
+                {
+                    <td>
+                        @if (Model.Where(x => x.AccountId == item.AccountId && x.CurrencySign == cur).FirstOrDefault() != null)
+                        {
+                            @Model.Where(x => x.AccountId == item.AccountId && x.CurrencySign == cur).FirstOrDefault().DiffAmount.ToString("N");
+                        }
+                        else
+                        {
+                            @Html.Raw("0");
+                        }
+                    </td>
+                }
+
+
+                @*<td>@Model.ArSummary.Where(x => x.AccountId == item.AccountId && x.CurrencySign == "USD").FirstOrDefault().DiffAmount.ToString("N")</td>
+                    <td>@Model.ArSummary.Where(x => x.AccountId == item.AccountId && x.CurrencySign == "EUR").FirstOrDefault().DiffAmount.ToString("N")</td>
+                    <td>@Model.ArSummary.Where(x => x.AccountId == item.AccountId && x.CurrencySign == "GBP").FirstOrDefault().DiffAmount.ToString("N")</td>*@
+
+            </tr>
+        }
+
+    </tbody>
+</table>

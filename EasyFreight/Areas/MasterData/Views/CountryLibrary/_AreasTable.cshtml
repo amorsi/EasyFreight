@@ -1,0 +1,30 @@
+﻿@model List<EasyFreight.Models.Area>
+<table class="table table-bordered table-striped mb-none" id="datatable-default">
+    <thead>
+        <tr>
+            <th>Country</th>
+            <th>Area Name En</th>
+            <th>Area Name Ar</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+  
+            <tr id="@item.AreaId" class="gradeX">
+                <td >@item.Country.CountryNameEn / @item.City.CityNameEn</td>
+                <td id="NameEn">@item.AreaNameEn</td>
+                <td id="NameAr">@item.AreaNameAr</td>
+
+                <td class="actions">
+                    <a href="javascript:void(0)"  countryId="@item.CountryId" 
+                        areaId="@item.AreaId" cityId="@item.CityId" class="on-default edit-row"><i class="fa fa-pencil"></i></a>
+                    <a href="#dialog"  areaId="@item.AreaId" 
+                        class="on-default remove-row"><i class="fa fa-trash-o"></i></a>
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

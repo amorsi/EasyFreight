@@ -1,0 +1,130 @@
+﻿@model EasyFreight.ViewModel.AgentNoteVm
+ @{
+    var bank = EasyFreight.DAL.BankHelper.GetBankInfo(Model.BankId);
+    var housB = Model.HouseBillId.Value != null ? EasyFreight.DAL.HouseBillHelper.GetHBViewInfo(Model.HouseBillId.Value) : null;
+}
+<style>
+    body {
+        color: black !important;
+    }
+    .text-dark2 {
+        font-weight: bold;
+        font-size: 15px; 
+    }
+    .value {
+        font-size: 14px; 
+    }
+</style>
+<section class="panel">
+    <div class="panel-body">
+        <div class="invoice">
+            <header class="clearfix">
+                <div class="row">
+                    <div class="col-sm-3 col-xs-3 form-group mt-md">
+                        <h2 class="h2 mt-none mb-sm text-dark text-bold">Agent Note</h2>
+                    </div>
+
+                    <div class="col-sm-3 col-xs-3 form-group mt-md">
+                        <h2 class="mt-none mb-sm text-dark"> @Model.AgentNoteCode</h2>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-10 col-xs-10 form-group mt-md">
+                        <h3>Agent: @Model.AgentName</h3>
+                    </div>
+                </div>
+            </header>
+
+            <div class="bill-info">
+
+                <div class="row form-group">
+                    <div class=" form-group">
+                        <div class="col-md-4 col-xs-4 form-group">
+                            <span class="text-dark2">Invoice Date:</span>
+                            <span class="value">@(Model.AgentNoteDate == null ? "" : Model.AgentNoteDate.Value.ToString("dd/MM/yyyy"))</span>
+                        </div>
+                        <div class="col-md-4 col-xs-4 form-group">
+                            <span class="text-dark2">Vessel Name:</span>
+                            <span class="value">@Model.VesselName</span>
+                        </div>
+
+                        <div class="col-md-4 col-xs-4 form-group">
+                            <span class="text-dark2">MBL:</span>
+                            <span class="value">@Model.MBL</span>
+                        </div>
+
+                    </div>
+
+                    <div class=" form-group">
+                        <div class="col-md-4 col-xs-4 form-group">
+                            <span class="text-dark2">Port Of Loading:</span>
+                            <span class="value">@Model.FromPort</span>
+                        </div>
+                        <div class="col-md-4 col-xs-4 form-group">
+                            <span class="text-dark2">Operation Code:</span>
+                            <span class="value">@Model.OperationCode</span>
+                        </div>
+                        <div class="col-md-4 col-xs-4 form-group">
+                              <span class="text-dark2">HBL:</span>
+                            <span class="value">@housB.HouseBL</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group" style="padding-bottom:15px;">
+
+                        <div class="col-md-4 col-xs-4 form-group">
+                            <span class="text-dark2">Port Of Discharge:</span>
+                            <span class="value">@Model.ToPort</span>
+                        </div>
+                        <div class="col-md-4 col-xs-4 form-group">
+                            <span class="text-dark2">ETD:</span>
+                            <span class="value">@(Model.DateOfDeparture == null ? "" : Model.DateOfDeparture.Value.ToString("dd/MM/yyyy"))</span>
+                        </div>
+
+                        <div class="col-md-4 col-xs-4 form-group">
+                            <span class="text-dark2">ETA:</span>
+                            <span class="value">@(Model.ArriveDate == null ? "" : Model.ArriveDate.Value.ToString("dd/MM/yyyy"))</span>
+                        </div>
+
+                        <div class="col-md-7 col-xs-7 form-group">
+                            <span class="text-dark2">Customer:</span>
+                            <span class="value"> @housB.ShipperNameEn</span>
+                        </div>
+                        <div class="col-md-5 col-xs-5 form-group">
+                            <span class="text-dark2">Containers:</span>
+                            <span class="value">@Model.ContainerSummary</span>
+                        </div>
+                    </div> 
+                </div>
+            </div>
+
+            @{Html.RenderPartial("~/Views/AgentNote/_AgNoteDetails.cshtml", Model);}
+
+
+                            <div class="form-group" style="padding-bottom:15px;">
+                        <div class="col-md-12">
+                            <span class="text-dark2">Bank Name:</span>
+                            <span id="bankname" class="value">@bank.BankNameEn</span>
+                        </div> 
+                       <div class="col-md-12">
+                            <span class="text-dark2">Account Name:</span>
+                            <span id="accountname" class="value">@bank.BankAccounts.Where(a => a.BankAccId == Model.BankAccId).FirstOrDefault().AccountName</span>
+                        </div>
+
+                     <div class="col-md-12">
+                            <span class="text-dark2">Account Number:</span>
+                            <span id="accountnum" class="value">@bank.BankAccounts.Where(a => a.BankAccId == Model.BankAccId).FirstOrDefault().AccountNumber </span>
+                        </div>
+                       <div class="col-md-12">
+                            <span class="text-dark2">Bank Address:</span>
+                            <span id="bankaddress" class="value">@bank.BankAddressEn</span>
+                        </div>
+                    </div>
+
+        </div>
+
+
+
+    </div>
+</section>
+ 

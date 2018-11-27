@@ -1,0 +1,219 @@
+﻿@model EasyFreight.Models.HouseBillView
+@{
+     var contSummary =  ((List<EasyFreight.ViewModel.OperationContainerVm>)ViewBag.QuoteContainers)
+             .GroupBy(x => x.ContainerTypeName,(key, values) => new { ContainerTypeName = key, count = values.Count() }).ToList();
+
+    System.Text.StringBuilder result = new System.Text.StringBuilder();
+    
+    foreach (var item in contSummary)
+    {
+        // result.Append("Air Container");
+        result.Append(item.count);
+        result.Append("x ");
+        result.Append(string.IsNullOrWhiteSpace(item.ContainerTypeName) ? "Air Container" : item.ContainerTypeName);
+        result.AppendLine("");
+    }
+    }
+<style>
+   .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+     border:  1px solid black;  
+} 
+    .clearfooter {
+height: 50px;
+clear: both;
+}
+    #footer {
+/*height: 330px;
+position: relative;*/
+display:none;
+}
+     #header00 {
+ display:none;
+}
+    .tdHeaderL {
+        height:15px;background-color:#dddddd;width:60%;
+    }
+     .tdHeaderR {
+        height:15px;background-color:#dddddd;width:40%;
+    }
+</style>
+  <h4 class="text-dark" style="text-align:center">  Bill of Lading  </h4>
+ <table class="table table-bordered mb-none">
+    <tbody>
+        <tr>
+            <td   class="tdHeaderL">
+               Shipper
+               </td>
+           <td   class="tdHeaderR">
+                Bill of Lading Number.
+            </td>
+        </tr>
+        <tr>
+            <td >
+                <span class="text-dark">@Model.ShipperNameEn  </span>
+                 <div>
+                    <span class="text-dark">@ViewBag.ShipperAddress</span>
+                </div>
+                <div>
+                    <span class="text-dark">@ViewBag.ShipperTel</span>
+                </div>
+                 
+            </td>
+         <td >
+              @Model.HouseBL
+         </td>
+        </tr>
+
+        <tr>
+
+           <td   class="tdHeaderL">
+                    Consignee   
+            </td>
+            <td   class="tdHeaderR">
+                    Agent   
+            </td>
+        </tr>
+        <tr>
+            <td>  
+                <span class="text-dark">@Model.ConsigneeNameEn</span>
+                 <div>
+                    <span class="text-dark">@Model.ConsigneeAddressEn</span>
+                </div>
+                <div>
+                    <span class="text-dark">
+                        @(!string.IsNullOrEmpty(Model.ConsigneePhoneNumber) ? Model.ConsigneePhoneNumber.ToString().Length > 0 ? "Tel." + @Model.ConsigneePhoneNumber : "" : "")
+                        @(!string.IsNullOrEmpty(Model.ConsigneeFaxNumber) ? Model.ConsigneeFaxNumber.ToString().Length > 0 ? "Fax." + @Model.ConsigneeFaxNumber : "" : "")  </span>
+                </div>
+            </td>
+            <td>
+ <div>
+                        <span class="text-dark">
+                            @Model.AgentNameEn</span>
+                    </div>
+                    <div>
+                        <span class="text-dark">@Model.AgentAddressEn </span>
+                    </div>
+                    <div>
+                        <span class="text-dark">
+                            @{ if (!string.IsNullOrWhiteSpace(Model.AgentPhoneNumber))
+                               {
+                                @(Model.AgentPhoneNumber.ToString().Length > 0 ? "Tel. " + @Model.AgentPhoneNumber : "")
+                            }
+                               if (!string.IsNullOrWhiteSpace(Model.AgentFaxNumber))
+                               {
+                                @(Model.AgentFaxNumber.ToString().Length > 0 ? " Fax. " + @Model.AgentFaxNumber : "")
+                            }
+                            }
+                        </span>
+                    </div>
+            </td>
+        </tr>
+
+        <tr> 
+           <td colspan="2"  class="tdHeaderL"> Notifier </td> 
+        </tr>
+        <tr> 
+             <td colspan="2" > 
+                 <span class="text-dark">@(Model.NotifierAsConsignee.Value ? Model.ConsigneeNameEn : Model.NotifierNameEn)</span> 
+                 <div>
+                     <span class="text-dark">@(Model.NotifierAsConsignee.Value ? Model.ConsigneeAddressEn : Model.NotifierAddressEn)</span>
+                 </div>
+                 <div>
+                     <span class="text-dark">
+
+                         @(Model.NotifierAsConsignee.Value ? (string.IsNullOrWhiteSpace(@Model.ConsigneePhoneNumber) ? "" : " Tel. ") + @Model.ConsigneePhoneNumber :
+                           (string.IsNullOrWhiteSpace(@Model.NotifierPhoneNumber) ? "" : " Tel. ") + @Model.NotifierPhoneNumber)
+
+                         @(Model.NotifierAsConsignee.Value ? (string.IsNullOrWhiteSpace(@Model.ConsigneeFaxNumber) ? "" : " Fax. ") + @Model.ConsigneeFaxNumber :
+                            (string.IsNullOrWhiteSpace(@Model.NotifierFaxNumber) ? "" : " Fax. ") + @Model.NotifierFaxNumber)
+
+                     </span>
+                 </div>
+              </td> 
+        </tr>
+
+         <tr>  
+           <td colspan="2" > 
+               <div >  Vessel (VOY)   : <span  >@Model.VesselName</span>    #<span  >@Model.FlightNumber.</span>   </div>
+               <div>Port of loading : <span  >@Model.FromPort</span></div> 
+           </td>
+              
+        </tr>
+        <tr >
+            <td  colspan="2"  > 
+                    <div class="col-md-6 col-xs-12"> <span  class="col-md-6 col-xs-6">Port of Discharge  : <span  >@Model.ToPort  </span>  </span> 
+                    <span  class="col-md-6 col-xs-6"> <span  > </span> </span>  </div>  
+            </td> 
+        </tr> 
+
+        <tr>
+            <td colspan="2"    class="tdHeaderL"> 
+                Container
+            </td>
+            </tr>
+        <tr>
+            <td  >
+                
+                    <span class="col-md-3 col-xs-3 text-dark">@result </span>  
+                   <span class="text-dark col-md-4 col-xs-4"> Packages# :  @Model.NumberOfPackages </span>
+                   <span class="text-dark col-md-5 col-xs-5"> Packages:  @Model.PackageTypeNameEn </span> 
+                
+            </td>
+            <td  >
+                <div class="col-sm-6 col-xs-6">
+                    <span class="text-dark">@Model.GoodsDescription </span>
+                </div>
+                <div class="col-sm-6 col-xs-6" style="text-align: right;">
+                    <span class="text-dark">@Model.GrossWeight KGs</span>
+                </div>
+            </td>
+
+
+        </tr>
+        <tr>
+            <td style="height: 100px;">
+                @if(Model.CarrierType==1)
+                {
+                   foreach (EasyFreight.ViewModel.OperationContainerVm item in ViewBag.QuoteContainers as List<EasyFreight.ViewModel.OperationContainerVm>)
+                    {        <div class="col-sm-12 col-xs-12 form-group">
+                            <span class="text-dark">Count# @item.ContainerNumber </span>
+                            <br />
+                            <span class="text-dark">SEAL# @item.SealNumber </span>
+                        </div> 
+                    }
+                }
+            </td>
+            <td style="width: 50%;"></td>
+        </tr>
+
+        <tr>
+            <td style="width: 50%;">Fee Terms:@(Model.IsPrepaid == true ? "Freight Prepaid" : "Freight Collected") </td>
+            <td style="width: 50%;"></td>
+        </tr>
+
+        <tr>
+            <td style="width: 50%; height: 100px;"></td>
+            <td style="width: 50%;"></td>
+        </tr>
+
+
+        <tr>
+            <td colspan="2">
+                <div id="footer" style="display:block !important;">
+                <div class="col-sm-4 col-xs-4 ">
+                      <span class="text-dark">@result</span>  
+                </div>
+
+                <div class="col-sm-4 col-xs-4 ">
+                    @(Model.IsPrepaid == true ? "Freight Prepaid" : "Freight Collected")
+                </div>
+                <div class="col-sm-4 col-xs-4 ">
+                </div>
+            </div>
+            </td>
+        </tr>
+    </tbody>
+</table>
+@*<div class="clearfooter"></div>*@
+
+ 

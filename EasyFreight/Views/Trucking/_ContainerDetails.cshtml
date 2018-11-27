@@ -1,0 +1,82 @@
+﻿@model List<EasyFreight.ViewModel.OperationContainerVm>
+@{
+    int index = 0;
+    int lastIndex = Model.Count() - 1;
+}
+<div class="row">
+    <div class="col-sm-2">
+        <label class="control-label">Container Type</label>
+    </div>
+    <div class="col-sm-2">
+        <label class="control-label">Container #</label>
+    </div>
+    <div class="col-sm-2">
+        <label class="control-label">Seal #</label>
+    </div>
+    <div class="col-sm-2">
+        <label class="control-label">Package Type</label>
+    </div>
+    <div class="col-sm-2">
+        <label class="control-label">Packages#</label>
+    </div>
+    <div class="col-sm-1">
+        <label class="control-label">G.W (KG)</label>
+    </div>
+    <div class="col-sm-1">
+        <label class="control-label">N.W (KG)</label>
+    </div>
+</div>
+@foreach (var item in Model)
+{
+    <div class="row contactform" style="margin-top: 25px">
+
+
+        <div class="col-sm-2">
+            <div class="form-group">
+                <span class="text-dark">@item.ContainerTypeName</span>
+            </div>
+        </div>
+
+        <div class="col-sm-2">
+            <div class="form-group">
+                <input type="text" name="OperationContainers[@index].ContainerNumber" readonly="@ViewBag.isView"
+                       class="form-control" value="@item.ContainerNumber">
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div class="form-group">
+                <input type="text" name="OperationContainers[@index].SealNumber" readonly="@ViewBag.isView"
+                       class="form-control" value="@item.SealNumber">
+            </div>
+        </div>
+
+        <div class="col-sm-2">
+            <div class="form-group">
+                <span class="text-dark">@item.PackageTypeName </span>
+            </div>
+        </div>
+
+        <div class="col-sm-2">
+            <div class="form-group">
+                <span class="text-dark">@item.NumberOfPackages</span>
+
+            </div>
+        </div>
+
+        <div class="col-sm-1">
+            <div class="form-group">
+                <span class="text-dark">@item.GrossWeight</span>
+            </div>
+        </div>
+
+        <div class="col-sm-1">
+            <div class="form-group">
+                <span class="text-dark">@item.NetWeight</span>
+
+            </div>
+        </div>
+        <input type="hidden" name="OperationContainers[@index].OperConId" value="@item.OperConId" />
+        <input type="hidden" name="OperationContainers[@index].OperationId" value="@item.OperationId" />
+    </div>
+    index++;
+}

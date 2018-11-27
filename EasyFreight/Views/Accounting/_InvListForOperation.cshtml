@@ -1,0 +1,89 @@
+﻿@model List<EasyFreight.ViewModel.InvoiceVm>
+@{
+    int index = 1;
+}
+@if (Model.Count == 0)
+{
+    <div class="well warning">
+        No Invoices Was Issued.
+    </div>
+}
+else
+{
+    <section class="panel">
+
+        <div class="panel-body">
+            <div class="table-responsive">
+                <table id="tbinvlist" class="table table-striped mb-none">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Invoice Number</th>
+                            <th>HBL</th>
+                            <th>Invoice Date</th>
+                            <th>Due Date</th>
+                            <th>Client</th>
+                            <th>Amount</th>
+                            <th>Amount Due</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                    {
+                    <tr>
+                        <td>@index</td>
+                        <td>@item.InvoiceCode</td>
+                        <td>@item.HouseBL</td>
+                        <td>@(item.InvoiceDate != null ? item.InvoiceDate.Value.ToString("dd/MM/yyyy") : "")</td>
+                        <td>@(item.DueDate != null ? item.DueDate.Value.ToString("dd/MM/yyyy") : "")</td>
+                        <td>@item.CustomerName</td>
+                        <td>
+                            @if (item.InvoiceTotals != null)
+                                {
+                                    foreach (var total in item.InvoiceTotals)
+                                    {
+                                <div>@total.CurrencySign  @total.TotalAmount</div>
+                                    }
+                                }
+
+
+                        </td>
+                        <td>
+                            @item.AmountDue
+                        </td>
+                        <td>
+                            @item.InvStatusName
+                        </td>
+                        <td>
+                            @if (item.InvoiceId != 0)
+                                {
+                                <a href="@Url.Content("~/Invoice/ViewInvoice?id=" + item.InvoiceId + "&hbId="+ item.HouseBillId)" target="_blank" title="View"
+                                   bankid="@item.InvoiceId" style="padding-left:5px"
+                                   class="on-default viewinv"><i class="fa fa-eye"></i></a>
+                                <a href="@Url.Content("~/Invoice/PrintInvoice?id=" + item.InvoiceId + "&hbId=" + item.HouseBillId)" title="Print"
+                                   bankid="@item.InvoiceId" style="padding-left:5px"
+                                   class="on-default printinv"><i class="fa fa-print"></i></a>
+                                }
+                                else // add new invoice for HB
+                                {
+                                <a href="@Url.Content("~/Accounting/Invoice?id=" + item.HouseBillId +
+                                    "&oId=" + item.OperationId + "&invType=0")" title="Add New Invoice"
+                                   bankid="@item.InvoiceId" style="padding-left:5px"
+                                   class="on-default viewinv"><i class="fa fa-plus-circle"></i></a>
+                                }
+
+                        </td>
+                    </tr>
+                                index++;
+
+                    }
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+}

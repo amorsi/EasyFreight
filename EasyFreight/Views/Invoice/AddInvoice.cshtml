@@ -1,0 +1,191 @@
+﻿@model EasyFreight.ViewModel.InvoiceVm
+@{
+    ViewBag.Title = "AddInvoice";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<header class="page-header">
+    <h2>Invoice</h2>
+
+    <div class="right-wrapper pull-right">
+        <ol class="breadcrumbs">
+            <li>
+                <a href="index.html">
+                    <i class="fa fa-home"></i>
+                </a>
+            </li>
+            <li><span>Accounting</span></li>
+            <li><span>Invoice</span></li>
+        </ol>
+
+        <a class="sidebar-right-toggle" data-open="sidebar-right"><i class="fa fa-chevron-left"></i></a>
+    </div>
+</header>
+
+<section class="panel">
+    <div class="panel-body">
+        <form id="invform">
+            <div class="invoice">
+                <header class="clearfix">
+                    <div class="row">
+                        <div class="col-sm-6 mt-md">
+                            <h2 class="h2 mt-none mb-sm text-dark text-bold">INVOICE</h2>
+                        </div>
+
+                    </div>
+                </header>
+                <div class="bill-info">
+                    <div class="row">
+                        <div class="col-md-4 form-group">
+                            <label class="col-sm-4 control-label" for="w4-username">Invoice Number<span class="required">*</span></label>
+                            <div class="col-sm-7">
+                                <input type="text" class="form-control" name="InvoiceCode" readonly
+                                       id="InvoiceCode" value="@Model.InvoiceCode" required>
+                            </div>
+                            @if (Model.InvoiceId == 0)
+                            {
+                                <a href="javascript:void(0)" title="Number will be generated after submit">
+                                    <i class="fa fa-info-circle fa-2x"></i>
+                                </a>
+                            }
+                        </div>
+                        <div class="col-md-4 form-group">
+                            <label class="col-sm-4 control-label" for="w4-username">Invoice Date<span class="required">*</span></label>
+                            <div class="col-sm-8">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </span>
+                                    <input type="text"
+                                           value="@(Model.InvoiceDate == null ? "" : Model.InvoiceDate.Value.ToString("dd/MM/yyyy"))"
+                                           class="form-control"
+                                           data-date-format="dd/mm/yyyy" name="InvoiceDate" required
+                                           data-plugin-datepicker="">
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 form-group">
+                            <label class="col-sm-4 control-label" for="w4-username">Due Date<span class="required">*</span></label>
+                            <div class="col-sm-8">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </span>
+                                    <input type="text"
+                                           value="@(Model.DueDate == null ? "" : Model.DueDate.Value.ToString("dd/MM/yyyy"))"
+                                           class="form-control"
+                                           data-date-format="dd/mm/yyyy" name="DueDate" required
+                                           data-plugin-datepicker="">
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 form-group">
+                            <label class="col-md-4 control-label" for="w4-username">Payment Term<span class="required">*</span></label>
+                            <div class="col-md-8">
+                                <select id="PaymentTermId" name="PaymentTermId" data-plugin-selecttwo
+                                    required class="form-control populate" data-placeholder="Select">
+                                    <option></option>
+                                    @foreach (var item in ViewBag.PaymentTerm)
+                                    {
+                                        <option value="@item.Key" @(Model.PaymentTermId == item.Key ? "selected" : "")>@item.Value</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 form-group">
+                            <label class="col-md-4 control-label" for="w4-username">Invoice Currency<span class="required">*</span></label>
+                            <div class="col-md-8">
+                                <select id="invcurrency" name="InvCurrencyId" data-plugin-selecttwo
+                                    required class="form-control populate" data-placeholder="Select">
+                                    <option></option>
+                                    @foreach (var item in ViewBag.CurrencyList)
+                                    {
+                                        <option value="@item.Key" @(Model.InvCurrencyId == item.Key ? "selected" : "")>@item.Value</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 form-group">
+                            <label class="col-md-4 control-label" for="w4-username"></label>
+                            <div class="col-md-8">
+                                <br />
+                            </div>
+                        </div>
+
+                    </div>
+                    <hr />
+                    <div class="row" style="padding-bottom: 10px">
+                        <div class="col-md-12">
+                            <span class="text-dark">Customer Name:</span>
+                            <span class="value">@Model.CustomerName</span>
+                        </div>
+                    </div>
+                    <div class="row" style="padding-bottom: 15px">
+
+                        <div class="col-md-3">
+                            <span class="text-dark">Operation:</span>
+                            <span class="value">@Model.OperationCode</span>
+                        </div>
+                        <div class="col-md-3">
+                            <span class="text-dark">HBL:</span>
+                            <span class="value">@Model.HouseBL</span>
+                        </div>
+                        <div class="col-md-3">
+                            <span class="text-dark">From Port:</span>
+                            <span class="value">@Model.FromPort</span>
+                        </div>
+                        <div class="col-md-3">
+                            <span class="text-dark">To Port:</span>
+                            <span class="value">@Model.ToPort</span>
+                        </div>
+
+
+                    </div>
+                </div>
+
+                <section class="panel">
+                    
+                    <div class="panel-body">
+                        <div class="table-responsive">
+                            @{Html.RenderPartial("~/Views/Invoice/_AddInvDetails.cshtml", Model);}
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <div class="col-sm-12 form-group">
+                <label for="textareaDefault" class="col-md-2 control-label">Notes</label>
+                <div class="col-md-7">
+                    <textarea id="textareaDefault" name="Notes" rows="3" class="form-control">@Model.Notes</textarea>
+                </div>
+            </div>
+            @Html.Hidden("ConsigneeId", Model.ConsigneeId)
+            @Html.HiddenFor(x => x.CreateDate)
+            @Html.HiddenFor(x => x.InvoiceId)
+            @Html.HiddenFor(x => x.ShipperId)
+            @Html.HiddenFor(x => x.OrderFrom)
+            @Html.HiddenFor(x => x.HouseBillId)
+            @Html.HiddenFor(x => x.OperationId)
+            @Html.HiddenFor(x => x.InvoiceType)
+            <input type="hidden" name="InvStatusId" value="@Model.InvStatusId" />
+            <input type="hidden" name="CreateBy" value="@Model.CreateBy" />
+
+        </form>
+        <div class="text-right mr-lg">
+            <a href="javascript:void(0)" id="saveinv" class="btn btn-primary">Submit Invoice</a>
+            <a id="ResetForm" href="@Url.Content("~/Invoice")" class="btn btn-default">Reset</a>
+            @*<a href="pages-invoice-print.html" target="_blank" class="btn btn-primary ml-sm"><i class="fa fa-print"></i>Submit & Print</a>*@
+        </div>
+    </div>
+</section>
+
+@section scripts{
+    <script src="@Url.Content("~/Scripts/Invoice/AddInv.js")"></script>
+}

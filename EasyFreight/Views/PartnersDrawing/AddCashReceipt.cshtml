@@ -1,0 +1,223 @@
+﻿@model EasyFreight.ViewModel.CashInVm
+@{
+    ViewBag.Title = "AddCashReceipt";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<header class="page-header">
+    <h2>Cash In/ Out</h2>
+
+    <div class="right-wrapper pull-right">
+        <ol class="breadcrumbs">
+            <li>
+                <a href="@Url.Content("~/Home/Index")">
+                    <i class="fa fa-home"></i>
+                </a>
+            </li>
+            <li><span>Accounting</span></li>
+            <li><span>Partners Drawing</span></li>
+        </ol>
+
+        <a class="sidebar-right-toggle" data-open="sidebar-right"><i class="fa fa-chevron-left"></i></a>
+    </div>
+</header>
+
+<section class="panel">
+    <div class="panel-body">
+        <form id="invform">
+            <div class="invoice">
+                <header class="clearfix">
+                    <div class="row">
+                        <div class="col-sm-6 mt-md">
+                            <h2 class="h2 mt-none mb-sm text-dark text-bold">@ViewBag.CashRecTitle</h2>
+                        </div>
+
+                    </div>
+                </header>
+                <div class="row bill-info">
+
+                    <div class="col-md-12" style="padding-bottom: 12px">
+                        <label class="col-sm-4 control-label" for="w4-username">Partner Name :</label>
+                        <div class="col-sm-8">
+                            <select id="PartnerAccountId" name="PartnerAccountId" data-plugin-selecttwo
+                                    required class="form-control populate" data-placeholder="Select">
+                                <option></option>
+                                @foreach (var item in ViewBag.PartnersList)
+                                {
+                                    <option value="@item.Key" @(Model.PartnerAccountId == item.Key ? "selected" : "")>@item.Value</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 form-group">
+                        <label class="col-sm-5 control-label" for="w4-username">Receipt Number<span class="required">*</span></label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" name="ReceiptCode" readonly
+                                   id="ReceiptCode" value="@Model.ReceiptCode" required>
+                        </div>
+                        @if (Model.ReceiptId == 0)
+                        {
+                            <a href="javascript:void(0)" title="Number will be generated after submit">
+                                <i class="fa fa-info-circle fa-2x"></i>
+                            </a>
+                        }
+                    </div>
+                    <div class="col-md-4 form-group">
+                        <label class="col-sm-5 control-label" for="w4-username">Receipt Date<span class="required">*</span></label>
+                        <div class="col-sm-7">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="fa fa-calendar"></i>
+                                </span>
+                                <input type="text"
+                                       value="@(Model.ReceiptDate == null ? "" : Model.ReceiptDate.Value.ToString("dd/MM/yyyy"))"
+                                       class="form-control"
+                                       data-date-format="dd/mm/yyyy" name="ReceiptDate" required
+                                       data-plugin-datepicker="">
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-sm-4 form-group">
+                        <label class="col-sm-4 control-label" for="w4-username">Currency<span class="required">*</span></label>
+                        <div class="col-sm-8">
+                            <select id="CurrencyId" name="CurrencyId" data-plugin-selecttwo
+                                    required class="form-control populate" data-placeholder="Select">
+                                <option></option>
+                                @foreach (var item in ViewBag.CurrencyList)
+                                {
+                                    <option value="@item.Key" @(Model.CurrencyId == item.Key ? "selected" : "")>@item.Value</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+
+
+                    <div class="col-sm-4 form-group">
+                        <label class="col-sm-5 control-label" for="w4-username">Payment Term<span class="required">*</span></label>
+                        <div class="col-sm-7">
+                            <select id="PaymentTermId" name="PaymentTermId" data-plugin-selecttwo
+                                    required class="form-control populate" data-placeholder="Select">
+                                <option></option>
+                                @foreach (var item in ViewBag.PaymentTerm)
+                                {
+                                    <option value="@item.Key" @(Model.PaymentTermId == item.Key ? "selected" : "")>@item.Value</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4 form-group">
+                        <label class="col-sm-5 control-label" for="w4-username">Receipt Amount<span class="required">*</span></label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control onlynumber" name="ReceiptAmount"
+                                   id="ReceiptAmount" value="@Model.ReceiptAmount" required>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div id="forbank" style="display:none;margin-top:15px;margin-bottom:20px;">
+                <div class="row form-group">
+                    <div class="col-sm-6 form-group">
+                        <label class="col-sm-4 control-label" for="w4-username">Bank<span class="required">*</span></label>
+                        <div class="col-sm-8">
+                            <select id="BankId" name="BankId" data-plugin-selecttwo
+                                    class="form-control populate" data-placeholder="Select">
+                                <option></option>
+                                @foreach (var item in ViewBag.BankList)
+                                {
+                                    <option value="@item.Key" @(Model.BankId == item.Key ? "selected" : "")>@item.Value</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row col-sm-offset-2" id="bankdetails" style="display:none;margin-top:15px;margin-bottom:15px;">
+                    <div class="col-sm-12 form-group">
+                        <span class="text-dark">Bank Name:</span>
+                        <span id="bankname" class="value"></span>
+                    </div>
+
+                    <div class="col-sm-12 form-group">
+                        <span class="text-dark">Bank Address:</span>
+                        <span id="bankaddress" class="value"></span>
+                    </div>
+
+                    <div class="col-sm-12 form-group">
+                        <span class="text-dark">Account Name:</span>
+                        <span id="accountname" class="value"></span>
+                    </div>
+
+                    <div class="col-sm-12 form-group">
+                        <span class="text-dark">Account Number:</span>
+                        <span id="accountnum" class="value"></span>
+                    </div>
+
+                    <div class="col-sm-12 form-group">
+                        <span class="text-dark">Swift Code:</span>
+                        <span id="swiftcode" class="value"></span>
+                    </div>
+                    <input type="hidden" id="BankAccId" name="BankAccId" value="" />
+                </div>
+
+            </div>
+
+            <div id="forcheck" style="display:none;margin-top:15px;margin-bottom:20px;">
+                <div class="row form-group">
+                    <div class="col-md-4 form-group">
+                        <label class="col-sm-5 control-label" for="w4-username">Check Number<span class="required">*</span></label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" name="CashInReceiptChecks[0].CheckNumber"
+                                   id="ReceiptAmount" value="@Model.CashInReceiptChecks[0].CheckNumber" />
+
+                            <input type="hidden" name="CashInReceiptChecks[0].ReceiptId" value="@Model.ReceiptId" />
+                            <input type="hidden" name="CashInReceiptChecks[0].CashInCheckId" value="@Model.CashInReceiptChecks[0].CashInCheckId" />
+                        </div>
+                    </div>
+                    <div class="col-md-4 form-group">
+                        <label class="col-sm-5 control-label" for="w4-username">Check Due Date<span class="required">*</span></label>
+                        <div class="col-sm-7">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="fa fa-calendar"></i>
+                                </span>
+                                <input type="text"
+                                       value="@(Model.CashInReceiptChecks[0].CheckDueDate == null ? "" : Model.CashInReceiptChecks[0].CheckDueDate.Value.ToString("dd/MM/yyyy"))"
+                                       class="form-control"
+                                       data-date-format="dd/mm/yyyy" name="CashInReceiptChecks[0].CheckDueDate" required
+                                       data-plugin-datepicker="">
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-sm-12 form-group">
+                <label for="textareaDefault" class="col-md-2 control-label">Notes</label>
+                <div class="col-md-7">
+                    <textarea id="textareaDefault" name="Notes" rows="3" class="form-control">@Model.Notes</textarea>
+                </div>
+            </div>
+            @Html.HiddenFor(x => x.CreateDate)
+            @Html.HiddenFor(x => x.ReceiptId)
+            @Html.HiddenFor(x => x.CreateBy)
+
+            <input type="hidden" id="cashtype" name="cashtype" value="@Model.CashType" />
+        </form>
+        <div class="text-right mr-lg">
+            <a href="javascript:void(0)" id="savepartnerreceipt" class="btn btn-default">Submit Receipt</a>
+            <a href="javascript:void(0)" id="saveAndPrint" class="btn btn-primary ml-sm"><i class="fa fa-print"></i>Submit & Print</a>
+        </div>
+    </div>
+</section>
+@section scripts{
+    <script src="@Url.Content("~/Scripts/CashManagement/CashCommon.js")"></script>
+<script src="@Url.Content("~/Scripts/PartnersDrawing/AddScript.js")"></script>
+}

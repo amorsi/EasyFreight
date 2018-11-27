@@ -1,0 +1,561 @@
+﻿@model EasyFreight.ViewModel.QuotationVm
+@{
+    ViewBag.Title = "Add";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<header class="page-header">
+    <h2>Add Quotation</h2>
+
+    <div class="right-wrapper pull-right">
+        <ol class="breadcrumbs">
+            <li>
+                <a href="@Url.Content("~/Home/Index")">
+                    <i class="fa fa-home"></i>
+                </a>
+            </li>
+            <li><span>Quotation</span></li>
+            <li><span>Add Quotation</span></li>
+        </ol>
+
+        <a class="sidebar-right-toggle" data-open="sidebar-right"><i class="fa fa-chevron-left"></i></a>
+    </div>
+</header>
+
+<div class="row">
+    <div class="col-lg-12">
+        <form id="Form1">
+            <section class="panel">
+                <header class="panel-heading">
+                    <div class="panel-actions">
+                        <a href="#"></a>
+                        <a href="#"></a>
+                    </div>
+
+                    <h2 class="panel-title">Quotation Details</h2>
+                </header>
+                <div class="panel-body">
+                    <div class="col-md-3 form-group">
+                        <label class="col-sm-4 control-label" for="w4-username">Quotation Code<span class="required">*</span></label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" name="QuoteCode"
+                                   id="QuoteCode" value="@Model.QuoteCode" required>
+                        </div>
+                        @if (Model.QuoteId == 0)
+                        {
+                            <a href="javascript:void(0)" title="Number will be generated after submit"><i class="fa fa-info-circle fa-2x"></i></a>
+                        }
+                    </div>
+                    <div class="col-md-3 form-group">
+                        <label class="col-sm-4 control-label" for="w4-username">Quotation Date<span class="required">*</span></label>
+                        <div class="col-sm-8">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="fa fa-calendar"></i>
+                                </span>
+                                <input type="text"
+                                       value="@(Model.QuoteDate == null ? "" : Model.QuoteDate.Value.ToString("dd/MM/yyyy"))" class="form-control"
+                                       data-date-format="dd/mm/yyyy" name="QuoteDate"
+                                       data-plugin-datepicker  />
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-md-6  form-inline">
+                        <div class="form-group">
+                            <label class="col-md-1 control-label"></label>
+                            <div class="col-md-11">
+                                <div class="checkbox-custom checkbox-default">
+                                    <input type="checkbox" id="HasExpireDateCheck" @(Model.HasExpireDate == true ? "checked" : "")>
+                                    <label for="checkboxExample1">This quotation will expire after </label>
+                                </div>
+                                <input type="hidden" id="HasExpireDate" name="HasExpireDate"
+                                       value="@Model.HasExpireDate.ToString()" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group mb-md">
+                                <input type="text" name="ExpirationInDays" disabled
+                                       class="form-control tgw onlyNumbers" id="ExpirationInDays" value="@Model.ExpirationInDays">
+                                <span class="input-group-addon btn-default">Days</span>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    @Html.Hidden("StatusId", Model.StatusId)
+                    @Html.Hidden("OrderFrom", Model.OrderFrom)
+                    @Html.Hidden("QuoteId", Model.QuoteId)
+                    @Html.Hidden("CreateDate", Model.CreateDate)
+
+                </div>
+            </section>
+
+            <section class="panel">
+                <header class="panel-heading">
+                    <div class="panel-actions">
+                        <a href="#"></a>
+                        <a href="#"></a>
+                    </div>
+
+                    <h2 class="panel-title">Partners Details</h2>
+                </header>
+                <div class="panel-body">
+                    <div class="col-sm-7 form-group">
+                        <label class="col-sm-4 control-label" for="w4-username">Shipper<span class="required">*</span></label>
+                        <div class="col-sm-7">
+                            <select id="ShipperId" name="ShipperId" data-plugin-selecttwo
+                                    required class="form-control populate" data-placeholder="Select">
+                                <option></option>
+                                @foreach (var item in ViewBag.ShipperList)
+                                {
+                                    <option value="@item.Key" @(Model.ShipperId == item.Key ? "selected" : "")>@item.Value</option>
+                                }
+                            </select>
+                        </div>
+
+                    @*    <a id="addNewShipper" class="col-sm-1 quickadd" addtype="1" title="Add New Shipper" style="padding-left:5px"
+                           href="#modalForm">
+                            <i class="fa fa-plus-square fa-2x"></i>
+                        </a>*@
+                    </div>
+                    @if (Model.OrderFrom == 1)
+                    {
+                        <div class="col-sm-5 form-group">
+                            <label class="col-md-1 control-label"></label>
+                            <div class="col-md-11" style="padding-top: 8px">
+                                <div class="checkbox-custom checkbox-default">
+                                    <input type="checkbox" id="IsCareOfCheck" @(Model.IsCareOf == true ? "checked" : "")>
+                                    <label for="checkboxExample1">Care Of A.M CARGO FOR WORLD TRANSPORTATION </label>
+                                </div>
+                                <input type="hidden" id="IsCareOf" name="IsCareOf"
+                                       value="@Model.IsCareOf.ToString()" />
+                            </div>
+
+                        </div>
+                    }
+                    <div class="col-sm-7 form-group">
+                        <label class="col-sm-4 control-label" for="w4-username">Consignee<span class="required">*</span></label>
+                        <div class="col-sm-7">
+                            <select id="ConsigneeId" name="ConsigneeId" data-plugin-selecttwo
+                                    required class="form-control populate" data-placeholder="Select">
+                                <option></option>
+                                @foreach (var item in ViewBag.ConsigneeList)
+                                {
+                                    <option value="@item.Key" @(Model.ConsigneeId == item.Key ? "selected" : "")>@item.Value</option>
+                                }
+                            </select>
+                        </div>
+                        @*<a id="addNewCons" class="col-sm-1 quickadd" addtype="2" title="Add New Consignee" style="padding-left:5px"
+                           href="#modalForm">
+                            <i class="fa fa-plus-square fa-2x"></i>
+                        </a>*@
+                    </div>
+                    <div class="col-sm-7 form-group">
+                        <label class="col-sm-4 control-label" for="w4-username">Notifier</label>
+                        <div class="col-sm-8">
+                            <select id="NotifierId" name="NotifierId" data-plugin-selecttwo data-allow-clear="true" 
+                                    class="form-control populate" data-placeholder="Select">
+                                <option></option>
+                                @foreach (var item in ViewBag.NotifierList)
+                                {
+                                    <option value="@item.Key" @(Model.NotifierId == item.Key ? "selected" : "")>@item.Value</option>
+                                }
+                            </select>
+
+                            @Html.Hidden("NotitiferEdit", Model.NotifierId)
+
+                        </div>
+                    </div>
+                    <div class="col-sm-5 form-group">
+
+                        <label class="col-md-1 control-label"></label>
+                        <div class="col-md-11">
+                            <div class="checkbox-custom checkbox-default">
+                                <input type="checkbox" id="notifierCheck" @(Model.NotifierAsConsignee == true ? "checked" : "")>
+                                <label for="checkboxExample1">same as consignee</label>
+                            </div>
+                            <input type="hidden" id="NotifierAsConsignee" name="NotifierAsConsignee"
+                                   value="@Model.NotifierAsConsignee.ToString()" />
+                        </div>
+
+                    </div>
+
+                    <div class="col-sm-7 form-group">
+                        <label class="col-sm-4 control-label" for="w4-username">Agent</label>
+                        <div class="col-sm-8">
+                            <select id="AgentId" name="AgentId"
+                                    data-plugin-selecttwo data-placeholder="Select Agent"
+                                    class="form-control populate">
+                                <option></option>
+                                @foreach (var item in ViewBag.AgentList)
+                                {
+                                    <option value="@item.Key" @(Model.AgentId == item.Key ? "selected" : "")>@item.Value</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="panel">
+                <header class="panel-heading">
+                    <div class="panel-actions">
+                        <a href="#"></a>
+                        <a href="#"></a>
+                    </div>
+
+                    <h2 class="panel-title">Carrier Details</h2>
+                </header>
+                <div class="panel-body">
+                    <div class="col-sm-8 form-group">
+                        <label class="col-sm-3 control-label" for="w4-username">Carrier Type<span class="required">*</span></label>
+                        <div class="col-sm-5">
+                            <select id="carriertype" name="CarrierType" data-plugin-selecttwo
+                                    required class="form-control populate">
+                                <option value="1" @(Model.CarrierType == 1 ? "selected" : "")>Sea</option>
+                                <option value="2" @(Model.CarrierType == 2 ? "selected" : "")>Air</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 form-group">
+                        <label class="col-sm-4 control-label" for="w4-username">Port of loading<span class="required">*</span></label>
+                        <div class="col-sm-8">
+                            @Html.Partial("~/Views/Shared/_PortGrouped.cshtml",
+                                    ViewData["PortList"] as List<EasyFreight.ViewModel.CountryPortList>,
+                                    new ViewDataDictionary { { "ddlName", "FromPortId" },
+                                    { "selectedVal", @Model.FromPortId },{"required","required"} })
+                        </div>
+                    </div>
+                    <div class="col-sm-6 form-group">
+                        <label class="col-sm-4 control-label" for="w4-username">Port of discharge<span class="required">*</span></label>
+                        <div class="col-sm-8">
+                            @Html.Partial("~/Views/Shared/_PortGrouped.cshtml",
+                                    ViewData["PortList"] as List<EasyFreight.ViewModel.CountryPortList>,
+                                    new ViewDataDictionary { { "ddlName", "ToPortId" },
+                                    { "selectedVal", @Model.ToPortId },{"required","required"} })
+                        </div>
+                    </div>
+                    <div class="col-sm-6 form-group">
+                        <label class="col-sm-4 control-label" for="w4-username">Carrier<span class="required">*</span></label>
+                        <div class="col-sm-8">
+                            <select id="CarrierId" name="CarrierId" data-plugin-selecttwo
+                                    required class="form-control populate" data-placeholder="Select">
+                                <option></option>
+                                @foreach (var item in ViewBag.CarrierList)
+                                {
+                                    <option value="@item.Key" @(Model.CarrierId == item.Key ? "selected" : "")>@item.Value</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 form-group">
+                        <label class="col-sm-4 control-label" for="w4-username">Incoterm</label>
+                        <div class="col-sm-8">
+                            <select id="IncotermId" name="IncotermId" data-plugin-selecttwo
+                                    class="form-control populate" data-placeholder="Select">
+                                <option></option>
+                                @foreach (var item in ViewBag.IncotermLib)
+                                {
+                                    <option value="@item.Key" @(Model.IncotermId == item.Key ? "selected" : "")>@item.Value</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div id="vesseldiv" class="col-sm-8 form-group">
+                        <label class="col-sm-3 control-label" for="w4-username">Vessel</label>
+                        <div class="col-sm-5">
+                            <select id="VesselId" name="VesselId" data-plugin-selecttwo
+                                    class="form-control populate" data-placeholder="Select">
+                                <option></option>
+                            </select>
+                            @Html.Hidden("VesselIdEdit", Model.VesselId)
+                        </div>
+                    </div>
+
+                    <div id="flightdiv" class="col-sm-8 form-group" style="display: none;">
+                        <label class="col-sm-3 control-label" for="w4-username">Flight Number</label>
+                        <div class="col-sm-5">
+                            <input type="text" class="form-control" name="FlightNumber" value="@Model.FlightNumber" />
+                        </div>
+                    </div>
+                    <div class="col-md-6 form-group" id="dateExp">
+                        <label class="col-sm-4 control-label">Departure Date</label>
+                        <div class="col-sm-8">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="fa fa-calendar"></i>
+                                </span>
+                                <input type="text"
+                                       value="@(Model.DateOfDeparture == null ? "" : Model.DateOfDeparture.Value.ToString("dd/MM/yyyy"))" class="form-control"
+                                       data-date-format="dd/mm/yyyy" name="DateOfDeparture"
+                                       data-plugin-datepicker="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label class="col-sm-4 control-label">Arrival Date</label>
+                        <div class="col-sm-8">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="fa fa-calendar"></i>
+                                </span>
+                                <input type="text"
+                                       value="@(Model.ArriveDate == null ? "" : Model.ArriveDate.Value.ToString("dd/MM/yyyy"))" class="form-control"
+                                       data-date-format="dd/mm/yyyy" name="ArriveDate"
+                                       data-plugin-datepicker="">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 form-group">
+                        <label class="col-sm-4 control-label" for="w4-username">Transit Time</label>
+                        <div class="col-sm-8">
+                            <div class="input-group mb-md">
+                                <input type="text" name="TransitTime" class="form-control tgw onlyNumbers" value="@Model.TransitTime">
+                                <span class="input-group-addon btn-default">Days</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 form-group">
+                        <label class="col-sm-4 control-label" for="w4-username">Free Days</label>
+                        <div class="col-sm-8">
+                            <div class="input-group mb-md">
+                                <input type="text" name="FreeDays" class="form-control tgw onlyNumbers" value="@Model.FreeDays">
+                                <span class="input-group-addon btn-default">Days</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="panel">
+                <header class="panel-heading">
+                    <div class="panel-actions">
+                        <a href="#"></a>
+                        <a href="#"></a>
+                    </div>
+
+                    <h2 class="panel-title">Container Details</h2>
+                </header>
+                <div class="panel-body">
+                    @Html.Partial("~/Views/Quotation/_AddContainer.cshtml",
+                    Model.QuotationContainers,
+                    new ViewDataDictionary {
+                    {"ContainerList", ViewBag.Containers}
+                    })
+                </div>
+            </section>
+
+            <section class="panel">
+                <header class="panel-heading">
+                    <div class="panel-actions">
+                        <a href="#"></a>
+                        <a href="#"></a>
+                    </div>
+
+                    <h2 class="panel-title">Cargo Summary and Options</h2>
+                </header>
+                <div class="panel-body">
+                    <div class="col-sm-3 form-group">
+                        <label class="col-sm-4 control-label" for="w4-username">G.W.</label>
+                        <div class="col-sm-8">
+                            <div class="input-group mb-md">
+                                <input type="text" name="GrossWeight" class="form-control tgw onlyNumbers" value="@Model.GrossWeight">
+                                <span class="input-group-addon btn-primary">KG</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 form-group">
+                        <label id="nwlbl" class="col-sm-4 control-label" for="w4-username">N.W.</label>
+                        <div class="col-sm-8">
+                            <div class="input-group mb-md">
+                                <input type="text" name="NetWeight" class="form-control tnw onlyNumbers" value="@Model.NetWeight">
+                                <span class="input-group-addon btn-primary">KG</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 form-group">
+                        <label class="col-sm-4 control-label" for="w4-username">CBM</label>
+                        <div class="col-sm-8">
+                            <div class="input-group mb-md">
+                                <input type="text" name="CBM" class="form-control tcbm onlyNumbers" value="@Model.CBM">
+                                <span class="input-group-addon btn-primary">m3</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-3 form-group">
+                        <label class="col-sm-4 control-label" for="w4-username">Packages</label>
+                        <div class="col-sm-8">
+                            <div class="input-group mb-md">
+                                <input type="text" name="NumberOfPackages" class="form-control tpackagesnum onlyNumbers"
+                                       value="@Model.NumberOfPackages">
+                                 <input type="text" name="PackagesType" class="form-control" placeholder="Package Type"
+                                       value="@Model.PackagesType">
+                                @*<span class="input-group-addon btn-primary">Item</span>*@
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4 form-group">
+                        <label class="col-sm-4 control-label" for="w4-username">Freight Amount</label>
+                        <div class="col-sm-8">
+                            @Html.Partial("~/Views/Shared/_InputWithCurrencySelect.cshtml",
+                                    ViewData["CurrencyList"] as Dictionary<int, string>,
+                                    new ViewDataDictionary
+                                    {
+                                    { "inputName", "FreightCostAmount" },
+                                    { "inputValue", Model.FreightCostAmount },
+                                    { "selectedCurrencyId", Model.FreighCurrencyId },
+                                    { "ddlCurrencyIdName", "FreighCurrencyId" },
+                                    { "defaultCurrencyId", 2 },{"required",""}
+                                    })
+                        </div>
+                    </div>
+                    <div class="col-sm-4 form-group">
+                        <label class="col-sm-4 control-label" for="w4-username">@(Model.OrderFrom == 1 ? "THC Cost" : "THCD Cost")</label>
+                        <div class="col-sm-8">
+                            @Html.Partial("~/Views/Shared/_InputWithCurrencySelect.cshtml",
+                                    ViewData["CurrencyList"] as Dictionary<int, string>,
+                                    new ViewDataDictionary
+                                    {
+                                    { "inputName", "ThcCostAmount" },
+                                    { "inputValue", Model.ThcCostAmount },
+                                    { "selectedCurrencyId", Model.ThcCurrencyId },
+                                    { "ddlCurrencyIdName", "ThcCurrencyId" },
+                                    { "defaultCurrencyId", 1 },{"required",""}
+                                    })
+                        </div>
+                    </div>
+                    <div class="col-sm-4 form-group">
+                        <label class="col-sm-4 control-label" for="w4-username"></label>
+                        <div class="col-sm-8">
+                            <div class="radio-custom radio-primary">
+
+                                <input type="radio" name="prepaidradio" @(Model.IsPrepaid == true ? "checked" : "") id="prepaid">
+                                <label for="radioExample2">Prepaid</label>
+                            </div>
+                            <div class="radio-custom radio-primary">
+                                <input type="radio" name="prepaidradio" @(Model.IsPrepaid == false ? "checked" : "") id="collected">
+                                <label for="radioExample2">Collect</label>
+                            </div>
+                            @Html.Hidden("IsPrepaid", Model.IsPrepaid.ToString())
+                        </div>
+                    </div>
+                    <div class="col-sm-11 col-md-offset-1 form-group">
+                        <div class="col-sm-6">
+                            <div class="checkbox-custom checkbox-default">
+                                <input type="checkbox" id="PickupNeededCheck" @(Model.PickupNeeded == true ? "checked" : "")>
+                                <label for="PickupNeededCheck">Transportation is required</label>
+                            </div>
+                            @Html.Hidden("PickupNeeded", Model.PickupNeeded.ToString())
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="checkbox-custom checkbox-default">
+                                <input type="checkbox" id="CustomClearanceNeededCheck" @(Model.CustomClearanceNeeded == true ? "checked" : "")>
+                                <label for="CustomClearanceNeededCheck">Custom Clearance is required</label>
+                            </div>
+                            @Html.Hidden("CustomClearanceNeeded", Model.CustomClearanceNeeded.ToString())
+                        </div>
+                    </div>
+                    <div class="col-sm-11 col-md-offset-1 form-group">
+                        <div id="truckcost" class="col-sm-5" style="display:none">
+                            <label class="col-sm-5 control-label" for="w4-username">Expected Trucking Cost</label>
+                            <div class="col-sm-7">
+                                @Html.Partial("~/Views/Shared/_InputWithCurrencySelect.cshtml",
+                                    ViewData["CurrencyList"] as Dictionary<int, string>,
+                                    new ViewDataDictionary
+                                    {
+                                    { "inputName", "TruckingCost" },
+                                    { "inputValue", Model.TruckingCost },
+                                    { "selectedCurrencyId", Model.TruckingCurrencyId },
+                                    { "ddlCurrencyIdName", "TruckingCurrencyId" },
+                                    { "defaultCurrencyId", 1 },{"required",""}
+                                    })
+                            </div>
+                        </div>
+                        <div id="cccost" class="col-sm-5" style="display:none">
+                            <label class="col-sm-5 control-label" for="w4-username">Expected Custom Clearance Cost</label>
+                            <div class="col-sm-7">
+                                @Html.Partial("~/Views/Shared/_InputWithCurrencySelect.cshtml",
+                                    ViewData["CurrencyList"] as Dictionary<int, string>,
+                                    new ViewDataDictionary
+                                    {
+                                    { "inputName", "CusClearanceCost" },
+                                    { "inputValue", Model.CusClearanceCost },
+                                    { "selectedCurrencyId", Model.CusClearanceCurrencyId },
+                                    { "ddlCurrencyIdName", "CusClearanceCurrencyId" },
+                                    { "defaultCurrencyId", 1 },{"required",""}
+                                    })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 form-group">
+                        <label for="textareaDefault" class="col-md-2 control-label">Description of goods</label>
+                        <div class="col-md-6">
+                            <textarea id="textareaDefault" name="GoodsDescription" rows="3" class="form-control">@Model.GoodsDescription</textarea>
+
+                        </div>
+                    </div>
+                </div>
+
+                <footer class="panel-footer">
+                    <div id="SaveBtnDiv" class="row">
+                        <div class="col-sm-9 col-sm-offset-3">
+                            <input type="button" id="SaveForm" class="btn btn-primary" value="Submit" />
+                            <a id="ResetForm" href="@Url.Content("~/Quotation/Index?orderFrom=" + Model.OrderFrom)" class="btn btn-default">Reset</a>
+                        </div>
+                    </div>
+                </footer>
+            </section>
+
+            @Html.HiddenFor(x => x.CreateDate)
+            @Html.HiddenFor(x => x.CreateBy)
+
+        </form>
+    </div>
+</div>
+<input type="hidden" id="addtype" />
+<div id="modalForm" class="modal-block modal-block-primary mfp-hide">
+    <section class="panel">
+        <header class="panel-heading">
+            <h2 id="addheader" class="panel-title">Registration Form</h2>
+        </header>
+        <div class="panel-body">
+            <form id="demo-form" class="form-horizontal mb-lg" novalidate="novalidate">
+                <div class="form-group mt-lg">
+                    <label class="col-sm-3 control-label">Code</label>
+                    <div class="col-sm-9">
+                        <input type="text" id="code" name="code" class="form-control" placeholder="Type Code..." required />
+                    </div>
+                </div>
+                <div class="form-group mt-lg">
+                    <label class="col-sm-3 control-label">Name</label>
+                    <div class="col-sm-9">
+                        <input type="text" id="name" name="name" class="form-control" placeholder="Type name..." required />
+                    </div>
+                </div>
+
+            </form>
+        </div>
+        <footer class="panel-footer">
+            <div class="row">
+                <div class="col-md-12 text-right">
+                    <button class="btn btn-primary modal-confirm">Submit</button>
+                    <button class="btn btn-default modal-dismiss">Cancel</button>
+                </div>
+            </div>
+        </footer>
+    </section>
+</div>
+
+
+@section scripts{
+    <script src="@Url.Content("~/Scripts/CurrencyWithSelect.js")"></script>
+    <script src="@Url.Content("~/Scripts/MasterData/ContactPerson.js")"></script>
+    <script src="@Url.Content("~/Scripts/Operation/OperationCommon.js")"></script>
+    <script src="@Url.Content("~/Scripts/Quotation/AddScript.js")"></script>
+}

@@ -1,0 +1,122 @@
+﻿@model List<EasyFreight.ViewModel.AgentVm>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .border {
+        border: 1px solid #888;
+        padding-top: 2px;
+        text-align: center;
+        vertical-align: central;
+    }
+
+    .default-icon {
+        color: #777;
+    }
+</style>
+
+<header class="page-header">
+    <h2> Agent Reports</h2>
+
+    <div class="right-wrapper pull-right">
+        <ol class="breadcrumbs">
+            <li>
+                <a href="@Url.Content("~/Home/Index")">
+                    <i class="fa fa-home"></i>
+                </a>
+            </li>
+            <li><span>Master Data</span></li>
+            <li><span>View Agents</span></li>
+        </ol>
+
+        <a class="sidebar-right-toggle" data-open="sidebar-right"><i class="fa fa-chevron-left"></i></a>
+    </div>
+</header>
+
+<section class="panel">
+    <header class="panel-heading">
+        <div class="panel-actions">
+            <a href="#" class=""></a>
+            <a href="#" class=""></a>
+        </div>
+
+        <h2 class="panel-title"></h2>
+    </header>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="mb-md">
+                    <select id="ddlCountry" name="ddlCountry" data-plugin-selecttwo class="form-control populate"
+                            data-placeholder="Select Country">
+                        <option></option>
+                        @foreach (var item in ViewBag.CountryList as Dictionary<int, string>)
+                        {
+                            <option value="@item.Key">@item.Value</option>
+
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class=" col-sm-1">
+                <div class="col-sm-12 border">
+                    <a id="ClearSearch" class="filter0 default-icon" title="Clear Search" href="javascript:void(0)">
+                        <i class="fa fa-eraser fa-2x"></i>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+        <table class="table table-bordered table-striped mb-none" id="datatable-default">
+            <thead>
+                <tr>
+
+                    <th>Name</th>
+                    <th>Address</th>
+                    <th>Phone </th>
+                    <th>Fax </th>
+                    <th>Email</th>
+                    <th>Country</th>
+
+
+                </tr>
+            </thead>
+
+        </table>
+    </div>
+    <div class="panel-footer">
+        <a href="#" class="btn btn-default printtruck" id="print">Print</a>
+    </div>
+</section>
+
+
+
+<div id="modalAnim" class="zoom-anim-dialog modal-block modal-block-primary mfp-hide">
+    <section class="panel">
+        <header class="panel-heading">
+            <h2 class="panel-title">Contacts Persons</h2>
+        </header>
+        <div class="panel-body">
+            <div class="modal-wrapper">
+                <div id="ModalContent" class="modal-text">
+                </div>
+            </div>
+        </div>
+        <footer class="panel-footer">
+            <div class="row">
+                <div class="col-md-12 text-right">
+                    <button class="btn btn-default modal-dismiss">Close</button>
+                </div>
+            </div>
+        </footer>
+    </section>
+</div>
+
+
+
+
+@section scripts{
+    <script src="@Url.Content("~/Scripts/AgentReport/Index.js")"></script>
+}

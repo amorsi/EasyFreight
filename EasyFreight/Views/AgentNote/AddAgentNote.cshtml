@@ -1,0 +1,243 @@
+﻿@model EasyFreight.ViewModel.AgentNoteVm
+@{
+    ViewBag.Title = "DebitNote";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<header class="page-header">
+    <h2>Agent @ViewBag.NoteType Note</h2>
+
+    <div class="right-wrapper pull-right">
+        <ol class="breadcrumbs">
+            <li>
+                <a href="index.html">
+                    <i class="fa fa-home"></i>
+                </a>
+            </li>
+            <li><span>Accounting</span></li>
+            <li><span>Agent @ViewBag.NoteType Note</span></li>
+        </ol>
+
+        <a class="sidebar-right-toggle" data-open="sidebar-right"><i class="fa fa-chevron-left"></i></a>
+    </div>
+</header>
+
+<section class="panel">
+    <div class="panel-body">
+        <form id="invform">
+            <div class="invoice">
+                <header class="clearfix">
+                    <div class="row">
+                        <div class="col-sm-6 mt-md">
+                            <h2 class="h2 mt-none mb-sm text-dark text-bold">Agent Note</h2>
+                            <h3>Agent: @Model.AgentName</h3>
+                        </div>
+                    </div>
+                </header>
+                <div class="bill-info">
+                    <div class="row form-group">
+                        <div class="col-md-6 form-group">
+                            <label class="col-sm-4 control-label" for="w4-username">Agent Note Number<span class="required">*</span></label>
+                            <div class="col-sm-7">
+                                <input type="text" class="form-control" name="AgentNoteCode" readonly
+                                       id="AgentNoteCode" value="@Model.AgentNoteCode" required>
+                            </div>
+                            @if (Model.AgentNoteId == 0)
+                            {
+                                <a href="javascript:void(0)" title="Number will be generated after submit">
+                                    <i class="fa fa-info-circle fa-2x"></i>
+                                </a>
+                            }
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label class="col-sm-4 control-label" for="w4-username">Agent Note Date<span class="required">*</span></label>
+                            <div class="col-sm-8">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </span>
+                                    <input type="text"
+                                           value="@(Model.AgentNoteDate == null ? "" : Model.AgentNoteDate.Value.ToString("dd/MM/yyyy"))"
+                                           class="form-control"
+                                           data-date-format="dd/mm/yyyy" name="AgentNoteDate" required
+                                           data-plugin-datepicker="">
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 form-group">
+                            <label class="col-sm-4 control-label" for="w4-username">Due Date<span class="required">*</span></label>
+                            <div class="col-sm-8">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </span>
+                                    <input type="text"
+                                           value="@(Model.DueDate == null ? "" : Model.DueDate.Value.ToString("dd/MM/yyyy"))"
+                                           class="form-control"
+                                           data-date-format="dd/mm/yyyy" name="DueDate" required
+                                           data-plugin-datepicker="">
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6 form-group">
+                            <label class="col-sm-4 control-label" for="w4-username">Agent Note Currency<span class="required">*</span></label>
+                            <div class="col-sm-8">
+                                <select id="invcurrency" name="InvCurrencyId" data-plugin-selecttwo
+                                        required class="form-control populate" data-placeholder= "Select">
+                                    <option></option>
+                                    @foreach (var item in ViewBag.CurrencyList)
+                                    {
+                                        <option value="@item.Key" @(Model.CurrencyId == item.Key ? "selected" : "")>@item.Value</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class=" form-group">
+                            <div class="col-md-4">
+                                <span class="text-dark">Vessel Name:</span>
+                                <span class="value">@Model.VesselName</span>
+                            </div>
+
+                            <div class="col-md-4">
+                                <span class="text-dark">MBL:</span>
+                                <span class="value">@Model.MBL</span>
+                            </div>
+
+                            <div class="col-md-4">
+                                 <span class="text-dark"></span>
+                                <span class="value"></span>
+                            </div>
+
+                        </div>
+
+                        <div class=" form-group">
+                            <div class="col-md-4">
+                                <span class="text-dark">Port Of Loading:</span>
+                                <span class="value">@Model.FromPort</span>
+                            </div>
+                            <div class="col-md-4">
+                                <span class="text-dark">Operation Code:</span>
+                                <span class="value">@Model.OperationCode</span>
+                            </div>
+                            <div class="col-md-4"></div>
+                        </div>
+
+                        <div class="form-group" style="padding-bottom:15px;">
+
+                            <div class="col-md-4 form-group">
+                                <span class="text-dark">Port Of Discharge:</span>
+                                <span class="value">@Model.ToPort</span>
+                            </div>
+                            <div class="col-md-4 form-group">
+                                <span class="text-dark">ETD:</span>
+                                <span class="value">@(Model.DateOfDeparture == null ? "" : Model.DateOfDeparture.Value.ToString("dd/MM/yyyy"))</span>
+                            </div>
+
+                            <div class="col-md-4 form-group">
+                                <span class="text-dark">ETA:</span>
+                                <span class="value">@(Model.ArriveDate == null ? "" : Model.ArriveDate.Value.ToString("dd/MM/yyyy"))</span>
+                            </div>
+                            <div class="col-md-7 form-group">
+                                <span class="text-dark">Customer:</span>
+                                <span class="value">@Model.CustomerName</span>
+                            </div>
+                            <div class="col-md-5 form-group">
+                                <span class="text-dark">Containers:</span>
+                                <span class="value">@Model.ContainerSummary</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <section class="panel">
+                    
+                    <div class="panel-body">
+                        <div class="table-responsive">
+                            @{Html.RenderPartial("~/Views/AgentNote/_AddNoteDetail.cshtml", Model);}
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <div class="row form-group">
+                <div class="col-sm-6 form-group">
+                    <label class="col-sm-4 control-label" for="w4-username">Bank<span class="required">*</span></label>
+                    <div class="col-sm-8">
+                        <select id="BankId" name="BankId" data-plugin-selecttwo
+                                required class="form-control populate" data-placeholder= "Select Bank">
+                            <option></option>
+                            @foreach (var item in ViewBag.BankList)
+                            {
+                                <option value="@item.Key" @(Model.BankId == item.Key ? "selected" : "")>@item.Value</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row col-sm-offset-2" id="bankdetails" style="display:none;margin-top:15px;margin-bottom:15px;">
+                <div class="col-sm-12 form-group">
+                    <span class="text-dark">Bank Name:</span>
+                    <span id="bankname" class="value"></span>
+                </div>
+
+                <div class="col-sm-12 form-group">
+                    <span class="text-dark">Bank Address:</span>
+                    <span id="bankaddress" class="value"></span>
+                </div>
+
+                <div class="col-sm-12 form-group">
+                    <span class="text-dark">Account Name:</span>
+                    <span id="accountname" class="value"></span>
+                </div>
+
+                <div class="col-sm-12 form-group">
+                    <span class="text-dark">Account Number:</span>
+                    <span id="accountnum" class="value"></span>
+                </div>
+
+                <div class="col-sm-12 form-group">
+                    <span class="text-dark">Swift Code:</span>
+                    <span id="swiftcode" class="value"></span>
+                </div>
+                <input type="hidden" id="BankAccId" name="BankAccId" value="" />
+            </div>
+
+            <div class="col-sm-12 row form-group">
+                <label for="textareaDefault" class="col-md-2 control-label">Notes</label>
+                <div class="col-md-7">
+                    <textarea id="textareaDefault" name="Notes" rows="3" class="form-control">@Model.Notes</textarea>
+                </div>
+            </div>
+
+            @Html.Hidden("ConsigneeId", Model.ConsigneeId)
+            @Html.HiddenFor(x => x.CreateDate)
+            @Html.HiddenFor(x => x.AgentNoteId)
+            @Html.HiddenFor(x => x.ShipperId)
+            @Html.HiddenFor(x => x.AgentNoteType)
+            @Html.HiddenFor(x => x.HouseBillId)
+            <input type="hidden" id="OperationId" name="OperationId" value="@Model.OperationId" />
+            <input type="hidden" id="AgentId" name="AgentId" value="@Model.AgentId" />
+            <input type="hidden" id="CurrencyId" name="CurrencyId" value="@Model.CurrencyId" />
+            <input type="hidden" name="InvStatusId" value="@Model.InvStatusId" />
+            <input type="hidden" name="CreateBy" value="@Model.CreateBy" /> 
+            <input type="hidden" name="HouseBillId" value="@Model.HouseBillId" />
+        </form>
+        <div class="text-right mr-lg">
+            <a href="javascript:void(0)" id="savenote" class="btn btn-default">Submit</a>
+            <a href="javascript:void(0)" id="savePrintnote"  target="_blank" class="btn btn-primary ml-sm"><i class="fa fa-print"></i>Submit & Print</a>
+        </div>
+    </div>
+</section>
+
+@section scripts{
+    <script src="@Url.Content("~/Scripts/Invoice/AddInv.js")"></script>
+    <script src="@Url.Content("~/Scripts/AgentNote/AddAgNote.js")"></script>
+}

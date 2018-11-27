@@ -1,0 +1,51 @@
+﻿@model List<EasyFreight.ViewModel.CustomClearanceDetailVm>
+<div class="row col-sm-10 col-xs-10">
+    <div class="col-sm-4 col-xs-4 ">
+        <div class="form-group">
+            <label class="control-label">Cost Name</label>
+        </div>
+    </div>
+    <div class="col-sm-3 col-xs-3 ">
+        <div class="form-group">
+            <label class="control-label">Net Price ( @(Model.Count == 0 ? "" : Model.FirstOrDefault().CurrencySign) )</label>
+        </div>
+    </div>
+    <div class="col-sm-3 col-xs-3 ">
+        <div class="form-group">
+            <label class="control-label">Selling Price ( @(Model.Count == 0 ? "" : Model.FirstOrDefault().CurrencySign) )</label>
+        </div>
+    </div>
+
+    @foreach (var item in Model)
+    {
+        <div class="col-sm-4 col-xs-4 ">
+            <div class="form-group">
+                <span class="text-dark">@item.CCCostName</span>
+            </div>
+        </div>
+        <div class="col-sm-3 col-xs-3 ">
+            <div class="form-group">
+                <span class="text-dark">@item.CCCostNet</span>
+            </div>
+        </div>
+        <div class="col-sm-3 col-xs-3 ">
+            <div class="form-group">
+                <span class="text-dark">@item.CCCostSelling</span>
+            </div>
+        </div>
+    }
+</div>
+<div class="row col-sm-10 col-xs-10" style="padding-top:15px">
+    <div class="col-sm-4 col-xs-4 ">
+        <h4>
+            <span class="label label-info">Total</span>
+        </h4>
+    </div>
+    <div class="col-sm-3 col-xs-3">
+        <h4><span class="label label-default">@Model.Sum(x => x.CCCostNet) </span> <span class="currncySign">@(Model.Count == 0 ? "" : Model.FirstOrDefault().CurrencySign)</span></h4>
+    </div>
+
+    <div class="col-sm-3 col-xs-3">
+        <h4><span class="label label-default">@Model.Sum(x => x.CCCostSelling) </span> <span class="currncySign">@(Model.Count == 0 ? "" : Model.FirstOrDefault().CurrencySign)</span></h4>
+    </div>
+</div>

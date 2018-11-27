@@ -1,0 +1,616 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="OperationsModelStoreContainer" CdmEntityContainer="OperationsEntities">
+    <EntitySetMapping Name="CustomClearanceDetails">
+      <EntityTypeMapping TypeName="OperationsModel.CustomClearanceDetail">
+        <MappingFragment StoreEntitySet="CustomClearanceDetail">
+          <ScalarProperty Name="CCDetailsId" ColumnName="CCDetailsId" />
+          <ScalarProperty Name="CCId" ColumnName="CCId" />
+          <ScalarProperty Name="CCCostId" ColumnName="CCCostId" />
+          <ScalarProperty Name="CCCostNet" ColumnName="CCCostNet" />
+          <ScalarProperty Name="CCCostSelling" ColumnName="CCCostSelling" />
+          <ScalarProperty Name="CurrencyId" ColumnName="CurrencyId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HouseBills">
+      <EntityTypeMapping TypeName="OperationsModel.HouseBill">
+        <MappingFragment StoreEntitySet="HouseBill">
+          <ScalarProperty Name="IsHazardous" ColumnName="IsHazardous" />
+          <ScalarProperty Name="BookingNumber" ColumnName="BookingNumber" />
+          <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+          <ScalarProperty Name="HouseBillId" ColumnName="HouseBillId" />
+          <ScalarProperty Name="OrderFrom" ColumnName="OrderFrom" />
+          <ScalarProperty Name="OperationId" ColumnName="OperationId" />
+          <ScalarProperty Name="OperationCode" ColumnName="OperationCode" />
+          <ScalarProperty Name="OperationDate" ColumnName="OperationDate" />
+          <ScalarProperty Name="HouseBL" ColumnName="HouseBL" />
+          <ScalarProperty Name="FromPortId" ColumnName="FromPortId" />
+          <ScalarProperty Name="ToPortId" ColumnName="ToPortId" />
+          <ScalarProperty Name="ShipperId" ColumnName="ShipperId" />
+          <ScalarProperty Name="ConsigneeId" ColumnName="ConsigneeId" />
+          <ScalarProperty Name="NotifierId" ColumnName="NotifierId" />
+          <ScalarProperty Name="NotifierAsConsignee" ColumnName="NotifierAsConsignee" />
+          <ScalarProperty Name="DeliveryType" ColumnName="DeliveryType" />
+          <ScalarProperty Name="AgentId" ColumnName="AgentId" />
+          <ScalarProperty Name="GrossWeight" ColumnName="GrossWeight" />
+          <ScalarProperty Name="NetWeight" ColumnName="NetWeight" />
+          <ScalarProperty Name="CBM" ColumnName="CBM" />
+          <ScalarProperty Name="NumberOfPackages" ColumnName="NumberOfPackages" />
+          <ScalarProperty Name="PackageTypeId" ColumnName="PackageTypeId" />
+          <ScalarProperty Name="IsPrepaid" ColumnName="IsPrepaid" />
+          <ScalarProperty Name="CollectedFreightCost" ColumnName="CollectedFreightCost" />
+          <ScalarProperty Name="FreighCurrencyId" ColumnName="FreighCurrencyId" />
+          <ScalarProperty Name="CollectedThcCost" ColumnName="CollectedThcCost" />
+          <ScalarProperty Name="ThcCurrencyId" ColumnName="ThcCurrencyId" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+          <ScalarProperty Name="GoodsDescription" ColumnName="GoodsDescription" />
+          <ScalarProperty Name="Marks" ColumnName="Marks" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OperationContainers">
+      <EntityTypeMapping TypeName="OperationsModel.OperationContainer">
+        <MappingFragment StoreEntitySet="OperationContainer">
+          <ScalarProperty Name="OperConId" ColumnName="OperConId" />
+          <ScalarProperty Name="OperationId" ColumnName="OperationId" />
+          <ScalarProperty Name="ContainerTypeId" ColumnName="ContainerTypeId" />
+          <ScalarProperty Name="ContainerNumber" ColumnName="ContainerNumber" />
+          <ScalarProperty Name="SealNumber" ColumnName="SealNumber" />
+          <ScalarProperty Name="PackageTypeId" ColumnName="PackageTypeId" />
+          <ScalarProperty Name="NumberOfPackages" ColumnName="NumberOfPackages" />
+          <ScalarProperty Name="GrossWeight" ColumnName="GrossWeight" />
+          <ScalarProperty Name="NetWeight" ColumnName="NetWeight" />
+          <ScalarProperty Name="CBM" ColumnName="CBM" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Quotations">
+      <EntityTypeMapping TypeName="OperationsModel.Quotation">
+        <MappingFragment StoreEntitySet="Quotation">
+          <ScalarProperty Name="ArriveDate" ColumnName="ArriveDate" />
+          <ScalarProperty Name="FreeDays" ColumnName="FreeDays" />
+          <ScalarProperty Name="TransitTime" ColumnName="TransitTime" />
+          <ScalarProperty Name="CusClearanceCurrencyId" ColumnName="CusClearanceCurrencyId" />
+          <ScalarProperty Name="CusClearanceCost" ColumnName="CusClearanceCost" />
+          <ScalarProperty Name="TruckingCurrencyId" ColumnName="TruckingCurrencyId" />
+          <ScalarProperty Name="TruckingCost" ColumnName="TruckingCost" />
+          <ScalarProperty Name="QuoteId" ColumnName="QuoteId" />
+          <ScalarProperty Name="OrderFrom" ColumnName="OrderFrom" />
+          <ScalarProperty Name="QuoteCode" ColumnName="QuoteCode" />
+          <ScalarProperty Name="QuoteDate" ColumnName="QuoteDate" />
+          <ScalarProperty Name="CarrierType" ColumnName="CarrierType" />
+          <ScalarProperty Name="FromPortId" ColumnName="FromPortId" />
+          <ScalarProperty Name="ToPortId" ColumnName="ToPortId" />
+          <ScalarProperty Name="ShipperId" ColumnName="ShipperId" />
+          <ScalarProperty Name="ConsigneeId" ColumnName="ConsigneeId" />
+          <ScalarProperty Name="NotifierId" ColumnName="NotifierId" />
+          <ScalarProperty Name="NotifierAsConsignee" ColumnName="NotifierAsConsignee" />
+          <ScalarProperty Name="CarrierId" ColumnName="CarrierId" />
+          <ScalarProperty Name="IncotermId" ColumnName="IncotermId" />
+          <ScalarProperty Name="VesselId" ColumnName="VesselId" />
+          <ScalarProperty Name="DateOfDeparture" ColumnName="DateOfDeparture" />
+          <ScalarProperty Name="GrossWeight" ColumnName="GrossWeight" />
+          <ScalarProperty Name="NetWeight" ColumnName="NetWeight" />
+          <ScalarProperty Name="CBM" ColumnName="CBM" />
+          <ScalarProperty Name="NumberOfPackages" ColumnName="NumberOfPackages" />
+          <ScalarProperty Name="IsHazardous" ColumnName="IsHazardous" />
+          <ScalarProperty Name="IsPrepaid" ColumnName="IsPrepaid" />
+          <ScalarProperty Name="PickupNeeded" ColumnName="PickupNeeded" />
+          <ScalarProperty Name="DeliveryNeeded" ColumnName="DeliveryNeeded" />
+          <ScalarProperty Name="CustomClearanceNeeded" ColumnName="CustomClearanceNeeded" />
+          <ScalarProperty Name="GoodsDescription" ColumnName="GoodsDescription" />
+          <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+          <ScalarProperty Name="HasExpireDate" ColumnName="HasExpireDate" />
+          <ScalarProperty Name="ExpirationInDays" ColumnName="ExpirationInDays" />
+          <ScalarProperty Name="FreightCostAmount" ColumnName="FreightCostAmount" />
+          <ScalarProperty Name="FreighCurrencyId" ColumnName="FreighCurrencyId" />
+          <ScalarProperty Name="ThcCostAmount" ColumnName="ThcCostAmount" />
+          <ScalarProperty Name="ThcCurrencyId" ColumnName="ThcCurrencyId" />
+          <ScalarProperty Name="FlightNumber" ColumnName="FlightNumber" />
+          <ScalarProperty Name="IsCareOf" ColumnName="IsCareOf" />
+          <ScalarProperty Name="AgentId" ColumnName="AgentId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="QuotationContainers">
+      <EntityTypeMapping TypeName="OperationsModel.QuotationContainer">
+        <MappingFragment StoreEntitySet="QuotationContainer">
+          <ScalarProperty Name="QuoteId" ColumnName="QuoteId" />
+          <ScalarProperty Name="ContainerTypeId" ColumnName="ContainerTypeId" />
+          <ScalarProperty Name="NumberOfContainers" ColumnName="NumberOfContainers" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OperationViews">
+      <EntityTypeMapping TypeName="OperationsModel.OperationView">
+        <MappingFragment StoreEntitySet="OperationView">
+          <ScalarProperty Name="ShipperAddressEn" ColumnName="ShipperAddressEn" />
+          <ScalarProperty Name="ShipperFaxNumber" ColumnName="ShipperFaxNumber" />
+          <ScalarProperty Name="ShipperPhoneNumber" ColumnName="ShipperPhoneNumber" />
+          <ScalarProperty Name="NotifierFaxNumber" ColumnName="NotifierFaxNumber" />
+          <ScalarProperty Name="NotifierPhoneNumber" ColumnName="NotifierPhoneNumber" />
+          <ScalarProperty Name="NotifierAddressEn" ColumnName="NotifierAddressEn" />
+          <ScalarProperty Name="ConsigneeFaxNumber" ColumnName="ConsigneeFaxNumber" />
+          <ScalarProperty Name="ConsigneePhoneNumber" ColumnName="ConsigneePhoneNumber" />
+          <ScalarProperty Name="ConsigneeAddressEn" ColumnName="ConsigneeAddressEn" />
+          <ScalarProperty Name="AgentNameEn" ColumnName="AgentNameEn" />
+          <ScalarProperty Name="PercentageOfAmount" ColumnName="PercentageOfAmount" />
+          <ScalarProperty Name="FixedCostCurrencyId" ColumnName="FixedCostCurrencyId" />
+          <ScalarProperty Name="FixedCost" ColumnName="FixedCost" />
+          <ScalarProperty Name="IsFixedCost" ColumnName="IsFixedCost" />
+          <ScalarProperty Name="AgentId" ColumnName="AgentId" />
+          <ScalarProperty Name="IsConsolidation" ColumnName="IsConsolidation" />
+          <ScalarProperty Name="ArriveDate" ColumnName="ArriveDate" />
+          <ScalarProperty Name="FreeDays" ColumnName="FreeDays" />
+          <ScalarProperty Name="TransitTime" ColumnName="TransitTime" />
+          <ScalarProperty Name="FlightNumber" ColumnName="FlightNumber" />
+          <ScalarProperty Name="QuoteId" ColumnName="QuoteId" />
+          <ScalarProperty Name="OrderFrom" ColumnName="OrderFrom" />
+          <ScalarProperty Name="OperationCode" ColumnName="OperationCode" />
+          <ScalarProperty Name="OperationDate" ColumnName="OperationDate" />
+          <ScalarProperty Name="FromPort" ColumnName="FromPort" />
+          <ScalarProperty Name="ToPort" ColumnName="ToPort" />
+          <ScalarProperty Name="ShipperNameEn" ColumnName="ShipperNameEn" />
+          <ScalarProperty Name="ConsigneeNameEn" ColumnName="ConsigneeNameEn" />
+          <ScalarProperty Name="NotifierNameEn" ColumnName="NotifierNameEn" />
+          <ScalarProperty Name="CarrierNameEn" ColumnName="CarrierNameEn" />
+          <ScalarProperty Name="VesselName" ColumnName="VesselName" />
+          <ScalarProperty Name="IncotermName" ColumnName="IncotermName" />
+          <ScalarProperty Name="DateOfDeparture" ColumnName="DateOfDeparture" />
+          <ScalarProperty Name="GrossWeight" ColumnName="GrossWeight" />
+          <ScalarProperty Name="NetWeight" ColumnName="NetWeight" />
+          <ScalarProperty Name="CBM" ColumnName="CBM" />
+          <ScalarProperty Name="NumberOfPackages" ColumnName="NumberOfPackages" />
+          <ScalarProperty Name="IsHazardous" ColumnName="IsHazardous" />
+          <ScalarProperty Name="IsPrepaid" ColumnName="IsPrepaid" />
+          <ScalarProperty Name="PickupNeeded" ColumnName="PickupNeeded" />
+          <ScalarProperty Name="DeliveryNeeded" ColumnName="DeliveryNeeded" />
+          <ScalarProperty Name="CustomClearanceNeeded" ColumnName="CustomClearanceNeeded" />
+          <ScalarProperty Name="GoodsDescription" ColumnName="GoodsDescription" />
+          <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+          <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="FreightCostAmount" ColumnName="FreightCostAmount" />
+          <ScalarProperty Name="FreighCurrencyId" ColumnName="FreighCurrencyId" />
+          <ScalarProperty Name="ThcCostAmount" ColumnName="ThcCostAmount" />
+          <ScalarProperty Name="ThcCurrencyId" ColumnName="ThcCurrencyId" />
+          <ScalarProperty Name="StatusName" ColumnName="StatusName" />
+          <ScalarProperty Name="CarrierType" ColumnName="CarrierType" />
+          <ScalarProperty Name="NotifierAsConsignee" ColumnName="NotifierAsConsignee" />
+          <ScalarProperty Name="MBL" ColumnName="MBL" />
+          <ScalarProperty Name="BookingNumber" ColumnName="BookingNumber" />
+          <ScalarProperty Name="IsCareOf" ColumnName="IsCareOf" />
+          <ScalarProperty Name="OperationId" ColumnName="OperationId" />
+          <ScalarProperty Name="FromPortId" ColumnName="FromPortId" />
+          <ScalarProperty Name="ToPortId" ColumnName="ToPortId" />
+          <ScalarProperty Name="ShipperId" ColumnName="ShipperId" />
+          <ScalarProperty Name="NotifierId" ColumnName="NotifierId" />
+          <ScalarProperty Name="ConsigneeId" ColumnName="ConsigneeId" />
+          <ScalarProperty Name="CarrierId" ColumnName="CarrierId" />
+          <ScalarProperty Name="IncotermId" ColumnName="IncotermId" />
+          <ScalarProperty Name="VesselId" ColumnName="VesselId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TruckingOrdersViews">
+      <EntityTypeMapping TypeName="OperationsModel.TruckingOrdersView">
+        <MappingFragment StoreEntitySet="TruckingOrdersView">
+          <ScalarProperty Name="ContactPhone" ColumnName="ContactPhone" />
+          <ScalarProperty Name="ContactName" ColumnName="ContactName" />
+          <ScalarProperty Name="HouseBL" ColumnName="HouseBL" />
+          <ScalarProperty Name="HouseBillId" ColumnName="HouseBillId" />
+          <ScalarProperty Name="TruckingOrderId" ColumnName="TruckingOrderId" />
+          <ScalarProperty Name="TruckingOrderCode" ColumnName="TruckingOrderCode" />
+          <ScalarProperty Name="OperationId" ColumnName="OperationId" />
+          <ScalarProperty Name="OperationCode" ColumnName="OperationCode" />
+          <ScalarProperty Name="OrderFrom" ColumnName="OrderFrom" />
+          <ScalarProperty Name="BookingNo" ColumnName="BookingNo" />
+          <ScalarProperty Name="ShipperNameEn" ColumnName="ShipperNameEn" />
+          <ScalarProperty Name="ConsigneeNameEn" ColumnName="ConsigneeNameEn" />
+          <ScalarProperty Name="CarrierNameEn" ColumnName="CarrierNameEn" />
+          <ScalarProperty Name="FromAreaName" ColumnName="FromAreaName" />
+          <ScalarProperty Name="ToAreaName" ColumnName="ToAreaName" />
+          <ScalarProperty Name="FromCityName" ColumnName="FromCityName" />
+          <ScalarProperty Name="ToCityName" ColumnName="ToCityName" />
+          <ScalarProperty Name="NeedArriveDate" ColumnName="NeedArriveDate" />
+          <ScalarProperty Name="NeedArriveTime" ColumnName="NeedArriveTime" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="ContractorNameEn" ColumnName="ContractorNameEn" />
+          <ScalarProperty Name="DriverName" ColumnName="DriverName" />
+          <ScalarProperty Name="DriverMobile" ColumnName="DriverMobile" />
+          <ScalarProperty Name="ArriveDate" ColumnName="ArriveDate" />
+          <ScalarProperty Name="ArriveTime" ColumnName="ArriveTime" />
+          <ScalarProperty Name="LoadedDate" ColumnName="LoadedDate" />
+          <ScalarProperty Name="LoadedTime" ColumnName="LoadedTime" />
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+          <ScalarProperty Name="StatusName" ColumnName="StatusName" />
+          <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+          <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+          <ScalarProperty Name="AssignToUserId" ColumnName="AssignToUserId" />
+          <ScalarProperty Name="FromAreaId" ColumnName="FromAreaId" />
+          <ScalarProperty Name="ToAreaId" ColumnName="ToAreaId" />
+          <ScalarProperty Name="ShipperId" ColumnName="ShipperId" />
+          <ScalarProperty Name="CarrierId" ColumnName="CarrierId" />
+          <ScalarProperty Name="ConsigneeId" ColumnName="ConsigneeId" />
+          <ScalarProperty Name="FromCityId" ColumnName="FromCityId" />
+          <ScalarProperty Name="ToCityId" ColumnName="ToCityId" />
+          <ScalarProperty Name="ContractorId" ColumnName="ContractorId" />
+          <ScalarProperty Name="LeaveDate" ColumnName="LeaveDate" />
+          <ScalarProperty Name="LeaveTime" ColumnName="LeaveTime" />
+          <ScalarProperty Name="FollowUpDate" ColumnName="FollowUpDate" />
+          <ScalarProperty Name="FollowUpBy" ColumnName="FollowUpBy" />
+          <ScalarProperty Name="CostCurrencyId" ColumnName="CostCurrencyId" />
+          <ScalarProperty Name="ShipFromAddress" ColumnName="ShipFromAddress" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="QuotationViews">
+      <EntityTypeMapping TypeName="OperationsModel.QuotationView">
+        <MappingFragment StoreEntitySet="QuotationView">
+          <ScalarProperty Name="ShipperAddressEn" ColumnName="ShipperAddressEn" />
+          <ScalarProperty Name="ShipperFaxNumber" ColumnName="ShipperFaxNumber" />
+          <ScalarProperty Name="ShipperPhoneNumber" ColumnName="ShipperPhoneNumber" />
+          <ScalarProperty Name="FromPortId" ColumnName="FromPortId" />
+          <ScalarProperty Name="ToPortId" ColumnName="ToPortId" />
+          <ScalarProperty Name="ShipperId" ColumnName="ShipperId" />
+          <ScalarProperty Name="VesselId" ColumnName="VesselId" />
+          <ScalarProperty Name="IncotermId" ColumnName="IncotermId" />
+          <ScalarProperty Name="CarrierId" ColumnName="CarrierId" />
+          <ScalarProperty Name="AgentId" ColumnName="AgentId" />
+          <ScalarProperty Name="FreeDays" ColumnName="FreeDays" />
+          <ScalarProperty Name="TransitTime" ColumnName="TransitTime" />
+          <ScalarProperty Name="ArriveDate" ColumnName="ArriveDate" />
+          <ScalarProperty Name="NotifierFaxNumber" ColumnName="NotifierFaxNumber" />
+          <ScalarProperty Name="NotifierPhoneNumber" ColumnName="NotifierPhoneNumber" />
+          <ScalarProperty Name="NotifierAddressEn" ColumnName="NotifierAddressEn" />
+          <ScalarProperty Name="NotifierId" ColumnName="NotifierId" />
+          <ScalarProperty Name="ConsigneeId" ColumnName="ConsigneeId" />
+          <ScalarProperty Name="ConsigneeFaxNumber" ColumnName="ConsigneeFaxNumber" />
+          <ScalarProperty Name="ConsigneePhoneNumber" ColumnName="ConsigneePhoneNumber" />
+          <ScalarProperty Name="ConsigneeAddressEn" ColumnName="ConsigneeAddressEn" />
+          <ScalarProperty Name="AgentNameEn" ColumnName="AgentNameEn" />
+          <ScalarProperty Name="CusClearanceCurrencyId" ColumnName="CusClearanceCurrencyId" />
+          <ScalarProperty Name="CusClearanceCost" ColumnName="CusClearanceCost" />
+          <ScalarProperty Name="TruckingCurrencyId" ColumnName="TruckingCurrencyId" />
+          <ScalarProperty Name="TruckingCost" ColumnName="TruckingCost" />
+          <ScalarProperty Name="IsCareOf" ColumnName="IsCareOf" />
+          <ScalarProperty Name="FlightNumber" ColumnName="FlightNumber" />
+          <ScalarProperty Name="NotifierAsConsignee" ColumnName="NotifierAsConsignee" />
+          <ScalarProperty Name="CarrierType" ColumnName="CarrierType" />
+          <ScalarProperty Name="StatusName" ColumnName="StatusName" />
+          <ScalarProperty Name="ThcCurrencyId" ColumnName="ThcCurrencyId" />
+          <ScalarProperty Name="ThcCostAmount" ColumnName="ThcCostAmount" />
+          <ScalarProperty Name="FreighCurrencyId" ColumnName="FreighCurrencyId" />
+          <ScalarProperty Name="FreightCostAmount" ColumnName="FreightCostAmount" />
+          <ScalarProperty Name="ExpirationInDays" ColumnName="ExpirationInDays" />
+          <ScalarProperty Name="HasExpireDate" ColumnName="HasExpireDate" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+          <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+          <ScalarProperty Name="GoodsDescription" ColumnName="GoodsDescription" />
+          <ScalarProperty Name="CustomClearanceNeeded" ColumnName="CustomClearanceNeeded" />
+          <ScalarProperty Name="DeliveryNeeded" ColumnName="DeliveryNeeded" />
+          <ScalarProperty Name="PickupNeeded" ColumnName="PickupNeeded" />
+          <ScalarProperty Name="IsPrepaid" ColumnName="IsPrepaid" />
+          <ScalarProperty Name="IsHazardous" ColumnName="IsHazardous" />
+          <ScalarProperty Name="NumberOfPackages" ColumnName="NumberOfPackages" />
+          <ScalarProperty Name="CBM" ColumnName="CBM" />
+          <ScalarProperty Name="NetWeight" ColumnName="NetWeight" />
+          <ScalarProperty Name="GrossWeight" ColumnName="GrossWeight" />
+          <ScalarProperty Name="DateOfDeparture" ColumnName="DateOfDeparture" />
+          <ScalarProperty Name="IncotermName" ColumnName="IncotermName" />
+          <ScalarProperty Name="VesselName" ColumnName="VesselName" />
+          <ScalarProperty Name="CarrierNameEn" ColumnName="CarrierNameEn" />
+          <ScalarProperty Name="NotifierNameEn" ColumnName="NotifierNameEn" />
+          <ScalarProperty Name="ConsigneeNameEn" ColumnName="ConsigneeNameEn" />
+          <ScalarProperty Name="ShipperNameEn" ColumnName="ShipperNameEn" />
+          <ScalarProperty Name="ToPort" ColumnName="ToPort" />
+          <ScalarProperty Name="FromPort" ColumnName="FromPort" />
+          <ScalarProperty Name="QuoteDate" ColumnName="QuoteDate" />
+          <ScalarProperty Name="QuoteCode" ColumnName="QuoteCode" />
+          <ScalarProperty Name="OrderFrom" ColumnName="OrderFrom" />
+          <ScalarProperty Name="QuoteId" ColumnName="QuoteId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Operations">
+      <EntityTypeMapping TypeName="OperationsModel.Operation">
+        <MappingFragment StoreEntitySet="Operation">
+          <ScalarProperty Name="DeliveryType" ColumnName="DeliveryType" />
+          <ScalarProperty Name="CCCashDepAccountId" ColumnName="CCCashDepAccountId" />
+          <ScalarProperty Name="PercentageOfAmount" ColumnName="PercentageOfAmount" />
+          <ScalarProperty Name="FixedCostCurrencyId" ColumnName="FixedCostCurrencyId" />
+          <ScalarProperty Name="FixedCost" ColumnName="FixedCost" />
+          <ScalarProperty Name="IsFixedCost" ColumnName="IsFixedCost" />
+          <ScalarProperty Name="AgentId" ColumnName="AgentId" />
+          <ScalarProperty Name="FreeDays" ColumnName="FreeDays" />
+          <ScalarProperty Name="TransitTime" ColumnName="TransitTime" />
+          <ScalarProperty Name="FlightNumber" ColumnName="FlightNumber" />
+          <ScalarProperty Name="ThcCurrencyId" ColumnName="ThcCurrencyId" />
+          <ScalarProperty Name="ThcCostAmount" ColumnName="ThcCostAmount" />
+          <ScalarProperty Name="FreighCurrencyId" ColumnName="FreighCurrencyId" />
+          <ScalarProperty Name="FreightCostAmount" ColumnName="FreightCostAmount" />
+          <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+          <ScalarProperty Name="GoodsDescription" ColumnName="GoodsDescription" />
+          <ScalarProperty Name="CustomClearanceNeeded" ColumnName="CustomClearanceNeeded" />
+          <ScalarProperty Name="DeliveryNeeded" ColumnName="DeliveryNeeded" />
+          <ScalarProperty Name="PickupNeeded" ColumnName="PickupNeeded" />
+          <ScalarProperty Name="IsPrepaid" ColumnName="IsPrepaid" />
+          <ScalarProperty Name="IsHazardous" ColumnName="IsHazardous" />
+          <ScalarProperty Name="NumberOfPackages" ColumnName="NumberOfPackages" />
+          <ScalarProperty Name="CBM" ColumnName="CBM" />
+          <ScalarProperty Name="NetWeight" ColumnName="NetWeight" />
+          <ScalarProperty Name="GrossWeight" ColumnName="GrossWeight" />
+          <ScalarProperty Name="ArriveDate" ColumnName="ArriveDate" />
+          <ScalarProperty Name="DateOfDeparture" ColumnName="DateOfDeparture" />
+          <ScalarProperty Name="VesselId" ColumnName="VesselId" />
+          <ScalarProperty Name="IncotermId" ColumnName="IncotermId" />
+          <ScalarProperty Name="CarrierId" ColumnName="CarrierId" />
+          <ScalarProperty Name="NotifierAsConsignee" ColumnName="NotifierAsConsignee" />
+          <ScalarProperty Name="NotifierId" ColumnName="NotifierId" />
+          <ScalarProperty Name="ConsigneeId" ColumnName="ConsigneeId" />
+          <ScalarProperty Name="IsCareOf" ColumnName="IsCareOf" />
+          <ScalarProperty Name="ShipperId" ColumnName="ShipperId" />
+          <ScalarProperty Name="ToPortId" ColumnName="ToPortId" />
+          <ScalarProperty Name="FromPortId" ColumnName="FromPortId" />
+          <ScalarProperty Name="MBL" ColumnName="MBL" />
+          <ScalarProperty Name="CarrierType" ColumnName="CarrierType" />
+          <ScalarProperty Name="BookingNumber" ColumnName="BookingNumber" />
+          <ScalarProperty Name="IsConsolidation" ColumnName="IsConsolidation" />
+          <ScalarProperty Name="OperationDate" ColumnName="OperationDate" />
+          <ScalarProperty Name="OperationCode" ColumnName="OperationCode" />
+          <ScalarProperty Name="OrderFrom" ColumnName="OrderFrom" />
+          <ScalarProperty Name="QuoteId" ColumnName="QuoteId" />
+          <ScalarProperty Name="OperationId" ColumnName="OperationId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CustomClearanceOrders">
+      <EntityTypeMapping TypeName="OperationsModel.CustomClearanceOrder">
+        <MappingFragment StoreEntitySet="CustomClearanceOrder">
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+          <ScalarProperty Name="CustomReleaseId" ColumnName="CustomReleaseId" />
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+          <ScalarProperty Name="AssignToUserId" ColumnName="AssignToUserId" />
+          <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+          <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="NeedArriveTime" ColumnName="NeedArriveTime" />
+          <ScalarProperty Name="NeedArriveDate" ColumnName="NeedArriveDate" />
+          <ScalarProperty Name="HouseBillId" ColumnName="HouseBillId" />
+          <ScalarProperty Name="OperationId" ColumnName="OperationId" />
+          <ScalarProperty Name="CCId" ColumnName="CCId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HouseBillViews">
+      <EntityTypeMapping TypeName="OperationsModel.HouseBillView">
+        <MappingFragment StoreEntitySet="HouseBillView">
+          <ScalarProperty Name="PackageTypeNameEn" ColumnName="PackageTypeNameEn" />
+          <ScalarProperty Name="FlightNumber" ColumnName="FlightNumber" />
+          <ScalarProperty Name="AgentFaxNumber" ColumnName="AgentFaxNumber" />
+          <ScalarProperty Name="AgentPhoneNumber" ColumnName="AgentPhoneNumber" />
+          <ScalarProperty Name="AgentAddressEn" ColumnName="AgentAddressEn" />
+          <ScalarProperty Name="NotifierFaxNumber" ColumnName="NotifierFaxNumber" />
+          <ScalarProperty Name="NotifierPhoneNumber" ColumnName="NotifierPhoneNumber" />
+          <ScalarProperty Name="NotifierAddressEn" ColumnName="NotifierAddressEn" />
+          <ScalarProperty Name="ConsigneeFaxNumber" ColumnName="ConsigneeFaxNumber" />
+          <ScalarProperty Name="ConsigneePhoneNumber" ColumnName="ConsigneePhoneNumber" />
+          <ScalarProperty Name="ConsigneeAddressEn" ColumnName="ConsigneeAddressEn" />
+          <ScalarProperty Name="VesselId" ColumnName="VesselId" />
+          <ScalarProperty Name="CarrierId" ColumnName="CarrierId" />
+          <ScalarProperty Name="CarrierNameEn" ColumnName="CarrierNameEn" />
+          <ScalarProperty Name="MBL" ColumnName="MBL" />
+          <ScalarProperty Name="CarrierType" ColumnName="CarrierType" />
+          <ScalarProperty Name="ArriveDate" ColumnName="ArriveDate" />
+          <ScalarProperty Name="DateOfDeparture" ColumnName="DateOfDeparture" />
+          <ScalarProperty Name="IncotermName" ColumnName="IncotermName" />
+          <ScalarProperty Name="VesselName" ColumnName="VesselName" />
+          <ScalarProperty Name="BookingNumber" ColumnName="BookingNumber" />
+          <ScalarProperty Name="StatusName" ColumnName="StatusName" />
+          <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+          <ScalarProperty Name="Marks" ColumnName="Marks" />
+          <ScalarProperty Name="GoodsDescription" ColumnName="GoodsDescription" />
+          <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="ThcCurrency" ColumnName="ThcCurrency" />
+          <ScalarProperty Name="ThcCurrencyId" ColumnName="ThcCurrencyId" />
+          <ScalarProperty Name="CollectedThcCost" ColumnName="CollectedThcCost" />
+          <ScalarProperty Name="FreighCurrency" ColumnName="FreighCurrency" />
+          <ScalarProperty Name="FreighCurrencyId" ColumnName="FreighCurrencyId" />
+          <ScalarProperty Name="CollectedFreightCost" ColumnName="CollectedFreightCost" />
+          <ScalarProperty Name="IsPrepaid" ColumnName="IsPrepaid" />
+          <ScalarProperty Name="NumberOfPackages" ColumnName="NumberOfPackages" />
+          <ScalarProperty Name="CBM" ColumnName="CBM" />
+          <ScalarProperty Name="NetWeight" ColumnName="NetWeight" />
+          <ScalarProperty Name="GrossWeight" ColumnName="GrossWeight" />
+          <ScalarProperty Name="AgentNameEn" ColumnName="AgentNameEn" />
+          <ScalarProperty Name="AgentId" ColumnName="AgentId" />
+          <ScalarProperty Name="DeliveryType" ColumnName="DeliveryType" />
+          <ScalarProperty Name="NotifierAsConsignee" ColumnName="NotifierAsConsignee" />
+          <ScalarProperty Name="NotifierNameEn" ColumnName="NotifierNameEn" />
+          <ScalarProperty Name="NotifierId" ColumnName="NotifierId" />
+          <ScalarProperty Name="ConsigneeNameEn" ColumnName="ConsigneeNameEn" />
+          <ScalarProperty Name="ConsigneeId" ColumnName="ConsigneeId" />
+          <ScalarProperty Name="ShipperNameEn" ColumnName="ShipperNameEn" />
+          <ScalarProperty Name="ShipperId" ColumnName="ShipperId" />
+          <ScalarProperty Name="ToPort" ColumnName="ToPort" />
+          <ScalarProperty Name="ToPortId" ColumnName="ToPortId" />
+          <ScalarProperty Name="FromPort" ColumnName="FromPort" />
+          <ScalarProperty Name="FromPortId" ColumnName="FromPortId" />
+          <ScalarProperty Name="HouseBL" ColumnName="HouseBL" />
+          <ScalarProperty Name="OperationDate" ColumnName="OperationDate" />
+          <ScalarProperty Name="OperationCode" ColumnName="OperationCode" />
+          <ScalarProperty Name="OperationId" ColumnName="OperationId" />
+          <ScalarProperty Name="OrderFrom" ColumnName="OrderFrom" />
+          <ScalarProperty Name="HouseBillId" ColumnName="HouseBillId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CustomClearanceViews">
+      <EntityTypeMapping TypeName="OperationsModel.CustomClearanceView">
+        <MappingFragment StoreEntitySet="CustomClearanceView">
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+          <ScalarProperty Name="Expr2" ColumnName="Expr2" />
+          <ScalarProperty Name="Expr1" ColumnName="Expr1" />
+          <ScalarProperty Name="AgentId" ColumnName="AgentId" />
+          <ScalarProperty Name="NotifierId" ColumnName="NotifierId" />
+          <ScalarProperty Name="ConsigneeId" ColumnName="ConsigneeId" />
+          <ScalarProperty Name="ShipperId" ColumnName="ShipperId" />
+          <ScalarProperty Name="ToPortId" ColumnName="ToPortId" />
+          <ScalarProperty Name="FromPortId" ColumnName="FromPortId" />
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+          <ScalarProperty Name="HouseBL" ColumnName="HouseBL" />
+          <ScalarProperty Name="NumberOfPackages" ColumnName="NumberOfPackages" />
+          <ScalarProperty Name="CBM" ColumnName="CBM" />
+          <ScalarProperty Name="BookingNumber" ColumnName="BookingNumber" />
+          <ScalarProperty Name="VesselName" ColumnName="VesselName" />
+          <ScalarProperty Name="VesselId" ColumnName="VesselId" />
+          <ScalarProperty Name="FlightNumber" ColumnName="FlightNumber" />
+          <ScalarProperty Name="FreeDays" ColumnName="FreeDays" />
+          <ScalarProperty Name="IsHazardous" ColumnName="IsHazardous" />
+          <ScalarProperty Name="ArriveDate" ColumnName="ArriveDate" />
+          <ScalarProperty Name="DateOfDeparture" ColumnName="DateOfDeparture" />
+          <ScalarProperty Name="CarrierNameEn" ColumnName="CarrierNameEn" />
+          <ScalarProperty Name="CarrierId" ColumnName="CarrierId" />
+          <ScalarProperty Name="MBL" ColumnName="MBL" />
+          <ScalarProperty Name="CarrierType" ColumnName="CarrierType" />
+          <ScalarProperty Name="AssignToUserId" ColumnName="AssignToUserId" />
+          <ScalarProperty Name="CCId" ColumnName="CCId" />
+          <ScalarProperty Name="StatusName" ColumnName="StatusName" />
+          <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+          <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="NeedArriveTime" ColumnName="NeedArriveTime" />
+          <ScalarProperty Name="NeedArriveDate" ColumnName="NeedArriveDate" />
+          <ScalarProperty Name="OperationId" ColumnName="OperationId" />
+          <ScalarProperty Name="GoodsDescription" ColumnName="GoodsDescription" />
+          <ScalarProperty Name="NetWeight" ColumnName="NetWeight" />
+          <ScalarProperty Name="GrossWeight" ColumnName="GrossWeight" />
+          <ScalarProperty Name="ConsigneeNameEn" ColumnName="ConsigneeNameEn" />
+          <ScalarProperty Name="ShipperNameEn" ColumnName="ShipperNameEn" />
+          <ScalarProperty Name="ToPort" ColumnName="ToPort" />
+          <ScalarProperty Name="FromPort" ColumnName="FromPort" />
+          <ScalarProperty Name="OperationDate" ColumnName="OperationDate" />
+          <ScalarProperty Name="OperationCode" ColumnName="OperationCode" />
+          <ScalarProperty Name="OrderFrom" ColumnName="OrderFrom" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OperationCosts">
+      <EntityTypeMapping TypeName="OperationsModel.OperationCost">
+        <MappingFragment StoreEntitySet="OperationCost">
+          <ScalarProperty Name="IsAccounting" ColumnName="IsAccounting" />
+          <ScalarProperty Name="CurrencyIdSelling" ColumnName="CurrencyIdSelling" />
+          <ScalarProperty Name="IsAgentCost" ColumnName="IsAgentCost" />
+          <ScalarProperty Name="CurrencyId" ColumnName="CurrencyId" />
+          <ScalarProperty Name="OperationCostSelling" ColumnName="OperationCostSelling" />
+          <ScalarProperty Name="OperationCostNet" ColumnName="OperationCostNet" />
+          <ScalarProperty Name="OperationId" ColumnName="OperationId" />
+          <ScalarProperty Name="OperCostLibId" ColumnName="OperCostLibId" />
+          <ScalarProperty Name="HouseBillId" ColumnName="HouseBillId" />
+          <ScalarProperty Name="OperCostId" ColumnName="OperCostId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OperationCostLibs">
+      <EntityTypeMapping TypeName="OperationsModel.OperationCostLib">
+        <MappingFragment StoreEntitySet="OperationCostLib">
+          <ScalarProperty Name="OperCostNameAr" ColumnName="OperCostNameAr" />
+          <ScalarProperty Name="OperCostNameEn" ColumnName="OperCostNameEn" />
+          <ScalarProperty Name="OperCostLibId" ColumnName="OperCostLibId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CurrencyOpers">
+      <EntityTypeMapping TypeName="OperationsModel.CurrencyOper">
+        <MappingFragment StoreEntitySet="Currency">
+          <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+          <ScalarProperty Name="CurrencyName" ColumnName="CurrencyName" />
+          <ScalarProperty Name="CurrencySign" ColumnName="CurrencySign" />
+          <ScalarProperty Name="CurrencyId" ColumnName="CurrencyId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CustomClearanceCostLibs">
+      <EntityTypeMapping TypeName="OperationsModel.CustomClearanceCostLib">
+        <MappingFragment StoreEntitySet="CustomClearanceCostLib">
+          <ScalarProperty Name="CostNameAr" ColumnName="CostNameAr" />
+          <ScalarProperty Name="CostNameEn" ColumnName="CostNameEn" />
+          <ScalarProperty Name="CCCostId" ColumnName="CCCostId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="GetContractorRate" FunctionName="OperationsModel.Store.GetContractorRate">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="OperationsModel.GetContractorRate_Result">
+          <ScalarProperty Name="ContractorRateId" ColumnName="ContractorRateId" />
+          <ScalarProperty Name="ContractorId" ColumnName="ContractorId" />
+          <ScalarProperty Name="FromAreaId" ColumnName="FromAreaId" />
+          <ScalarProperty Name="ToAreaId" ColumnName="ToAreaId" />
+          <ScalarProperty Name="FromCityId" ColumnName="FromCityId" />
+          <ScalarProperty Name="ToCityId" ColumnName="ToCityId" />
+          <ScalarProperty Name="ContainerTypeId" ColumnName="ContainerTypeId" />
+          <ScalarProperty Name="CostAmount" ColumnName="CostAmount" />
+          <ScalarProperty Name="CurrencyId" ColumnName="CurrencyId" />
+          <ScalarProperty Name="IsValid" ColumnName="IsValid" />
+          <ScalarProperty Name="ValidToChecked" ColumnName="ValidToChecked" />
+          <ScalarProperty Name="ValidToDate" ColumnName="ValidToDate" />
+          <ScalarProperty Name="FromAreaName" ColumnName="FromAreaName" />
+          <ScalarProperty Name="ToAreaName" ColumnName="ToAreaName" />
+          <ScalarProperty Name="FromCityName" ColumnName="FromCityName" />
+          <ScalarProperty Name="ToCityName" ColumnName="ToCityName" />
+          <ScalarProperty Name="ContainerTypeName" ColumnName="ContainerTypeName" />
+          <ScalarProperty Name="CurrencySign" ColumnName="CurrencySign" />
+          <ScalarProperty Name="ContractorName" ColumnName="ContractorName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetOperationStatistics" FunctionName="OperationsModel.Store.GetOperationStatistics">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="OperationsModel.GetOperationStatistics_Result">
+          <ScalarProperty Name="NewAir" ColumnName="NewAir" />
+          <ScalarProperty Name="NewAirNet" ColumnName="NewAirNet" />
+          <ScalarProperty Name="NewAirCBM" ColumnName="NewAirCBM" />
+          <ScalarProperty Name="NewSea" ColumnName="NewSea" />
+          <ScalarProperty Name="NewSeaNet" ColumnName="NewSeaNet" />
+          <ScalarProperty Name="NewSeaCBM" ColumnName="NewSeaCBM" />
+          <ScalarProperty Name="OpenAir" ColumnName="OpenAir" />
+          <ScalarProperty Name="OpenAirNet" ColumnName="OpenAirNet" />
+          <ScalarProperty Name="OpenAirCBM" ColumnName="OpenAirCBM" />
+          <ScalarProperty Name="OpenSea" ColumnName="OpenSea" />
+          <ScalarProperty Name="OpenSeaNet" ColumnName="OpenSeaNet" />
+          <ScalarProperty Name="OpenSeaCBM" ColumnName="OpenSeaCBM" />
+          <ScalarProperty Name="ClosedAir" ColumnName="ClosedAir" />
+          <ScalarProperty Name="ClosedAirNet" ColumnName="ClosedAirNet" />
+          <ScalarProperty Name="ClosedAirCBM" ColumnName="ClosedAirCBM" />
+          <ScalarProperty Name="ClosedSea" ColumnName="ClosedSea" />
+          <ScalarProperty Name="ClosedSeaNet" ColumnName="ClosedSeaNet" />
+          <ScalarProperty Name="ClosedSeaCBM" ColumnName="ClosedSeaCBM" />
+          <ScalarProperty Name="InvoiceAir" ColumnName="InvoiceAir" />
+          <ScalarProperty Name="InvoiceAirNet" ColumnName="InvoiceAirNet" />
+          <ScalarProperty Name="InvoiceAirCBM" ColumnName="InvoiceAirCBM" />
+          <ScalarProperty Name="InvoiceSea" ColumnName="InvoiceSea" />
+          <ScalarProperty Name="InvoiceSeaNet" ColumnName="InvoiceSeaNet" />
+          <ScalarProperty Name="InvoiceSeaCBM" ColumnName="InvoiceSeaCBM" />
+          <ScalarProperty Name="QuotNewAir" ColumnName="QuotNewAir" />
+          <ScalarProperty Name="QuotNewSea" ColumnName="QuotNewSea" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <EntitySetMapping Name="StatusLibOpers">
+      <EntityTypeMapping TypeName="OperationsModel.StatusLibOper">
+        <MappingFragment StoreEntitySet="StatusLib">
+          <ScalarProperty Name="StatusName" ColumnName="StatusName" />
+          <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

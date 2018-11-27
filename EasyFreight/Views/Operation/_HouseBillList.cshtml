@@ -1,0 +1,97 @@
+﻿@model List<EasyFreight.ViewModel.HouseBillListVm>
+
+@foreach (var item in Model)
+{
+    <section class="panel hblist">
+        <div class="panel-body" style="border-left: solid #0088cc">
+
+            <div class="col-sm-4 form-group">
+                <label class="col-md-5 control-label">House Bill</label>
+                <div class="col-md-7">
+                    <span class="text-dark">@item.HouseBL</span>
+                </div>
+            </div>
+
+            <div class="col-sm-4 form-group">
+                <label class="col-md-5 control-label">Operation Code</label>
+                <div class="col-md-7">
+                    <span class="text-dark">@item.OperationCode</span>
+                </div>
+            </div>
+
+            <div class="col-sm-4 form-group">
+                <label class="col-md-5 control-label">Operation Date</label>
+                <div class="col-md-7">
+                    <span class="text-dark">@(item.OperationDate == null ? "" : item.OperationDate.Value.ToString("dd/MM/yyyy"))</span>
+                </div>
+            </div>
+            
+
+            <div class="col-sm-4 form-group">
+                <label class="col-md-5 control-label">Client</label>
+                <div class="col-md-7">
+                    <span class="text-dark">@item.ClientName</span>
+                </div>
+            </div>
+            <div class="col-sm-4 form-group">
+                <label class="col-md-5 control-label">Packages #</label>
+                <div class="col-md-7">
+                    <span class="text-dark">@item.NumberOfPackages</span>
+                </div>
+            </div>
+            <div class="col-sm-4 form-group">
+                <div class="btn-group btn-group-justified">
+                    <a role="button" class="btn btn-info viewhb" hbid="@item.HouseBillId">View</a>
+                    <a role="button" class="btn btn-primary edithb" hbid="@item.HouseBillId" statusid="@item.StatusId">Edit</a>
+                    @if (ViewBag.IsConsolidation == true)
+                    {
+                        <a role="button" class="btn btn-success addhb" hbid="@item.HouseBillId">Add HB</a>
+                    }
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Other
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a role="button" statusid="@item.StatusId" class="addtro" hbid="@item.HouseBillId" href="#">Add Trucking Order</a></li>
+                            <li><a role="button" statusid="@item.StatusId" class="addccorder" hbid="@item.HouseBillId" href="#">Add Custom Clearance</a></li>
+                            @if (ViewBag.OrderFrom == 2)
+                            {
+                                if (ViewBag.IsConsolidation == false)
+                                {
+                                    if (item.CarrierType == 1) //sea
+                                    {
+                                        <li><a href="@Url.Action("PrintConcessionLetter", "DocsToPrint", new { operationId = item.HouseBillId,langCode="ar" })">Concession Letter</a></li>
+                                    }
+                                    else
+                                    {
+                                        <li><a href="@Url.Action("PrintConcessionLetterAir", "DocsToPrint", new { operationId = item.HouseBillId,langCode="en" })">Concession Letter</a></li>
+                                    }
+                                }
+                                else
+                                {
+                                    <li><a href="@Url.Action("PrintDeliveryOrder", "DocsToPrint", new { houseBillId = item.HouseBillId, langCode = "en" })"> @((item.CarrierType == 1)? "Delivery Order": "Releasing Letter" )</a></li>
+                                }
+                                <li><a href="@Url.Action("PrintPreAlertLetter", "DocsToPrint", new { houseBillId = item.HouseBillId, isNotifier = 0 })">PRE-ALERT Consignee</a></li>
+                                <li><a href="@Url.Action("PrintPreAlertLetter", "DocsToPrint", new { houseBillId = item.HouseBillId, isNotifier = 1 })">PRE-ALERT Notifier</a></li>
+                            }
+                            <li role="separator" class="divider"></li>
+                            <li>
+                                <a href="javascript:void(0)" statusid="@item.StatusId" class="opercost" hbid="@item.HouseBillId">Operation Cost</a>
+                            </li>
+                            <li role="separator" class="divider"></li>
+                            <li>
+                                <a href="javascript:void(0)" statusid="@item.StatusId" class="closehb" hbid="@item.HouseBillId">Close HB</a>
+                            </li>
+
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+}
+

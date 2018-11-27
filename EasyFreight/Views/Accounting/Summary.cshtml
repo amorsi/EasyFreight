@@ -1,0 +1,265 @@
+﻿@model EasyFreight.ViewModel.AccountSummaryMain
+@{
+    ViewBag.Title = "Summary";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<header class="page-header">
+    <h2>Accounting Summary</h2>
+
+    <div class="right-wrapper pull-right">
+        <ol class="breadcrumbs">
+            <li>
+                <a href="@Url.Content("~/Home/Index")">
+                    <i class="fa fa-home"></i>
+                </a>
+            </li>
+            <li><span>Accounting </span></li>
+            <li><span>Accounting Summary</span></li>
+        </ol>
+
+        <a class="sidebar-right-toggle" data-open="sidebar-right"><i class="fa fa-chevron-left"></i></a>
+    </div>
+</header>
+
+<div class="row">
+    <div class="col-lg-6 col-md-12">
+        <section class="panel">
+            <header class="panel-heading">
+
+                <h2 class="panel-title">
+                    Top 5 A/R
+                    <a href="@Url.Content("~/AccountingRpt/AccSummaryByParentAccId?parentAccId=171")">(View All List)</a>
+                </h2>
+            </header>
+            <div class="panel-body">
+                <div class="table-responsive">
+                    @{Html.RenderPartial("~/Views/Accounting/_SummaryRpt.cshtml", Model.ArSummary);}
+                </div>
+            </div>
+        </section>
+    </div>
+    <div class="col-lg-6 col-md-12">
+        <section class="panel">
+            <header class="panel-heading">
+
+                <h2 class="panel-title">
+                    Top 5 Agents
+                    <a href="@Url.Content("~/AccountingRpt/AccSummaryByParentAccId?parentAccId=178")">(View All List)</a>
+                </h2>
+            </header>
+            <div class="panel-body">
+                <div class="table-responsive">
+                    @{Html.RenderPartial("~/Views/Accounting/_SummaryRpt.cshtml", Model.AgentSummary);}
+                </div>
+            </div>
+        </section>
+    </div>
+    
+</div>
+<div class="row">
+    <div class="col-lg-6 col-md-12">
+        <section class="panel">
+            <header class="panel-heading ">
+
+                <h2 class="panel-title">
+                    Top 5 Carriers (A/P)
+                    <a href="@Url.Content("~/AccountingRpt/AccSummaryByParentAccId?parentAccId=2811&isCreditAccount=true")">(View All List)</a>
+                </h2>
+            </header>
+            <div class="panel-body">
+                <div class="table-responsive">
+                    @{Html.RenderPartial("~/Views/Accounting/_SummaryRpt.cshtml", Model.ApCarrierSummary);}
+
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div class="col-lg-6 col-md-12">
+        <section class="panel">
+            <header class="panel-heading ">
+
+                <h2 class="panel-title">
+                    Top 5 Contractors A/P
+                    <a href="@Url.Content("~/AccountingRpt/AccSummaryByParentAccId?parentAccId=2812&isCreditAccount=true")">(View All List)</a>
+                </h2>
+            </header>
+            <div class="panel-body">
+                <div class="table-responsive">
+                    @{Html.RenderPartial("~/Views/Accounting/_SummaryRpt.cshtml", Model.ApContractorSummary);}
+
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-6 col-md-12">
+        <section class="panel">
+            <header class="panel-heading ">
+
+                <h2 class="panel-title">
+                    Top 5 Cash In Bank
+                    <a href="@Url.Content("~/AccountingRpt/AccSummaryByParentAccId?parentAccId=193&isCreditAccount=false")">(View All List)</a>
+                </h2>
+            </header>
+            <div class="panel-body">
+                <div class="table-responsive">
+                    @{Html.RenderPartial("~/Views/Accounting/_BankSummaryRpt.cshtml", Model.CashInBankSummary);}
+
+                </div>
+            </div>
+        </section>
+    </div>
+
+  <div class="col-lg-6 col-md-12">
+        <section class="panel">
+            <header class="panel-heading ">
+
+                <h2 class="panel-title">
+                      Cash Transactions
+                    <a href="@Url.Content("~/AccountingRpt/AccSummaryByParentAccId?parentAccId=194&isCreditAccount=false")">(View All List)</a>
+                </h2>
+            </header>
+            <div class="panel-body">
+                <div class="table-responsive">
+                    @{Html.RenderPartial("~/Views/Accounting/_SummaryRpt.cshtml", Model.TreasurySummary );}
+
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12 col-lg-6 col-xl-6">
+        <section class="panel panel-featured-left panel-featured-primary">
+            <div class="panel-body">
+                <div class="widget-summary">
+                    <div class="widget-summary-col widget-summary-col-icon">
+                        <div class="summary-icon bg-success">
+                            <i class="fa fa-usd"></i>
+                        </div>
+                    </div>
+                    <div class="widget-summary-col">
+                        <div class="summary" style="min-height:85px;">
+                            <h4 class="title">Total Collected</h4>
+
+                            @foreach (var item in Model.TotalCollectedByCurrency)
+                            {
+                                <div class="col-md-12 info">
+                                    <strong class="amount">@item.Key @item.Value.ToString("N")</strong>
+                                </div>
+                            }
+
+                        </div>
+                        <div class="summary-footer">
+                            <a href="@Url.Content("~/CashManagement")" class="text-muted text-uppercase">(view all)</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <div class="col-md-12 col-lg-6 col-xl-6">
+        <section class="panel panel-featured-left panel-featured-secondary">
+            <div class="panel-body">
+                <div class="widget-summary">
+                    <div class="widget-summary-col widget-summary-col-icon">
+                        <div class="summary-icon bg-secondary">
+                            <i class="fa fa-usd"></i>
+                        </div>
+                    </div>
+                    <div class="widget-summary-col">
+                        <div class="summary" style="min-height:85px;">
+                            <h4 class="title">Total Paid</h4>
+
+                            @foreach (var item in Model.TotalPaidByCurrency)
+                            {
+                                <div class="col-md-12 info">
+                                    <strong class="amount">@item.Key @item.Value.ToString("N")</strong>
+                                </div>
+                            }
+
+                        </div>
+                        <div class="summary-footer">
+                            <a href="@Url.Content("~/CashManagement")" class="text-muted text-uppercase">(view all)</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+</div>
+
+
+<div class="row">
+    <div class="col-lg-12 col-md-12">
+        <section class="panel">
+            <header class="panel-heading">
+
+                <h2 class="panel-title">
+                    Balance Top View
+                    @*<a href="@Url.Content("~/AccountingRpt/AccBalanceTopView")">(View Full Report)</a>*@
+                </h2>
+            </header>
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <table class="table table-striped mb-none">
+                        <thead>
+                            <tr>
+
+                                <th>Account Number</th>
+                                <th>Account Name</th>
+                                <th>Account Name Ar</th>
+                                <th>EGP</th>
+                                <th>USD</th>
+                                <th>EUR</th>
+                                <th>GBP</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.TopViewBalance)
+                            {
+                                <tr>
+                                    <td>@item.ParentAccountId</td>
+                                    <td>
+                                        @item.AccountNameEn
+                                    </td>
+                                    <td>
+                                        @item.AccountNameAr
+                                    </td>
+                                    <td>@(item.EGP != null ? item.EGP.Value.ToString("N") : "0")</td>
+                                    <td>@(item.USD != null ? item.USD.Value.ToString("N") : "0")</td>
+                                    <td>@(item.EUR != null ? item.EUR.Value.ToString("N") : "0")</td>
+                                    <td>@(item.GBP != null ? item.GBP.Value.ToString("N") : "0")</td>
+
+                                </tr>
+                            }
+
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="3">
+                                    Totals
+                                </td>
+                                @foreach (var item in ViewBag.TopViewTotals as Dictionary<string, decimal>)
+                                {
+                                    <td>
+                                        @item.Value.ToString("N")
+                                    </td>
+                                }
+
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </div>
+
+
+</div>

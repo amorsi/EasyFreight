@@ -1,0 +1,92 @@
+﻿ @model EasyFreight.ViewModel.OpenBalancePaymentVm
+@{
+    ViewBag.Title = "OpenBalance";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .select2-drop {
+        z-index: 99959;
+    }
+
+    .datepicker-dropdown {
+        z-index: 99959 !important;
+    }
+
+    .border {
+        border: 1px solid #888;
+        padding-top: 2px;
+        text-align: center;
+        vertical-align: central;
+    }
+
+    .default-icon {
+        color: #777;
+    }
+
+    .clicked-icon {
+        color: #0088cc;
+    }
+
+</style>
+
+<header class="page-header">
+    <h2>Open Balance</h2>
+
+    <div class="right-wrapper pull-right">
+        <ol class="breadcrumbs">
+            <li>
+                <a href="@Url.Content("~/Home/Index")">
+                    <i class="fa fa-home"></i>
+                </a>
+            </li>
+            <li><span>Accounting</span></li>
+            <li><span>Open Balance</span></li>
+        </ol>
+
+        <a class="sidebar-right-toggle" data-open="sidebar-right"><i class="fa fa-chevron-left"></i></a>
+    </div>
+</header>
+
+<section class="panel">
+    <header class="panel-heading">
+        <div class="panel-actions">
+            <a href="#" class=""></a>
+            <a href="#" class=""></a>
+        </div>
+
+        <h2 class="panel-title"></h2>
+    </header>
+
+    <div class="panel-body">
+        
+        <div id="tbResult"> 
+            <table class="table table-bordered table-striped mb-none" id="datatable-default">
+    <thead>
+        <tr>
+             
+            <th>Account Name</th>
+            <th>Debit Amount</th>
+            <th>Credit Amount</th>
+            <th>Amount</th>
+            <th>Currency</th>  
+            <th>Actions</th>
+        
+        </tr>
+    </thead>
+
+</table>
+
+
+        </div>
+
+
+    </div>
+
+
+</section>
+
+
+@section scripts{
+    <script src="@Url.Content("~/Scripts/Accounting/OpenBalancePayment.js")"></script>
+ }

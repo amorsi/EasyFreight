@@ -1,0 +1,130 @@
+﻿@model EasyFreight.Models.CustomClearanceView
+
+<section class="panel panel-primary">
+    <header class="panel-heading">
+        <div class="panel-actions">
+            <a href="#"></a>
+            <a href="#"></a>
+        </div>
+        <h2 class="panel-title">Custom Clearance Order</h2>
+    </header>
+    <div class="panel-body">
+        <div class="col-sm-6 col-xs-6 form-group">
+            <label class="col-md-5 col-xs-5 control-label">House Bill</label>
+            <div class="col-md-7 col-xs-7 ">
+                <span class="text-dark">@Model.HouseBL</span>
+            </div>
+        </div>
+        <div class="col-sm-6 col-xs-6 form-group">
+            <label class="col-md-5 col-xs-5 control-label">Operation Code</label>
+            <div class="col-md-7 col-xs-7 ">
+                <span class="text-dark">@Model.OperationCode</span>
+            </div>
+        </div>
+        <div class="col-sm-6 col-xs-6 form-group">
+            <label class="col-md-5 col-xs-5 control-label">Department</label>
+            <div class="col-md-7 col-xs-7 ">
+                <span class="text-dark">@(Model.OrderFrom == 1 ? "Export" : "Import")</span>
+            </div>
+        </div>
+        <div class="col-sm-6 col-xs-6 form-group">
+            <label class="col-md-5 col-xs-5 control-label">Booking Number</label>
+            <div class="col-md-7 col-xs-7 ">
+                <span class="text-dark">@Model.BookingNumber</span>
+            </div>
+        </div>
+        <div class="col-sm-6 col-xs-6 form-group">
+            <label class="col-md-5 col-xs-5 control-label">From</label>
+            <div class="col-md-7 col-xs-7 ">
+                <span class="text-dark">@Model.FromPort</span>
+            </div>
+        </div>
+        <div class="col-sm-6 col-xs-6 form-group">
+            <label class="col-md-5 col-xs-5 control-label">To</label>
+            <div class="col-md-7 col-xs-7 ">
+                <span class="text-dark">@Model.ToPort</span>
+            </div>
+        </div>
+        <div class="col-sm-6 col-xs-6 form-group">
+            <label class="col-md-5 col-xs-5 control-label">Carrier</label>
+            <div class="col-md-7 col-xs-7 ">
+                <span class="text-dark">@Model.CarrierNameEn</span>
+            </div>
+        </div>
+        <div class="col-sm-6 col-xs-6 form-group">
+            <label class="col-md-5 col-xs-5 control-label">Containers</label>
+            <div class="col-md-7 col-xs-7 ">
+                <span class="text-dark">@ViewBag.ContainersSummary</span>
+            </div>
+        </div>
+        <div class="col-sm-6 col-xs-6 form-group">
+            <label class="col-md-5 col-xs-5 control-label">Need Arrive Date</label>
+            <div class="col-md-7 col-xs-7 ">
+                <span class="text-dark">@Model.NeedArriveDate.ToString("dd/MM/yyyy")</span>
+            </div>
+        </div>
+        <div class="col-sm-6 col-xs-6 form-group">
+            <label class="col-md-5 col-xs-5 control-label">Need Arrive Time</label>
+            <div class="col-md-7 col-xs-7 ">
+                <span class="text-dark">@Model.NeedArriveTime.ToString(@"h\:mm") </span>
+            </div>
+        </div>
+        <div class="col-sm-6 col-xs-6 form-group">
+            <label class="col-md-5 col-xs-5 control-label">Shipper</label>
+            <div class="col-md-7 col-xs-7 ">
+                <span class="text-dark">@Model.ShipperNameEn</span>
+            </div>
+        </div>
+        <div class="col-sm-6 col-xs-6 form-group">
+            <label class="col-md-5 col-xs-5 control-label">Consignee</label>
+            <div class="col-md-7 col-xs-7 ">
+                <span class="text-dark">@Model.ConsigneeNameEn</span>
+            </div>
+        </div>
+        <div class="col-sm-6 col-xs-6 form-group">
+            <label class="col-md-5 col-xs-5 control-label">Create Date</label>
+            <div class="col-md-7 col-xs-7 ">
+                <span class="text-dark">@Model.CreateDate.Value.ToString("d-MM-yyyy HH:mm")</span>
+            </div>
+        </div>
+        <div class="col-sm-6 col-xs-6 form-group">
+            <label class="col-md-5 col-xs-5 control-label">Status</label>
+            <div class="col-md-7 col-xs-7 ">
+                <span class="text-dark">@Model.StatusName</span>
+            </div>
+        </div>
+   
+         <div class="col-sm-12 col-xs-12 form-group">
+            <label class="col-md-3 col-xs-3 control-label">Notes</label>
+            <div class="col-md-8 col-xs-8 ">
+                <span class="text-dark">@Model.Notes</span>
+            </div>
+        </div>
+        
+         <div class="col-sm-12 col-xs-12 form-group">
+            <label class="col-md-3 col-xs-3 control-label">Comments</label>
+            <div class="col-md-8 col-xs-8 ">
+                <span class="text-dark">@Model.Comment</span>
+            </div>
+        </div>
+        
+        
+         </div>
+
+</section>
+@if ((ViewBag.OrderDetails as List<EasyFreight.ViewModel.CustomClearanceDetailVm>).Count() > 0)
+{
+    <section class="panel panel-info">
+        <header class="panel-heading">
+            <div class="panel-actions">
+                <a href="#"></a>
+                <a href="#"></a>
+            </div>
+
+            <h2 class="panel-title">Custom Clearance Cost</h2>
+        </header>
+        <div class="panel-body">
+            @{Html.RenderPartial("~/Views/CustomClearance/_ViewOrderCost.cshtml", ViewBag.OrderDetails as List<EasyFreight.ViewModel.CustomClearanceDetailVm>);}
+        </div>
+    </section>
+}

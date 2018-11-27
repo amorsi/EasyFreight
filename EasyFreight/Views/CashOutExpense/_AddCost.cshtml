@@ -1,0 +1,125 @@
+﻿@model List<EasyFreight.ViewModel.CashOutExpense>
+
+@{
+    int index = 0;
+    int lastIndex = 0;
+
+    if (Model != null)
+    {
+        lastIndex = Model.Count() - 1;
+    }
+}
+
+<div class="col-sm-10">
+    <div class="col-sm-5">
+        <div class="form-group">
+            <label class="control-label">Expense Name</label>
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="form-group">
+            <label class="control-label">Amount</label>
+        </div>
+    </div>
+
+
+    <div class="row contactform form-template" style="display: none;">
+
+        <div class="col-sm-5">
+            <label class="control-label"></label>
+            <div class="form-group">
+                <select name="CashOutReceiptExpenses[-1].ExpenseId" data-placeholder="Select" 
+                        required class="form-control populate costname">
+                    <option></option>
+                    @foreach (var item in ViewBag.ExpenseNameList)
+                    {
+
+                        <option value="@item.Key">@item.Value</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <label class="control-label"></label>
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon currncySign">
+                        EGP
+                    </span>
+                    <input type="text" name="CashOutReceiptExpenses[-1].PaidAmount" class="form-control costnet onlyNumbers">
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-1" style="margin-top: 25px">
+            <div class="form-group">
+                <label class="control-label"></label>
+                <a class="on-default remove-contact" href="javascript:void(0)"><i class="fa fa-trash-o fa-2x"></i></a>
+            </div>
+        </div>
+        <input type="hidden" class="ccid" name="CashOutReceiptExpenses[-1].ReceiptId" value="@ViewBag.ReceiptId" />
+    </div>
+
+    @foreach (var item in Model)
+    {
+        <div class="row contactform" style="margin-top: 30px">
+            <div class="col-sm-5">
+
+                <div class="form-group">
+                    <select name="CashOutReceiptExpenses[@index].ExpenseId"
+                            required class="form-control populate costname" data-placeholder="Select" data-plugin-selecttwo>
+                        <option></option>
+                        @foreach (var costItem in ViewBag.ExpenseNameList)
+                        {
+                            if (costItem.Key == item.ExpenseId)
+                            {
+                                <option selected value="@costItem.Key">@costItem.Value</option>
+                            }
+                            else
+                            {
+                                <option value="@costItem.Key">@costItem.Value</option>}
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-4">
+
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon currncySign">
+                            EGP
+                        </span>
+                        <input type="text" name="CashOutReceiptExpenses[@index].PaidAmount"
+                               class="form-control costnet onlyNumbers" value="@item.PaidAmount">
+                    </div>
+                </div>
+            </div>
+
+            @if (index > 0)
+            {
+                <div class="col-sm-1" style="margin-top: 5px">
+                    <div class="form-group">
+                        <a class="on-default remove-contact" href="javascript:void(0)"><i class="fa fa-trash-o fa-2x"></i></a>
+                    </div>
+                </div>
+            }
+            <input type="hidden" name="CashOutReceiptExpenses[@index].ReceiptId" value="@item.ReceiptId" />
+
+        </div>
+        index++;
+    }
+    <div class="form-group">
+        <div class="col-sm-offset-9 col-sm-3">
+            <a href="javascript:void(0)" lastindex="@lastIndex" class="btnAdd">Add Cost</a>
+        </div>
+    </div>
+
+</div>
+<div class="col-sm-2">
+    <div class="well info">
+        Total:
+
+        <h3><span class="number sumnet">0 </span> <span class="currncySign">EGP</span></h3>
+    </div>
+
+</div>

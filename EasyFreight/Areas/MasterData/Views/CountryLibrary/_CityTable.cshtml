@@ -1,0 +1,29 @@
+﻿@model List<EasyFreight.Models.City>
+<table class="table table-bordered table-striped mb-none" id="datatable-default">
+                    <thead>
+                        <tr>
+                            <th>Country </th>
+                            <th>City Name En</th>
+                            <th>City Name Ar</th>
+                            <th >Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        { 
+                            <tr id="@item.CityId" class="gradeX">
+                                <td>@item.Country.CountryNameEn  </td>
+                                <td id="NameEn">@item.CityNameEn</td>
+                                <td id="NameAr">@item.CityNameAr</td>
+                                <td class="actions">
+                                    <a href="javascript:void(0)"   countryId="@item.CountryId" 
+                         cityId="@item.CityId" class="on-default edit-row"><i class="fa fa-pencil"></i></a>
+                                    <a href="#dialog"  cityId="@item.CityId" 
+                        class="on-default remove-row"><i class="fa fa-trash-o"></i></a>
+
+                                </td>
+                            </tr>
+                        }
+ 
+                    </tbody>
+                </table>

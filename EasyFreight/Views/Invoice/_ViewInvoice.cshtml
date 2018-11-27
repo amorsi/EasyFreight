@@ -1,0 +1,71 @@
+﻿@model EasyFreight.ViewModel.InvoiceVm
+
+<section class="panel">
+    <div class="panel-body">
+            <div class="invoice">
+                <header class="clearfix">
+                    <div class="row">
+                        <div class="col-sm-2 col-xs-2 mt-md">
+                            <h2 class="h2 mt-none mb-sm text-dark text-bold">INVOICE</h2>
+                        </div>
+
+                        <div class="col-sm-3 col-xs-3 mt-md">
+                            <h2 class="h2 mt-none mb-sm text-dark text-bold"> @Model.InvoiceCode</h2>
+                        </div>
+                    </div>
+                </header>
+                <div class="bill-info">
+                    <div class="row">
+                        
+                        <div class="col-md-4 col-xs-4 form-group">
+                            <span class="text-dark">Invoice Date:</span>
+                            <span class="value">@Model.InvoiceDate.Value.ToString("dd/MM/yyyy")</span>
+                        </div>
+                        @*<div class="col-sm-4 col-xs-4 form-group">
+                            <span class="text-dark">Payment Term:</span>
+                            <span class="value">@Model.PaymentTermName</span>
+                        </div>*@
+                        @if (!string.IsNullOrEmpty(Model.APInvoiceCode))
+                        { 
+                        <div class="col-sm-4 col-xs-4 form-group">
+                            <span class="text-dark">A/P Invoice:</span>
+                            <span class="value">@Model.APInvoiceCode</span>
+                        </div>
+                        }
+                    </div>
+                    <div class="row" style="padding-bottom: 10px">
+                        <div class="col-md-12 col-xs-12">
+                            <span id="cuslabel" class="text-dark">@(!string.IsNullOrEmpty(Model.APInvoiceCode) ? "Supplier Name: " : "Customer Name:")</span>
+                            <span class="value">@Model.CustomerName</span>
+                        </div>
+                    </div>
+                    <div class="row" style="padding-bottom: 15px">
+
+                        <div class="col-md-3 col-xs-3">
+                            <span class="text-dark">Operation:</span>
+                            <span class="value">@Model.OperationCode</span>
+                        </div>
+                        <div class="col-md-3 col-xs-3">
+                            <span class="text-dark">HBL:</span>
+                            <span class="value">@Model.HouseBL</span>
+                        </div>
+                        <div class="col-md-3 col-xs-3">
+                            <span class="text-dark">From Port:</span>
+                            <span class="value">@Model.FromPort</span>
+                        </div>
+                        <div class="col-md-3 col-xs-3">
+                            <span class="text-dark">To Port:</span>
+                            <span class="value">@Model.ToPort</span>
+                        </div>
+
+
+                    </div>
+                </div>
+
+                @{Html.RenderPartial("~/Views/Invoice/_InvoiceDet.cshtml", Model);}
+
+
+
+            </div>
+    </div>
+</section>

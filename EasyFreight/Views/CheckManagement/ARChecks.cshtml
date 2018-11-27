@@ -1,0 +1,92 @@
+﻿
+@{
+    ViewBag.Title = "ARChecks";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<header class="page-header">
+    <h2>A/R Checks</h2>
+
+    <div class="right-wrapper pull-right">
+        <ol class="breadcrumbs">
+            <li>
+                <a href="@Url.Content("~/Home/Index")">
+                    <i class="fa fa-home"></i>
+                </a>
+            </li>
+            <li><span>Accounting</span></li>
+            <li><span>A/R Checks</span></li>
+        </ol>
+
+        <a class="sidebar-right-toggle" data-open="sidebar-right"><i class="fa fa-chevron-left"></i></a>
+    </div>
+</header>
+
+<section class="panel">
+    <header class="panel-heading">
+        <div class="panel-actions">
+            <a href="#" class=""></a>
+            <a href="#" class=""></a>
+        </div>
+
+        <h2 class="panel-title"></h2>
+    </header>
+
+    <div class="panel-body">
+        @*<div class="row">
+            <div class="col-sm-3">
+                <div class="mb-md">
+                    <a href="#modalForm" class="modal-with-form" id="addToTable">
+                        <i class="fa fa-search fa-2x"></i><span style="padding-left: 8px">Advanced Search</span>
+                    </a>
+                </div>
+            </div>
+            <div class="col-sm-1">
+                <div class="col-sm-12 border">
+                    <a id="ClearSearch" class="filter0 default-icon" title="Clear Search" href="javascript:void(0)">
+                        <i class="fa fa-eraser fa-2x"></i>
+                    </a>
+                </div>
+            </div>
+            
+
+        </div>*@
+        <div id="tbResult">
+            @Html.Partial("~/Views/CheckManagement/_ResultTable.cshtml")
+        </div>
+
+        <input type="hidden" id="receiptIdToCollect" />
+
+        <div id="modelConfirmCollect" class="modal-block mfp-hide">
+            <section class="panel">
+                <header class="panel-heading">
+                    <h2 class="panel-title">Are you sure?</h2>
+                </header>
+                <div class="panel-body">
+                    <div class="modal-wrapper">
+                        <div class="modal-text">
+                            <p>Are you sure you want to collect this check?</p>
+                        </div>
+                    </div>
+                </div>
+                <footer class="panel-footer">
+                    <div class="row">
+                        <div class="col-md-12 text-right">
+                            <button id="btnConfirmCollect" class="btn btn-primary modal-confirm">Confirm</button>
+                            <button id="dialogCancel" class="btn btn-default modal-dismiss">Cancel</button>
+                        </div>
+                    </div>
+                </footer>
+            </section>
+        </div>
+
+    </div>
+
+
+</section>
+
+
+@section scripts{
+    <script src="@Url.Content("~/Scripts/CheckManagement/ARCheckIndex.js")"></script>
+
+}

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="5a8aa2c00c2a46d4abe97f703f604341" Name="Diagram1" ZoomLevel="74">
+        <EntityTypeShape EntityType="OperationsModel.CustomClearanceDetail" Width="1.5" PointX="7.5" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="OperationsModel.HouseBill" Width="1.5" PointX="5.25" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="OperationsModel.OperationContainer" Width="1.5" PointX="5.25" PointY="14" IsExpanded="true" />
+        <EntityTypeShape EntityType="OperationsModel.Quotation" Width="1.5" PointX="0.5" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="OperationsModel.QuotationContainer" Width="1.5" PointX="3" PointY="22.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="OperationsModel.OperationView" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OperationsModel.TruckingOrdersView" Width="1.5" PointX="11.75" PointY="11.75" IsExpanded="true" />
+        <AssociationConnector Association="OperationsModel.FK_QuotationContainer_Quotation" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="OperationsModel.QuotationView" Width="1.5" PointX="7.375" PointY="12.75" />
+        <EntityTypeShape EntityType="OperationsModel.Operation" Width="1.5" PointX="3.5" PointY="9" />
+        <AssociationConnector Association="OperationsModel.FK_HouseBill_Operation" />
+        <AssociationConnector Association="OperationsModel.FK_Operation_Quotation" />
+        <AssociationConnector Association="OperationsModel.FK_OperationContainer_Operation" />
+        <EntityTypeShape EntityType="OperationsModel.CustomClearanceOrder" Width="1.5" PointX="12.5" PointY="7.5" />
+        <AssociationConnector Association="OperationsModel.FK_CustomClearanceDetail_CustomClearanceOrder" />
+        <AssociationConnector Association="OperationsModel.FK_CustomClearanceOrder_HouseBill" />
+        <AssociationConnector Association="OperationsModel.FK_CustomClearanceOrder_Operation" />
+        <EntityTypeShape EntityType="OperationsModel.HouseBillView" Width="1.5" PointX="14.375" PointY="11.75" />
+        <EntityTypeShape EntityType="OperationsModel.CustomClearanceView" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="OperationsModel.OperationCost" Width="1.5" PointX="7.5" PointY="8.75" />
+        <EntityTypeShape EntityType="OperationsModel.OperationCostLib" Width="1.5" PointX="5.25" PointY="2.375" />
+        <AssociationConnector Association="OperationsModel.FK_OperationCost_HouseBill" />
+        <AssociationConnector Association="OperationsModel.FK_OperationCost_Operation" />
+        <AssociationConnector Association="OperationsModel.FK_OperationCost_OperationCostLib" />
+        <EntityTypeShape EntityType="OperationsModel.CurrencyOper" Width="1.5" PointX="1.875" PointY="8.5" />
+        <AssociationConnector Association="OperationsModel.FK_CustomClearanceDetail_Currency" />
+        <AssociationConnector Association="OperationsModel.FK_HouseBill_Currency" />
+        <AssociationConnector Association="OperationsModel.FK_HouseBill_Currency1" />
+        <AssociationConnector Association="OperationsModel.FK_Operation_Currency" />
+        <AssociationConnector Association="OperationsModel.FK_Operation_Currency1" />
+        <AssociationConnector Association="OperationsModel.FK_OperationCost_Currency" />
+        <AssociationConnector Association="OperationsModel.FK_Quotation_Currency" />
+        <AssociationConnector Association="OperationsModel.FK_Quotation_Currency1" />
+        <AssociationConnector Association="OperationsModel.FK_Quotation_Currency2" />
+        <AssociationConnector Association="OperationsModel.FK_Quotation_Currency3" />
+        <AssociationConnector Association="OperationsModel.FK_Operation_Currency2" />
+        <EntityTypeShape EntityType="OperationsModel.CustomClearanceCostLib" Width="1.5" PointX="12.375" PointY="0.875" />
+        <AssociationConnector Association="OperationsModel.FK_CustomClearanceDetail_CustomClearanceCostLib" />
+        <AssociationConnector Association="OperationsModel.FK_OperationCost_CurrencySelling" />
+        <EntityTypeShape EntityType="OperationsModel.StatusLibOper" Width="1.5" PointX="12.375" PointY="3.875" />
+        <AssociationConnector Association="OperationsModel.FK_HouseBill_StatusLib" />
+        <AssociationConnector Association="OperationsModel.FK_Operation_StatusLib" />
+        <AssociationConnector Association="OperationsModel.FK_Quotation_StatusLib" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,56 @@
+﻿@model List<EasyFreight.ViewModel.ModuleVm>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<header class="page-header">
+    <h2>Security Rights <span id="empname"></span></h2>
+
+    <div class="right-wrapper pull-right">
+        <ol class="breadcrumbs">
+            <li>
+                <a href="@Url.Content("~/Home/Index")">
+                    <i class="fa fa-home"></i>
+                </a>
+            </li>
+            <li><span>Admin</span></li>
+            <li><span>Rights By Employee (user)</span></li>
+        </ol>
+
+        <a class="sidebar-right-toggle" data-open="sidebar-right"><i class="fa fa-chevron-left"></i></a>
+    </div>
+</header>
+<form id="form1">
+    <div class="form-group mb-lg">
+        <label>Select Employee</label>
+        <select id="EmpId" name="EmpId" required class="form-control input-lg">
+            <option value=""></option>
+            @foreach (var item in ViewBag.EmpList)
+        {
+                <option value="@item.Key">@item.Value</option>
+        }
+        </select>
+    </div>
+
+    <div id="secview">
+        
+    </div>
+</form>
+
+<footer class="panel-footer">
+    <div id="SaveBtnDiv" class="row">
+        <div class="col-sm-9 col-sm-offset-3">
+            <button id="SaveForm" class="btn btn-primary">Submit</button>
+            <a id="ResetForm" href="@Url.Content("~/Admin/Security/UsersList")" class="btn btn-default">Reset</a>
+        </div>
+    </div>
+</footer>
+
+
+
+
+
+@section scripts{
+    <script src="@Url.Content("~/Scripts/Security/IndexScript.js")"></script>
+}

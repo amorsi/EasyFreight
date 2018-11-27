@@ -1,0 +1,45 @@
+﻿@model List<EasyFreight.ViewModel.ContractorRateVm>
+@{
+    int index = 1;
+}
+<section class="panel">
+
+    <div class="panel-body">
+        <div class="table-responsive">
+            <table class="table table-striped mb-none">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Contractor Name</th>
+                        <th>Container Type</th>
+                        <th>Trucing Cost</th>
+                         <th>From Area</th>
+                         <th>To Area</th>
+                        <th>Contractor Phone</th>
+                        <th>Contractor Email</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@index</td>
+                            <td>@item.Contractor.ContractorNameEn</td>
+                            <td>@item.ContainerTypeName</td>
+                            <td>@item.CostAmount  @item.CurrencySign</td>
+                            <td>@item.FromCityName / @item.FromAreaName</td>
+                             <td>@item.ToCityName / @item.ToAreaName</td>
+                            <td>@item.Contractor.PhoneNumber</td>
+                            <td><a href="mailto:@item.Contractor.Email">@item.Contractor.Email</a></td>
+                        </tr>
+                        index++;
+
+                    }
+
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>

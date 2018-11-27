@@ -1,0 +1,164 @@
+﻿@model List<EasyFreight.ViewModel.TruckingCostVm>
+
+@{
+    int index = 0;
+    int lastIndex = 0;
+
+    if (Model != null)
+    {
+        lastIndex = Model.Count() - 1;
+    }
+}
+
+<div class="col-sm-10">
+    <div class="col-sm-4">
+        <div class="form-group">
+            <label class="control-label">Cost Name</label>
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="form-group">
+            <label class="control-label">Net Price</label>
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="form-group">
+            <label class="control-label">Selling Price</label>
+        </div>
+    </div>
+
+    <div class="row contactform form-template" style="display: none;">
+
+        <div class="col-sm-4">
+            <label class="control-label"></label>
+            <div class="form-group">
+                <select name="TruckingOrderCosts[-1].TruckingCostId"
+                        required class="form-control populate costname" data-placeholder="Select">
+                    <option></option>
+                    @foreach (var item in ViewBag.TruckingCostNameList)
+                    {
+
+                        <option value="@item.Key">@item.Value</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <label class="control-label"></label>
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon currncySign">
+                        EGP
+                    </span>
+                    <input type="text" name="TruckingOrderCosts[-1].TruckingCostNet" class="form-control costnet onlyNumbers">
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <label class="control-label"></label>
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon currncySign">
+                        EGP
+                    </span>
+                    <input type="text" name="TruckingOrderCosts[-1].TruckingCostSelling" class="form-control costsell onlyNumbers">
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-1" style="margin-top: 25px">
+            <div class="form-group">
+                <label class="control-label"></label>
+                <a class="on-default remove-contact" href="javascript:void(0)"><i class="fa fa-trash-o fa-2x"></i></a>
+            </div>
+        </div>
+        <input type="hidden" name="TruckingOrderCosts[-1].TruckingOrderCostId" />
+        <input type="hidden" name="TruckingOrderCosts[-1].TruckingOrderId" />
+        <input type="hidden" class="contractorId" name="TruckingOrderCosts[-1].ContractorId" />
+        <input type="hidden" class="currencyid" name="TruckingOrderCosts[-1].CurrencyId" />
+
+
+    </div>
+    @foreach (var item in Model)
+{
+    <div class="row contactform" style="margin-top: 30px">
+        <div class="col-sm-4">
+
+            <div class="form-group">
+                <select name="TruckingOrderCosts[@index].TruckingCostId" data-plugin-selecttwo
+                        required class="form-control populate costname" data-placeholder="Select">
+                    <option></option>
+                    @foreach (var truckingCostName in ViewBag.TruckingCostNameList)
+                    {
+                        if (truckingCostName.Key == item.TruckingCostId)
+                        {
+                            <option selected value="@truckingCostName.Key">@truckingCostName.Value</option>
+                        }
+                        else
+                        {
+                            <option value="@truckingCostName.Key">@truckingCostName.Value</option>}
+                    }
+                </select>
+
+
+            </div>
+        </div>
+        <div class="col-sm-3">
+
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon currncySign">
+                        EGP
+                    </span>
+                    <input type="text" name="TruckingOrderCosts[@index].TruckingCostNet"
+                           class="form-control costnet onlyNumbers" value="@item.TruckingCostNet">
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon currncySign">
+                        EGP
+                    </span>
+                    <input type="text"
+                           class="form-control costsell onlyNumbers" name="TruckingOrderCosts[@index].TruckingCostSelling" value="@item.TruckingCostSelling">
+                </div>
+            </div>
+        </div>
+
+        @if (index > 0)
+        {
+            <div class="col-sm-1" style="margin-top: 5px">
+                <div class="form-group">
+                    <a class="on-default remove-contact" href="javascript:void(0)"><i class="fa fa-trash-o fa-2x"></i></a>
+                </div>
+            </div>
+        }
+        <input type="hidden" name="TruckingOrderCosts[@index].TruckingOrderCostId" value="@item.TruckingOrderCostId" />
+        <input type="hidden" name="TruckingOrderCosts[@index].TruckingOrderId" value="@item.TruckingOrderId" />
+        <input type="hidden" class="currencyid" name="TruckingOrderCosts[@index].CurrencyId" value="@item.CurrencyId" />
+        <input type="hidden" class="contractorId" name="TruckingOrderCosts[@index].ContractorId" value="@item.ContractorId" />
+    </div>
+        index++;
+}
+    <div class="form-group" style="margin-top: 5px">
+        <div class="col-sm-offset-9 col-sm-3">
+            <a href="javascript:void(0)" lastindex="@lastIndex" class="btnAdd">Add Cost</a>
+        </div>
+    </div>
+
+</div>
+<div class="col-sm-2">
+    <div class="well info">
+        Total Net:
+
+        <h3><span class="number sumnet">0 </span> <span class="currncySign">EGP</span></h3>
+    </div>
+
+    <div class="well success">
+        Total Selling:
+
+        <h3><span class="number sumsell">0 </span> <span class="currncySign">EGP</span></h3>
+    </div>
+</div>

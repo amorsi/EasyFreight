@@ -1,0 +1,126 @@
+﻿@charset "utf-8";
+/* CSS Document */
+
+body {
+	font-family: 'Lato', sans-serif;
+}
+
+.logo h1 {
+	font-size: 34px;
+	font-weight: bold;
+	/*color: #41a536;*/
+	padding-top: 30px;
+}
+
+.logo span {
+	font-weight: bold;
+}
+
+.content {
+	margin-top: 30px;
+}
+
+.list-head ,.head-info {
+	font-size: 1.3em;
+	font-weight: bold;
+	/*color: #41a536;*/
+}
+
+.head-info {
+	padding-bottom: 1px;
+}
+
+.table-info {
+	margin: 30px 0;
+}
+
+thead ,tfoot {
+	/*color: #fff;
+	background: #41a536;*/
+    background: #DADADA;
+}
+
+.table-info th,.table-info td {
+	text-align: center;
+}
+
+.table-info .desc {
+	text-align: left !important;
+	padding-left: 15px;
+}
+
+.Total-amo {
+	border: none !important;
+}
+
+.line {
+	margin-top: 25px;
+	border: 1px solid #000;
+}
+
+.copy p {
+	padding: 20px 0 15px;
+}
+
+.receipt {
+	padding: 0 20px 20px;
+	margin-bottom: 50px;
+	border: 5px double #000;
+}
+
+.receipt h3 {
+	font-size: 21px;
+	font-weight: bold;
+}
+
+.receipt p {
+	font-size: 18px;
+}
+
+.price {
+	margin-top: -10px;
+}
+
+.curenc {
+	margin-bottom: 0;
+}
+
+.name {
+	padding-top: 15px;
+}
+
+.line2 {
+	width: 40%;
+	margin: 0 auto;
+	border: 1px solid #000;
+}
+
+.name {
+	border-bottom: 1px dotted #000;
+}
+
+.Recog {
+	font-size: 20px;
+	font-weight: bold;
+	padding-top: 15px;
+}
+
+.left {
+    text-align:left
+}
+.right {
+    text-align:right
+}
+.dirtl {
+    direction:rtl;
+}
+.value {
+    font-weight: bold;
+}
+/*	----------------------------------------------------------
+	Responsive Structure
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = */
+@media only screen and ( min-width: 320px) and ( max-width: 767px ) {
+	.logo {text-align: center;}
+	.More-info {padding-top: 20px;}
+}

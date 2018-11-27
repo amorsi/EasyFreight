@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="c6352cb7830c42069375dd72e05371d7" Name="Diagram1" ZoomLevel="95">
+        <EntityTypeShape EntityType="AccountingModel.AccountingChart" Width="1.5" PointX="7.75" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="AccountingModel.ConsigneeAcc" Width="1.5" PointX="0.75" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="AccountingModel.CurrencyAcc" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AccountingModel.HouseBillAcc" Width="1.5" PointX="3" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="AccountingModel.ShipperAcc" Width="1.5" PointX="0.75" PointY="9.5" IsExpanded="true" />
+        <AssociationConnector Association="AccountingModel.FK_AccountingChart_AccountingChart" ManuallyRouted="false" />
+        <AssociationConnector Association="AccountingModel.FK_HouseBill_Consignee" ManuallyRouted="false" />
+        <AssociationConnector Association="AccountingModel.FK_HouseBill_Currency" ManuallyRouted="false" />
+        <AssociationConnector Association="AccountingModel.FK_HouseBill_Currency1" ManuallyRouted="false" />
+        <AssociationConnector Association="AccountingModel.FK_HouseBill_Shipper" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="AccountingModel.PaymentTerm" Width="1.5" PointX="7.375" PointY="4.875" />
+        <EntityTypeShape EntityType="AccountingModel.Invoice" Width="1.5" PointX="9.625" PointY="5.75" />
+        <AssociationConnector Association="AccountingModel.FK_Invoice_Consignee" />
+        <AssociationConnector Association="AccountingModel.FK_Invoice_HouseBill" />
+        <AssociationConnector Association="AccountingModel.FK_Invoice_PaymentTerm" />
+        <AssociationConnector Association="AccountingModel.FK_Invoice_Shipper" />
+        <EntityTypeShape EntityType="AccountingModel.Bank" Width="1.5" PointX="0.75" PointY="16.375" />
+        <EntityTypeShape EntityType="AccountingModel.BankAccount" Width="1.5" PointX="3" PointY="11.625" />
+        <AssociationConnector Association="AccountingModel.FK_BankAccount_Bank" />
+        <AssociationConnector Association="AccountingModel.FK_BankAccount_Currency" />
+        <EntityTypeShape EntityType="AccountingModel.AgentNote" Width="1.5" PointX="5.25" PointY="8.125" />
+        <AssociationConnector Association="AccountingModel.FK_AgentNote_BankAccount" />
+        <AssociationConnector Association="AccountingModel.FK_AgentNote_Consignee" />
+        <AssociationConnector Association="AccountingModel.FK_AgentNote_Shipper" />
+        <EntityTypeShape EntityType="AccountingModel.AccTransaction" Width="1.5" PointX="7.75" PointY="11.625" />
+        <EntityTypeShape EntityType="AccountingModel.AccTransactionDetail" Width="1.5" PointX="10" PointY="1.125" />
+        <AssociationConnector Association="AccountingModel.FK_AccTransactionDetail_AccountingChart" />
+        <AssociationConnector Association="AccountingModel.FK_AccTransactionDetail_AccTransaction" />
+        <AssociationConnector Association="AccountingModel.FK_AccTransactionDetail_Currency" />
+        <EntityTypeShape EntityType="AccountingModel.InvStatusLib" Width="1.5" PointX="10.375" PointY="11.875" />
+        <AssociationConnector Association="AccountingModel.FK_AgentNote_InvStatusLib" />
+        <AssociationConnector Association="AccountingModel.FK_Invoice_InvStatusLib" />
+        <AssociationConnector Association="AccountingModel.FK_Invoice_AccTransaction" />
+        <EntityTypeShape EntityType="AccountingModel.InvoiceTotal" Width="1.5" PointX="12.875" PointY="4.125" />
+        <AssociationConnector Association="AccountingModel.FK_InvoiceTotal_Currency" />
+        <AssociationConnector Association="AccountingModel.FK_InvoiceTotal_Invoice" />
+        <EntityTypeShape EntityType="AccountingModel.InvoiceDetail" Width="1.5" PointX="11.875" PointY="18.625" />
+        <AssociationConnector Association="AccountingModel.FK_Invoice_Currency" />
+        <AssociationConnector Association="AccountingModel.FK_InvoiceDetail_Invoice" />
+        <AssociationConnector Association="AccountingModel.FK_InvoiceDetailInvCurr_Currency" />
+        <AssociationConnector Association="AccountingModel.FK_InvoiceDetailMainCurrency_Currency" />
+        <EntityTypeShape EntityType="AccountingModel.CashInReceipt" Width="1.5" PointX="12.375" PointY="11.125" />
+        <EntityTypeShape EntityType="AccountingModel.CashInReceiptInv" Width="1.5" PointX="11.875" PointY="7.75" />
+        <AssociationConnector Association="AccountingModel.FK_CashInReceipt_AccTransaction" />
+        <AssociationConnector Association="AccountingModel.FK_CashInReceipt_Bank" />
+        <AssociationConnector Association="AccountingModel.FK_CashInReceipt_BankAccount" />
+        <AssociationConnector Association="AccountingModel.FK_CashInReceipt_Consignee" />
+        <AssociationConnector Association="AccountingModel.FK_CashInReceipt_Currency" />
+        <AssociationConnector Association="AccountingModel.FK_CashInReceipt_PaymentTerm" />
+        <AssociationConnector Association="AccountingModel.FK_CashInReceipt_Shipper" />
+        <AssociationConnector Association="AccountingModel.FK_CashInReceiptInv_CashInReceipt" />
+        <AssociationConnector Association="AccountingModel.FK_CashInReceiptInv_Invoice" />
+        <EntityTypeShape EntityType="AccountingModel.CashInReceiptCheck" Width="1.5" PointX="15.25" PointY="12.875" />
+        <AssociationConnector Association="AccountingModel.FK_CashInReceiptCheck_CashInReceipt" />
+        <EntityTypeShape EntityType="AccountingModel.AgentNoteDetail" Width="1.5" PointX="7.5" PointY="23.375" />
+        <AssociationConnector Association="AccountingModel.FK_AgentNoteDetail_AgentNote" />
+        <EntityTypeShape EntityType="AccountingModel.AgentNoteView" Width="1.5" PointX="7.375" PointY="14.75" />
+        <EntityTypeShape EntityType="AccountingModel.CashInReceiptAgNote" Width="1.5" PointX="17.625" PointY="11.875" />
+        <AssociationConnector Association="AccountingModel.FK_CashInReceiptAgNote_AgentNote" />
+        <AssociationConnector Association="AccountingModel.FK_CashInReceiptAgNote_CashInReceipt" />
+        <EntityTypeShape EntityType="AccountingModel.InvoiceTotalAP" Width="1.5" PointX="20.875" PointY="4.375" />
+        <AssociationConnector Association="AccountingModel.FK_InvoiceTotalAP_Currency" />
+        <EntityTypeShape EntityType="AccountingModel.CashOutReceipt" Width="1.5" PointX="18" PointY="15" />
+        <EntityTypeShape EntityType="AccountingModel.CashOutReceiptAgNote" Width="1.5" PointX="12.5" PointY="1.125" />
+        <EntityTypeShape EntityType="AccountingModel.CashOutReceiptCheck" Width="1.5" PointX="20.25" PointY="17" />
+        <AssociationConnector Association="AccountingModel.FK_CashOutReceipt_AccTransaction" />
+        <AssociationConnector Association="AccountingModel.FK_CashOutReceiptAgNote_AgentNote" />
+        <AssociationConnector Association="AccountingModel.FK_CashOutReceipt_Bank" />
+        <AssociationConnector Association="AccountingModel.FK_CashOutReceipt_BankAccount" />
+        <AssociationConnector Association="AccountingModel.FK_CashOutReceipt_Currency" />
+        <AssociationConnector Association="AccountingModel.FK_CashOutReceipt_PaymentTerm" />
+        <AssociationConnector Association="AccountingModel.FK_CashOutReceiptAgNote_CashOutReceipt" />
+        <AssociationConnector Association="AccountingModel.FK_CashOutReceiptCheck_CashOutReceipt" />
+        <EntityTypeShape EntityType="AccountingModel.CashOutReceiptInv" Width="1.5" PointX="20.25" PointY="12.375" />
+        <AssociationConnector Association="AccountingModel.FK_CashOutReceiptInv_CashOutReceipt" />
+        <AssociationConnector Association="AccountingModel.FK_CashOutReceiptInv_Invoice" />
+        <EntityTypeShape EntityType="AccountingModel.CashOutCCCashDeposit" Width="1.5" PointX="20.25" PointY="20.25" />
+        <AssociationConnector Association="AccountingModel.FK_CashOutCCCashDeposit_CashOutReceipt" />
+        <EntityTypeShape EntityType="AccountingModel.InvoiceAP" Width="1.5" PointX="15.625" PointY="4.25" />
+        <EntityTypeShape EntityType="AccountingModel.InvoiceDetailAP" Width="1.5" PointX="17.875" PointY="4" />
+        <AssociationConnector Association="AccountingModel.FK_CashOutReceiptInv_InvoiceAP" />
+        <AssociationConnector Association="AccountingModel.FK_InvoiceAP_Currency" />
+        <AssociationConnector Association="AccountingModel.FK_InvoiceDetailAP_Currency" />
+        <AssociationConnector Association="AccountingModel.FK_InvoiceDetailAP_Currency1" />
+        <AssociationConnector Association="AccountingModel.FK_InvoiceAP_HouseBill" />
+        <AssociationConnector Association="AccountingModel.FK_InvoiceAP_InvStatusLib" />
+        <AssociationConnector Association="AccountingModel.FK_InvoiceAP_PaymentTerm" />
+        <AssociationConnector Association="AccountingModel.FK_InvoiceDetailAP_InvoiceAP" />
+        <AssociationConnector Association="AccountingModel.FK_InvoiceTotalAP_InvoiceAP" />
+        <EntityTypeShape EntityType="AccountingModel.APInvoiceView" Width="1.5" PointX="14.375" PointY="16.75" />
+        <EntityTypeShape EntityType="AccountingModel.InvoiceView" Width="1.5" PointX="3.375" PointY="15.75" />
+        <AssociationConnector Association="AccountingModel.FK_CashInReceiptCheck_AccTransaction" />
+        <AssociationConnector Association="AccountingModel.FK_CashOutReceiptCheck_AccTransaction" />
+        <EntityTypeShape EntityType="AccountingModel.CashInReceiptView" Width="1.5" PointX="0.75" PointY="20.75" />
+        <EntityTypeShape EntityType="AccountingModel.CashOutReceiptView" Width="1.5" PointX="22.375" PointY="7.75" />
+        <EntityTypeShape EntityType="AccountingModel.ExpenseLib" Width="1.5" PointX="15.375" PointY="0.75" />
+        <EntityTypeShape EntityType="AccountingModel.CashOutReceiptExpense" Width="1.5" PointX="25.25" PointY="10.25" />
+        <AssociationConnector Association="AccountingModel.FK_CashOutReceiptExpense_CashOutReceipt" />
+        <AssociationConnector Association="AccountingModel.FK_CashOutReceiptExpense_ExpenseLib" />
+        <EntityTypeShape EntityType="AccountingModel.AspNetUserAcc" Width="1.5" PointX="9.375" PointY="15.75" />
+        <EntityTypeShape EntityType="AccountingModel.ArCashDeposit" Width="1.5" PointX="17.625" PointY="0.75" />
+        <AssociationConnector Association="AccountingModel.FK_ArCashDeposit_Consignee" />
+        <AssociationConnector Association="AccountingModel.FK_ArCashDeposit_Currency" />
+        <AssociationConnector Association="AccountingModel.FK_ArCashDeposit_PaymentTerm" />
+        <AssociationConnector Association="AccountingModel.FK_ArCashDeposit_Shipper" />
+        <EntityTypeShape EntityType="AccountingModel.ArCashDepositView" Width="1.5" PointX="10.375" PointY="22.875" />
+        <EntityTypeShape EntityType="AccountingModel.ArCashDepositBalance" Width="1.5" PointX="3" PointY="0.75" />
+        <AssociationConnector Association="AccountingModel.FK_ArCashDepositBalance_Consignee" />
+        <AssociationConnector Association="AccountingModel.FK_ArCashDepositBalance_Currency" />
+        <AssociationConnector Association="AccountingModel.FK_ArCashDepositBalance_Shipper" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

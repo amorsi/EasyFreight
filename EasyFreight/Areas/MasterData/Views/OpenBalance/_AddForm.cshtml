@@ -1,0 +1,49 @@
+﻿@model EasyFreight.ViewModel.OpenBalanceVm
+@{
+    int index = 0;
+}
+
+
+<div class="form-group table-responsive">
+    <table id="tbinvlist" class="table table-striped mb-none">
+        <thead>
+            <tr>
+                <th>Currency</th>
+                <th>Debit Amount</th>
+                <th>Credit Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.OpenBalanceDetails)
+            {
+                <tr id="@item.CurrencyId" itemid="@item.LibItemId">
+                    <td>
+                        @item.CurrencySign
+                        <input type="hidden" name="OpenBalanceDetails[@index].CurrencyId"
+                               value="@item.CurrencyId">
+                        <input type="hidden" name="OpenBalanceDetails[@index].TransDetailId"
+                               value="@item.TransDetailId">
+                        <input type="hidden" name="OpenBalanceDetails[@index].TransId"
+                               value="@item.TransId">
+                        <input type="hidden" name="OpenBalanceDetails[@index].AccountId"
+                               value="@(Model.TbName != "Cash" ? item.AccountId : item.CurrencyAccountId)">
+                        <input type="hidden" name="OpenBalanceDetails[@index].LibItemId"
+                               value="@item.LibItemId">
+                        
+                    </td>
+                    <td>
+                        <input type="text" name="OpenBalanceDetails[@index].DebitAmount"
+                               class="form-control costnet onlyNumbers" value="@item.DebitAmount">
+                    </td>
+                    <td>
+                        <input type="text" name="OpenBalanceDetails[@index].CreditAmount"
+                               class="form-control costnet onlyNumbers" value="@item.CreditAmount">
+                    </td>
+                </tr>
+                index++;
+            }
+        </tbody>
+    </table>
+</div>
+ <input type="hidden" name="TransId"
+                               value="@Model.TransId">

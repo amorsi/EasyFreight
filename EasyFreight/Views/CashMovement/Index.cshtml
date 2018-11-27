@@ -1,0 +1,83 @@
+﻿@model List<EasyFreight.ViewModel.CashBankRptVm>
+@{
+     ViewBag.Title = "Cash and Bank Balance";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<header class="page-header">
+    <h2>Cash and Bank Balance  </h2>
+
+    <div class="right-wrapper pull-right">
+        <ol class="breadcrumbs">
+            <li>
+                <a href="@Url.Content("~/Home/Index")">
+                    <i class="fa fa-home"></i>
+                </a>
+            </li>
+            <li><span>Accounting Reports</span></li>
+            <li><span>Cash & Bank Report</span></li>
+        </ol>
+
+        <a class="sidebar-right-toggle" data-open="sidebar-right"><i class="fa fa-chevron-left"></i></a>
+    </div>
+</header>
+
+
+ <section class="panel">
+            <header class="panel-heading" style="padding-bottom: 30px">
+                <h2 class="panel-title col-md-6">Cash & Bank Report </h2>
+            </header>
+            <div class="panel-body"> 
+                <div id="tbResult">
+                    <table class="table table-bordered table-striped mb-none" id="datatable-default">
+                         <thead>
+                            <tr>
+                                 <th>Account Number</th> 
+                                <th>Account Name EN </th>
+                                @*<th>Account Name Ar </th>*@
+                                <th>EGP</th>
+                                <th>USD</th>
+                                <th>EUR</th>
+                                <th>GBP</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr    class="gradeX">
+                                   <td>@item.AccountId</td> 
+                                    <td>@item.AccountNameEn</td>
+                                   @* <td>@item.AccountNameAr</td>*@
+                                    <td>@item.EGP </td>
+                                    <td>@item.USD</td>
+                                    <td>@item.EUR</td>
+                                    <td>@item.GBP</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div> 
+            </div>
+      <div class="panel-footer">
+           <div class="row">
+                <div class="col-md-12 text-right">
+                    <a class="btn btn-primary" href="CurrencyExchange">Currency Exchange</a>
+                    <a class="btn btn-info " href="CashToBank">Cash To Bank</a>
+                    <a class="btn btn-warning " href="BankToCash">Bank To Cash</a>
+                </div>
+            </div>
+      </div>
+        </section>
+@section scripts{
+     
+    <link href="@Url.Content("~/assets/vendor/jquery-datatables/responsive.dataTables.min.css")" rel="stylesheet" />
+    <script src="@Url.Content("~/assets/vendor/jquery-datatables/dataTables.responsive.min.js")"></script> 
+    <script src="@Url.Content("~/assets/vendor/jquery-datatables/pdfmake.min.js")"></script>
+    <script src="@Url.Content("~/assets/vendor/jquery-datatables/vfs_fonts.js")"></script> 
+    <script src="@Url.Content("~/assets/vendor/jquery-datatables/buttons.print.min.js")"></script>
+    <script src="@Url.Content("~/assets/vendor/jquery-datatables/buttons.colVis.min.js")"></script>
+
+    <script src="@Url.Content("~/Scripts/CashMovement/Index.js")"></script>
+}

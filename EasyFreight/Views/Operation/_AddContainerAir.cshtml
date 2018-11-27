@@ -1,0 +1,180 @@
+﻿@model List<EasyFreight.ViewModel.OperationContainerVm>
+
+@{
+    int index = 0;
+    int lastIndex = Model.Count() - 1;
+}
+
+<div class="row contactform form-template" style="display: none; margin-top: 25px">
+
+    <div class="col-sm-1">
+        <div class="form-group">
+            <input type="hidden" name="OperationContainers[-1].ContainerTypeId" value="0" />
+        </div>
+    </div>
+
+    <div class="col-sm-2">
+        <div class="form-group">
+            <input type="text" name="OperationContainers[-1].ContainerNumber"
+                   class="form-control" value="">
+        </div>
+    </div>
+
+    <div class="col-sm-2">
+        <div class="form-group">
+            <select name="OperationContainers[-1].PackageTypeId"
+                    class="form-control populate" data-placeholder="Select">
+                <option></option>
+                @foreach (var item in ViewBag.PackageList)
+                {
+                    <option value="@item.Key">@item.Value</option>
+                }
+            </select>
+
+
+        </div>
+    </div>
+
+    <div class="col-sm-1">
+        <div class="form-group">
+            <input type="text" name="OperationContainers[-1].NumberOfPackages"
+                   class="form-control onlyNumbers packagesnum">
+        </div>
+    </div>
+
+    <div class="col-sm-1">
+        <div class="form-group">
+            <input type="text" name="OperationContainers[-1].GrossWeight"
+                   class="form-control onlyNumbers gw" value="">
+        </div>
+    </div>
+
+    <div class="col-sm-1">
+        <div class="form-group">
+            <input type="text" name="OperationContainers[-1].NetWeight"
+                   class="form-control onlyNumbers nw">
+        </div>
+    </div>
+
+    <div class="col-sm-1">
+        <div class="form-group">
+            <input type="text" name="OperationContainers[-1].CBM"
+                   class="form-control notReq onlyNumbers cbm">
+        </div>
+    </div>
+
+    <div class="col-sm-1">
+        <div class="form-group">
+            <label class="control-label"></label>
+            <a class="on-default remove-contact" href="javascript:void(0)"><i class="fa fa-trash-o fa-2x"></i></a>
+        </div>
+    </div>
+
+    <input type="hidden" name="OperationContainers[-1].OperConId" />
+    <input type="hidden" name="OperationContainers[-1].OperationId" />
+</div>
+<div class="row">
+    <div class="col-sm-1">
+        @*<label class="control-label">Container Type</label>*@
+    </div>
+    <div class="col-sm-2">
+        <label class="control-label">Package Number</label>
+    </div>
+    
+    <div class="col-sm-2">
+        <label class="control-label">Package Type</label>
+    </div>
+    <div class="col-sm-1">
+        <label class="control-label">Packages#</label>
+    </div>
+    <div class="col-sm-1">
+        <label class="control-label">G.W (KG)</label>
+    </div>
+    <div class="col-sm-1">
+        <label class="control-label">CH.W (KG)</label>
+    </div>
+    <div class="col-sm-1">
+        <label class="control-label">CBM (m3)</label>
+    </div>
+</div>
+@foreach (var item in Model)
+{
+    <div class="row contactform" style="margin-top: 25px">
+
+
+        <div class="col-sm-1">
+            <div class="form-group">
+                <input type="hidden" name="OperationContainers[@index].ContainerTypeId" value="0" />
+            </div>
+        </div>
+
+        <div class="col-sm-2">
+            <div class="form-group">
+                <input type="text" name="OperationContainers[@index].ContainerNumber" required
+                       class="form-control" value="@item.ContainerNumber">
+            </div>
+        </div>
+        
+
+        <div class="col-sm-2">
+            <div class="form-group">
+                <select name="OperationContainers[@index].PackageTypeId" data-plugin-selecttwo
+                        class="form-control populate" required data-placeholder="Select">
+                    <option></option>
+                    @foreach (var item1 in ViewBag.PackageList)
+                    {
+                        <option value="@item1.Key" @(item.PackageTypeId == item1.Key ? "selected" : "")>@item1.Value</option>
+                    }
+                </select>
+
+            </div>
+        </div>
+
+        <div class="col-sm-1">
+            <div class="form-group">
+                <input type="text" name="OperationContainers[@index].NumberOfPackages"
+                       class="form-control onlyNumbers packagesnum" required value="@item.NumberOfPackages">
+            </div>
+        </div>
+
+        <div class="col-sm-1">
+            <div class="form-group">
+                <input type="text" name="OperationContainers[@index].GrossWeight"
+                       class="form-control onlyNumbers gw" required value="@item.GrossWeight">
+            </div>
+        </div>
+
+        <div class="col-sm-1">
+            <div class="form-group">
+                <input type="text" name="OperationContainers[@index].NetWeight"
+                       class="form-control onlyNumbers nw" required value="@item.NetWeight">
+            </div>
+        </div>
+
+        <div class="col-sm-1">
+            <div class="form-group">
+                <input type="text" name="OperationContainers[@index].CBM"
+                       class="form-control onlyNumbers cbm"  value="@item.CBM">
+            </div>
+        </div>
+
+        @if (index > 0)
+        {
+            <div class="col-sm-1">
+                <div class="form-group">
+                    <a class="on-default remove-contact" href="javascript:void(0)"><i class="fa fa-trash-o fa-2x"></i></a>
+                </div>
+            </div>
+        }
+        <input type="hidden" name="OperationContainers[@index].OperConId" value="@item.OperConId" />
+        <input type="hidden" name="OperationContainers[@index].OperationId" value="@item.OperationId" />
+    </div>
+
+        index++;
+}
+<div class="form-group">
+    <div class="col-sm-offset-10 col-sm-2">
+        <a href="javascript:void(0)" lastindex="@lastIndex" class="btnAdd">Add Container</a>
+    </div>
+</div>
+

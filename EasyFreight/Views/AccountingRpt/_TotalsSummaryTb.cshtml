@@ -1,0 +1,52 @@
+﻿@model EasyFreight.ViewModel.AccountSummary
+
+<section class="panel">
+    <header class="panel-heading" style="padding-bottom: 30px">
+        <h2 class="panel-title col-md-6"> @Model.AccountNameEn Summary </h2>
+    </header>
+    <div class="panel-body">
+        <table class="table table-bordered totaltbl">
+            <thead>
+                <tr>
+                    <th>
+                      Account / Currency
+                    </th>
+                    @foreach (string cur in Enum.GetNames(typeof(UsedCurrencies)))
+                    {
+                        <th>@cur</th>
+                    }
+
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.TotalByCurrency != null)
+                {
+                    <tr>
+                        <td >Debit Amount</td>
+                        @foreach (string cur in Enum.GetNames(typeof(UsedCurrencies)))
+                        {
+                           // var objFirst = 
+                            <td>@(Model.TotalByCurrency.Where(x=>x.CurrencySign == cur).FirstOrDefault()?.DebitAmout)</td>
+                        }
+
+                    </tr>
+                    <tr>
+                        <td>credit Amount</td>
+                        @foreach (string cur in Enum.GetNames(typeof(UsedCurrencies)))
+                        {
+                            <td>@(Model.TotalByCurrency.Where(x => x.CurrencySign == cur).FirstOrDefault()?.CreditAmount)</td>
+                        }
+
+                    </tr>
+                   
+                }
+                else
+                {
+                    <tr><td colspan="3">No Transactions</td></tr>
+                }
+
+            </tbody>
+        </table>
+
+    </div>
+</section>

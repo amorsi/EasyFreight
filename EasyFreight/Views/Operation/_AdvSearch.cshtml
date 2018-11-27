@@ -1,0 +1,142 @@
+﻿
+<form id="searchform" class="form-horizontal mb-lg" novalidate="novalidate">
+    <div class="form-group col-sm-6">
+        <label class="col-sm-4 control-label">Carrier</label>
+        <div class="col-sm-8">
+            <select id="CarrierId" name="CarrierId" data-plugin-selecttwo data-placeholder="Select Carrier"
+                    class="form-control populate">
+                <option></option>
+                @foreach (var item in ViewBag.CarrierList)
+                {
+                    <option value="@item.Key">@item.Value</option>
+                }
+            </select>
+
+        </div>
+
+        
+    </div>
+    <div class="form-group col-sm-6">
+        <label class="col-sm-4 control-label" for="w4-username">Operation Code </label>
+				<div class="col-sm-8">
+					<input type="text" class="form-control" name="OperationCode"  
+								id="OperationCode"  >
+				</div>
+    </div>
+    <div class="form-group col-sm-6">
+        <label class="col-sm-4 control-label">From Port</label>
+        <div class="col-sm-8">
+            @Html.Partial("~/Views/Shared/_PortGrouped.cshtml",
+                                    ViewData["PortList"] as List<EasyFreight.ViewModel.CountryPortList>,
+                                    new ViewDataDictionary { { "ddlName", "FromPortId" },
+                                    { "selectedVal", null },{"required","required"} })
+        </div>
+    </div>
+    <div class="form-group col-sm-6">
+        <label class="col-sm-4 control-label">To Port</label>
+        <div class="col-sm-8">
+            @Html.Partial("~/Views/Shared/_PortGrouped.cshtml",
+                                    ViewData["PortList"] as List<EasyFreight.ViewModel.CountryPortList>,
+                                    new ViewDataDictionary { { "ddlName", "ToPortId" },
+                                    { "selectedVal", null },{"required","required"} })
+        </div>
+    </div>
+    <div class="form-group col-sm-6">
+        <label class="col-sm-4 control-label">Container Type</label>
+        <div class="col-sm-8">
+            <select name="ContainerType" data-plugin-selecttwo data-placeholder="Select Container Type"
+                    class="form-control populate">
+                <option></option>
+                @foreach (var item in ViewBag.ContainerList)
+                {
+                    <option value="@item.Key">@item.Value</option>
+                }
+            </select>
+
+        </div>
+    </div>
+    <div class="form-group col-sm-6">
+        <label class="col-sm-4 control-label">Order From</label>
+        <div class="col-sm-8">
+            <select name="OrderFrom" data-plugin-selecttwo data-placeholder="Select Order From"
+                     class="form-control populate">
+                <option></option>
+                <option value="1">Export</option>
+                <option value="2">Import</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group col-sm-6">
+        <label class="col-sm-4 control-label">Shipper</label>
+        <div class="col-sm-8">
+            <select name="ShipperId" data-plugin-selecttwo data-placeholder="Select Shipper"
+                    required class="form-control populate">
+                <option></option>
+                @foreach (var item in ViewBag.ShipperList)
+                {
+                    <option value="@item.Key">@item.Value</option>
+                }
+            </select>
+
+        </div>
+    </div>
+    <div class="form-group col-sm-6">
+        <label class="col-sm-4 control-label">Consignee</label>
+        <div class="col-sm-8">
+            <select name="ConsigneeId" data-plugin-selecttwo data-placeholder="Select Consignee"
+                    class="form-control populate">
+                <option></option>
+                @foreach (var item in ViewBag.ConsigneeList)
+                {
+                    <option value="@item.Key">@item.Value</option>
+                }
+            </select>
+
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Create Date</label>
+        <div class="col-md-10">
+            <div data-plugin-datepicker="" data-date-format="dd/mm/yyyy" class="input-daterange input-group">
+                <span class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                </span>
+                <input type="text" name="CreateDateStart" class="form-control date">
+                <span class="input-group-addon">to</span>
+                <input type="text" name="CreateDateEnd" class="form-control date">
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Departure Date</label>
+        <div class="col-md-10">
+            <div data-plugin-datepicker="" data-date-format="dd/mm/yyyy" class="input-daterange input-group">
+                <span class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                </span>
+                <input type="text" name="DepartureDateStart" class="form-control date">
+                <span class="input-group-addon">to</span>
+                <input type="text" name="DepartureDateEnd" class="form-control date">
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group col-sm-6">
+        <label class="col-sm-4 control-label">Order status</label>
+        <div class="col-sm-8">
+            <select name="StatusId" data-plugin-selecttwo
+                    class="form-control populate" data-placeholder="Select">
+                <option ></option>
+                <option value="1">New</option>
+                <option value="2">Opened</option>
+                <option value="3">Closed</option>
+                <option value="5">Deleted</option>
+                <option value="6">Invoice Issued</option>
+            </select>
+        </div>
+    </div>
+
+</form>

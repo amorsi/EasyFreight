@@ -1,0 +1,1204 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="OperationsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="CustomClearanceDetail">
+    <Key>
+      <PropertyRef Name="CCDetailsId" />
+      <PropertyRef Name="CCId" />
+      <PropertyRef Name="CCCostId" />
+    </Key>
+    <Property Name="CCDetailsId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CCId" Type="Int32" Nullable="false" />
+    <Property Name="CCCostId" Type="Int32" Nullable="false" />
+    <Property Name="CCCostNet" Type="Decimal" Precision="18" Scale="3" Nullable="false" />
+    <Property Name="CCCostSelling" Type="Decimal" Precision="18" Scale="3" Nullable="false" />
+    <Property Name="CurrencyId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="CustomClearanceOrder" Relationship="OperationsModel.FK_CustomClearanceDetail_CustomClearanceOrder" FromRole="CustomClearanceDetail" ToRole="CustomClearanceOrder" />
+    <NavigationProperty Name="Currency" Relationship="OperationsModel.FK_CustomClearanceDetail_Currency" FromRole="CustomClearanceDetail" ToRole="Currency" />
+    <NavigationProperty Name="CustomClearanceCostLib" Relationship="OperationsModel.FK_CustomClearanceDetail_CustomClearanceCostLib" FromRole="CustomClearanceDetail" ToRole="CustomClearanceCostLib" />
+  </EntityType>
+  <EntityType Name="HouseBill">
+    <Key>
+      <PropertyRef Name="HouseBillId" />
+    </Key>
+    <Property Name="HouseBillId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OrderFrom" Type="Byte" Nullable="false" />
+    <Property Name="OperationId" Type="Int32" Nullable="false" />
+    <Property Name="OperationCode" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="OperationDate" Type="DateTime" Precision="3" />
+    <Property Name="HouseBL" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="FromPortId" Type="Int32" Nullable="false" />
+    <Property Name="ToPortId" Type="Int32" Nullable="false" />
+    <Property Name="ShipperId" Type="Int32" Nullable="false" />
+    <Property Name="ConsigneeId" Type="Int32" Nullable="false" />
+    <Property Name="NotifierId" Type="Int32" />
+    <Property Name="NotifierAsConsignee" Type="Boolean" />
+    <Property Name="DeliveryType" Type="Byte" Nullable="false" />
+    <Property Name="AgentId" Type="Int32" />
+    <Property Name="GrossWeight" Type="Decimal" Precision="18" Scale="3" />
+    <Property Name="NetWeight" Type="Decimal" Precision="18" Scale="3" />
+    <Property Name="CBM" Type="Decimal" Precision="18" Scale="3" />
+    <Property Name="NumberOfPackages" Type="Int32" />
+    <Property Name="PackageTypeId" Type="Int32" />
+    <Property Name="IsPrepaid" Type="Boolean" />
+    <Property Name="CollectedFreightCost" Type="Decimal" Precision="18" Scale="3" />
+    <Property Name="FreighCurrencyId" Type="Int32" />
+    <Property Name="CollectedThcCost" Type="Decimal" Precision="18" Scale="3" />
+    <Property Name="ThcCurrencyId" Type="Int32" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreateBy" Type="String" MaxLength="128" Unicode="true" FixedLength="false" />
+    <Property Name="GoodsDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Marks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Operation" Relationship="OperationsModel.FK_HouseBill_Operation" FromRole="HouseBill" ToRole="Operation" />
+    <Property Name="StatusId" Type="Byte" Nullable="false" />
+    <NavigationProperty Name="CustomClearanceOrders" Relationship="OperationsModel.FK_CustomClearanceOrder_HouseBill" FromRole="HouseBill" ToRole="CustomClearanceOrder" />
+    <Property Name="BookingNumber" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="OperationCosts" Relationship="OperationsModel.FK_OperationCost_HouseBill" FromRole="HouseBill" ToRole="OperationCost" />
+    <NavigationProperty Name="Currency" Relationship="OperationsModel.FK_HouseBill_Currency" FromRole="HouseBill" ToRole="Currency" />
+    <NavigationProperty Name="Currency1" Relationship="OperationsModel.FK_HouseBill_Currency1" FromRole="HouseBill" ToRole="Currency" />
+    <Property Name="IsHazardous" Type="Boolean" />
+    <NavigationProperty Name="StatusLib" Relationship="OperationsModel.FK_HouseBill_StatusLib" FromRole="HouseBill" ToRole="StatusLib" />
+  </EntityType>
+  <EntityType Name="OperationContainer">
+    <Key>
+      <PropertyRef Name="OperConId" />
+      <PropertyRef Name="OperationId" />
+      <PropertyRef Name="ContainerTypeId" />
+    </Key>
+    <Property Name="OperConId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OperationId" Type="Int32" Nullable="false" />
+    <Property Name="ContainerTypeId" Type="Int32" Nullable="false" />
+    <Property Name="ContainerNumber" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="SealNumber" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="PackageTypeId" Type="Int32" />
+    <Property Name="NumberOfPackages" Type="Int32" />
+    <Property Name="GrossWeight" Type="Decimal" Precision="18" Scale="3" />
+    <Property Name="NetWeight" Type="Decimal" Precision="18" Scale="3" />
+    <Property Name="CBM" Type="Decimal" Precision="18" Scale="3" />
+    <NavigationProperty Name="Operation" Relationship="OperationsModel.FK_OperationContainer_Operation" FromRole="OperationContainer" ToRole="Operation" />
+  </EntityType>
+  <EntityType Name="Quotation">
+    <Key>
+      <PropertyRef Name="QuoteId" />
+    </Key>
+    <Property Name="QuoteId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OrderFrom" Type="Byte" Nullable="false" />
+    <Property Name="QuoteCode" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="QuoteDate" Type="DateTime" Precision="3" />
+    <Property Name="CarrierType" Type="Byte" Nullable="false" />
+    <Property Name="FromPortId" Type="Int32" />
+    <Property Name="ToPortId" Type="Int32" />
+    <Property Name="ShipperId" Type="Int32" />
+    <Property Name="ConsigneeId" Type="Int32" />
+    <Property Name="NotifierId" Type="Int32" />
+    <Property Name="NotifierAsConsignee" Type="Boolean" />
+    <Property Name="CarrierId" Type="Int32" />
+    <Property Name="IncotermId" Type="Int32" />
+    <Property Name="VesselId" Type="Int32" />
+    <Property Name="DateOfDeparture" Type="DateTime" Precision="3" />
+    <Property Name="GrossWeight" Type="Decimal" Precision="18" Scale="3" />
+    <Property Name="NetWeight" Type="Decimal" Precision="18" Scale="3" />
+    <Property Name="CBM" Type="Decimal" Precision="18" Scale="3" />
+    <Property Name="NumberOfPackages" Type="Int32" />
+    <Property Name="IsHazardous" Type="Boolean" Nullable="false" />
+    <Property Name="IsPrepaid" Type="Boolean" Nullable="false" />
+    <Property Name="PickupNeeded" Type="Boolean" />
+    <Property Name="DeliveryNeeded" Type="Boolean" />
+    <Property Name="CustomClearanceNeeded" Type="Boolean" />
+    <Property Name="GoodsDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="StatusId" Type="Byte" Nullable="false" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreateBy" Type="String" MaxLength="128" Unicode="true" FixedLength="false" />
+    <Property Name="HasExpireDate" Type="Boolean" />
+    <Property Name="ExpirationInDays" Type="Byte" />
+    <Property Name="FreightCostAmount" Type="Decimal" Precision="18" Scale="3" />
+    <Property Name="FreighCurrencyId" Type="Int32" />
+    <Property Name="ThcCostAmount" Type="Decimal" Precision="18" Scale="3" />
+    <Property Name="ThcCurrencyId" Type="Int32" />
+    <Property Name="FlightNumber" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="IsCareOf" Type="Boolean" Nullable="false" />
+    <Property Name="AgentId" Type="Int32" />
+    <NavigationProperty Name="QuotationContainers" Relationship="Self.FK_QuotationContainer_Quotation" FromRole="Quotation" ToRole="QuotationContainer" />
+    <Property Name="TruckingCost" Type="Decimal" Precision="18" Scale="3" />
+    <Property Name="TruckingCurrencyId" Type="Int32" />
+    <Property Name="CusClearanceCost" Type="Decimal" Precision="18" Scale="3" />
+    <Property Name="CusClearanceCurrencyId" Type="Int32" />
+    <NavigationProperty Name="Operations" Relationship="OperationsModel.FK_Operation_Quotation" FromRole="Quotation" ToRole="Operation" />
+    <Property Name="TransitTime" Type="Byte" />
+    <Property Name="FreeDays" Type="Byte" />
+    <Property Name="ArriveDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Currency" Relationship="OperationsModel.FK_Quotation_Currency" FromRole="Quotation" ToRole="Currency" />
+    <NavigationProperty Name="Currency1" Relationship="OperationsModel.FK_Quotation_Currency1" FromRole="Quotation" ToRole="Currency" />
+    <NavigationProperty Name="Currency2" Relationship="OperationsModel.FK_Quotation_Currency2" FromRole="Quotation" ToRole="Currency" />
+    <NavigationProperty Name="Currency3" Relationship="OperationsModel.FK_Quotation_Currency3" FromRole="Quotation" ToRole="Currency" />
+    <NavigationProperty Name="StatusLib" Relationship="OperationsModel.FK_Quotation_StatusLib" FromRole="Quotation" ToRole="StatusLib" />
+  </EntityType>
+  <EntityType Name="QuotationContainer">
+    <Key>
+      <PropertyRef Name="QuoteId" />
+      <PropertyRef Name="ContainerTypeId" />
+    </Key>
+    <Property Name="QuoteId" Type="Int32" Nullable="false" />
+    <Property Name="ContainerTypeId" Type="Int32" Nullable="false" />
+    <Property Name="NumberOfContainers" Type="Byte" Nullable="false" />
+    <NavigationProperty Name="Quotation" Relationship="Self.FK_QuotationContainer_Quotation" FromRole="QuotationContainer" ToRole="Quotation" />
+  </EntityType>
+  <EntityType Name="OperationView">
+    <Key>
+      <PropertyRef Name="OrderFrom" />
+      <PropertyRef Name="OperationCode" />
+      <PropertyRef Name="FromPort" />
+      <PropertyRef Name="ToPort" />
+      <PropertyRef Name="ShipperNameEn" />
+      <PropertyRef Name="ConsigneeNameEn" />
+      <PropertyRef Name="CarrierNameEn" />
+      <PropertyRef Name="IsHazardous" />
+      <PropertyRef Name="IsPrepaid" />
+      <PropertyRef Name="StatusId" />
+      <PropertyRef Name="CreateDate" />
+      <PropertyRef Name="StatusName" />
+      <PropertyRef Name="CarrierType" />
+      <PropertyRef Name="BookingNumber" />
+      <PropertyRef Name="IsCareOf" />
+      <PropertyRef Name="OperationId" />
+      <PropertyRef Name="FromPortId" />
+      <PropertyRef Name="ToPortId" />
+      <PropertyRef Name="ShipperId" />
+      <PropertyRef Name="ConsigneeId" />
+      <PropertyRef Name="CarrierId" />
+      <PropertyRef Name="IsConsolidation" />
+    </Key>
+    <Property Name="QuoteId" Type="Int32" />
+    <Property Name="OrderFrom" Type="Byte" Nullable="false" />
+    <Property Name="OperationCode" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="OperationDate" Type="DateTime" Precision="3" Nullable="false" />
+    <Property Name="FromPort" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ToPort" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ShipperNameEn" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ConsigneeNameEn" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="NotifierNameEn" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CarrierNameEn" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="VesselName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IncotermName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DateOfDeparture" Type="DateTime" Precision="3" />
+    <Property Name="GrossWeight" Type="Decimal" Precision="18" Scale="3" />
+    <Property Name="NetWeight" Type="Decimal" Precision="18" Scale="3" />
+    <Property Name="CBM" Type="Decimal" Precision="18" Scale="3" />
+    <Property Name="NumberOfPackages" Type="Int32" />
+    <Property Name="IsHazardous" Type="Boolean" Nullable="false" />
+    <Property Name="IsPrepaid" Type="Boolean" Nullable="false" />
+    <Property Name="PickupNeeded" Type="Boolean" />
+    <Property Name="DeliveryNeeded" Type="Boolean" />
+    <Property Name="CustomClearanceNeeded" Type="Boolean" />
+    <Property Name="GoodsDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="StatusId" Type="Byte" Nullable="false" />
+    <Property Name="CreateBy" Type="String" MaxLength="128" Unicode="true" FixedLength="false" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="FreightCostAmount" Type="Decimal" Precision="18" Scale="3" />
+    <Property Name="FreighCurrencyId" Type="Int32" />
+    <Property Name="ThcCostAmount" Type="Decimal" Precision="18" Scale="3" />
+    <Property Name="ThcCurrencyId" Type="Int32" />
+    <Property Name="StatusName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CarrierType" Type="Byte" Nullable="false" />
+    <Property Name="NotifierAsConsignee" Type="Boolean" Nullable="false" />
+    <Property Name="MBL" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="BookingNumber" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="IsCareOf" Type="Boolean" Nullable="false" />
+    <Property Name="OperationId" Type="Int32" Nullable="false" />
+    <Property Name="FromPortId" Type="Int32" Nullable="false" />
+    <Property Name="ToPortId" Type="Int32" Nullable="false" />
+    <Property Name="ShipperId" Type="Int32" Nullable="false" />
+    <Property Name="NotifierId" Type="Int32" />
+    <Property Name="ConsigneeId" Type="Int32" Nullable="false" />
+    <Property Name="CarrierId" Type="Int32" Nullable="false" />
+    <Property Name="IncotermId" Type="Int32" />
+    <Property Name="VesselId" Type="Int32" />
+    <Property Name="FlightNumber" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="TransitTime" Type="Byte" />
+    <Property Name="FreeDays" Type="Byte" />
+    <Property Name="ArriveDate" Type="DateTime" Precision="3" />
+    <Property Name="IsConsolidation" Type="Boolean" Nullable="false" />
+    <Property Name="AgentId" Type="Int32" />
+    <Property Name="IsFixedCost" Type="Boolean" />
+    <Property Name="FixedCost" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="FixedCostCurrencyId" Type="Int32" />
+    <Property Name="PercentageOfAmount" Type="Decimal" Precision="5" Scale="2" />
+    <Property Name="AgentNameEn" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="ConsigneeAddressEn" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="ConsigneePhoneNumber" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="ConsigneeFaxNumber" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="NotifierAddressEn" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="NotifierPhoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="NotifierFaxNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="ShipperPhoneNumber" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="ShipperFaxNumber" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="ShipperAddressEn" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="TruckingOrdersView">
+    <Key>
+      <PropertyRef Name="TruckingOrderId" />
+      <PropertyRef Name="OperationId" />
+      <PropertyRef Name="OperationCode" />
+      <PropertyRef Name="OrderFrom" />
+      <PropertyRef Name="FromAreaName" />
+      <PropertyRef Name="ToAreaName" />
+      <PropertyRef Name="FromCityName" />
+      <PropertyRef Name="ToCityName" />
+      <PropertyRef Name="NeedArriveDate" />
+      <PropertyRef Name="NeedArriveTime" />
+      <PropertyRef Name="StatusName" />
+      <PropertyRef Name="StatusId" />
+      <PropertyRef Name="FromAreaId" />
+      <PropertyRef Name="ToAreaId" />
+    </Key>
+    <Property Name="TruckingOrderId" Type="Int32" Nullable="false" />
+    <Property Name="TruckingOrderCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="OperationId" Type="Int32" Nullable="false" />
+    <Property Name="OperationCode" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="OrderFrom" Type="Byte" Nullable="false" />
+    <Property Name="BookingNo" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="ShipperNameEn" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="ConsigneeNameEn" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="CarrierNameEn" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="FromAreaName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ToAreaName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="FromCityName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ToCityName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="NeedArriveDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="NeedArriveTime" Type="Time" Nullable="false" Precision="1" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="ContractorNameEn" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DriverName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DriverMobile" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ArriveDate" Type="DateTime" Precision="3" />
+    <Property Name="ArriveTime" Type="Time" Precision="1" />
+    <Property Name="LoadedDate" Type="DateTime" Precision="3" />
+    <Property Name="LoadedTime" Type="Time" Precision="1" />
+    <Property Name="Notes" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="StatusName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CreateBy" Type="String" MaxLength="128" Unicode="true" FixedLength="false" />
+    <Property Name="StatusId" Type="Byte" Nullable="false" />
+    <Property Name="AssignToUserId" Type="String" MaxLength="128" Unicode="true" FixedLength="false" />
+    <Property Name="FromAreaId" Type="Int32" Nullable="false" />
+    <Property Name="ToAreaId" Type="Int32" Nullable="false" />
+    <Property Name="ShipperId" Type="Int32" />
+    <Property Name="CarrierId" Type="Int32" />
+    <Property Name="ConsigneeId" Type="Int32" />
+    <Property Name="FromCityId" Type="Int32" />
+    <Property Name="ToCityId" Type="Int32" />
+    <Property Name="ContractorId" Type="Int32" />
+    <Property Name="LeaveDate" Type="DateTime" Precision="3" />
+    <Property Name="LeaveTime" Type="Time" Precision="1" />
+    <Property Name="FollowUpDate" Type="DateTime" Precision="3" />
+    <Property Name="FollowUpBy" Type="String" MaxLength="128" Unicode="true" FixedLength="false" />
+    <Property Name="CostCurrencyId" Type="Int32" />
+    <Property Name="ShipFromAddress" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="HouseBillId" Type="Int32" />
+    <Property Name="HouseBL" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="ContactName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="ContactPhone" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <Association Name="FK_QuotationContainer_Quotation">
+    <End Role="Quotation" Type="Self.Quotation" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="QuotationContainer" Type="Self.QuotationContainer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Quotation">
+        <PropertyRef Name="QuoteId" />
+      </Principal>
+      <Dependent Role="QuotationContainer">
+        <PropertyRef Name="QuoteId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="OperationsEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="CustomClearanceDetails" EntityType="Self.CustomClearanceDetail" />
+    <EntitySet Name="HouseBills" EntityType="Self.HouseBill" />
+    <EntitySet Name="OperationContainers" EntityType="Self.OperationContainer" />
+    <EntitySet Name="Quotations" EntityType="Self.Quotation" />
+    <EntitySet Name="QuotationContainers" EntityType="Self.QuotationContainer" />
+    <EntitySet Name="OperationViews" EntityType="Self.OperationView" />
+    <EntitySet Name="TruckingOrdersViews" EntityType="Self.TruckingOrdersView" />
+    <AssociationSet Name="FK_QuotationContainer_Quotation" Association="Self.FK_QuotationContainer_Quotation">
+      <End Role="Quotation" EntitySet="Quotations" />
+      <End Role="QuotationContainer" EntitySet="QuotationContainers" />
+    </AssociationSet>
+    <EntitySet Name="QuotationViews" EntityType="OperationsModel.QuotationView" />
+    <EntitySet Name="Operations" EntityType="OperationsModel.Operation" />
+    <AssociationSet Name="FK_HouseBill_Operation" Association="OperationsModel.FK_HouseBill_Operation">
+      <End Role="Operation" EntitySet="Operations" />
+      <End Role="HouseBill" EntitySet="HouseBills" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Operation_Quotation" Association="OperationsModel.FK_Operation_Quotation">
+      <End Role="Quotation" EntitySet="Quotations" />
+      <End Role="Operation" EntitySet="Operations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OperationContainer_Operation" Association="OperationsModel.FK_OperationContainer_Operation">
+      <End Role="Operation" EntitySet="Operations" />
+      <End Role="OperationContainer" EntitySet="OperationContainers" />
+    </AssociationSet>
+    <EntitySet Name="CustomClearanceOrders" EntityType="OperationsModel.CustomClearanceOrder" />
+    <AssociationSet Name="FK_CustomClearanceDetail_CustomClearanceOrder" Association="OperationsModel.FK_CustomClearanceDetail_CustomClearanceOrder">
+      <End Role="CustomClearanceOrder" EntitySet="CustomClearanceOrders" />
+      <End Role="CustomClearanceDetail" EntitySet="CustomClearanceDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CustomClearanceOrder_HouseBill" Association="OperationsModel.FK_CustomClearanceOrder_HouseBill">
+      <End Role="HouseBill" EntitySet="HouseBills" />
+      <End Role="CustomClearanceOrder" EntitySet="CustomClearanceOrders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CustomClearanceOrder_Operation" Association="OperationsModel.FK_CustomClearanceOrder_Operation">
+      <End Role="Operation" EntitySet="Operations" />
+      <End Role="CustomClearanceOrder" EntitySet="CustomClearanceOrders" />
+    </AssociationSet>
+    <EntitySet Name="HouseBillViews" EntityType="OperationsModel.HouseBillView" />
+    <EntitySet Name="CustomClearanceViews" EntityType="OperationsModel.CustomClearanceView" />
+    <EntitySet Name="OperationCosts" EntityType="OperationsModel.OperationCost" />
+    <EntitySet Name="OperationCostLibs" EntityType="OperationsModel.OperationCostLib" />
+    <AssociationSet Name="FK_OperationCost_HouseBill" Association="OperationsModel.FK_OperationCost_HouseBill">
+      <End Role="HouseBill" EntitySet="HouseBills" />
+      <End Role="OperationCost" EntitySet="OperationCosts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OperationCost_Operation" Association="OperationsModel.FK_OperationCost_Operation">
+      <End Role="Operation" EntitySet="Operations" />
+      <End Role="OperationCost" EntitySet="OperationCosts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OperationCost_OperationCostLib" Association="OperationsModel.FK_OperationCost_OperationCostLib">
+      <End Role="OperationCostLib" EntitySet="OperationCostLibs" />
+      <End Role="OperationCost" EntitySet="OperationCosts" />
+    </AssociationSet>
+    <EntitySet Name="CurrencyOpers" EntityType="OperationsModel.CurrencyOper" />
+    <AssociationSet Name="FK_CustomClearanceDetail_Currency" Association="OperationsModel.FK_CustomClearanceDetail_Currency">
+      <End Role="Currency" EntitySet="CurrencyOpers" />
+      <End Role="CustomClearanceDetail" EntitySet="CustomClearanceDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HouseBill_Currency" Association="OperationsModel.FK_HouseBill_Currency">
+      <End Role="Currency" EntitySet="CurrencyOpers" />
+      <End Role="HouseBill" EntitySet="HouseBills" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HouseBill_Currency1" Association="OperationsModel.FK_HouseBill_Currency1">
+      <End Role="Currency" EntitySet="CurrencyOpers" />
+      <End Role="HouseBill" EntitySet="HouseBills" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Operation_Currency" Association="OperationsModel.FK_Operation_Currency">
+      <End Role="Currency" EntitySet="CurrencyOpers" />
+      <End Role="Operation" EntitySet="Operations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Operation_Currency1" Association="OperationsModel.FK_Operation_Currency1">
+      <End Role="Currency" EntitySet="CurrencyOpers" />
+      <End Role="Operation" EntitySet="Operations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OperationCost_Currency" Association="OperationsModel.FK_OperationCost_Currency">
+      <End Role="Currency" EntitySet="CurrencyOpers" />
+      <End Role="OperationCost" EntitySet="OperationCosts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Quotation_Currency" Association="OperationsModel.FK_Quotation_Currency">
+      <End Role="Currency" EntitySet="CurrencyOpers" />
+      <End Role="Quotation" EntitySet="Quotations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Quotation_Currency1" Association="OperationsModel.FK_Quotation_Currency1">
+      <End Role="Currency" EntitySet="CurrencyOpers" />
+      <End Role="Quotation" EntitySet="Quotations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Quotation_Currency2" Association="OperationsModel.FK_Quotation_Currency2">
+      <End Role="Currency" EntitySet="CurrencyOpers" />
+      <End Role="Quotation" EntitySet="Quotations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Quotation_Currency3" Association="OperationsModel.FK_Quotation_Currency3">
+      <End Role="Currency" EntitySet="CurrencyOpers" />
+      <End Role="Quotation" EntitySet="Quotations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Operation_Currency2" Association="OperationsModel.FK_Operation_Currency2">
+      <End Role="CurrencyOper" EntitySet="CurrencyOpers" />
+      <End Role="Operation" EntitySet="Operations" />
+    </AssociationSet>
+    <EntitySet Name="CustomClearanceCostLibs" EntityType="OperationsModel.CustomClearanceCostLib" />
+    <AssociationSet Name="FK_CustomClearanceDetail_CustomClearanceCostLib" Association="OperationsModel.FK_CustomClearanceDetail_CustomClearanceCostLib">
+      <End Role="CustomClearanceCostLib" EntitySet="CustomClearanceCostLibs" />
+      <End Role="CustomClearanceDetail" EntitySet="CustomClearanceDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OperationCost_CurrencySelling" Association="OperationsModel.FK_OperationCost_CurrencySelling">
+      <End Role="CurrencyOper" EntitySet="CurrencyOpers" />
+      <End Role="OperationCost" EntitySet="OperationCosts" />
+    </AssociationSet>
+    <FunctionImport Name="GetContractorRate" ReturnType="Collection(OperationsModel.GetContractorRate_Result)">
+      <Parameter Name="getValidOnly" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <FunctionImport Name="GetOperationStatistics" ReturnType="Collection(OperationsModel.GetOperationStatistics_Result)">
+      <Parameter Name="OrderFrom" Mode="In" Type="Int32" />
+      <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+      <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <EntitySet Name="StatusLibOpers" EntityType="OperationsModel.StatusLibOper" />
+    <AssociationSet Name="FK_HouseBill_StatusLib" Association="OperationsModel.FK_HouseBill_StatusLib">
+      <End Role="StatusLib" EntitySet="StatusLibOpers" />
+      <End Role="HouseBill" EntitySet="HouseBills" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Operation_StatusLib" Association="OperationsModel.FK_Operation_StatusLib">
+      <End Role="StatusLib" EntitySet="StatusLibOpers" />
+      <End Role="Operation" EntitySet="Operations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Quotation_StatusLib" Association="OperationsModel.FK_Quotation_StatusLib">
+      <End Role="StatusLib" EntitySet="StatusLibOpers" />
+      <End Role="Quotation" EntitySet="Quotations" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="QuotationView">
+    <Key>
+      <PropertyRef Name="QuoteId" />
+      <PropertyRef Name="OrderFrom" />
+      <PropertyRef Name="QuoteCode" />
+      <PropertyRef Name="FromPort" />
+      <PropertyRef Name="ToPort" />
+      <PropertyRef Name="ShipperNameEn" />
+      <PropertyRef Name="ConsigneeNameEn" />
+      <PropertyRef Name="CarrierNameEn" />
+      <PropertyRef Name="IsHazardous" />
+      <PropertyRef Name="IsPrepaid" />
+      <PropertyRef Name="StatusId" />
+      <PropertyRef Name="CreateDate" />
+      <PropertyRef Name="StatusName" />
+      <PropertyRef Name="CarrierType" />
+      <PropertyRef Name="IsCareOf" />
+    </Key>
+    <Property Name="QuoteId" Type="Int32" Nullable="false" />
+    <Property Name="OrderFrom" Type="Byte" Nullable="false" />
+    <Property Name="QuoteCode" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="QuoteDate" Type="DateTime" Precision="3" />
+    <Property Name="FromPort" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ToPort" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ShipperNameEn" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="ConsigneeNameEn" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="NotifierNameEn" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CarrierNameEn" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="VesselName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IncotermName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DateOfDeparture" Type="DateTime" Precision="3" />
+    <Property Name="GrossWeight" Type="Decimal" Precision="18" Scale="3" />
+    <Property Name="NetWeight" Type="Decimal" Precision="18" Scale="3" />
+    <Property Name="CBM" Type="Decimal" Precision="18" Scale="3" />
+    <Property Name="NumberOfPackages" Type="Int32" />
+    <Property Name="IsHazardous" Type="Boolean" Nullable="false" />
+    <Property Name="IsPrepaid" Type="Boolean" Nullable="false" />
+    <Property Name="PickupNeeded" Type="Boolean" />
+    <Property Name="DeliveryNeeded" Type="Boolean" />
+    <Property Name="CustomClearanceNeeded" Type="Boolean" />
+    <Property Name="GoodsDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="StatusId" Type="Byte" Nullable="false" />
+    <Property Name="CreateBy" Type="String" MaxLength="128" Unicode="true" FixedLength="false" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="HasExpireDate" Type="Boolean" />
+    <Property Name="ExpirationInDays" Type="Byte" />
+    <Property Name="FreightCostAmount" Type="Decimal" Precision="18" Scale="3" />
+    <Property Name="FreighCurrencyId" Type="Int32" />
+    <Property Name="ThcCostAmount" Type="Decimal" Precision="18" Scale="3" />
+    <Property Name="ThcCurrencyId" Type="Int32" />
+    <Property Name="StatusName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CarrierType" Type="Byte" Nullable="false" />
+    <Property Name="NotifierAsConsignee" Type="Boolean" />
+    <Property Name="FlightNumber" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="IsCareOf" Type="Boolean" Nullable="false" />
+    <Property Name="TruckingCost" Type="Decimal" Precision="18" Scale="3" />
+    <Property Name="TruckingCurrencyId" Type="Int32" />
+    <Property Name="CusClearanceCost" Type="Decimal" Precision="18" Scale="3" />
+    <Property Name="CusClearanceCurrencyId" Type="Int32" />
+    <Property Name="AgentNameEn" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="ConsigneeAddressEn" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="ConsigneePhoneNumber" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="ConsigneeFaxNumber" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="ConsigneeId" Type="Int32" />
+    <Property Name="NotifierId" Type="Int32" />
+    <Property Name="NotifierAddressEn" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="NotifierPhoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="NotifierFaxNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="ArriveDate" Type="DateTime" Precision="3" />
+    <Property Name="TransitTime" Type="Byte" />
+    <Property Name="FreeDays" Type="Byte" />
+    <Property Name="AgentId" Type="Int32" />
+    <Property Name="CarrierId" Type="Int32" />
+    <Property Name="IncotermId" Type="Int32" />
+    <Property Name="VesselId" Type="Int32" />
+    <Property Name="ShipperId" Type="Int32" />
+    <Property Name="ToPortId" Type="Int32" />
+    <Property Name="FromPortId" Type="Int32" />
+    <Property Name="ShipperPhoneNumber" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="ShipperFaxNumber" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="ShipperAddressEn" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Operation">
+    <Key>
+      <PropertyRef Name="OperationId" />
+    </Key>
+    <Property Name="OperationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="QuoteId" Type="Int32" />
+    <Property Name="OrderFrom" Type="Byte" Nullable="false" />
+    <Property Name="OperationCode" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="OperationDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="IsConsolidation" Type="Boolean" Nullable="false" />
+    <Property Name="BookingNumber" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="CarrierType" Type="Byte" Nullable="false" />
+    <Property Name="MBL" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="FromPortId" Type="Int32" Nullable="false" />
+    <Property Name="ToPortId" Type="Int32" Nullable="false" />
+    <Property Name="ShipperId" Type="Int32" Nullable="false" />
+    <Property Name="IsCareOf" Type="Boolean" Nullable="false" />
+    <Property Name="ConsigneeId" Type="Int32" Nullable="false" />
+    <Property Name="NotifierId" Type="Int32" />
+    <Property Name="NotifierAsConsignee" Type="Boolean" Nullable="false" />
+    <Property Name="CarrierId" Type="Int32" Nullable="false" />
+    <Property Name="IncotermId" Type="Int32" />
+    <Property Name="VesselId" Type="Int32" />
+    <Property Name="DateOfDeparture" Type="DateTime" Precision="3" />
+    <Property Name="ArriveDate" Type="DateTime" Precision="3" />
+    <Property Name="GrossWeight" Type="Decimal" Precision="18" Scale="3" />
+    <Property Name="NetWeight" Type="Decimal" Precision="18" Scale="3" />
+    <Property Name="CBM" Type="Decimal" Precision="18" Scale="3" />
+    <Property Name="NumberOfPackages" Type="Int32" />
+    <Property Name="IsHazardous" Type="Boolean" Nullable="false" />
+    <Property Name="IsPrepaid" Type="Boolean" Nullable="false" />
+    <Property Name="PickupNeeded" Type="Boolean" />
+    <Property Name="DeliveryNeeded" Type="Boolean" />
+    <Property Name="CustomClearanceNeeded" Type="Boolean" />
+    <Property Name="GoodsDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="StatusId" Type="Byte" Nullable="false" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreateBy" Type="String" MaxLength="128" Unicode="true" FixedLength="false" />
+    <Property Name="FreightCostAmount" Type="Decimal" Precision="18" Scale="3" />
+    <Property Name="FreighCurrencyId" Type="Int32" />
+    <Property Name="ThcCostAmount" Type="Decimal" Precision="18" Scale="3" />
+    <Property Name="ThcCurrencyId" Type="Int32" />
+    <Property Name="FlightNumber" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="HouseBills" Relationship="OperationsModel.FK_HouseBill_Operation" FromRole="Operation" ToRole="HouseBill" />
+    <NavigationProperty Name="Quotation" Relationship="OperationsModel.FK_Operation_Quotation" FromRole="Operation" ToRole="Quotation" />
+    <NavigationProperty Name="OperationContainers" Relationship="OperationsModel.FK_OperationContainer_Operation" FromRole="Operation" ToRole="OperationContainer" />
+    <Property Name="TransitTime" Type="Byte" />
+    <Property Name="FreeDays" Type="Byte" />
+    <NavigationProperty Name="CustomClearanceOrders" Relationship="OperationsModel.FK_CustomClearanceOrder_Operation" FromRole="Operation" ToRole="CustomClearanceOrder" />
+    <NavigationProperty Name="OperationCosts" Relationship="OperationsModel.FK_OperationCost_Operation" FromRole="Operation" ToRole="OperationCost" />
+    <NavigationProperty Name="Currency" Relationship="OperationsModel.FK_Operation_Currency" FromRole="Operation" ToRole="Currency" />
+    <NavigationProperty Name="Currency1" Relationship="OperationsModel.FK_Operation_Currency1" FromRole="Operation" ToRole="Currency" />
+    <Property Name="AgentId" Type="Int32" />
+    <Property Name="IsFixedCost" Type="Boolean" />
+    <Property Name="FixedCost" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="FixedCostCurrencyId" Type="Int32" />
+    <Property Name="PercentageOfAmount" Type="Decimal" Precision="5" Scale="2" />
+    <NavigationProperty Name="Currency2" Relationship="OperationsModel.FK_Operation_Currency2" FromRole="Operation" ToRole="CurrencyOper" />
+    <Property Name="CCCashDepAccountId" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="DeliveryType" Type="Byte" />
+    <NavigationProperty Name="StatusLib" Relationship="OperationsModel.FK_Operation_StatusLib" FromRole="Operation" ToRole="StatusLib" />
+  </EntityType>
+  <Association Name="FK_HouseBill_Operation">
+    <End Type="OperationsModel.Operation" Role="Operation" Multiplicity="1" />
+    <End Type="OperationsModel.HouseBill" Role="HouseBill" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Operation">
+        <PropertyRef Name="OperationId" />
+      </Principal>
+      <Dependent Role="HouseBill">
+        <PropertyRef Name="OperationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Operation_Quotation">
+    <End Type="OperationsModel.Quotation" Role="Quotation" Multiplicity="0..1" />
+    <End Type="OperationsModel.Operation" Role="Operation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Quotation">
+        <PropertyRef Name="QuoteId" />
+      </Principal>
+      <Dependent Role="Operation">
+        <PropertyRef Name="QuoteId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OperationContainer_Operation">
+    <End Type="OperationsModel.Operation" Role="Operation" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="OperationsModel.OperationContainer" Role="OperationContainer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Operation">
+        <PropertyRef Name="OperationId" />
+      </Principal>
+      <Dependent Role="OperationContainer">
+        <PropertyRef Name="OperationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="CustomClearanceOrder">
+    <Key>
+      <PropertyRef Name="CCId" />
+    </Key>
+    <Property Name="CCId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OperationId" Type="Int32" Nullable="false" />
+    <Property Name="HouseBillId" Type="Int32" Nullable="false" />
+    <Property Name="NeedArriveDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="NeedArriveTime" Type="Time" Nullable="false" Precision="1" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="CreateBy" Type="String" MaxLength="128" Unicode="true" FixedLength="false" />
+    <Property Name="StatusId" Type="Byte" Nullable="false" />
+    <Property Name="AssignToUserId" Type="String" MaxLength="128" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="CustomClearanceDetails" Relationship="OperationsModel.FK_CustomClearanceDetail_CustomClearanceOrder" FromRole="CustomClearanceOrder" ToRole="CustomClearanceDetail" />
+    <NavigationProperty Name="HouseBill" Relationship="OperationsModel.FK_CustomClearanceOrder_HouseBill" FromRole="CustomClearanceOrder" ToRole="HouseBill" />
+    <NavigationProperty Name="Operation" Relationship="OperationsModel.FK_CustomClearanceOrder_Operation" FromRole="CustomClearanceOrder" ToRole="Operation" />
+    <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CustomReleaseId" Type="Int32" />
+    <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <Association Name="FK_CustomClearanceDetail_CustomClearanceOrder">
+    <End Type="OperationsModel.CustomClearanceOrder" Role="CustomClearanceOrder" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="OperationsModel.CustomClearanceDetail" Role="CustomClearanceDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CustomClearanceOrder">
+        <PropertyRef Name="CCId" />
+      </Principal>
+      <Dependent Role="CustomClearanceDetail">
+        <PropertyRef Name="CCId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CustomClearanceOrder_HouseBill">
+    <End Type="OperationsModel.HouseBill" Role="HouseBill" Multiplicity="1" />
+    <End Type="OperationsModel.CustomClearanceOrder" Role="CustomClearanceOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HouseBill">
+        <PropertyRef Name="HouseBillId" />
+      </Principal>
+      <Dependent Role="CustomClearanceOrder">
+        <PropertyRef Name="HouseBillId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CustomClearanceOrder_Operation">
+    <End Type="OperationsModel.Operation" Role="Operation" Multiplicity="1" />
+    <End Type="OperationsModel.CustomClearanceOrder" Role="CustomClearanceOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Operation">
+        <PropertyRef Name="OperationId" />
+      </Principal>
+      <Dependent Role="CustomClearanceOrder">
+        <PropertyRef Name="OperationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="HouseBillView">
+    <Key>
+      <PropertyRef Name="HouseBillId" />
+      <PropertyRef Name="OrderFrom" />
+      <PropertyRef Name="OperationId" />
+      <PropertyRef Name="HouseBL" />
+      <PropertyRef Name="FromPortId" />
+      <PropertyRef Name="FromPort" />
+      <PropertyRef Name="ToPortId" />
+      <PropertyRef Name="ToPort" />
+      <PropertyRef Name="ShipperId" />
+      <PropertyRef Name="ShipperNameEn" />
+      <PropertyRef Name="ConsigneeId" />
+      <PropertyRef Name="ConsigneeNameEn" />
+      <PropertyRef Name="DeliveryType" />
+      <PropertyRef Name="CreateDate" />
+      <PropertyRef Name="StatusId" />
+      <PropertyRef Name="StatusName" />
+      <PropertyRef Name="CarrierType" />
+      <PropertyRef Name="CarrierNameEn" />
+      <PropertyRef Name="CarrierId" />
+    </Key>
+    <Property Name="HouseBillId" Type="Int32" Nullable="false" />
+    <Property Name="OrderFrom" Type="Byte" Nullable="false" />
+    <Property Name="OperationId" Type="Int32" Nullable="false" />
+    <Property Name="OperationCode" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="OperationDate" Type="DateTime" Precision="3" />
+    <Property Name="HouseBL" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="FromPortId" Type="Int32" Nullable="false" />
+    <Property Name="FromPort" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ToPortId" Type="Int32" Nullable="false" />
+    <Property Name="ToPort" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ShipperId" Type="Int32" Nullable="false" />
+    <Property Name="ShipperNameEn" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="ConsigneeId" Type="Int32" Nullable="false" />
+    <Property Name="ConsigneeNameEn" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="NotifierId" Type="Int32" />
+    <Property Name="NotifierNameEn" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="NotifierAsConsignee" Type="Boolean" />
+    <Property Name="DeliveryType" Type="Byte" Nullable="false" />
+    <Property Name="AgentId" Type="Int32" />
+    <Property Name="AgentNameEn" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="GrossWeight" Type="Decimal" Precision="18" Scale="3" />
+    <Property Name="NetWeight" Type="Decimal" Precision="18" Scale="3" />
+    <Property Name="CBM" Type="Decimal" Precision="18" Scale="3" />
+    <Property Name="NumberOfPackages" Type="Int32" />
+    <Property Name="IsPrepaid" Type="Boolean" />
+    <Property Name="CollectedFreightCost" Type="Decimal" Precision="18" Scale="3" />
+    <Property Name="FreighCurrencyId" Type="Int32" />
+    <Property Name="FreighCurrency" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="CollectedThcCost" Type="Decimal" Precision="18" Scale="3" />
+    <Property Name="ThcCurrencyId" Type="Int32" />
+    <Property Name="ThcCurrency" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreateBy" Type="String" MaxLength="128" Unicode="true" FixedLength="false" />
+    <Property Name="GoodsDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Marks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="StatusId" Type="Byte" Nullable="false" />
+    <Property Name="StatusName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="BookingNumber" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="VesselName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IncotermName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DateOfDeparture" Type="DateTime" Precision="3" />
+    <Property Name="ArriveDate" Type="DateTime" Precision="3" />
+    <Property Name="CarrierType" Type="Byte" Nullable="false" />
+    <Property Name="MBL" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="CarrierNameEn" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="CarrierId" Type="Int32" Nullable="false" />
+    <Property Name="VesselId" Type="Int32" />
+    <Property Name="ConsigneeAddressEn" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="ConsigneePhoneNumber" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="ConsigneeFaxNumber" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="NotifierAddressEn" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="NotifierPhoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="NotifierFaxNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="AgentAddressEn" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="AgentPhoneNumber" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="AgentFaxNumber" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="FlightNumber" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="PackageTypeNameEn" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="CustomClearanceView">
+    <Key>
+      <PropertyRef Name="OrderFrom" />
+      <PropertyRef Name="FromPort" />
+      <PropertyRef Name="ToPort" />
+      <PropertyRef Name="ShipperNameEn" />
+      <PropertyRef Name="ConsigneeNameEn" />
+      <PropertyRef Name="OperationId" />
+      <PropertyRef Name="NeedArriveDate" />
+      <PropertyRef Name="NeedArriveTime" />
+      <PropertyRef Name="StatusId" />
+      <PropertyRef Name="StatusName" />
+      <PropertyRef Name="CCId" />
+      <PropertyRef Name="CarrierType" />
+      <PropertyRef Name="CarrierId" />
+      <PropertyRef Name="CarrierNameEn" />
+      <PropertyRef Name="IsHazardous" />
+      <PropertyRef Name="BookingNumber" />
+      <PropertyRef Name="HouseBL" />
+      <PropertyRef Name="FromPortId" />
+      <PropertyRef Name="ToPortId" />
+      <PropertyRef Name="ShipperId" />
+      <PropertyRef Name="ConsigneeId" />
+    </Key>
+    <Property Name="OrderFrom" Type="Byte" Nullable="false" />
+    <Property Name="OperationCode" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="OperationDate" Type="DateTime" Precision="3" />
+    <Property Name="FromPort" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ToPort" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ShipperNameEn" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="ConsigneeNameEn" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="GrossWeight" Type="Decimal" Precision="18" Scale="3" />
+    <Property Name="NetWeight" Type="Decimal" Precision="18" Scale="3" />
+    <Property Name="GoodsDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="OperationId" Type="Int32" Nullable="false" />
+    <Property Name="NeedArriveDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="NeedArriveTime" Type="Time" Nullable="false" Precision="1" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="CreateBy" Type="String" MaxLength="128" Unicode="true" FixedLength="false" />
+    <Property Name="StatusId" Type="Byte" Nullable="false" />
+    <Property Name="StatusName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CCId" Type="Int32" Nullable="false" />
+    <Property Name="AssignToUserId" Type="String" MaxLength="128" Unicode="true" FixedLength="false" />
+    <Property Name="CarrierType" Type="Byte" Nullable="false" />
+    <Property Name="MBL" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="CarrierId" Type="Int32" Nullable="false" />
+    <Property Name="CarrierNameEn" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="DateOfDeparture" Type="DateTime" Precision="3" />
+    <Property Name="ArriveDate" Type="DateTime" Precision="3" />
+    <Property Name="IsHazardous" Type="Boolean" Nullable="false" />
+    <Property Name="FreeDays" Type="Byte" />
+    <Property Name="FlightNumber" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="VesselId" Type="Int32" />
+    <Property Name="VesselName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="BookingNumber" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="CBM" Type="Decimal" Precision="18" Scale="3" />
+    <Property Name="NumberOfPackages" Type="Int32" />
+    <Property Name="HouseBL" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="FromPortId" Type="Int32" Nullable="false" />
+    <Property Name="ToPortId" Type="Int32" Nullable="false" />
+    <Property Name="ShipperId" Type="Int32" Nullable="false" />
+    <Property Name="ConsigneeId" Type="Int32" Nullable="false" />
+    <Property Name="NotifierId" Type="Int32" />
+    <Property Name="AgentId" Type="Int32" />
+    <Property Name="Expr1" Type="DateTime" Precision="3" />
+    <Property Name="Expr2" Type="DateTime" Precision="3" />
+    <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="OperationCost">
+    <Key>
+      <PropertyRef Name="OperCostId" />
+      <PropertyRef Name="HouseBillId" />
+      <PropertyRef Name="OperCostLibId" />
+    </Key>
+    <Property Name="OperCostId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="HouseBillId" Type="Int32" Nullable="false" />
+    <Property Name="OperCostLibId" Type="Int32" Nullable="false" />
+    <Property Name="OperationId" Type="Int32" Nullable="false" />
+    <Property Name="OperationCostNet" Type="Decimal" Nullable="false" Precision="18" Scale="3" />
+    <Property Name="OperationCostSelling" Type="Decimal" Nullable="false" Precision="18" Scale="3" />
+    <Property Name="CurrencyId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="HouseBill" Relationship="OperationsModel.FK_OperationCost_HouseBill" FromRole="OperationCost" ToRole="HouseBill" />
+    <NavigationProperty Name="Operation" Relationship="OperationsModel.FK_OperationCost_Operation" FromRole="OperationCost" ToRole="Operation" />
+    <NavigationProperty Name="OperationCostLib" Relationship="OperationsModel.FK_OperationCost_OperationCostLib" FromRole="OperationCost" ToRole="OperationCostLib" />
+    <NavigationProperty Name="Currency" Relationship="OperationsModel.FK_OperationCost_Currency" FromRole="OperationCost" ToRole="Currency" />
+    <Property Name="IsAgentCost" Type="Boolean" Nullable="false" />
+    <Property Name="CurrencyIdSelling" Type="Int32" />
+    <NavigationProperty Name="Currency1" Relationship="OperationsModel.FK_OperationCost_CurrencySelling" FromRole="OperationCost" ToRole="CurrencyOper" />
+    <Property Name="IsAccounting" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="OperationCostLib">
+    <Key>
+      <PropertyRef Name="OperCostLibId" />
+    </Key>
+    <Property Name="OperCostLibId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OperCostNameEn" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="OperCostNameAr" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="OperationCosts" Relationship="OperationsModel.FK_OperationCost_OperationCostLib" FromRole="OperationCostLib" ToRole="OperationCost" />
+  </EntityType>
+  <Association Name="FK_OperationCost_HouseBill">
+    <End Type="OperationsModel.HouseBill" Role="HouseBill" Multiplicity="1" />
+    <End Type="OperationsModel.OperationCost" Role="OperationCost" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HouseBill">
+        <PropertyRef Name="HouseBillId" />
+      </Principal>
+      <Dependent Role="OperationCost">
+        <PropertyRef Name="HouseBillId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OperationCost_Operation">
+    <End Type="OperationsModel.Operation" Role="Operation" Multiplicity="1" />
+    <End Type="OperationsModel.OperationCost" Role="OperationCost" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Operation">
+        <PropertyRef Name="OperationId" />
+      </Principal>
+      <Dependent Role="OperationCost">
+        <PropertyRef Name="OperationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OperationCost_OperationCostLib">
+    <End Type="OperationsModel.OperationCostLib" Role="OperationCostLib" Multiplicity="1" />
+    <End Type="OperationsModel.OperationCost" Role="OperationCost" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OperationCostLib">
+        <PropertyRef Name="OperCostLibId" />
+      </Principal>
+      <Dependent Role="OperationCost">
+        <PropertyRef Name="OperCostLibId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="CurrencyOper">
+    <Key>
+      <PropertyRef Name="CurrencyId" />
+    </Key>
+    <Property Name="CurrencyId" Type="Int32" Nullable="false" />
+    <Property Name="CurrencySign" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="CurrencyName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="CustomClearanceDetails" Relationship="OperationsModel.FK_CustomClearanceDetail_Currency" FromRole="Currency" ToRole="CustomClearanceDetail" />
+    <NavigationProperty Name="HouseBills" Relationship="OperationsModel.FK_HouseBill_Currency" FromRole="Currency" ToRole="HouseBill" />
+    <NavigationProperty Name="HouseBills1" Relationship="OperationsModel.FK_HouseBill_Currency1" FromRole="Currency" ToRole="HouseBill" />
+    <NavigationProperty Name="Operations" Relationship="OperationsModel.FK_Operation_Currency" FromRole="Currency" ToRole="Operation" />
+    <NavigationProperty Name="Operations1" Relationship="OperationsModel.FK_Operation_Currency1" FromRole="Currency" ToRole="Operation" />
+    <NavigationProperty Name="OperationCosts" Relationship="OperationsModel.FK_OperationCost_Currency" FromRole="Currency" ToRole="OperationCost" />
+    <NavigationProperty Name="Quotations" Relationship="OperationsModel.FK_Quotation_Currency" FromRole="Currency" ToRole="Quotation" />
+    <NavigationProperty Name="Quotations1" Relationship="OperationsModel.FK_Quotation_Currency1" FromRole="Currency" ToRole="Quotation" />
+    <NavigationProperty Name="Quotations2" Relationship="OperationsModel.FK_Quotation_Currency2" FromRole="Currency" ToRole="Quotation" />
+    <NavigationProperty Name="Quotations3" Relationship="OperationsModel.FK_Quotation_Currency3" FromRole="Currency" ToRole="Quotation" />
+    <NavigationProperty Name="Operations2" Relationship="OperationsModel.FK_Operation_Currency2" FromRole="CurrencyOper" ToRole="Operation" />
+    <Property Name="AccountId" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="OperationCosts1" Relationship="OperationsModel.FK_OperationCost_CurrencySelling" FromRole="CurrencyOper" ToRole="OperationCost" />
+  </EntityType>
+  <Association Name="FK_CustomClearanceDetail_Currency">
+    <End Type="OperationsModel.CurrencyOper" Role="Currency" Multiplicity="1" />
+    <End Type="OperationsModel.CustomClearanceDetail" Role="CustomClearanceDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Currency">
+        <PropertyRef Name="CurrencyId" />
+      </Principal>
+      <Dependent Role="CustomClearanceDetail">
+        <PropertyRef Name="CurrencyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_HouseBill_Currency">
+    <End Type="OperationsModel.CurrencyOper" Role="Currency" Multiplicity="0..1" />
+    <End Type="OperationsModel.HouseBill" Role="HouseBill" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Currency">
+        <PropertyRef Name="CurrencyId" />
+      </Principal>
+      <Dependent Role="HouseBill">
+        <PropertyRef Name="ThcCurrencyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_HouseBill_Currency1">
+    <End Type="OperationsModel.CurrencyOper" Role="Currency" Multiplicity="0..1" />
+    <End Type="OperationsModel.HouseBill" Role="HouseBill" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Currency">
+        <PropertyRef Name="CurrencyId" />
+      </Principal>
+      <Dependent Role="HouseBill">
+        <PropertyRef Name="FreighCurrencyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Operation_Currency">
+    <End Type="OperationsModel.CurrencyOper" Role="Currency" Multiplicity="0..1" />
+    <End Type="OperationsModel.Operation" Role="Operation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Currency">
+        <PropertyRef Name="CurrencyId" />
+      </Principal>
+      <Dependent Role="Operation">
+        <PropertyRef Name="FreighCurrencyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Operation_Currency1">
+    <End Type="OperationsModel.CurrencyOper" Role="Currency" Multiplicity="0..1" />
+    <End Type="OperationsModel.Operation" Role="Operation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Currency">
+        <PropertyRef Name="CurrencyId" />
+      </Principal>
+      <Dependent Role="Operation">
+        <PropertyRef Name="ThcCurrencyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OperationCost_Currency">
+    <End Type="OperationsModel.CurrencyOper" Role="Currency" Multiplicity="1" />
+    <End Type="OperationsModel.OperationCost" Role="OperationCost" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Currency">
+        <PropertyRef Name="CurrencyId" />
+      </Principal>
+      <Dependent Role="OperationCost">
+        <PropertyRef Name="CurrencyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Quotation_Currency">
+    <End Type="OperationsModel.CurrencyOper" Role="Currency" Multiplicity="0..1" />
+    <End Type="OperationsModel.Quotation" Role="Quotation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Currency">
+        <PropertyRef Name="CurrencyId" />
+      </Principal>
+      <Dependent Role="Quotation">
+        <PropertyRef Name="ThcCurrencyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Quotation_Currency1">
+    <End Type="OperationsModel.CurrencyOper" Role="Currency" Multiplicity="0..1" />
+    <End Type="OperationsModel.Quotation" Role="Quotation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Currency">
+        <PropertyRef Name="CurrencyId" />
+      </Principal>
+      <Dependent Role="Quotation">
+        <PropertyRef Name="FreighCurrencyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Quotation_Currency2">
+    <End Type="OperationsModel.CurrencyOper" Role="Currency" Multiplicity="0..1" />
+    <End Type="OperationsModel.Quotation" Role="Quotation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Currency">
+        <PropertyRef Name="CurrencyId" />
+      </Principal>
+      <Dependent Role="Quotation">
+        <PropertyRef Name="TruckingCurrencyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Quotation_Currency3">
+    <End Type="OperationsModel.CurrencyOper" Role="Currency" Multiplicity="0..1" />
+    <End Type="OperationsModel.Quotation" Role="Quotation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Currency">
+        <PropertyRef Name="CurrencyId" />
+      </Principal>
+      <Dependent Role="Quotation">
+        <PropertyRef Name="CusClearanceCurrencyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Operation_Currency2">
+    <End Type="OperationsModel.CurrencyOper" Role="CurrencyOper" Multiplicity="0..1" />
+    <End Type="OperationsModel.Operation" Role="Operation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CurrencyOper">
+        <PropertyRef Name="CurrencyId" />
+      </Principal>
+      <Dependent Role="Operation">
+        <PropertyRef Name="FixedCostCurrencyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="CustomClearanceCostLib">
+    <Key>
+      <PropertyRef Name="CCCostId" />
+    </Key>
+    <Property Name="CCCostId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CostNameEn" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CostNameAr" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="CustomClearanceDetails" Relationship="OperationsModel.FK_CustomClearanceDetail_CustomClearanceCostLib" FromRole="CustomClearanceCostLib" ToRole="CustomClearanceDetail" />
+  </EntityType>
+  <Association Name="FK_CustomClearanceDetail_CustomClearanceCostLib">
+    <End Type="OperationsModel.CustomClearanceCostLib" Role="CustomClearanceCostLib" Multiplicity="1" />
+    <End Type="OperationsModel.CustomClearanceDetail" Role="CustomClearanceDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CustomClearanceCostLib">
+        <PropertyRef Name="CCCostId" />
+      </Principal>
+      <Dependent Role="CustomClearanceDetail">
+        <PropertyRef Name="CCCostId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OperationCost_CurrencySelling">
+    <End Type="OperationsModel.CurrencyOper" Role="CurrencyOper" Multiplicity="0..1" />
+    <End Type="OperationsModel.OperationCost" Role="OperationCost" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CurrencyOper">
+        <PropertyRef Name="CurrencyId" />
+      </Principal>
+      <Dependent Role="OperationCost">
+        <PropertyRef Name="CurrencyIdSelling" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <ComplexType Name="GetContractorRate_Result1">
+    <Property Type="Int32" Name="ContractorRateId" Nullable="false" />
+    <Property Type="Int32" Name="ContractorId" Nullable="false" />
+    <Property Type="Int32" Name="FromAreaId" Nullable="false" />
+    <Property Type="Int32" Name="ToAreaId" Nullable="false" />
+    <Property Type="Int32" Name="FromCityId" Nullable="false" />
+    <Property Type="Int32" Name="ToCityId" Nullable="false" />
+    <Property Type="Int32" Name="ContainerTypeId" Nullable="false" />
+    <Property Type="Decimal" Name="CostAmount" Nullable="false" Precision="18" Scale="3" />
+    <Property Type="Int32" Name="CurrencyId" Nullable="false" />
+    <Property Type="Boolean" Name="IsValid" Nullable="true" />
+    <Property Type="Boolean" Name="ValidToChecked" Nullable="true" />
+    <Property Type="DateTime" Name="ValidToDate" Nullable="true" />
+    <Property Type="String" Name="FromAreaName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="ToAreaName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="FromCityName" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="ToCityName" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="ContainerTypeName" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="CurrencySign" Nullable="false" MaxLength="10" />
+    <Property Type="String" Name="ContractorName" Nullable="false" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="GetOperationStatistics_Result">
+    <Property Type="Int32" Name="NewAir" Nullable="true" />
+    <Property Type="Decimal" Name="NewAirNet" Nullable="true" Precision="38" Scale="3" />
+    <Property Type="Decimal" Name="NewAirCBM" Nullable="true" Precision="38" Scale="3" />
+    <Property Type="Int32" Name="NewSea" Nullable="true" />
+    <Property Type="Decimal" Name="NewSeaNet" Nullable="true" Precision="38" Scale="3" />
+    <Property Type="Decimal" Name="NewSeaCBM" Nullable="true" Precision="38" Scale="3" />
+    <Property Type="Int32" Name="OpenAir" Nullable="true" />
+    <Property Type="Decimal" Name="OpenAirNet" Nullable="true" Precision="38" Scale="3" />
+    <Property Type="Decimal" Name="OpenAirCBM" Nullable="true" Precision="38" Scale="3" />
+    <Property Type="Int32" Name="OpenSea" Nullable="true" />
+    <Property Type="Decimal" Name="OpenSeaNet" Nullable="true" Precision="38" Scale="3" />
+    <Property Type="Decimal" Name="OpenSeaCBM" Nullable="true" Precision="38" Scale="3" />
+    <Property Type="Int32" Name="ClosedAir" Nullable="true" />
+    <Property Type="Decimal" Name="ClosedAirNet" Nullable="true" Precision="38" Scale="3" />
+    <Property Type="Decimal" Name="ClosedAirCBM" Nullable="true" Precision="38" Scale="3" />
+    <Property Type="Int32" Name="ClosedSea" Nullable="true" />
+    <Property Type="Decimal" Name="ClosedSeaNet" Nullable="true" Precision="38" Scale="3" />
+    <Property Type="Decimal" Name="ClosedSeaCBM" Nullable="true" Precision="38" Scale="3" />
+    <Property Type="Int32" Name="InvoiceAir" Nullable="true" />
+    <Property Type="Decimal" Name="InvoiceAirNet" Nullable="true" Precision="38" Scale="3" />
+    <Property Type="Decimal" Name="InvoiceAirCBM" Nullable="true" Precision="38" Scale="3" />
+    <Property Type="Int32" Name="InvoiceSea" Nullable="true" />
+    <Property Type="Decimal" Name="InvoiceSeaNet" Nullable="true" Precision="38" Scale="3" />
+    <Property Type="Decimal" Name="InvoiceSeaCBM" Nullable="true" Precision="38" Scale="3" />
+    <Property Type="Int32" Name="QuotNewAir" Nullable="true" />
+    <Property Type="Int32" Name="QuotNewSea" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="GetContractorRate_Result">
+    <Property Type="Int32" Name="ContractorRateId" Nullable="false" />
+    <Property Type="Int32" Name="ContractorId" Nullable="false" />
+    <Property Type="Int32" Name="FromAreaId" Nullable="false" />
+    <Property Type="Int32" Name="ToAreaId" Nullable="false" />
+    <Property Type="Int32" Name="FromCityId" Nullable="false" />
+    <Property Type="Int32" Name="ToCityId" Nullable="false" />
+    <Property Type="Int32" Name="ContainerTypeId" Nullable="false" />
+    <Property Type="Decimal" Name="CostAmount" Nullable="false" Precision="18" Scale="3" />
+    <Property Type="Int32" Name="CurrencyId" Nullable="false" />
+    <Property Type="Boolean" Name="IsValid" Nullable="true" />
+    <Property Type="Boolean" Name="ValidToChecked" Nullable="true" />
+    <Property Type="DateTime" Name="ValidToDate" Nullable="true" />
+    <Property Type="String" Name="FromAreaName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="ToAreaName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="FromCityName" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="ToCityName" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="ContainerTypeName" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="CurrencySign" Nullable="false" MaxLength="10" />
+    <Property Type="String" Name="ContractorName" Nullable="false" MaxLength="50" />
+  </ComplexType>
+  <EntityType Name="StatusLibOper">
+    <Key>
+      <PropertyRef Name="StatusId" />
+    </Key>
+    <Property Name="StatusId" Type="Byte" Nullable="false" />
+    <Property Name="StatusName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="HouseBills" Relationship="OperationsModel.FK_HouseBill_StatusLib" FromRole="StatusLib" ToRole="HouseBill" />
+    <NavigationProperty Name="Operations" Relationship="OperationsModel.FK_Operation_StatusLib" FromRole="StatusLib" ToRole="Operation" />
+    <NavigationProperty Name="Quotations" Relationship="OperationsModel.FK_Quotation_StatusLib" FromRole="StatusLib" ToRole="Quotation" />
+  </EntityType>
+  <Association Name="FK_HouseBill_StatusLib">
+    <End Type="OperationsModel.StatusLibOper" Role="StatusLib" Multiplicity="1" />
+    <End Type="OperationsModel.HouseBill" Role="HouseBill" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StatusLib">
+        <PropertyRef Name="StatusId" />
+      </Principal>
+      <Dependent Role="HouseBill">
+        <PropertyRef Name="StatusId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Operation_StatusLib">
+    <End Type="OperationsModel.StatusLibOper" Role="StatusLib" Multiplicity="1" />
+    <End Type="OperationsModel.Operation" Role="Operation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StatusLib">
+        <PropertyRef Name="StatusId" />
+      </Principal>
+      <Dependent Role="Operation">
+        <PropertyRef Name="StatusId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Quotation_StatusLib">
+    <End Type="OperationsModel.StatusLibOper" Role="StatusLib" Multiplicity="1" />
+    <End Type="OperationsModel.Quotation" Role="Quotation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StatusLib">
+        <PropertyRef Name="StatusId" />
+      </Principal>
+      <Dependent Role="Quotation">
+        <PropertyRef Name="StatusId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

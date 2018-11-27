@@ -1,0 +1,2108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="AccountingModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="AccountingChart">
+    <Key>
+      <PropertyRef Name="AccountId" />
+    </Key>
+    <Property Name="AccountId" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ParentAccountId" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="AccountNameEn" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="AccountNameAr" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="AccountingChart1" Relationship="Self.FK_AccountingChart_AccountingChart" FromRole="AccountingChart" ToRole="AccountingChart1" />
+    <NavigationProperty Name="AccountingChart2" Relationship="Self.FK_AccountingChart_AccountingChart" FromRole="AccountingChart1" ToRole="AccountingChart" />
+    <NavigationProperty Name="AccTransactionDetails" Relationship="AccountingModel.FK_AccTransactionDetail_AccountingChart" FromRole="AccountingChart" ToRole="AccTransactionDetail" />
+  </EntityType>
+  <EntityType Name="ConsigneeAcc">
+    <Key>
+      <PropertyRef Name="ConsigneeId" />
+    </Key>
+    <Property Name="ConsigneeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ConsigneeCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ConsigneeNameEn" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ConsigneeNameAr" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="ConsigneeAddressEn" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="ConsigneeAddressAr" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="CountryId" Type="Int32" />
+    <Property Name="CityId" Type="Int32" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="WebSite" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="FaxNumber" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="HouseBills" Relationship="Self.FK_HouseBill_Consignee" FromRole="Consignee" ToRole="HouseBill" />
+    <NavigationProperty Name="Invoices" Relationship="AccountingModel.FK_Invoice_Consignee" FromRole="ConsigneeAcc" ToRole="Invoice" />
+    <NavigationProperty Name="AgentNotes" Relationship="AccountingModel.FK_AgentNote_Consignee" FromRole="ConsigneeAcc" ToRole="AgentNote" />
+    <Property Name="AccountId" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="CashInReceipts" Relationship="AccountingModel.FK_CashInReceipt_Consignee" FromRole="ConsigneeAcc" ToRole="CashInReceipt" />
+    <Property Name="TaxDepositAccountId" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="VatTaxAccountId" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="ArCashDeposits" Relationship="AccountingModel.FK_ArCashDeposit_Consignee" FromRole="ConsigneeAcc" ToRole="ArCashDeposit" />
+    <NavigationProperty Name="ArCashDepositBalances" Relationship="AccountingModel.FK_ArCashDepositBalance_Consignee" FromRole="ConsigneeAcc" ToRole="ArCashDepositBalance" />
+  </EntityType>
+  <EntityType Name="CurrencyAcc">
+    <Key>
+      <PropertyRef Name="CurrencyId" />
+    </Key>
+    <Property Name="CurrencyId" Type="Int32" Nullable="false" />
+    <Property Name="CurrencySign" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CurrencyName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="HouseBills" Relationship="Self.FK_HouseBill_Currency" FromRole="Currency" ToRole="HouseBill" />
+    <NavigationProperty Name="HouseBills1" Relationship="Self.FK_HouseBill_Currency1" FromRole="Currency" ToRole="HouseBill" />
+    <NavigationProperty Name="BankAccounts" Relationship="AccountingModel.FK_BankAccount_Currency" FromRole="CurrencyAcc" ToRole="BankAccount" />
+    <NavigationProperty Name="AccTransactionDetails" Relationship="AccountingModel.FK_AccTransactionDetail_Currency" FromRole="CurrencyAcc" ToRole="AccTransactionDetail" />
+    <NavigationProperty Name="InvoiceTotals" Relationship="AccountingModel.FK_InvoiceTotal_Currency" FromRole="CurrencyAcc" ToRole="InvoiceTotal" />
+    <NavigationProperty Name="Invoices" Relationship="AccountingModel.FK_Invoice_Currency" FromRole="CurrencyAcc" ToRole="Invoice" />
+    <NavigationProperty Name="InvoiceDetails" Relationship="AccountingModel.FK_InvoiceDetailInvCurr_Currency" FromRole="CurrencyAcc" ToRole="InvoiceDetail" />
+    <NavigationProperty Name="InvoiceDetails1" Relationship="AccountingModel.FK_InvoiceDetailMainCurrency_Currency" FromRole="CurrencyAcc" ToRole="InvoiceDetail" />
+    <Property Name="AccountId" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="CashInReceipts" Relationship="AccountingModel.FK_CashInReceipt_Currency" FromRole="CurrencyAcc" ToRole="CashInReceipt" />
+    <NavigationProperty Name="InvoiceTotalAPs" Relationship="AccountingModel.FK_InvoiceTotalAP_Currency" FromRole="CurrencyAcc" ToRole="InvoiceTotalAP" />
+    <NavigationProperty Name="CashOutReceipts" Relationship="AccountingModel.FK_CashOutReceipt_Currency" FromRole="CurrencyAcc" ToRole="CashOutReceipt" />
+    <NavigationProperty Name="InvoiceAPs" Relationship="AccountingModel.FK_InvoiceAP_Currency" FromRole="CurrencyAcc" ToRole="InvoiceAP" />
+    <NavigationProperty Name="InvoiceDetailAPs" Relationship="AccountingModel.FK_InvoiceDetailAP_Currency" FromRole="CurrencyAcc" ToRole="InvoiceDetailAP" />
+    <NavigationProperty Name="InvoiceDetailAPs1" Relationship="AccountingModel.FK_InvoiceDetailAP_Currency1" FromRole="CurrencyAcc" ToRole="InvoiceDetailAP" />
+    <NavigationProperty Name="ArCashDeposits" Relationship="AccountingModel.FK_ArCashDeposit_Currency" FromRole="CurrencyAcc" ToRole="ArCashDeposit" />
+    <NavigationProperty Name="ArCashDepositBalances" Relationship="AccountingModel.FK_ArCashDepositBalance_Currency" FromRole="CurrencyAcc" ToRole="ArCashDepositBalance" />
+  </EntityType>
+  <EntityType Name="HouseBillAcc">
+    <Key>
+      <PropertyRef Name="HouseBillId" />
+    </Key>
+    <Property Name="HouseBillId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OrderFrom" Type="Byte" Nullable="false" />
+    <Property Name="OperationId" Type="Int32" Nullable="false" />
+    <Property Name="OperationCode" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="OperationDate" Type="DateTime" Precision="3" />
+    <Property Name="HouseBL" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="FromPortId" Type="Int32" Nullable="false" />
+    <Property Name="ToPortId" Type="Int32" Nullable="false" />
+    <Property Name="ShipperId" Type="Int32" Nullable="false" />
+    <Property Name="ConsigneeId" Type="Int32" Nullable="false" />
+    <Property Name="NotifierId" Type="Int32" />
+    <Property Name="NotifierAsConsignee" Type="Boolean" />
+    <Property Name="DeliveryType" Type="Byte" Nullable="false" />
+    <Property Name="AgentId" Type="Int32" />
+    <Property Name="GrossWeight" Type="Decimal" Precision="18" Scale="3" />
+    <Property Name="NetWeight" Type="Decimal" Precision="18" Scale="3" />
+    <Property Name="CBM" Type="Decimal" Precision="18" Scale="3" />
+    <Property Name="NumberOfPackages" Type="Int32" />
+    <Property Name="PackageTypeId" Type="Int32" />
+    <Property Name="IsPrepaid" Type="Boolean" />
+    <Property Name="CollectedFreightCost" Type="Decimal" Precision="18" Scale="3" />
+    <Property Name="FreighCurrencyId" Type="Int32" />
+    <Property Name="CollectedThcCost" Type="Decimal" Precision="18" Scale="3" />
+    <Property Name="ThcCurrencyId" Type="Int32" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreateBy" Type="String" MaxLength="128" Unicode="true" FixedLength="false" />
+    <Property Name="GoodsDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Marks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="StatusId" Type="Byte" Nullable="false" />
+    <Property Name="BookingNumber" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Consignee" Relationship="Self.FK_HouseBill_Consignee" FromRole="HouseBill" ToRole="Consignee" />
+    <NavigationProperty Name="Currency" Relationship="Self.FK_HouseBill_Currency" FromRole="HouseBill" ToRole="Currency" />
+    <NavigationProperty Name="Currency1" Relationship="Self.FK_HouseBill_Currency1" FromRole="HouseBill" ToRole="Currency" />
+    <NavigationProperty Name="Shipper" Relationship="Self.FK_HouseBill_Shipper" FromRole="HouseBill" ToRole="Shipper" />
+    <NavigationProperty Name="Invoices" Relationship="AccountingModel.FK_Invoice_HouseBill" FromRole="HouseBillAcc" ToRole="Invoice" />
+    <NavigationProperty Name="InvoiceAPs" Relationship="AccountingModel.FK_InvoiceAP_HouseBill" FromRole="HouseBillAcc" ToRole="InvoiceAP" />
+    <Property Name="IsHazardous" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="ShipperAcc">
+    <Key>
+      <PropertyRef Name="ShipperId" />
+    </Key>
+    <Property Name="ShipperId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ShipperCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ShipperNameEn" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ShipperNameAr" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="ShipperAddressEn" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="ShipperAddressAr" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="CountryId" Type="Int32" />
+    <Property Name="CityId" Type="Int32" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="WebSite" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="FaxNumber" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="HouseBills" Relationship="Self.FK_HouseBill_Shipper" FromRole="Shipper" ToRole="HouseBill" />
+    <Property Name="AccountId" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Invoices" Relationship="AccountingModel.FK_Invoice_Shipper" FromRole="ShipperAcc" ToRole="Invoice" />
+    <NavigationProperty Name="AgentNotes" Relationship="AccountingModel.FK_AgentNote_Shipper" FromRole="ShipperAcc" ToRole="AgentNote" />
+    <NavigationProperty Name="CashInReceipts" Relationship="AccountingModel.FK_CashInReceipt_Shipper" FromRole="ShipperAcc" ToRole="CashInReceipt" />
+    <Property Name="TaxDepositAccountId" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="VatTaxAccountId" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="ArCashDeposits" Relationship="AccountingModel.FK_ArCashDeposit_Shipper" FromRole="ShipperAcc" ToRole="ArCashDeposit" />
+    <NavigationProperty Name="ArCashDepositBalances" Relationship="AccountingModel.FK_ArCashDepositBalance_Shipper" FromRole="ShipperAcc" ToRole="ArCashDepositBalance" />
+  </EntityType>
+  <Association Name="FK_AccountingChart_AccountingChart">
+    <End Role="AccountingChart" Type="Self.AccountingChart" Multiplicity="0..1" />
+    <End Role="AccountingChart1" Type="Self.AccountingChart" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AccountingChart">
+        <PropertyRef Name="AccountId" />
+      </Principal>
+      <Dependent Role="AccountingChart1">
+        <PropertyRef Name="ParentAccountId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_HouseBill_Consignee">
+    <End Role="Consignee" Type="AccountingModel.ConsigneeAcc" Multiplicity="1" />
+    <End Role="HouseBill" Type="AccountingModel.HouseBillAcc" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Consignee">
+        <PropertyRef Name="ConsigneeId" />
+      </Principal>
+      <Dependent Role="HouseBill">
+        <PropertyRef Name="ConsigneeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_HouseBill_Currency">
+    <End Role="Currency" Type="AccountingModel.CurrencyAcc" Multiplicity="0..1" />
+    <End Role="HouseBill" Type="AccountingModel.HouseBillAcc" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Currency">
+        <PropertyRef Name="CurrencyId" />
+      </Principal>
+      <Dependent Role="HouseBill">
+        <PropertyRef Name="ThcCurrencyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_HouseBill_Currency1">
+    <End Role="Currency" Type="AccountingModel.CurrencyAcc" Multiplicity="0..1" />
+    <End Role="HouseBill" Type="AccountingModel.HouseBillAcc" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Currency">
+        <PropertyRef Name="CurrencyId" />
+      </Principal>
+      <Dependent Role="HouseBill">
+        <PropertyRef Name="FreighCurrencyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_HouseBill_Shipper">
+    <End Role="Shipper" Type="AccountingModel.ShipperAcc" Multiplicity="1" />
+    <End Role="HouseBill" Type="AccountingModel.HouseBillAcc" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Shipper">
+        <PropertyRef Name="ShipperId" />
+      </Principal>
+      <Dependent Role="HouseBill">
+        <PropertyRef Name="ShipperId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="AccountingEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="AccountingCharts" EntityType="Self.AccountingChart" />
+    <EntitySet Name="ConsigneeAccs" EntityType="AccountingModel.ConsigneeAcc" />
+    <EntitySet Name="CurrencyAccs" EntityType="AccountingModel.CurrencyAcc" />
+    <EntitySet Name="HouseBillAccs" EntityType="AccountingModel.HouseBillAcc" />
+    <EntitySet Name="ShipperAccs" EntityType="AccountingModel.ShipperAcc" />
+    <AssociationSet Name="FK_AccountingChart_AccountingChart" Association="Self.FK_AccountingChart_AccountingChart">
+      <End Role="AccountingChart" EntitySet="AccountingCharts" />
+      <End Role="AccountingChart1" EntitySet="AccountingCharts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HouseBill_Consignee" Association="Self.FK_HouseBill_Consignee">
+      <End Role="Consignee" EntitySet="ConsigneeAccs" />
+      <End Role="HouseBill" EntitySet="HouseBillAccs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HouseBill_Currency" Association="Self.FK_HouseBill_Currency">
+      <End Role="Currency" EntitySet="CurrencyAccs" />
+      <End Role="HouseBill" EntitySet="HouseBillAccs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HouseBill_Currency1" Association="Self.FK_HouseBill_Currency1">
+      <End Role="Currency" EntitySet="CurrencyAccs" />
+      <End Role="HouseBill" EntitySet="HouseBillAccs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HouseBill_Shipper" Association="Self.FK_HouseBill_Shipper">
+      <End Role="Shipper" EntitySet="ShipperAccs" />
+      <End Role="HouseBill" EntitySet="HouseBillAccs" />
+    </AssociationSet>
+    <EntitySet Name="PaymentTerms" EntityType="AccountingModel.PaymentTerm" />
+    <EntitySet Name="Invoices" EntityType="AccountingModel.Invoice" />
+    <AssociationSet Name="FK_Invoice_Consignee" Association="AccountingModel.FK_Invoice_Consignee">
+      <End Role="ConsigneeAcc" EntitySet="ConsigneeAccs" />
+      <End Role="Invoice" EntitySet="Invoices" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Invoice_HouseBill" Association="AccountingModel.FK_Invoice_HouseBill">
+      <End Role="HouseBillAcc" EntitySet="HouseBillAccs" />
+      <End Role="Invoice" EntitySet="Invoices" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Invoice_PaymentTerm" Association="AccountingModel.FK_Invoice_PaymentTerm">
+      <End Role="PaymentTerm" EntitySet="PaymentTerms" />
+      <End Role="Invoice" EntitySet="Invoices" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Invoice_Shipper" Association="AccountingModel.FK_Invoice_Shipper">
+      <End Role="ShipperAcc" EntitySet="ShipperAccs" />
+      <End Role="Invoice" EntitySet="Invoices" />
+    </AssociationSet>
+    <EntitySet Name="Banks" EntityType="AccountingModel.Bank" />
+    <EntitySet Name="BankAccounts" EntityType="AccountingModel.BankAccount" />
+    <AssociationSet Name="FK_BankAccount_Bank" Association="AccountingModel.FK_BankAccount_Bank">
+      <End Role="Bank" EntitySet="Banks" />
+      <End Role="BankAccount" EntitySet="BankAccounts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BankAccount_Currency" Association="AccountingModel.FK_BankAccount_Currency">
+      <End Role="CurrencyAcc" EntitySet="CurrencyAccs" />
+      <End Role="BankAccount" EntitySet="BankAccounts" />
+    </AssociationSet>
+    <EntitySet Name="AgentNotes" EntityType="AccountingModel.AgentNote" />
+    <AssociationSet Name="FK_AgentNote_BankAccount" Association="AccountingModel.FK_AgentNote_BankAccount">
+      <End Role="BankAccount" EntitySet="BankAccounts" />
+      <End Role="AgentNote" EntitySet="AgentNotes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AgentNote_Consignee" Association="AccountingModel.FK_AgentNote_Consignee">
+      <End Role="ConsigneeAcc" EntitySet="ConsigneeAccs" />
+      <End Role="AgentNote" EntitySet="AgentNotes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AgentNote_Shipper" Association="AccountingModel.FK_AgentNote_Shipper">
+      <End Role="ShipperAcc" EntitySet="ShipperAccs" />
+      <End Role="AgentNote" EntitySet="AgentNotes" />
+    </AssociationSet>
+    <EntitySet Name="AccTransactions" EntityType="AccountingModel.AccTransaction" />
+    <EntitySet Name="AccTransactionDetails" EntityType="AccountingModel.AccTransactionDetail" />
+    <AssociationSet Name="FK_AccTransactionDetail_AccountingChart" Association="AccountingModel.FK_AccTransactionDetail_AccountingChart">
+      <End Role="AccountingChart" EntitySet="AccountingCharts" />
+      <End Role="AccTransactionDetail" EntitySet="AccTransactionDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AccTransactionDetail_AccTransaction" Association="AccountingModel.FK_AccTransactionDetail_AccTransaction">
+      <End Role="AccTransaction" EntitySet="AccTransactions" />
+      <End Role="AccTransactionDetail" EntitySet="AccTransactionDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AccTransactionDetail_Currency" Association="AccountingModel.FK_AccTransactionDetail_Currency">
+      <End Role="CurrencyAcc" EntitySet="CurrencyAccs" />
+      <End Role="AccTransactionDetail" EntitySet="AccTransactionDetails" />
+    </AssociationSet>
+    <EntitySet Name="InvStatusLibs" EntityType="AccountingModel.InvStatusLib" />
+    <AssociationSet Name="FK_AgentNote_InvStatusLib" Association="AccountingModel.FK_AgentNote_InvStatusLib">
+      <End Role="InvStatusLib" EntitySet="InvStatusLibs" />
+      <End Role="AgentNote" EntitySet="AgentNotes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Invoice_InvStatusLib" Association="AccountingModel.FK_Invoice_InvStatusLib">
+      <End Role="InvStatusLib" EntitySet="InvStatusLibs" />
+      <End Role="Invoice" EntitySet="Invoices" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Invoice_AccTransaction" Association="AccountingModel.FK_Invoice_AccTransaction">
+      <End Role="AccTransaction" EntitySet="AccTransactions" />
+      <End Role="Invoice" EntitySet="Invoices" />
+    </AssociationSet>
+    <EntitySet Name="InvoiceTotals" EntityType="AccountingModel.InvoiceTotal" />
+    <AssociationSet Name="FK_InvoiceTotal_Currency" Association="AccountingModel.FK_InvoiceTotal_Currency">
+      <End Role="CurrencyAcc" EntitySet="CurrencyAccs" />
+      <End Role="InvoiceTotal" EntitySet="InvoiceTotals" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InvoiceTotal_Invoice" Association="AccountingModel.FK_InvoiceTotal_Invoice">
+      <End Role="Invoice" EntitySet="Invoices" />
+      <End Role="InvoiceTotal" EntitySet="InvoiceTotals" />
+    </AssociationSet>
+    <EntitySet Name="InvoiceDetails" EntityType="AccountingModel.InvoiceDetail" />
+    <AssociationSet Name="FK_Invoice_Currency" Association="AccountingModel.FK_Invoice_Currency">
+      <End Role="CurrencyAcc" EntitySet="CurrencyAccs" />
+      <End Role="Invoice" EntitySet="Invoices" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InvoiceDetail_Invoice" Association="AccountingModel.FK_InvoiceDetail_Invoice">
+      <End Role="Invoice" EntitySet="Invoices" />
+      <End Role="InvoiceDetail" EntitySet="InvoiceDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InvoiceDetailInvCurr_Currency" Association="AccountingModel.FK_InvoiceDetailInvCurr_Currency">
+      <End Role="CurrencyAcc" EntitySet="CurrencyAccs" />
+      <End Role="InvoiceDetail" EntitySet="InvoiceDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InvoiceDetailMainCurrency_Currency" Association="AccountingModel.FK_InvoiceDetailMainCurrency_Currency">
+      <End Role="CurrencyAcc" EntitySet="CurrencyAccs" />
+      <End Role="InvoiceDetail" EntitySet="InvoiceDetails" />
+    </AssociationSet>
+    <EntitySet Name="CashInReceipts" EntityType="AccountingModel.CashInReceipt" />
+    <EntitySet Name="CashInReceiptInvs" EntityType="AccountingModel.CashInReceiptInv" />
+    <AssociationSet Name="FK_CashInReceipt_AccTransaction" Association="AccountingModel.FK_CashInReceipt_AccTransaction">
+      <End Role="AccTransaction" EntitySet="AccTransactions" />
+      <End Role="CashInReceipt" EntitySet="CashInReceipts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CashInReceipt_Bank" Association="AccountingModel.FK_CashInReceipt_Bank">
+      <End Role="Bank" EntitySet="Banks" />
+      <End Role="CashInReceipt" EntitySet="CashInReceipts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CashInReceipt_BankAccount" Association="AccountingModel.FK_CashInReceipt_BankAccount">
+      <End Role="BankAccount" EntitySet="BankAccounts" />
+      <End Role="CashInReceipt" EntitySet="CashInReceipts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CashInReceipt_Consignee" Association="AccountingModel.FK_CashInReceipt_Consignee">
+      <End Role="ConsigneeAcc" EntitySet="ConsigneeAccs" />
+      <End Role="CashInReceipt" EntitySet="CashInReceipts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CashInReceipt_Currency" Association="AccountingModel.FK_CashInReceipt_Currency">
+      <End Role="CurrencyAcc" EntitySet="CurrencyAccs" />
+      <End Role="CashInReceipt" EntitySet="CashInReceipts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CashInReceipt_PaymentTerm" Association="AccountingModel.FK_CashInReceipt_PaymentTerm">
+      <End Role="PaymentTerm" EntitySet="PaymentTerms" />
+      <End Role="CashInReceipt" EntitySet="CashInReceipts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CashInReceipt_Shipper" Association="AccountingModel.FK_CashInReceipt_Shipper">
+      <End Role="ShipperAcc" EntitySet="ShipperAccs" />
+      <End Role="CashInReceipt" EntitySet="CashInReceipts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CashInReceiptInv_CashInReceipt" Association="AccountingModel.FK_CashInReceiptInv_CashInReceipt">
+      <End Role="CashInReceipt" EntitySet="CashInReceipts" />
+      <End Role="CashInReceiptInv" EntitySet="CashInReceiptInvs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CashInReceiptInv_Invoice" Association="AccountingModel.FK_CashInReceiptInv_Invoice">
+      <End Role="Invoice" EntitySet="Invoices" />
+      <End Role="CashInReceiptInv" EntitySet="CashInReceiptInvs" />
+    </AssociationSet>
+    <EntitySet Name="CashInReceiptChecks" EntityType="AccountingModel.CashInReceiptCheck" />
+    <AssociationSet Name="FK_CashInReceiptCheck_CashInReceipt" Association="AccountingModel.FK_CashInReceiptCheck_CashInReceipt">
+      <End Role="CashInReceipt" EntitySet="CashInReceipts" />
+      <End Role="CashInReceiptCheck" EntitySet="CashInReceiptChecks" />
+    </AssociationSet>
+    <EntitySet Name="AgentNoteDetails" EntityType="AccountingModel.AgentNoteDetail" />
+    <AssociationSet Name="FK_AgentNoteDetail_AgentNote" Association="AccountingModel.FK_AgentNoteDetail_AgentNote">
+      <End Role="AgentNote" EntitySet="AgentNotes" />
+      <End Role="AgentNoteDetail" EntitySet="AgentNoteDetails" />
+    </AssociationSet>
+    <EntitySet Name="AgentNoteViews" EntityType="AccountingModel.AgentNoteView" />
+    <EntitySet Name="CashInReceiptAgNotes" EntityType="AccountingModel.CashInReceiptAgNote" />
+    <AssociationSet Name="FK_CashInReceiptAgNote_AgentNote" Association="AccountingModel.FK_CashInReceiptAgNote_AgentNote">
+      <End Role="AgentNote" EntitySet="AgentNotes" />
+      <End Role="CashInReceiptAgNote" EntitySet="CashInReceiptAgNotes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CashInReceiptAgNote_CashInReceipt" Association="AccountingModel.FK_CashInReceiptAgNote_CashInReceipt">
+      <End Role="CashInReceipt" EntitySet="CashInReceipts" />
+      <End Role="CashInReceiptAgNote" EntitySet="CashInReceiptAgNotes" />
+    </AssociationSet>
+    <EntitySet Name="InvoiceTotalAPs" EntityType="AccountingModel.InvoiceTotalAP" />
+    <AssociationSet Name="FK_InvoiceTotalAP_Currency" Association="AccountingModel.FK_InvoiceTotalAP_Currency">
+      <End Role="CurrencyAcc" EntitySet="CurrencyAccs" />
+      <End Role="InvoiceTotalAP" EntitySet="InvoiceTotalAPs" />
+    </AssociationSet>
+    <EntitySet Name="CashOutReceipts" EntityType="AccountingModel.CashOutReceipt" />
+    <EntitySet Name="CashOutReceiptAgNotes" EntityType="AccountingModel.CashOutReceiptAgNote" />
+    <EntitySet Name="CashOutReceiptChecks" EntityType="AccountingModel.CashOutReceiptCheck" />
+    <AssociationSet Name="FK_CashOutReceipt_AccTransaction" Association="AccountingModel.FK_CashOutReceipt_AccTransaction">
+      <End Role="AccTransaction" EntitySet="AccTransactions" />
+      <End Role="CashOutReceipt" EntitySet="CashOutReceipts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CashOutReceiptAgNote_AgentNote" Association="AccountingModel.FK_CashOutReceiptAgNote_AgentNote">
+      <End Role="AgentNote" EntitySet="AgentNotes" />
+      <End Role="CashOutReceiptAgNote" EntitySet="CashOutReceiptAgNotes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CashOutReceipt_Bank" Association="AccountingModel.FK_CashOutReceipt_Bank">
+      <End Role="Bank" EntitySet="Banks" />
+      <End Role="CashOutReceipt" EntitySet="CashOutReceipts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CashOutReceipt_BankAccount" Association="AccountingModel.FK_CashOutReceipt_BankAccount">
+      <End Role="BankAccount" EntitySet="BankAccounts" />
+      <End Role="CashOutReceipt" EntitySet="CashOutReceipts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CashOutReceipt_Currency" Association="AccountingModel.FK_CashOutReceipt_Currency">
+      <End Role="CurrencyAcc" EntitySet="CurrencyAccs" />
+      <End Role="CashOutReceipt" EntitySet="CashOutReceipts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CashOutReceipt_PaymentTerm" Association="AccountingModel.FK_CashOutReceipt_PaymentTerm">
+      <End Role="PaymentTerm" EntitySet="PaymentTerms" />
+      <End Role="CashOutReceipt" EntitySet="CashOutReceipts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CashOutReceiptAgNote_CashOutReceipt" Association="AccountingModel.FK_CashOutReceiptAgNote_CashOutReceipt">
+      <End Role="CashOutReceipt" EntitySet="CashOutReceipts" />
+      <End Role="CashOutReceiptAgNote" EntitySet="CashOutReceiptAgNotes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CashOutReceiptCheck_CashOutReceipt" Association="AccountingModel.FK_CashOutReceiptCheck_CashOutReceipt">
+      <End Role="CashOutReceipt" EntitySet="CashOutReceipts" />
+      <End Role="CashOutReceiptCheck" EntitySet="CashOutReceiptChecks" />
+    </AssociationSet>
+    <EntitySet Name="CashOutReceiptInvs" EntityType="AccountingModel.CashOutReceiptInv" />
+    <AssociationSet Name="FK_CashOutReceiptInv_CashOutReceipt" Association="AccountingModel.FK_CashOutReceiptInv_CashOutReceipt">
+      <End Role="CashOutReceipt" EntitySet="CashOutReceipts" />
+      <End Role="CashOutReceiptInv" EntitySet="CashOutReceiptInvs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CashOutReceiptInv_Invoice" Association="AccountingModel.FK_CashOutReceiptInv_Invoice">
+      <End Role="Invoice" EntitySet="Invoices" />
+      <End Role="CashOutReceiptInv" EntitySet="CashOutReceiptInvs" />
+    </AssociationSet>
+    <EntitySet Name="CashOutCCCashDeposits" EntityType="AccountingModel.CashOutCCCashDeposit" />
+    <AssociationSet Name="FK_CashOutCCCashDeposit_CashOutReceipt" Association="AccountingModel.FK_CashOutCCCashDeposit_CashOutReceipt">
+      <End Role="CashOutReceipt" EntitySet="CashOutReceipts" />
+      <End Role="CashOutCCCashDeposit" EntitySet="CashOutCCCashDeposits" />
+    </AssociationSet>
+    <EntitySet Name="InvoiceAPs" EntityType="AccountingModel.InvoiceAP" />
+    <EntitySet Name="InvoiceDetailAPs" EntityType="AccountingModel.InvoiceDetailAP" />
+    <AssociationSet Name="FK_CashOutReceiptInv_InvoiceAP" Association="AccountingModel.FK_CashOutReceiptInv_InvoiceAP">
+      <End Role="InvoiceAP" EntitySet="InvoiceAPs" />
+      <End Role="CashOutReceiptInv" EntitySet="CashOutReceiptInvs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InvoiceAP_Currency" Association="AccountingModel.FK_InvoiceAP_Currency">
+      <End Role="CurrencyAcc" EntitySet="CurrencyAccs" />
+      <End Role="InvoiceAP" EntitySet="InvoiceAPs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InvoiceDetailAP_Currency" Association="AccountingModel.FK_InvoiceDetailAP_Currency">
+      <End Role="CurrencyAcc" EntitySet="CurrencyAccs" />
+      <End Role="InvoiceDetailAP" EntitySet="InvoiceDetailAPs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InvoiceDetailAP_Currency1" Association="AccountingModel.FK_InvoiceDetailAP_Currency1">
+      <End Role="CurrencyAcc" EntitySet="CurrencyAccs" />
+      <End Role="InvoiceDetailAP" EntitySet="InvoiceDetailAPs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InvoiceAP_HouseBill" Association="AccountingModel.FK_InvoiceAP_HouseBill">
+      <End Role="HouseBillAcc" EntitySet="HouseBillAccs" />
+      <End Role="InvoiceAP" EntitySet="InvoiceAPs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InvoiceAP_InvStatusLib" Association="AccountingModel.FK_InvoiceAP_InvStatusLib">
+      <End Role="InvStatusLib" EntitySet="InvStatusLibs" />
+      <End Role="InvoiceAP" EntitySet="InvoiceAPs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InvoiceAP_PaymentTerm" Association="AccountingModel.FK_InvoiceAP_PaymentTerm">
+      <End Role="PaymentTerm" EntitySet="PaymentTerms" />
+      <End Role="InvoiceAP" EntitySet="InvoiceAPs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InvoiceDetailAP_InvoiceAP" Association="AccountingModel.FK_InvoiceDetailAP_InvoiceAP">
+      <End Role="InvoiceAP" EntitySet="InvoiceAPs" />
+      <End Role="InvoiceDetailAP" EntitySet="InvoiceDetailAPs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InvoiceTotalAP_InvoiceAP" Association="AccountingModel.FK_InvoiceTotalAP_InvoiceAP">
+      <End Role="InvoiceAP" EntitySet="InvoiceAPs" />
+      <End Role="InvoiceTotalAP" EntitySet="InvoiceTotalAPs" />
+    </AssociationSet>
+    <EntitySet Name="APInvoiceViews" EntityType="AccountingModel.APInvoiceView" />
+    <EntitySet Name="InvoiceViews" EntityType="AccountingModel.InvoiceView" />
+    <AssociationSet Name="FK_CashInReceiptCheck_AccTransaction" Association="AccountingModel.FK_CashInReceiptCheck_AccTransaction">
+      <End Role="AccTransaction" EntitySet="AccTransactions" />
+      <End Role="CashInReceiptCheck" EntitySet="CashInReceiptChecks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CashOutReceiptCheck_AccTransaction" Association="AccountingModel.FK_CashOutReceiptCheck_AccTransaction">
+      <End Role="AccTransaction" EntitySet="AccTransactions" />
+      <End Role="CashOutReceiptCheck" EntitySet="CashOutReceiptChecks" />
+    </AssociationSet>
+    <EntitySet Name="CashInReceiptViews" EntityType="AccountingModel.CashInReceiptView" />
+    <EntitySet Name="CashOutReceiptViews" EntityType="AccountingModel.CashOutReceiptView" />
+    <EntitySet Name="ExpenseLibs" EntityType="AccountingModel.ExpenseLib" />
+    <EntitySet Name="CashOutReceiptExpenses" EntityType="AccountingModel.CashOutReceiptExpense" />
+    <AssociationSet Name="FK_CashOutReceiptExpense_CashOutReceipt" Association="AccountingModel.FK_CashOutReceiptExpense_CashOutReceipt">
+      <End Role="CashOutReceipt" EntitySet="CashOutReceipts" />
+      <End Role="CashOutReceiptExpense" EntitySet="CashOutReceiptExpenses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CashOutReceiptExpense_ExpenseLib" Association="AccountingModel.FK_CashOutReceiptExpense_ExpenseLib">
+      <End Role="ExpenseLib" EntitySet="ExpenseLibs" />
+      <End Role="CashOutReceiptExpense" EntitySet="CashOutReceiptExpenses" />
+    </AssociationSet>
+    <EntitySet Name="AspNetUserAccs" EntityType="AccountingModel.AspNetUserAcc" />
+    <EntitySet Name="ArCashDeposits" EntityType="AccountingModel.ArCashDeposit" />
+    <AssociationSet Name="FK_ArCashDeposit_Consignee" Association="AccountingModel.FK_ArCashDeposit_Consignee">
+      <End Role="ConsigneeAcc" EntitySet="ConsigneeAccs" />
+      <End Role="ArCashDeposit" EntitySet="ArCashDeposits" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ArCashDeposit_Currency" Association="AccountingModel.FK_ArCashDeposit_Currency">
+      <End Role="CurrencyAcc" EntitySet="CurrencyAccs" />
+      <End Role="ArCashDeposit" EntitySet="ArCashDeposits" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ArCashDeposit_PaymentTerm" Association="AccountingModel.FK_ArCashDeposit_PaymentTerm">
+      <End Role="PaymentTerm" EntitySet="PaymentTerms" />
+      <End Role="ArCashDeposit" EntitySet="ArCashDeposits" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ArCashDeposit_Shipper" Association="AccountingModel.FK_ArCashDeposit_Shipper">
+      <End Role="ShipperAcc" EntitySet="ShipperAccs" />
+      <End Role="ArCashDeposit" EntitySet="ArCashDeposits" />
+    </AssociationSet>
+    <EntitySet Name="ArCashDepositViews" EntityType="AccountingModel.ArCashDepositView" />
+    <EntitySet Name="ArCashDepositBalances" EntityType="AccountingModel.ArCashDepositBalance" />
+    <AssociationSet Name="FK_ArCashDepositBalance_Consignee" Association="AccountingModel.FK_ArCashDepositBalance_Consignee">
+      <End Role="ConsigneeAcc" EntitySet="ConsigneeAccs" />
+      <End Role="ArCashDepositBalance" EntitySet="ArCashDepositBalances" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ArCashDepositBalance_Currency" Association="AccountingModel.FK_ArCashDepositBalance_Currency">
+      <End Role="CurrencyAcc" EntitySet="CurrencyAccs" />
+      <End Role="ArCashDepositBalance" EntitySet="ArCashDepositBalances" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ArCashDepositBalance_Shipper" Association="AccountingModel.FK_ArCashDepositBalance_Shipper">
+      <End Role="ShipperAcc" EntitySet="ShipperAccs" />
+      <End Role="ArCashDepositBalance" EntitySet="ArCashDepositBalances" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="PaymentTerm">
+    <Key>
+      <PropertyRef Name="PaymentTermId" />
+    </Key>
+    <Property Name="PaymentTermId" Type="Byte" Nullable="false" />
+    <Property Name="PaymentTermEn" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PaymentTermAr" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Invoices" Relationship="AccountingModel.FK_Invoice_PaymentTerm" FromRole="PaymentTerm" ToRole="Invoice" />
+    <NavigationProperty Name="CashInReceipts" Relationship="AccountingModel.FK_CashInReceipt_PaymentTerm" FromRole="PaymentTerm" ToRole="CashInReceipt" />
+    <NavigationProperty Name="CashOutReceipts" Relationship="AccountingModel.FK_CashOutReceipt_PaymentTerm" FromRole="PaymentTerm" ToRole="CashOutReceipt" />
+    <NavigationProperty Name="InvoiceAPs" Relationship="AccountingModel.FK_InvoiceAP_PaymentTerm" FromRole="PaymentTerm" ToRole="InvoiceAP" />
+    <NavigationProperty Name="ArCashDeposits" Relationship="AccountingModel.FK_ArCashDeposit_PaymentTerm" FromRole="PaymentTerm" ToRole="ArCashDeposit" />
+  </EntityType>
+  <EntityType Name="Invoice">
+    <Key>
+      <PropertyRef Name="InvoiceId" />
+    </Key>
+    <Property Name="InvoiceId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="InvoiceCode" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="InvoiceDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="OperationId" Type="Int32" Nullable="false" />
+    <Property Name="HouseBillId" Type="Int32" Nullable="false" />
+    <Property Name="ShipperId" Type="Int32" />
+    <Property Name="ConsigneeId" Type="Int32" />
+    <Property Name="OrderFrom" Type="Byte" Nullable="false" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreateBy" Type="String" MaxLength="128" Unicode="true" FixedLength="false" />
+    <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PaymentTermId" Type="Byte" Nullable="false" />
+    <NavigationProperty Name="Consignee" Relationship="AccountingModel.FK_Invoice_Consignee" FromRole="Invoice" ToRole="ConsigneeAcc" />
+    <NavigationProperty Name="HouseBill" Relationship="AccountingModel.FK_Invoice_HouseBill" FromRole="Invoice" ToRole="HouseBillAcc" />
+    <NavigationProperty Name="PaymentTerm" Relationship="AccountingModel.FK_Invoice_PaymentTerm" FromRole="Invoice" ToRole="PaymentTerm" />
+    <NavigationProperty Name="Shipper" Relationship="AccountingModel.FK_Invoice_Shipper" FromRole="Invoice" ToRole="ShipperAcc" />
+    <Property Name="InvoiceType" Type="Byte" Nullable="false" />
+    <Property Name="TransId" Type="Int32" />
+    <Property Name="DueDate" Type="DateTime" Precision="3" />
+    <Property Name="InvStatusId" Type="Byte" />
+    <NavigationProperty Name="InvStatusLib" Relationship="AccountingModel.FK_Invoice_InvStatusLib" FromRole="Invoice" ToRole="InvStatusLib" />
+    <NavigationProperty Name="AccTransaction" Relationship="AccountingModel.FK_Invoice_AccTransaction" FromRole="Invoice" ToRole="AccTransaction" />
+    <NavigationProperty Name="InvoiceTotals" Relationship="AccountingModel.FK_InvoiceTotal_Invoice" FromRole="Invoice" ToRole="InvoiceTotal" />
+    <Property Name="InvCurrencyId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Currency" Relationship="AccountingModel.FK_Invoice_Currency" FromRole="Invoice" ToRole="CurrencyAcc" />
+    <NavigationProperty Name="InvoiceDetails" Relationship="AccountingModel.FK_InvoiceDetail_Invoice" FromRole="Invoice" ToRole="InvoiceDetail" />
+    <NavigationProperty Name="CashInReceiptInvs" Relationship="AccountingModel.FK_CashInReceiptInv_Invoice" FromRole="Invoice" ToRole="CashInReceiptInv" />
+    <Property Name="IsDeleted" Type="Boolean" />
+    <Property Name="DeletedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="DeleteReason" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="CashOutReceiptInvs" Relationship="AccountingModel.FK_CashOutReceiptInv_Invoice" FromRole="Invoice" ToRole="CashOutReceiptInv" />
+  </EntityType>
+  <Association Name="FK_Invoice_Consignee">
+    <End Type="AccountingModel.ConsigneeAcc" Role="ConsigneeAcc" Multiplicity="0..1" />
+    <End Type="AccountingModel.Invoice" Role="Invoice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ConsigneeAcc">
+        <PropertyRef Name="ConsigneeId" />
+      </Principal>
+      <Dependent Role="Invoice">
+        <PropertyRef Name="ConsigneeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Invoice_HouseBill">
+    <End Type="AccountingModel.HouseBillAcc" Role="HouseBillAcc" Multiplicity="1" />
+    <End Type="AccountingModel.Invoice" Role="Invoice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HouseBillAcc">
+        <PropertyRef Name="HouseBillId" />
+      </Principal>
+      <Dependent Role="Invoice">
+        <PropertyRef Name="HouseBillId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Invoice_PaymentTerm">
+    <End Type="AccountingModel.PaymentTerm" Role="PaymentTerm" Multiplicity="1" />
+    <End Type="AccountingModel.Invoice" Role="Invoice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PaymentTerm">
+        <PropertyRef Name="PaymentTermId" />
+      </Principal>
+      <Dependent Role="Invoice">
+        <PropertyRef Name="PaymentTermId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Invoice_Shipper">
+    <End Type="AccountingModel.ShipperAcc" Role="ShipperAcc" Multiplicity="0..1" />
+    <End Type="AccountingModel.Invoice" Role="Invoice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ShipperAcc">
+        <PropertyRef Name="ShipperId" />
+      </Principal>
+      <Dependent Role="Invoice">
+        <PropertyRef Name="ShipperId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Bank">
+    <Key>
+      <PropertyRef Name="BankId" />
+    </Key>
+    <Property Name="BankId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BankNameEn" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="BankNameAr" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="BankAddressEn" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="BankAddressAr" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SwiftCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="AccountId" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="BankAccounts" Relationship="AccountingModel.FK_BankAccount_Bank" FromRole="Bank" ToRole="BankAccount" />
+    <NavigationProperty Name="CashInReceipts" Relationship="AccountingModel.FK_CashInReceipt_Bank" FromRole="Bank" ToRole="CashInReceipt" />
+    <NavigationProperty Name="CashOutReceipts" Relationship="AccountingModel.FK_CashOutReceipt_Bank" FromRole="Bank" ToRole="CashOutReceipt" />
+  </EntityType>
+  <EntityType Name="BankAccount">
+    <Key>
+      <PropertyRef Name="BankAccId" />
+      <PropertyRef Name="BankId" />
+    </Key>
+    <Property Name="BankAccId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BankId" Type="Int32" Nullable="false" />
+    <Property Name="AccountName" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="AccountNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="AccountId" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="CurrencyId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Bank" Relationship="AccountingModel.FK_BankAccount_Bank" FromRole="BankAccount" ToRole="Bank" />
+    <NavigationProperty Name="Currency" Relationship="AccountingModel.FK_BankAccount_Currency" FromRole="BankAccount" ToRole="CurrencyAcc" />
+    <NavigationProperty Name="AgentNotes" Relationship="AccountingModel.FK_AgentNote_BankAccount" FromRole="BankAccount" ToRole="AgentNote" />
+    <NavigationProperty Name="CashInReceipts" Relationship="AccountingModel.FK_CashInReceipt_BankAccount" FromRole="BankAccount" ToRole="CashInReceipt" />
+    <NavigationProperty Name="CashOutReceipts" Relationship="AccountingModel.FK_CashOutReceipt_BankAccount" FromRole="BankAccount" ToRole="CashOutReceipt" />
+  </EntityType>
+  <Association Name="FK_BankAccount_Bank">
+    <End Type="AccountingModel.Bank" Role="Bank" Multiplicity="1" />
+    <End Type="AccountingModel.BankAccount" Role="BankAccount" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Bank">
+        <PropertyRef Name="BankId" />
+      </Principal>
+      <Dependent Role="BankAccount">
+        <PropertyRef Name="BankId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BankAccount_Currency">
+    <End Type="AccountingModel.CurrencyAcc" Role="CurrencyAcc" Multiplicity="1" />
+    <End Type="AccountingModel.BankAccount" Role="BankAccount" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CurrencyAcc">
+        <PropertyRef Name="CurrencyId" />
+      </Principal>
+      <Dependent Role="BankAccount">
+        <PropertyRef Name="CurrencyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="AgentNote">
+    <Key>
+      <PropertyRef Name="AgentNoteId" />
+    </Key>
+    <Property Name="AgentNoteId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AgentNoteType" Type="Byte" Nullable="false" />
+    <Property Name="AgentNoteCode" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="AgentNoteDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="AgentId" Type="Int32" Nullable="false" />
+    <Property Name="OperationId" Type="Int32" Nullable="false" />
+    <Property Name="HouseBillId" Type="Int32" />
+    <Property Name="ShipperId" Type="Int32" />
+    <Property Name="ConsigneeId" Type="Int32" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreateBy" Type="String" MaxLength="128" Unicode="true" FixedLength="false" Nullable="false" />
+    <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="BankAccId" Type="Int32" Nullable="false" />
+    <Property Name="BankId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="BankAccount" Relationship="AccountingModel.FK_AgentNote_BankAccount" FromRole="AgentNote" ToRole="BankAccount" />
+    <NavigationProperty Name="Consignee" Relationship="AccountingModel.FK_AgentNote_Consignee" FromRole="AgentNote" ToRole="ConsigneeAcc" />
+    <NavigationProperty Name="Shipper" Relationship="AccountingModel.FK_AgentNote_Shipper" FromRole="AgentNote" ToRole="ShipperAcc" />
+    <Property Name="TransId" Type="Int32" />
+    <Property Name="DueDate" Type="DateTime" Precision="3" />
+    <Property Name="InvStatusId" Type="Byte" />
+    <NavigationProperty Name="InvStatusLib" Relationship="AccountingModel.FK_AgentNote_InvStatusLib" FromRole="AgentNote" ToRole="InvStatusLib" />
+    <Property Name="TotalAmount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="CurrencyId" Type="Int32" Nullable="false" />
+    <Property Name="CurrencySign" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AgentNoteDetails" Relationship="AccountingModel.FK_AgentNoteDetail_AgentNote" FromRole="AgentNote" ToRole="AgentNoteDetail" />
+    <NavigationProperty Name="CashInReceiptAgNotes" Relationship="AccountingModel.FK_CashInReceiptAgNote_AgentNote" FromRole="AgentNote" ToRole="CashInReceiptAgNote" />
+    <NavigationProperty Name="CashOutReceiptAgNotes" Relationship="AccountingModel.FK_CashOutReceiptAgNote_AgentNote" FromRole="AgentNote" ToRole="CashOutReceiptAgNote" />
+  </EntityType>
+  <Association Name="FK_AgentNote_BankAccount">
+    <End Type="AccountingModel.BankAccount" Role="BankAccount" Multiplicity="1" />
+    <End Type="AccountingModel.AgentNote" Role="AgentNote" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BankAccount">
+        <PropertyRef Name="BankAccId" />
+        <PropertyRef Name="BankId" />
+      </Principal>
+      <Dependent Role="AgentNote">
+        <PropertyRef Name="BankAccId" />
+        <PropertyRef Name="BankId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AgentNote_Consignee">
+    <End Type="AccountingModel.ConsigneeAcc" Role="ConsigneeAcc" Multiplicity="0..1" />
+    <End Type="AccountingModel.AgentNote" Role="AgentNote" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ConsigneeAcc">
+        <PropertyRef Name="ConsigneeId" />
+      </Principal>
+      <Dependent Role="AgentNote">
+        <PropertyRef Name="ConsigneeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AgentNote_Shipper">
+    <End Type="AccountingModel.ShipperAcc" Role="ShipperAcc" Multiplicity="0..1" />
+    <End Type="AccountingModel.AgentNote" Role="AgentNote" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ShipperAcc">
+        <PropertyRef Name="ShipperId" />
+      </Principal>
+      <Dependent Role="AgentNote">
+        <PropertyRef Name="ShipperId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="AccTransaction">
+    <Key>
+      <PropertyRef Name="TransId" />
+    </Key>
+    <Property Name="TransId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreateBy" Type="String" MaxLength="128" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="AccTransactionDetails" Relationship="AccountingModel.FK_AccTransactionDetail_AccTransaction" FromRole="AccTransaction" ToRole="AccTransactionDetail" />
+    <NavigationProperty Name="Invoices" Relationship="AccountingModel.FK_Invoice_AccTransaction" FromRole="AccTransaction" ToRole="Invoice" />
+    <NavigationProperty Name="CashInReceipts" Relationship="AccountingModel.FK_CashInReceipt_AccTransaction" FromRole="AccTransaction" ToRole="CashInReceipt" />
+    <NavigationProperty Name="CashOutReceipts" Relationship="AccountingModel.FK_CashOutReceipt_AccTransaction" FromRole="AccTransaction" ToRole="CashOutReceipt" />
+    <Property Name="TransactionName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="TransactionNameAr" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="CashInReceiptChecks" Relationship="AccountingModel.FK_CashInReceiptCheck_AccTransaction" FromRole="AccTransaction" ToRole="CashInReceiptCheck" />
+    <NavigationProperty Name="CashOutReceiptChecks" Relationship="AccountingModel.FK_CashOutReceiptCheck_AccTransaction" FromRole="AccTransaction" ToRole="CashOutReceiptCheck" />
+  </EntityType>
+  <EntityType Name="AccTransactionDetail">
+    <Key>
+      <PropertyRef Name="TransDetailId" />
+    </Key>
+    <Property Name="TransDetailId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TransId" Type="Int32" Nullable="false" />
+    <Property Name="AccountId" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="DebitAmount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="CreditAmount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="CurrencyId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="AccountingChart" Relationship="AccountingModel.FK_AccTransactionDetail_AccountingChart" FromRole="AccTransactionDetail" ToRole="AccountingChart" />
+    <NavigationProperty Name="AccTransaction" Relationship="AccountingModel.FK_AccTransactionDetail_AccTransaction" FromRole="AccTransactionDetail" ToRole="AccTransaction" />
+    <NavigationProperty Name="Currency" Relationship="AccountingModel.FK_AccTransactionDetail_Currency" FromRole="AccTransactionDetail" ToRole="CurrencyAcc" />
+  </EntityType>
+  <Association Name="FK_AccTransactionDetail_AccountingChart">
+    <End Type="AccountingModel.AccountingChart" Role="AccountingChart" Multiplicity="1" />
+    <End Type="AccountingModel.AccTransactionDetail" Role="AccTransactionDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AccountingChart">
+        <PropertyRef Name="AccountId" />
+      </Principal>
+      <Dependent Role="AccTransactionDetail">
+        <PropertyRef Name="AccountId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AccTransactionDetail_AccTransaction">
+    <End Type="AccountingModel.AccTransaction" Role="AccTransaction" Multiplicity="1" />
+    <End Type="AccountingModel.AccTransactionDetail" Role="AccTransactionDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AccTransaction">
+        <PropertyRef Name="TransId" />
+      </Principal>
+      <Dependent Role="AccTransactionDetail">
+        <PropertyRef Name="TransId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AccTransactionDetail_Currency">
+    <End Type="AccountingModel.CurrencyAcc" Role="CurrencyAcc" Multiplicity="1" />
+    <End Type="AccountingModel.AccTransactionDetail" Role="AccTransactionDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CurrencyAcc">
+        <PropertyRef Name="CurrencyId" />
+      </Principal>
+      <Dependent Role="AccTransactionDetail">
+        <PropertyRef Name="CurrencyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="InvStatusLib">
+    <Key>
+      <PropertyRef Name="InvStatusId" />
+    </Key>
+    <Property Name="InvStatusId" Type="Byte" Nullable="false" />
+    <Property Name="InvStatusNameEn" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="InvStatusNameAr" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AgentNotes" Relationship="AccountingModel.FK_AgentNote_InvStatusLib" FromRole="InvStatusLib" ToRole="AgentNote" />
+    <NavigationProperty Name="Invoices" Relationship="AccountingModel.FK_Invoice_InvStatusLib" FromRole="InvStatusLib" ToRole="Invoice" />
+    <NavigationProperty Name="InvoiceAPs" Relationship="AccountingModel.FK_InvoiceAP_InvStatusLib" FromRole="InvStatusLib" ToRole="InvoiceAP" />
+  </EntityType>
+  <Association Name="FK_AgentNote_InvStatusLib">
+    <End Type="AccountingModel.InvStatusLib" Role="InvStatusLib" Multiplicity="0..1" />
+    <End Type="AccountingModel.AgentNote" Role="AgentNote" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="InvStatusLib">
+        <PropertyRef Name="InvStatusId" />
+      </Principal>
+      <Dependent Role="AgentNote">
+        <PropertyRef Name="InvStatusId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Invoice_InvStatusLib">
+    <End Type="AccountingModel.InvStatusLib" Role="InvStatusLib" Multiplicity="0..1" />
+    <End Type="AccountingModel.Invoice" Role="Invoice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="InvStatusLib">
+        <PropertyRef Name="InvStatusId" />
+      </Principal>
+      <Dependent Role="Invoice">
+        <PropertyRef Name="InvStatusId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Invoice_AccTransaction">
+    <End Type="AccountingModel.AccTransaction" Role="AccTransaction" Multiplicity="0..1" />
+    <End Type="AccountingModel.Invoice" Role="Invoice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AccTransaction">
+        <PropertyRef Name="TransId" />
+      </Principal>
+      <Dependent Role="Invoice">
+        <PropertyRef Name="TransId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="InvoiceTotal">
+    <Key>
+      <PropertyRef Name="InvoiceId" />
+      <PropertyRef Name="CurrencyId" />
+    </Key>
+    <Property Name="InvoiceId" Type="Int32" Nullable="false" />
+    <Property Name="CurrencyId" Type="Int32" Nullable="false" />
+    <Property Name="TotalAmount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <NavigationProperty Name="Currency" Relationship="AccountingModel.FK_InvoiceTotal_Currency" FromRole="InvoiceTotal" ToRole="CurrencyAcc" />
+    <NavigationProperty Name="Invoice" Relationship="AccountingModel.FK_InvoiceTotal_Invoice" FromRole="InvoiceTotal" ToRole="Invoice" />
+    <Property Name="CurrencySign" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="TaxDepositAmount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="TotalBeforeTax" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="VatTaxAmount" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_InvoiceTotal_Currency">
+    <End Type="AccountingModel.CurrencyAcc" Role="CurrencyAcc" Multiplicity="1" />
+    <End Type="AccountingModel.InvoiceTotal" Role="InvoiceTotal" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CurrencyAcc">
+        <PropertyRef Name="CurrencyId" />
+      </Principal>
+      <Dependent Role="InvoiceTotal">
+        <PropertyRef Name="CurrencyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InvoiceTotal_Invoice">
+    <End Type="AccountingModel.Invoice" Role="Invoice" Multiplicity="1" />
+    <End Type="AccountingModel.InvoiceTotal" Role="InvoiceTotal" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Invoice">
+        <PropertyRef Name="InvoiceId" />
+      </Principal>
+      <Dependent Role="InvoiceTotal">
+        <PropertyRef Name="InvoiceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="InvoiceDetail">
+    <Key>
+      <PropertyRef Name="InvDetailId" />
+    </Key>
+    <Property Name="InvDetailId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="InvoiceId" Type="Int32" Nullable="false" />
+    <Property Name="CostFkId" Type="Int32" Nullable="false" />
+    <Property Name="FkType" Type="Byte" Nullable="false" />
+    <Property Name="MainAmount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="InvoiceAmount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="CurrencyId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Invoice" Relationship="AccountingModel.FK_InvoiceDetail_Invoice" FromRole="InvoiceDetail" ToRole="Invoice" />
+    <Property Name="MainCurrencyId" Type="Int32" Nullable="false" />
+    <Property Name="ExchangeRate" Type="Decimal" Nullable="false" Precision="8" Scale="3" />
+    <NavigationProperty Name="InvCurr" Relationship="AccountingModel.FK_InvoiceDetailInvCurr_Currency" FromRole="InvoiceDetail" ToRole="CurrencyAcc" />
+    <NavigationProperty Name="MainCurr" Relationship="AccountingModel.FK_InvoiceDetailMainCurrency_Currency" FromRole="InvoiceDetail" ToRole="CurrencyAcc" />
+    <Property Name="ItemOrder" Type="Int32" />
+    <Property Name="PrintedTitle" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <Association Name="FK_Invoice_Currency">
+    <End Type="AccountingModel.CurrencyAcc" Role="CurrencyAcc" Multiplicity="1" />
+    <End Type="AccountingModel.Invoice" Role="Invoice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CurrencyAcc">
+        <PropertyRef Name="CurrencyId" />
+      </Principal>
+      <Dependent Role="Invoice">
+        <PropertyRef Name="InvCurrencyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InvoiceDetail_Invoice">
+    <End Type="AccountingModel.Invoice" Role="Invoice" Multiplicity="1" />
+    <End Type="AccountingModel.InvoiceDetail" Role="InvoiceDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Invoice">
+        <PropertyRef Name="InvoiceId" />
+      </Principal>
+      <Dependent Role="InvoiceDetail">
+        <PropertyRef Name="InvoiceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InvoiceDetailInvCurr_Currency">
+    <End Type="AccountingModel.CurrencyAcc" Role="CurrencyAcc" Multiplicity="1" />
+    <End Type="AccountingModel.InvoiceDetail" Role="InvoiceDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CurrencyAcc">
+        <PropertyRef Name="CurrencyId" />
+      </Principal>
+      <Dependent Role="InvoiceDetail">
+        <PropertyRef Name="CurrencyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InvoiceDetailMainCurrency_Currency">
+    <End Type="AccountingModel.CurrencyAcc" Role="CurrencyAcc" Multiplicity="1" />
+    <End Type="AccountingModel.InvoiceDetail" Role="InvoiceDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CurrencyAcc">
+        <PropertyRef Name="CurrencyId" />
+      </Principal>
+      <Dependent Role="InvoiceDetail">
+        <PropertyRef Name="MainCurrencyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="CashInReceipt">
+    <Key>
+      <PropertyRef Name="ReceiptId" />
+    </Key>
+    <Property Name="ReceiptId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ReceiptCode" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="ReceiptDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ShipperId" Type="Int32" />
+    <Property Name="ConsigneeId" Type="Int32" />
+    <Property Name="AgentId" Type="Int32" />
+    <Property Name="PaymentTermId" Type="Byte" Nullable="false" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" Nullable="false" />
+    <Property Name="CreateBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ReceiptAmount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="DiscountAmount" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="TransId" Type="Int32" />
+    <Property Name="CurrencyId" Type="Int32" />
+    <Property Name="BankId" Type="Int32" />
+    <Property Name="BankAccId" Type="Int32" />
+    <NavigationProperty Name="AccTransaction" Relationship="AccountingModel.FK_CashInReceipt_AccTransaction" FromRole="CashInReceipt" ToRole="AccTransaction" />
+    <NavigationProperty Name="Bank" Relationship="AccountingModel.FK_CashInReceipt_Bank" FromRole="CashInReceipt" ToRole="Bank" />
+    <NavigationProperty Name="BankAccount" Relationship="AccountingModel.FK_CashInReceipt_BankAccount" FromRole="CashInReceipt" ToRole="BankAccount" />
+    <NavigationProperty Name="Consignee" Relationship="AccountingModel.FK_CashInReceipt_Consignee" FromRole="CashInReceipt" ToRole="ConsigneeAcc" />
+    <NavigationProperty Name="Currency" Relationship="AccountingModel.FK_CashInReceipt_Currency" FromRole="CashInReceipt" ToRole="CurrencyAcc" />
+    <NavigationProperty Name="PaymentTerm" Relationship="AccountingModel.FK_CashInReceipt_PaymentTerm" FromRole="CashInReceipt" ToRole="PaymentTerm" />
+    <NavigationProperty Name="Shipper" Relationship="AccountingModel.FK_CashInReceipt_Shipper" FromRole="CashInReceipt" ToRole="ShipperAcc" />
+    <NavigationProperty Name="CashInReceiptInvs" Relationship="AccountingModel.FK_CashInReceiptInv_CashInReceipt" FromRole="CashInReceipt" ToRole="CashInReceiptInv" />
+    <NavigationProperty Name="CashInReceiptChecks" Relationship="AccountingModel.FK_CashInReceiptCheck_CashInReceipt" FromRole="CashInReceipt" ToRole="CashInReceiptCheck" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="DeletedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="DeleteReason" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="CashInReceiptAgNotes" Relationship="AccountingModel.FK_CashInReceiptAgNote_CashInReceipt" FromRole="CashInReceipt" ToRole="CashInReceiptAgNote" />
+    <Property Name="OperationId" Type="Int32" />
+    <Property Name="PartnerAccountId" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="CashInReceiptInv">
+    <Key>
+      <PropertyRef Name="ReceiptId" />
+      <PropertyRef Name="InvoiceId" />
+    </Key>
+    <Property Name="ReceiptId" Type="Int32" Nullable="false" />
+    <Property Name="InvoiceId" Type="Int32" Nullable="false" />
+    <Property Name="PaidAmount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="DiscountAmount" Type="Decimal" Precision="18" Scale="2" />
+    <NavigationProperty Name="CashInReceipt" Relationship="AccountingModel.FK_CashInReceiptInv_CashInReceipt" FromRole="CashInReceiptInv" ToRole="CashInReceipt" />
+    <NavigationProperty Name="Invoice" Relationship="AccountingModel.FK_CashInReceiptInv_Invoice" FromRole="CashInReceiptInv" ToRole="Invoice" />
+  </EntityType>
+  <Association Name="FK_CashInReceipt_AccTransaction">
+    <End Type="AccountingModel.AccTransaction" Role="AccTransaction" Multiplicity="0..1" />
+    <End Type="AccountingModel.CashInReceipt" Role="CashInReceipt" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AccTransaction">
+        <PropertyRef Name="TransId" />
+      </Principal>
+      <Dependent Role="CashInReceipt">
+        <PropertyRef Name="TransId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CashInReceipt_Bank">
+    <End Type="AccountingModel.Bank" Role="Bank" Multiplicity="0..1" />
+    <End Type="AccountingModel.CashInReceipt" Role="CashInReceipt" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Bank">
+        <PropertyRef Name="BankId" />
+      </Principal>
+      <Dependent Role="CashInReceipt">
+        <PropertyRef Name="BankId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CashInReceipt_BankAccount">
+    <End Type="AccountingModel.BankAccount" Role="BankAccount" Multiplicity="0..1" />
+    <End Type="AccountingModel.CashInReceipt" Role="CashInReceipt" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BankAccount">
+        <PropertyRef Name="BankAccId" />
+        <PropertyRef Name="BankId" />
+      </Principal>
+      <Dependent Role="CashInReceipt">
+        <PropertyRef Name="BankAccId" />
+        <PropertyRef Name="BankId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CashInReceipt_Consignee">
+    <End Type="AccountingModel.ConsigneeAcc" Role="ConsigneeAcc" Multiplicity="0..1" />
+    <End Type="AccountingModel.CashInReceipt" Role="CashInReceipt" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ConsigneeAcc">
+        <PropertyRef Name="ConsigneeId" />
+      </Principal>
+      <Dependent Role="CashInReceipt">
+        <PropertyRef Name="ConsigneeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CashInReceipt_Currency">
+    <End Type="AccountingModel.CurrencyAcc" Role="CurrencyAcc" Multiplicity="0..1" />
+    <End Type="AccountingModel.CashInReceipt" Role="CashInReceipt" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CurrencyAcc">
+        <PropertyRef Name="CurrencyId" />
+      </Principal>
+      <Dependent Role="CashInReceipt">
+        <PropertyRef Name="CurrencyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CashInReceipt_PaymentTerm">
+    <End Type="AccountingModel.PaymentTerm" Role="PaymentTerm" Multiplicity="1" />
+    <End Type="AccountingModel.CashInReceipt" Role="CashInReceipt" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PaymentTerm">
+        <PropertyRef Name="PaymentTermId" />
+      </Principal>
+      <Dependent Role="CashInReceipt">
+        <PropertyRef Name="PaymentTermId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CashInReceipt_Shipper">
+    <End Type="AccountingModel.ShipperAcc" Role="ShipperAcc" Multiplicity="0..1" />
+    <End Type="AccountingModel.CashInReceipt" Role="CashInReceipt" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ShipperAcc">
+        <PropertyRef Name="ShipperId" />
+      </Principal>
+      <Dependent Role="CashInReceipt">
+        <PropertyRef Name="ShipperId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CashInReceiptInv_CashInReceipt">
+    <End Type="AccountingModel.CashInReceipt" Role="CashInReceipt" Multiplicity="1" />
+    <End Type="AccountingModel.CashInReceiptInv" Role="CashInReceiptInv" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CashInReceipt">
+        <PropertyRef Name="ReceiptId" />
+      </Principal>
+      <Dependent Role="CashInReceiptInv">
+        <PropertyRef Name="ReceiptId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CashInReceiptInv_Invoice">
+    <End Type="AccountingModel.Invoice" Role="Invoice" Multiplicity="1" />
+    <End Type="AccountingModel.CashInReceiptInv" Role="CashInReceiptInv" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Invoice">
+        <PropertyRef Name="InvoiceId" />
+      </Principal>
+      <Dependent Role="CashInReceiptInv">
+        <PropertyRef Name="InvoiceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="CashInReceiptCheck">
+    <Key>
+      <PropertyRef Name="CashInCheckId" />
+    </Key>
+    <Property Name="CashInCheckId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ReceiptId" Type="Int32" Nullable="false" />
+    <Property Name="CheckNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CheckDueDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="IsCollected" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="CashInReceipt" Relationship="AccountingModel.FK_CashInReceiptCheck_CashInReceipt" FromRole="CashInReceiptCheck" ToRole="CashInReceipt" />
+    <Property Name="TransId" Type="Int32" />
+    <NavigationProperty Name="AccTransaction" Relationship="AccountingModel.FK_CashInReceiptCheck_AccTransaction" FromRole="CashInReceiptCheck" ToRole="AccTransaction" />
+    <Property Name="CollectDate" Type="DateTime" Precision="3" />
+    <Property Name="CollectBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="BankId" Type="Int32" />
+  </EntityType>
+  <Association Name="FK_CashInReceiptCheck_CashInReceipt">
+    <End Type="AccountingModel.CashInReceipt" Role="CashInReceipt" Multiplicity="1" />
+    <End Type="AccountingModel.CashInReceiptCheck" Role="CashInReceiptCheck" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CashInReceipt">
+        <PropertyRef Name="ReceiptId" />
+      </Principal>
+      <Dependent Role="CashInReceiptCheck">
+        <PropertyRef Name="ReceiptId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="AgentNoteDetail">
+    <Key>
+      <PropertyRef Name="AgentNoteDetailId" />
+    </Key>
+    <Property Name="AgentNoteDetailId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AgentNoteId" Type="Int32" Nullable="false" />
+    <Property Name="OperCostId" Type="Int32" Nullable="false" />
+    <Property Name="OperCostLibId" Type="Int32" Nullable="false" />
+    <Property Name="MainAmount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="MainCurrencyId" Type="Int32" Nullable="false" />
+    <Property Name="MainCurrencySign" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="ExchangeRate" Type="Decimal" Nullable="false" Precision="8" Scale="3" />
+    <Property Name="AgentNoteAmount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="CurrencyId" Type="Int32" Nullable="false" />
+    <Property Name="CurrencySign" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AgentNote" Relationship="AccountingModel.FK_AgentNoteDetail_AgentNote" FromRole="AgentNoteDetail" ToRole="AgentNote" />
+  </EntityType>
+  <Association Name="FK_AgentNoteDetail_AgentNote">
+    <End Type="AccountingModel.AgentNote" Role="AgentNote" Multiplicity="1" />
+    <End Type="AccountingModel.AgentNoteDetail" Role="AgentNoteDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AgentNote">
+        <PropertyRef Name="AgentNoteId" />
+      </Principal>
+      <Dependent Role="AgentNoteDetail">
+        <PropertyRef Name="AgentNoteId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="AgentNoteView">
+    <Key>
+      <PropertyRef Name="AgentNoteId" />
+      <PropertyRef Name="AgentNoteType" />
+      <PropertyRef Name="AgentNoteCode" />
+      <PropertyRef Name="AgentNoteDate" />
+      <PropertyRef Name="AgentId" />
+      <PropertyRef Name="OperationId" />
+      <PropertyRef Name="CreateDate" />
+      <PropertyRef Name="CreateBy" />
+      <PropertyRef Name="AgentNameEn" />
+      <PropertyRef Name="OrderFrom" />
+      <PropertyRef Name="OperationCode" />
+      <PropertyRef Name="BookingNumber" />
+      <PropertyRef Name="InvStatusNameEn" />
+      <PropertyRef Name="TotalAmount" />
+      <PropertyRef Name="CurrencyId" />
+      <PropertyRef Name="CurrencySign" />
+      <PropertyRef Name="BankNameEn" />
+      <PropertyRef Name="AccountName" />
+      <PropertyRef Name="AccountNumber" />
+    </Key>
+    <Property Name="AgentNoteId" Type="Int32" Nullable="false" />
+    <Property Name="AgentNoteType" Type="Byte" Nullable="false" />
+    <Property Name="AgentNoteCode" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="AgentNoteDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="DueDate" Type="DateTime" Precision="3" />
+    <Property Name="AgentId" Type="Int32" Nullable="false" />
+    <Property Name="OperationId" Type="Int32" Nullable="false" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreateBy" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="AgentNameEn" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="AgentNameAr" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="OrderFrom" Type="Byte" Nullable="false" />
+    <Property Name="OperationCode" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="BookingNumber" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="MBL" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="InvStatusNameEn" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="InvStatusNameAr" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="InvStatusId" Type="Byte" />
+    <Property Name="TotalAmount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="CurrencyId" Type="Int32" Nullable="false" />
+    <Property Name="CurrencySign" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="BankNameEn" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="AccountName" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="AccountNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="CashInReceiptAgNote">
+    <Key>
+      <PropertyRef Name="ReceiptId" />
+      <PropertyRef Name="AgentNoteId" />
+    </Key>
+    <Property Name="ReceiptId" Type="Int32" Nullable="false" />
+    <Property Name="AgentNoteId" Type="Int32" Nullable="false" />
+    <Property Name="PaidAmount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="DiscountAmount" Type="Decimal" Precision="18" Scale="2" />
+    <NavigationProperty Name="AgentNote" Relationship="AccountingModel.FK_CashInReceiptAgNote_AgentNote" FromRole="CashInReceiptAgNote" ToRole="AgentNote" />
+    <NavigationProperty Name="CashInReceipt" Relationship="AccountingModel.FK_CashInReceiptAgNote_CashInReceipt" FromRole="CashInReceiptAgNote" ToRole="CashInReceipt" />
+  </EntityType>
+  <Association Name="FK_CashInReceiptAgNote_AgentNote">
+    <End Type="AccountingModel.AgentNote" Role="AgentNote" Multiplicity="1" />
+    <End Type="AccountingModel.CashInReceiptAgNote" Role="CashInReceiptAgNote" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AgentNote">
+        <PropertyRef Name="AgentNoteId" />
+      </Principal>
+      <Dependent Role="CashInReceiptAgNote">
+        <PropertyRef Name="AgentNoteId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CashInReceiptAgNote_CashInReceipt">
+    <End Type="AccountingModel.CashInReceipt" Role="CashInReceipt" Multiplicity="1" />
+    <End Type="AccountingModel.CashInReceiptAgNote" Role="CashInReceiptAgNote" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CashInReceipt">
+        <PropertyRef Name="ReceiptId" />
+      </Principal>
+      <Dependent Role="CashInReceiptAgNote">
+        <PropertyRef Name="ReceiptId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="InvoiceTotalAP">
+    <Key>
+      <PropertyRef Name="InvoiceId" />
+      <PropertyRef Name="CurrencyId" />
+    </Key>
+    <Property Name="InvoiceId" Type="Int32" Nullable="false" />
+    <Property Name="CurrencyId" Type="Int32" Nullable="false" />
+    <Property Name="CurrencySign" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="TotalAmount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <NavigationProperty Name="Currency" Relationship="AccountingModel.FK_InvoiceTotalAP_Currency" FromRole="InvoiceTotalAP" ToRole="CurrencyAcc" />
+    <NavigationProperty Name="InvoiceAP" Relationship="AccountingModel.FK_InvoiceTotalAP_InvoiceAP" FromRole="InvoiceTotalAP" ToRole="InvoiceAP" />
+  </EntityType>
+  <Association Name="FK_InvoiceTotalAP_Currency">
+    <End Type="AccountingModel.CurrencyAcc" Role="CurrencyAcc" Multiplicity="1" />
+    <End Type="AccountingModel.InvoiceTotalAP" Role="InvoiceTotalAP" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CurrencyAcc">
+        <PropertyRef Name="CurrencyId" />
+      </Principal>
+      <Dependent Role="InvoiceTotalAP">
+        <PropertyRef Name="CurrencyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="CashOutReceipt">
+    <Key>
+      <PropertyRef Name="ReceiptId" />
+    </Key>
+    <Property Name="ReceiptId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ReceiptCode" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="ReceiptDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CarrierId" Type="Int32" />
+    <Property Name="ContractorId" Type="Int32" />
+    <Property Name="AgentId" Type="Int32" />
+    <Property Name="PaymentTermId" Type="Byte" Nullable="false" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreateBy" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ReceiptAmount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="DiscountAmount" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="TransId" Type="Int32" />
+    <Property Name="CurrencyId" Type="Int32" />
+    <Property Name="BankId" Type="Int32" />
+    <Property Name="BankAccId" Type="Int32" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="DeletedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="DeleteReason" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AccTransaction" Relationship="AccountingModel.FK_CashOutReceipt_AccTransaction" FromRole="CashOutReceipt" ToRole="AccTransaction" />
+    <NavigationProperty Name="Bank" Relationship="AccountingModel.FK_CashOutReceipt_Bank" FromRole="CashOutReceipt" ToRole="Bank" />
+    <NavigationProperty Name="BankAccount" Relationship="AccountingModel.FK_CashOutReceipt_BankAccount" FromRole="CashOutReceipt" ToRole="BankAccount" />
+    <NavigationProperty Name="Currency" Relationship="AccountingModel.FK_CashOutReceipt_Currency" FromRole="CashOutReceipt" ToRole="CurrencyAcc" />
+    <NavigationProperty Name="PaymentTerm" Relationship="AccountingModel.FK_CashOutReceipt_PaymentTerm" FromRole="CashOutReceipt" ToRole="PaymentTerm" />
+    <NavigationProperty Name="CashOutReceiptAgNotes" Relationship="AccountingModel.FK_CashOutReceiptAgNote_CashOutReceipt" FromRole="CashOutReceipt" ToRole="CashOutReceiptAgNote" />
+    <NavigationProperty Name="CashOutReceiptChecks" Relationship="AccountingModel.FK_CashOutReceiptCheck_CashOutReceipt" FromRole="CashOutReceipt" ToRole="CashOutReceiptCheck" />
+    <NavigationProperty Name="CashOutReceiptInvs" Relationship="AccountingModel.FK_CashOutReceiptInv_CashOutReceipt" FromRole="CashOutReceipt" ToRole="CashOutReceiptInv" />
+    <NavigationProperty Name="CashOutCCCashDeposits" Relationship="AccountingModel.FK_CashOutCCCashDeposit_CashOutReceipt" FromRole="CashOutReceipt" ToRole="CashOutCCCashDeposit" />
+    <Property Name="OperationId" Type="Int32" />
+    <NavigationProperty Name="CashOutReceiptExpenses" Relationship="AccountingModel.FK_CashOutReceiptExpense_CashOutReceipt" FromRole="CashOutReceipt" ToRole="CashOutReceiptExpense" />
+    <Property Name="PartnerAccountId" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="CashOutReceiptAgNote">
+    <Key>
+      <PropertyRef Name="ReceiptId" />
+      <PropertyRef Name="AgentNoteId" />
+    </Key>
+    <Property Name="ReceiptId" Type="Int32" Nullable="false" />
+    <Property Name="AgentNoteId" Type="Int32" Nullable="false" />
+    <Property Name="PaidAmount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="DiscountAmount" Type="Decimal" Precision="18" Scale="2" />
+    <NavigationProperty Name="AgentNote" Relationship="AccountingModel.FK_CashOutReceiptAgNote_AgentNote" FromRole="CashOutReceiptAgNote" ToRole="AgentNote" />
+    <NavigationProperty Name="CashOutReceipt" Relationship="AccountingModel.FK_CashOutReceiptAgNote_CashOutReceipt" FromRole="CashOutReceiptAgNote" ToRole="CashOutReceipt" />
+  </EntityType>
+  <EntityType Name="CashOutReceiptCheck">
+    <Key>
+      <PropertyRef Name="CashOutCheckId" />
+    </Key>
+    <Property Name="CashOutCheckId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ReceiptId" Type="Int32" Nullable="false" />
+    <Property Name="CheckNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CheckDueDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="IsCollected" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="CashOutReceipt" Relationship="AccountingModel.FK_CashOutReceiptCheck_CashOutReceipt" FromRole="CashOutReceiptCheck" ToRole="CashOutReceipt" />
+    <Property Name="TransId" Type="Int32" />
+    <NavigationProperty Name="AccTransaction" Relationship="AccountingModel.FK_CashOutReceiptCheck_AccTransaction" FromRole="CashOutReceiptCheck" ToRole="AccTransaction" />
+    <Property Name="CollectDate" Type="DateTime" Precision="3" />
+    <Property Name="CollectBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="BankId" Type="Int32" />
+  </EntityType>
+  <Association Name="FK_CashOutReceipt_AccTransaction">
+    <End Type="AccountingModel.AccTransaction" Role="AccTransaction" Multiplicity="0..1" />
+    <End Type="AccountingModel.CashOutReceipt" Role="CashOutReceipt" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AccTransaction">
+        <PropertyRef Name="TransId" />
+      </Principal>
+      <Dependent Role="CashOutReceipt">
+        <PropertyRef Name="TransId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CashOutReceiptAgNote_AgentNote">
+    <End Type="AccountingModel.AgentNote" Role="AgentNote" Multiplicity="1" />
+    <End Type="AccountingModel.CashOutReceiptAgNote" Role="CashOutReceiptAgNote" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AgentNote">
+        <PropertyRef Name="AgentNoteId" />
+      </Principal>
+      <Dependent Role="CashOutReceiptAgNote">
+        <PropertyRef Name="AgentNoteId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CashOutReceipt_Bank">
+    <End Type="AccountingModel.Bank" Role="Bank" Multiplicity="0..1" />
+    <End Type="AccountingModel.CashOutReceipt" Role="CashOutReceipt" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Bank">
+        <PropertyRef Name="BankId" />
+      </Principal>
+      <Dependent Role="CashOutReceipt">
+        <PropertyRef Name="BankId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CashOutReceipt_BankAccount">
+    <End Type="AccountingModel.BankAccount" Role="BankAccount" Multiplicity="0..1" />
+    <End Type="AccountingModel.CashOutReceipt" Role="CashOutReceipt" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BankAccount">
+        <PropertyRef Name="BankAccId" />
+        <PropertyRef Name="BankId" />
+      </Principal>
+      <Dependent Role="CashOutReceipt">
+        <PropertyRef Name="BankAccId" />
+        <PropertyRef Name="BankId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CashOutReceipt_Currency">
+    <End Type="AccountingModel.CurrencyAcc" Role="CurrencyAcc" Multiplicity="0..1" />
+    <End Type="AccountingModel.CashOutReceipt" Role="CashOutReceipt" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CurrencyAcc">
+        <PropertyRef Name="CurrencyId" />
+      </Principal>
+      <Dependent Role="CashOutReceipt">
+        <PropertyRef Name="CurrencyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CashOutReceipt_PaymentTerm">
+    <End Type="AccountingModel.PaymentTerm" Role="PaymentTerm" Multiplicity="1" />
+    <End Type="AccountingModel.CashOutReceipt" Role="CashOutReceipt" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PaymentTerm">
+        <PropertyRef Name="PaymentTermId" />
+      </Principal>
+      <Dependent Role="CashOutReceipt">
+        <PropertyRef Name="PaymentTermId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CashOutReceiptAgNote_CashOutReceipt">
+    <End Type="AccountingModel.CashOutReceipt" Role="CashOutReceipt" Multiplicity="1" />
+    <End Type="AccountingModel.CashOutReceiptAgNote" Role="CashOutReceiptAgNote" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CashOutReceipt">
+        <PropertyRef Name="ReceiptId" />
+      </Principal>
+      <Dependent Role="CashOutReceiptAgNote">
+        <PropertyRef Name="ReceiptId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CashOutReceiptCheck_CashOutReceipt">
+    <End Type="AccountingModel.CashOutReceipt" Role="CashOutReceipt" Multiplicity="1" />
+    <End Type="AccountingModel.CashOutReceiptCheck" Role="CashOutReceiptCheck" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CashOutReceipt">
+        <PropertyRef Name="ReceiptId" />
+      </Principal>
+      <Dependent Role="CashOutReceiptCheck">
+        <PropertyRef Name="ReceiptId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="CashOutReceiptInv">
+    <Key>
+      <PropertyRef Name="ReceiptId" />
+      <PropertyRef Name="InvoiceId" />
+    </Key>
+    <Property Name="ReceiptId" Type="Int32" Nullable="false" />
+    <Property Name="InvoiceId" Type="Int32" Nullable="false" />
+    <Property Name="PaidAmount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="DiscountAmount" Type="Decimal" Precision="18" Scale="2" />
+    <NavigationProperty Name="CashOutReceipt" Relationship="AccountingModel.FK_CashOutReceiptInv_CashOutReceipt" FromRole="CashOutReceiptInv" ToRole="CashOutReceipt" />
+    <NavigationProperty Name="Invoice" Relationship="AccountingModel.FK_CashOutReceiptInv_Invoice" FromRole="CashOutReceiptInv" ToRole="Invoice" />
+    <NavigationProperty Name="InvoiceAP" Relationship="AccountingModel.FK_CashOutReceiptInv_InvoiceAP" FromRole="CashOutReceiptInv" ToRole="InvoiceAP" />
+  </EntityType>
+  <Association Name="FK_CashOutReceiptInv_CashOutReceipt">
+    <End Type="AccountingModel.CashOutReceipt" Role="CashOutReceipt" Multiplicity="1" />
+    <End Type="AccountingModel.CashOutReceiptInv" Role="CashOutReceiptInv" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CashOutReceipt">
+        <PropertyRef Name="ReceiptId" />
+      </Principal>
+      <Dependent Role="CashOutReceiptInv">
+        <PropertyRef Name="ReceiptId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CashOutReceiptInv_Invoice">
+    <End Type="AccountingModel.Invoice" Role="Invoice" Multiplicity="1" />
+    <End Type="AccountingModel.CashOutReceiptInv" Role="CashOutReceiptInv" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Invoice">
+        <PropertyRef Name="InvoiceId" />
+      </Principal>
+      <Dependent Role="CashOutReceiptInv">
+        <PropertyRef Name="InvoiceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="CashOutCCCashDeposit">
+    <Key>
+      <PropertyRef Name="ReceiptId" />
+      <PropertyRef Name="OperationId" />
+    </Key>
+    <Property Name="ReceiptId" Type="Int32" Nullable="false" />
+    <Property Name="OperationId" Type="Int32" Nullable="false" />
+    <Property Name="DepositToUserEmpId" Type="Int32" />
+    <NavigationProperty Name="CashOutReceipt" Relationship="AccountingModel.FK_CashOutCCCashDeposit_CashOutReceipt" FromRole="CashOutCCCashDeposit" ToRole="CashOutReceipt" />
+  </EntityType>
+  <Association Name="FK_CashOutCCCashDeposit_CashOutReceipt">
+    <End Type="AccountingModel.CashOutReceipt" Role="CashOutReceipt" Multiplicity="1" />
+    <End Type="AccountingModel.CashOutCCCashDeposit" Role="CashOutCCCashDeposit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CashOutReceipt">
+        <PropertyRef Name="ReceiptId" />
+      </Principal>
+      <Dependent Role="CashOutCCCashDeposit">
+        <PropertyRef Name="ReceiptId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="InvoiceAP">
+    <Key>
+      <PropertyRef Name="InvoiceId" />
+    </Key>
+    <Property Name="InvoiceId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="InvoiceCode" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="InvoiceDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="DueDate" Type="DateTime" Precision="3" />
+    <Property Name="APInvoiceCode" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="OperationId" Type="Int32" Nullable="false" />
+    <Property Name="HouseBillId" Type="Int32" />
+    <Property Name="CarrierId" Type="Int32" />
+    <Property Name="ContractorId" Type="Int32" />
+    <Property Name="OrderFrom" Type="Byte" Nullable="false" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreateBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PaymentTermId" Type="Byte" Nullable="false" />
+    <Property Name="InvStatusId" Type="Byte" />
+    <Property Name="TransId" Type="Int32" />
+    <Property Name="InvCurrencyId" Type="Int32" Nullable="false" />
+    <Property Name="IsDeleted" Type="Boolean" />
+    <Property Name="DeletedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="DeleteReason" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="InvoiceType" Type="Byte" Nullable="false" />
+    <NavigationProperty Name="CashOutReceiptInvs" Relationship="AccountingModel.FK_CashOutReceiptInv_InvoiceAP" FromRole="InvoiceAP" ToRole="CashOutReceiptInv" />
+    <NavigationProperty Name="Currency" Relationship="AccountingModel.FK_InvoiceAP_Currency" FromRole="InvoiceAP" ToRole="CurrencyAcc" />
+    <NavigationProperty Name="HouseBill" Relationship="AccountingModel.FK_InvoiceAP_HouseBill" FromRole="InvoiceAP" ToRole="HouseBillAcc" />
+    <NavigationProperty Name="InvStatusLib" Relationship="AccountingModel.FK_InvoiceAP_InvStatusLib" FromRole="InvoiceAP" ToRole="InvStatusLib" />
+    <NavigationProperty Name="PaymentTerm" Relationship="AccountingModel.FK_InvoiceAP_PaymentTerm" FromRole="InvoiceAP" ToRole="PaymentTerm" />
+    <NavigationProperty Name="InvoiceDetailAPs" Relationship="AccountingModel.FK_InvoiceDetailAP_InvoiceAP" FromRole="InvoiceAP" ToRole="InvoiceDetailAP" />
+    <NavigationProperty Name="InvoiceTotalAPs" Relationship="AccountingModel.FK_InvoiceTotalAP_InvoiceAP" FromRole="InvoiceAP" ToRole="InvoiceTotalAP" />
+  </EntityType>
+  <EntityType Name="InvoiceDetailAP">
+    <Key>
+      <PropertyRef Name="InvDetailId" />
+    </Key>
+    <Property Name="InvDetailId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="InvoiceId" Type="Int32" Nullable="false" />
+    <Property Name="CostFkId" Type="Int32" Nullable="false" />
+    <Property Name="FkType" Type="Byte" Nullable="false" />
+    <Property Name="MainAmount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="MainCurrencyId" Type="Int32" Nullable="false" />
+    <Property Name="ExchangeRate" Type="Decimal" Nullable="false" Precision="8" Scale="3" />
+    <Property Name="InvoiceAmount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="CurrencyId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Currency" Relationship="AccountingModel.FK_InvoiceDetailAP_Currency" FromRole="InvoiceDetailAP" ToRole="CurrencyAcc" />
+    <NavigationProperty Name="Currency1" Relationship="AccountingModel.FK_InvoiceDetailAP_Currency1" FromRole="InvoiceDetailAP" ToRole="CurrencyAcc" />
+    <NavigationProperty Name="InvoiceAP" Relationship="AccountingModel.FK_InvoiceDetailAP_InvoiceAP" FromRole="InvoiceDetailAP" ToRole="InvoiceAP" />
+    <Property Name="ItemOrder" Type="Int32" />
+    <Property Name="PrintedTitle" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <Association Name="FK_CashOutReceiptInv_InvoiceAP">
+    <End Type="AccountingModel.InvoiceAP" Role="InvoiceAP" Multiplicity="1" />
+    <End Type="AccountingModel.CashOutReceiptInv" Role="CashOutReceiptInv" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="InvoiceAP">
+        <PropertyRef Name="InvoiceId" />
+      </Principal>
+      <Dependent Role="CashOutReceiptInv">
+        <PropertyRef Name="InvoiceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InvoiceAP_Currency">
+    <End Type="AccountingModel.CurrencyAcc" Role="CurrencyAcc" Multiplicity="1" />
+    <End Type="AccountingModel.InvoiceAP" Role="InvoiceAP" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CurrencyAcc">
+        <PropertyRef Name="CurrencyId" />
+      </Principal>
+      <Dependent Role="InvoiceAP">
+        <PropertyRef Name="InvCurrencyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InvoiceDetailAP_Currency">
+    <End Type="AccountingModel.CurrencyAcc" Role="CurrencyAcc" Multiplicity="1" />
+    <End Type="AccountingModel.InvoiceDetailAP" Role="InvoiceDetailAP" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CurrencyAcc">
+        <PropertyRef Name="CurrencyId" />
+      </Principal>
+      <Dependent Role="InvoiceDetailAP">
+        <PropertyRef Name="CurrencyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InvoiceDetailAP_Currency1">
+    <End Type="AccountingModel.CurrencyAcc" Role="CurrencyAcc" Multiplicity="1" />
+    <End Type="AccountingModel.InvoiceDetailAP" Role="InvoiceDetailAP" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CurrencyAcc">
+        <PropertyRef Name="CurrencyId" />
+      </Principal>
+      <Dependent Role="InvoiceDetailAP">
+        <PropertyRef Name="MainCurrencyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InvoiceAP_HouseBill">
+    <End Type="AccountingModel.HouseBillAcc" Role="HouseBillAcc" Multiplicity="0..1" />
+    <End Type="AccountingModel.InvoiceAP" Role="InvoiceAP" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HouseBillAcc">
+        <PropertyRef Name="HouseBillId" />
+      </Principal>
+      <Dependent Role="InvoiceAP">
+        <PropertyRef Name="HouseBillId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InvoiceAP_InvStatusLib">
+    <End Type="AccountingModel.InvStatusLib" Role="InvStatusLib" Multiplicity="0..1" />
+    <End Type="AccountingModel.InvoiceAP" Role="InvoiceAP" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="InvStatusLib">
+        <PropertyRef Name="InvStatusId" />
+      </Principal>
+      <Dependent Role="InvoiceAP">
+        <PropertyRef Name="InvStatusId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InvoiceAP_PaymentTerm">
+    <End Type="AccountingModel.PaymentTerm" Role="PaymentTerm" Multiplicity="1" />
+    <End Type="AccountingModel.InvoiceAP" Role="InvoiceAP" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PaymentTerm">
+        <PropertyRef Name="PaymentTermId" />
+      </Principal>
+      <Dependent Role="InvoiceAP">
+        <PropertyRef Name="PaymentTermId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InvoiceDetailAP_InvoiceAP">
+    <End Type="AccountingModel.InvoiceAP" Role="InvoiceAP" Multiplicity="1" />
+    <End Type="AccountingModel.InvoiceDetailAP" Role="InvoiceDetailAP" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="InvoiceAP">
+        <PropertyRef Name="InvoiceId" />
+      </Principal>
+      <Dependent Role="InvoiceDetailAP">
+        <PropertyRef Name="InvoiceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InvoiceTotalAP_InvoiceAP">
+    <End Type="AccountingModel.InvoiceAP" Role="InvoiceAP" Multiplicity="1" />
+    <End Type="AccountingModel.InvoiceTotalAP" Role="InvoiceTotalAP" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="InvoiceAP">
+        <PropertyRef Name="InvoiceId" />
+      </Principal>
+      <Dependent Role="InvoiceTotalAP">
+        <PropertyRef Name="InvoiceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="APInvoiceView">
+    <Key>
+      <PropertyRef Name="InvoiceId" />
+      <PropertyRef Name="InvoiceCode" />
+      <PropertyRef Name="InvoiceDate" />
+      <PropertyRef Name="APInvoiceCode" />
+      <PropertyRef Name="OperationId" />
+      <PropertyRef Name="OperationCode" />
+      <PropertyRef Name="BookingNumber" />
+      <PropertyRef Name="CarrierType" />
+      <PropertyRef Name="CarrierNameEn" />
+      <PropertyRef Name="CurrencyId" />
+      <PropertyRef Name="TotalAmount" />
+      <PropertyRef Name="CurrencySign" />
+      <PropertyRef Name="InvStatusNameEn" />
+      <PropertyRef Name="CreateDate" />
+      <PropertyRef Name="PaymentTermId" />
+      <PropertyRef Name="InvCurrencyId" />
+      <PropertyRef Name="OrderFrom" />
+      <PropertyRef Name="InvoiceType" />
+      <PropertyRef Name="OperationDate" />
+    </Key>
+    <Property Name="InvoiceId" Type="Int32" Nullable="false" />
+    <Property Name="InvoiceCode" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="InvoiceDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="DueDate" Type="DateTime" Precision="3" />
+    <Property Name="APInvoiceCode" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="OperationId" Type="Int32" Nullable="false" />
+    <Property Name="HouseBillId" Type="Int32" />
+    <Property Name="CarrierId" Type="Int32" />
+    <Property Name="ContractorId" Type="Int32" />
+    <Property Name="OperationCode" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="BookingNumber" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="CarrierType" Type="Byte" Nullable="false" />
+    <Property Name="MBL" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="CarrierNameEn" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="CarrierNameAr" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CurrencyId" Type="Int32" Nullable="false" />
+    <Property Name="TotalAmount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="CurrencySign" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="InvStatusId" Type="Byte" />
+    <Property Name="InvStatusNameEn" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="InvStatusNameAr" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreateBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PaymentTermId" Type="Byte" Nullable="false" />
+    <Property Name="TransId" Type="Int32" />
+    <Property Name="InvCurrencyId" Type="Int32" Nullable="false" />
+    <Property Name="PaymentTermEn" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PaymentTermAr" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="OrderFrom" Type="Byte" Nullable="false" />
+    <Property Name="ContractorNameEn" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ContractorNameAr" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IsDeleted" Type="Boolean" />
+    <Property Name="DeletedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="DeleteReason" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="InvoiceType" Type="Byte" Nullable="false" />
+    <Property Name="OperationDate" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="InvoiceView">
+    <Key>
+      <PropertyRef Name="InvoiceId" />
+      <PropertyRef Name="InvoiceCode" />
+      <PropertyRef Name="InvoiceDate" />
+      <PropertyRef Name="OperationId" />
+      <PropertyRef Name="HouseBillId" />
+      <PropertyRef Name="OrderFrom" />
+      <PropertyRef Name="CreateDate" />
+      <PropertyRef Name="PaymentTermId" />
+      <PropertyRef Name="InvoiceType" />
+      <PropertyRef Name="CurrencyId" />
+      <PropertyRef Name="CurrencySign" />
+      <PropertyRef Name="TotalAmount" />
+      <PropertyRef Name="InvStatusNameEn" />
+      <PropertyRef Name="InvCurrencyId" />
+      <PropertyRef Name="HouseBL" />
+      <PropertyRef Name="TaxDepositAmount" />
+      <PropertyRef Name="TotalBeforeTax" />
+    </Key>
+    <Property Name="InvoiceId" Type="Int32" Nullable="false" />
+    <Property Name="InvoiceCode" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="InvoiceDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="DueDate" Type="DateTime" Precision="3" />
+    <Property Name="OperationId" Type="Int32" Nullable="false" />
+    <Property Name="HouseBillId" Type="Int32" Nullable="false" />
+    <Property Name="ShipperId" Type="Int32" />
+    <Property Name="ConsigneeId" Type="Int32" />
+    <Property Name="OrderFrom" Type="Byte" Nullable="false" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreateBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PaymentTermId" Type="Byte" Nullable="false" />
+    <Property Name="InvoiceType" Type="Byte" Nullable="false" />
+    <Property Name="InvStatusId" Type="Byte" />
+    <Property Name="PaymentTermEn" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ConsigneeNameEn" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="ShipperNameEn" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="CurrencyId" Type="Int32" Nullable="false" />
+    <Property Name="CurrencySign" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="TotalAmount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="TransId" Type="Int32" />
+    <Property Name="InvStatusNameEn" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="InvStatusNameAr" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ShipperNameAr" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="ConsigneeNameAr" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="PaymentTermAr" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="InvCurrencyId" Type="Int32" Nullable="false" />
+    <Property Name="IsDeleted" Type="Boolean" />
+    <Property Name="DeletedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="DeleteReason" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="OperationCode" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="OperationDate" Type="DateTime" Precision="3" />
+    <Property Name="HouseBL" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="TaxDepositAmount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="TotalBeforeTax" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+  </EntityType>
+  <Association Name="FK_CashInReceiptCheck_AccTransaction">
+    <End Type="AccountingModel.AccTransaction" Role="AccTransaction" Multiplicity="0..1" />
+    <End Type="AccountingModel.CashInReceiptCheck" Role="CashInReceiptCheck" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AccTransaction">
+        <PropertyRef Name="TransId" />
+      </Principal>
+      <Dependent Role="CashInReceiptCheck">
+        <PropertyRef Name="TransId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CashOutReceiptCheck_AccTransaction">
+    <End Type="AccountingModel.AccTransaction" Role="AccTransaction" Multiplicity="0..1" />
+    <End Type="AccountingModel.CashOutReceiptCheck" Role="CashOutReceiptCheck" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AccTransaction">
+        <PropertyRef Name="TransId" />
+      </Principal>
+      <Dependent Role="CashOutReceiptCheck">
+        <PropertyRef Name="TransId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="CashInReceiptView">
+    <Key>
+      <PropertyRef Name="ReceiptId" />
+      <PropertyRef Name="ReceiptCode" />
+      <PropertyRef Name="ReceiptDate" />
+      <PropertyRef Name="ReceiptAmount" />
+      <PropertyRef Name="IsDeleted" />
+      <PropertyRef Name="CurrencySign" />
+      <PropertyRef Name="CreateDate" />
+      <PropertyRef Name="CreateBy" />
+      <PropertyRef Name="PaymentTermId" />
+    </Key>
+    <Property Name="ReceiptId" Type="Int32" Nullable="false" />
+    <Property Name="ReceiptCode" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="ReceiptDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ShipperId" Type="Int32" />
+    <Property Name="ShipperNameEn" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="ShipperNameAr" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="ConsigneeId" Type="Int32" />
+    <Property Name="ConsigneeNameEn" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="ConsigneeNameAr" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="AgentId" Type="Int32" />
+    <Property Name="AgentNameEn" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="AgentNameAr" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ReceiptAmount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="DeletedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="DeleteReason" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="TransId" Type="Int32" />
+    <Property Name="CurrencySign" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="OperationId" Type="Int32" />
+    <Property Name="PaymentTermEn" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PaymentTermAr" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CheckNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CheckDueDate" Type="DateTime" Precision="3" />
+    <Property Name="IsCollected" Type="Boolean" />
+    <Property Name="CurrencyId" Type="Int32" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreateBy" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="UserName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PaymentTermId" Type="Byte" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CashOutReceiptView">
+    <Key>
+      <PropertyRef Name="ReceiptId" />
+      <PropertyRef Name="ReceiptCode" />
+      <PropertyRef Name="ReceiptDate" />
+      <PropertyRef Name="PaymentTermId" />
+      <PropertyRef Name="CreateDate" />
+      <PropertyRef Name="CreateBy" />
+      <PropertyRef Name="ReceiptAmount" />
+      <PropertyRef Name="CurrencySign" />
+      <PropertyRef Name="IsDeleted" />
+      <PropertyRef Name="CheckNumber" />
+      <PropertyRef Name="CheckDueDate" />
+      <PropertyRef Name="IsCollected" />
+    </Key>
+    <Property Name="ReceiptId" Type="Int32" Nullable="false" />
+    <Property Name="ReceiptCode" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="ReceiptDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CarrierId" Type="Int32" />
+    <Property Name="CarrierNameEn" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="CarrierNameAr" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ContractorId" Type="Int32" />
+    <Property Name="ContractorNameEn" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ContractorNameAr" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="AgentId" Type="Int32" />
+    <Property Name="AgentNameEn" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="AgentNameAr" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="PaymentTermId" Type="Byte" Nullable="false" />
+    <Property Name="PaymentTermEn" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PaymentTermAr" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreateBy" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ReceiptAmount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="TransId" Type="Int32" />
+    <Property Name="CurrencyId" Type="Int32" />
+    <Property Name="CurrencySign" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="CheckNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CheckDueDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="IsCollected" Type="Boolean" Nullable="false" />
+    <Property Name="Expr1" Type="Int32" />
+    <Property Name="CollectDate" Type="DateTime" Precision="3" />
+    <Property Name="CollectBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="DeletedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="DeleteReason" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="BankId" Type="Int32" />
+    <Property Name="UserName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="ExpenseLib">
+    <Key>
+      <PropertyRef Name="ExpenseId" />
+    </Key>
+    <Property Name="ExpenseId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ExpenseNameEn" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="ExpenseNameAr" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="AccountId" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="CashOutReceiptExpenses" Relationship="AccountingModel.FK_CashOutReceiptExpense_ExpenseLib" FromRole="ExpenseLib" ToRole="CashOutReceiptExpense" />
+  </EntityType>
+  <EntityType Name="CashOutReceiptExpense">
+    <Key>
+      <PropertyRef Name="ReceiptId" />
+      <PropertyRef Name="ExpenseId" />
+    </Key>
+    <Property Name="ReceiptId" Type="Int32" Nullable="false" />
+    <Property Name="ExpenseId" Type="Int32" Nullable="false" />
+    <Property Name="PaidAmount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <NavigationProperty Name="CashOutReceipt" Relationship="AccountingModel.FK_CashOutReceiptExpense_CashOutReceipt" FromRole="CashOutReceiptExpense" ToRole="CashOutReceipt" />
+    <NavigationProperty Name="ExpenseLib" Relationship="AccountingModel.FK_CashOutReceiptExpense_ExpenseLib" FromRole="CashOutReceiptExpense" ToRole="ExpenseLib" />
+  </EntityType>
+  <Association Name="FK_CashOutReceiptExpense_CashOutReceipt">
+    <End Type="AccountingModel.CashOutReceipt" Role="CashOutReceipt" Multiplicity="1" />
+    <End Type="AccountingModel.CashOutReceiptExpense" Role="CashOutReceiptExpense" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CashOutReceipt">
+        <PropertyRef Name="ReceiptId" />
+      </Principal>
+      <Dependent Role="CashOutReceiptExpense">
+        <PropertyRef Name="ReceiptId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CashOutReceiptExpense_ExpenseLib">
+    <End Type="AccountingModel.ExpenseLib" Role="ExpenseLib" Multiplicity="1" />
+    <End Type="AccountingModel.CashOutReceiptExpense" Role="CashOutReceiptExpense" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ExpenseLib">
+        <PropertyRef Name="ExpenseId" />
+      </Principal>
+      <Dependent Role="CashOutReceiptExpense">
+        <PropertyRef Name="ExpenseId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="AspNetUserAcc">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="UserName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Discriminator" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="ArCashDeposit">
+    <Key>
+      <PropertyRef Name="ReceiptId" />
+    </Key>
+    <Property Name="ReceiptId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ReceiptCode" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="ReceiptDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ShipperId" Type="Int32" />
+    <Property Name="ConsigneeId" Type="Int32" />
+    <Property Name="PaymentTermId" Type="Byte" Nullable="false" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreateBy" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ReceiptAmount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="TransId" Type="Int32" />
+    <Property Name="CurrencyId" Type="Int32" />
+    <Property Name="BankId" Type="Int32" />
+    <Property Name="BankAccId" Type="Int32" />
+    <NavigationProperty Name="Consignee" Relationship="AccountingModel.FK_ArCashDeposit_Consignee" FromRole="ArCashDeposit" ToRole="ConsigneeAcc" />
+    <NavigationProperty Name="Currency" Relationship="AccountingModel.FK_ArCashDeposit_Currency" FromRole="ArCashDeposit" ToRole="CurrencyAcc" />
+    <NavigationProperty Name="PaymentTerm" Relationship="AccountingModel.FK_ArCashDeposit_PaymentTerm" FromRole="ArCashDeposit" ToRole="PaymentTerm" />
+    <NavigationProperty Name="Shipper" Relationship="AccountingModel.FK_ArCashDeposit_Shipper" FromRole="ArCashDeposit" ToRole="ShipperAcc" />
+  </EntityType>
+  <Association Name="FK_ArCashDeposit_Consignee">
+    <End Type="AccountingModel.ConsigneeAcc" Role="ConsigneeAcc" Multiplicity="0..1" />
+    <End Type="AccountingModel.ArCashDeposit" Role="ArCashDeposit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ConsigneeAcc">
+        <PropertyRef Name="ConsigneeId" />
+      </Principal>
+      <Dependent Role="ArCashDeposit">
+        <PropertyRef Name="ConsigneeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ArCashDeposit_Currency">
+    <End Type="AccountingModel.CurrencyAcc" Role="CurrencyAcc" Multiplicity="0..1" />
+    <End Type="AccountingModel.ArCashDeposit" Role="ArCashDeposit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CurrencyAcc">
+        <PropertyRef Name="CurrencyId" />
+      </Principal>
+      <Dependent Role="ArCashDeposit">
+        <PropertyRef Name="CurrencyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ArCashDeposit_PaymentTerm">
+    <End Type="AccountingModel.PaymentTerm" Role="PaymentTerm" Multiplicity="1" />
+    <End Type="AccountingModel.ArCashDeposit" Role="ArCashDeposit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PaymentTerm">
+        <PropertyRef Name="PaymentTermId" />
+      </Principal>
+      <Dependent Role="ArCashDeposit">
+        <PropertyRef Name="PaymentTermId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ArCashDeposit_Shipper">
+    <End Type="AccountingModel.ShipperAcc" Role="ShipperAcc" Multiplicity="0..1" />
+    <End Type="AccountingModel.ArCashDeposit" Role="ArCashDeposit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ShipperAcc">
+        <PropertyRef Name="ShipperId" />
+      </Principal>
+      <Dependent Role="ArCashDeposit">
+        <PropertyRef Name="ShipperId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="ArCashDepositView">
+    <Key>
+      <PropertyRef Name="ReceiptId" />
+      <PropertyRef Name="ReceiptCode" />
+      <PropertyRef Name="ReceiptDate" />
+      <PropertyRef Name="PaymentTermId" />
+      <PropertyRef Name="CreateDate" />
+      <PropertyRef Name="ReceiptAmount" />
+      <PropertyRef Name="CurrencySign" />
+      <PropertyRef Name="CurrencyName" />
+    </Key>
+    <Property Name="ReceiptId" Type="Int32" Nullable="false" />
+    <Property Name="ReceiptCode" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="ReceiptDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ShipperId" Type="Int32" />
+    <Property Name="ConsigneeId" Type="Int32" />
+    <Property Name="PaymentTermId" Type="Byte" Nullable="false" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UserName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="TransId" Type="Int32" />
+    <Property Name="CurrencyId" Type="Int32" />
+    <Property Name="BankId" Type="Int32" />
+    <Property Name="BankAccId" Type="Int32" />
+    <Property Name="ReceiptAmount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="ShipperNameEn" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="ShipperNameAr" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="ConsigneeNameEn" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="ConsigneeNameAr" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="PaymentTermEn" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PaymentTermAr" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CurrencySign" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="CurrencyName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="ArCashDepositBalance">
+    <Key>
+      <PropertyRef Name="BalanceId" />
+    </Key>
+    <Property Name="BalanceId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ShipperId" Type="Int32" />
+    <Property Name="ConsigneeId" Type="Int32" />
+    <Property Name="CurrencyId" Type="Int32" Nullable="false" />
+    <Property Name="BalanceAmount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <NavigationProperty Name="Consignee" Relationship="AccountingModel.FK_ArCashDepositBalance_Consignee" FromRole="ArCashDepositBalance" ToRole="ConsigneeAcc" />
+    <NavigationProperty Name="Currency" Relationship="AccountingModel.FK_ArCashDepositBalance_Currency" FromRole="ArCashDepositBalance" ToRole="CurrencyAcc" />
+    <NavigationProperty Name="Shipper" Relationship="AccountingModel.FK_ArCashDepositBalance_Shipper" FromRole="ArCashDepositBalance" ToRole="ShipperAcc" />
+  </EntityType>
+  <Association Name="FK_ArCashDepositBalance_Consignee">
+    <End Type="AccountingModel.ConsigneeAcc" Role="ConsigneeAcc" Multiplicity="0..1" />
+    <End Type="AccountingModel.ArCashDepositBalance" Role="ArCashDepositBalance" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ConsigneeAcc">
+        <PropertyRef Name="ConsigneeId" />
+      </Principal>
+      <Dependent Role="ArCashDepositBalance">
+        <PropertyRef Name="ConsigneeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ArCashDepositBalance_Currency">
+    <End Type="AccountingModel.CurrencyAcc" Role="CurrencyAcc" Multiplicity="1" />
+    <End Type="AccountingModel.ArCashDepositBalance" Role="ArCashDepositBalance" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CurrencyAcc">
+        <PropertyRef Name="CurrencyId" />
+      </Principal>
+      <Dependent Role="ArCashDepositBalance">
+        <PropertyRef Name="CurrencyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ArCashDepositBalance_Shipper">
+    <End Type="AccountingModel.ShipperAcc" Role="ShipperAcc" Multiplicity="0..1" />
+    <End Type="AccountingModel.ArCashDepositBalance" Role="ArCashDepositBalance" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ShipperAcc">
+        <PropertyRef Name="ShipperId" />
+      </Principal>
+      <Dependent Role="ArCashDepositBalance">
+        <PropertyRef Name="ShipperId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

@@ -1,0 +1,54 @@
+﻿@model List<EasyFreight.ViewModel.InvoiceLightVm>
+@{
+    int index = 1;
+}
+<section class="panel">
+
+    <div class="panel-body">
+        <div class="table-responsive">
+            <table id="tbinvlist" class="table table-striped mb-none">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Invoice Number</th>
+                        <th>Invoice Date</th>
+                        <th>Total</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@index</td>
+                            <td>@item.InvoiceCode</td>
+                            <td>@item.InvoiceDate.ToString("dd/MM/yyyy")</td>
+                            <td>
+                                @foreach (var total in item.OperationCostTotalAccVms)
+                                {
+                                    <div>@total.CurrencySign  @total.TotalSellingRate</div>
+                                }
+                                
+                            </td>
+                            <td>
+                                <a href="@Url.Content("~/Invoice/ViewInvoice?id=" + item.InvoiceId + "&hbId="+ item.HouseBillId)" target="_blank" title="View"
+                                   bankid="@item.InvoiceId" style="padding-left:5px"
+                                   class="on-default viewinv"><i class="fa fa-eye"></i></a>
+                                <a href="@Url.Content("~/Invoice/PrintInvoice?id=" + item.InvoiceId + "&hbId=" + item.HouseBillId)" title="Print"
+                                   bankid="@item.InvoiceId" style="padding-left:5px"
+                                   class="on-default printinv"><i class="fa fa-print"></i></a>
+                            </td>
+                        </tr>
+                        index++;
+
+                    }
+
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+
+

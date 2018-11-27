@@ -1,0 +1,177 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .select2-drop {
+        z-index: 99959;
+    }
+
+    .datepicker-dropdown {
+        z-index: 99959 !important;
+    }
+    .border {
+        border: 1px solid #888;
+        padding-top: 2px;
+        text-align: center;
+        vertical-align: central;
+    }
+    .default-icon {
+        color: #777;
+    }
+</style>
+
+<header class="page-header">
+    <h2>View Contractor Rates</h2>
+
+    <div class="right-wrapper pull-right">
+        <ol class="breadcrumbs">
+            <li>
+                <a href="@Url.Content("~/Home/Index")">
+                    <i class="fa fa-home"></i>
+                </a>
+            </li>
+            <li><span>Master Data</span></li>
+            <li><span>View Contractor Rates</span></li>
+        </ol>
+
+        <a class="sidebar-right-toggle" data-open="sidebar-right"><i class="fa fa-chevron-left"></i></a>
+    </div>
+</header>
+
+
+<section class="panel">
+    
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="mb-md">
+                    <a href="#modalForm" class="modal-with-form" id="addToTable">
+                        <i class="fa fa-search fa-2x"></i><span style="padding-left: 8px">Advanced Search</span>    </a>
+                </div>
+            </div>
+            <div class=" col-sm-1">
+                <div class="col-sm-12 border">
+                    <a id="ClearSearch" class="filter0 default-icon" title="Clear Search" href="javascript:void(0)">
+                        <i class="fa fa-eraser fa-2x"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div id="tbResult">
+            @Html.Partial("~/Views/ContractorRateInquiry/_ResultTable.cshtml")
+        </div>
+    </div>
+</section>
+
+<div id="modalAnim" class="zoom-anim-dialog modal-block modal-block-primary mfp-hide">
+    <section class="panel">
+        <header class="panel-heading">
+            <h2 class="panel-title">Contacts Persons</h2>
+        </header>
+        <div class="panel-body">
+            <div class="modal-wrapper">
+                <div id="ModalContent" class="modal-text">
+                </div>
+            </div>
+        </div>
+        <footer class="panel-footer">
+            <div class="row">
+                <div class="col-md-12 text-right">
+                    <button class="btn btn-default modal-dismiss">Close</button>
+                </div>
+            </div>
+        </footer>
+    </section>
+</div>
+
+<div id="modalForm" class="modal-block modal-block-lg mfp-hide">
+
+    <section class="panel">
+        <header class="panel-heading">
+            <h2 class="panel-title">Advanced Search</h2>
+        </header>
+        <div class="panel-body">
+            <form id="searchform" class="form-horizontal mb-lg" novalidate="novalidate">
+                <div class="form-group col-sm-6">
+                    <label class="col-sm-4 control-label">Contractor</label>
+                    <div class="col-sm-8">
+                        <select id="ContractorId" data-placeholder="Select Contractor" name="ContractorId"
+                            class="form-control populate">
+                            <option></option>
+                            @foreach (var item in ViewBag.ContractorList)
+                            {
+ 
+                                <option  value="@item.Key">@item.Value</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group col-sm-6">
+                    <label class="col-sm-4 control-label">Container Type</label>
+                    <div class="col-sm-8">
+                        <select id="ContainerTypeId" name="ContainerTypeId"
+                            class="form-control populate" data-placeholder="Select Container">
+                            <option></option>
+                            @foreach (var item in ViewBag.ContainerList)
+                            {
+                                <option  value="@item.Key">@item.Value</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group col-sm-6">
+                    <label class="col-sm-4 control-label">From Area</label>
+                    <div class="col-sm-8">
+                          @Html.Partial("~/Views/Shared/_AreaGrouped.cshtml",
+                                    ViewData["AreaList"] as List<EasyFreight.ViewModel.CityAreaList>,
+                                    new ViewDataDictionary { { "ddlName", "FromAreaId" }, 
+                                    { "selectedVal", 0 },{"required",""} })
+                    </div>
+                </div>
+                <div class="form-group col-sm-6">
+                    <label class="col-sm-4 control-label">To Area</label>
+                    <div class="col-sm-8">
+                                @Html.Partial("~/Views/Shared/_AreaGrouped.cshtml",
+                                    ViewData["AreaList"] as List<EasyFreight.ViewModel.CityAreaList>,
+                                    new ViewDataDictionary { { "ddlName", "ToAreaId" }, 
+                                    { "selectedVal", 0 },{"required",""} })
+                    </div>
+                </div>
+
+
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Valid Date</label>
+                    <div class="col-md-10">
+                        <div data-plugin-datepicker="" data-date-format="dd/mm/yyyy" class="input-daterange input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-calendar"></i>
+                            </span>
+                            <input type="text" name="FromDate" class="form-control">
+                            <span class="input-group-addon">to</span>
+                            <input type="text" name="ToDate" class="form-control">
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+        <footer class="panel-footer">
+            <div class="row">
+                <div class="col-md-12 text-right">
+                    <button class="btn btn-primary modal-search">Search</button>
+                    <button class="btn btn-default modal-dismiss">Cancel</button>
+                </div>
+            </div>
+        </footer>
+    </section>
+</div>
+
+
+
+@section scripts{
+    <script src="@Url.Content("~/Scripts/MasterData/ContractorRate/ContractorRateIndex.js")"></script>
+}

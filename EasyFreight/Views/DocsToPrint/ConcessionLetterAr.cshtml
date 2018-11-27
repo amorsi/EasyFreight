@@ -1,0 +1,131 @@
+﻿@model EasyFreight.ViewModel.ConcessionLetterVm
+
+@{
+    ViewBag.Title = "ConcessionLetterAr";
+    Layout = null ;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>_PrintLayout</title>
+    <link rel="stylesheet" href="@Url.Content("~/assets/vendor/bootstrap/css/bootstrap.css")" />
+    <link rel="stylesheet" href="@Url.Content("~/Content/theme-custom.css")" />
+    <link rel="stylesheet" href="@Url.Content("~/assets/vendor/font-awesome/css/font-awesome.min0.css")" />
+    @*<link rel="stylesheet" href="@Url.Content("~/Content/theme.css")" />*@
+    <style>
+        tfoot { display: table-footer-group; }
+
+    </style>
+</head>
+<body>
+    <div id="wrap">
+        <br />
+        <div id="header" class="col-sm-12 col-md-12 col-xs-12 col-lg-12">
+            <div class="col-sm-6 col-md-6 col-xs-6 col-lg-6">
+                <img src="@Url.Content("~/images/EnglishLogo.png")" height="100" width="250" />
+            </div>
+            <div class="col-sm-6 col-md-6 col-xs-6 col-lg-6" style="text-align: right;">
+                <img src="@Url.Content("~/images/ArabicLogo.png")" height="100" width="250" />
+            </div>
+        </div>
+
+
+        <div id="main" style="min-height:1200px;">
+
+<section style="text-align:right;direction:rtl;font-size:20px;font-family:'Times New Roman'" class="panel hblist">
+    <br />
+    <div class="panel-body">
+        <div class="col-md-12 col-xs-12 col-lg-12 form-group">
+            <div class="col-md-12 col-xs-12 col-lg-12 ">
+                <h2 style=" font-weight:bold;font-family:'Times New Roman';    text-align: center;">@Model.StaticLabels["lbl1"]</h2>
+            </div>
+        </div>
+
+        <div class="col-sm-12 col-sm-12 form-group">
+            <label class="col-md-1 col-sm-1 col-lg-1  pull-right control-label">@Model.StaticLabels["lbl2"] /</label>
+            <div class="col-md-11 col-sm-11 col-lg-11 pull-right">
+                <span class="text-dark">
+                    @Model.CarrierName
+                </span>
+            </div>
+        </div>
+
+        <div class="col-sm-12 col-xs-12 form-group">
+            <label class="col-md-4 col-sm-4 col-lg-4 pull-right control-label">@Model.StaticLabels["lbl3"] @Model.CompanyName @Model.StaticLabels["lbl4"] :</label>
+            <div class="col-md-8 col-sm-8 col-lg-8 pull-right">
+                <span class="text-dark">
+                    @Model.FromPort
+                </span>
+            </div>
+        </div>
+
+        <div class="col-sm-12 col-xs-12 form-group">
+            <label class="col-md-2 col-sm-2 col-lg-2 pull-right control-label">@Model.StaticLabels["lbl11"] :</label>
+            <div class="col-md-10 col-sm-10 col-lg-10 pull-right">
+                <span class="text-dark">
+                    @Model.MBL
+                </span>
+            </div>
+        </div>
+
+        <div class="col-xs-12  col-sm-12 col-md-12 col-lg-12 form-group">
+            <label class="col-md-1 col-sm-1 col-lg-2 pull-right control-label">@Model.StaticLabels["lbl5"] :</label>
+            <div class="col-md-11 col-sm-11 col-lg-10 pull-right"  style="direction:ltr">
+                <span class="text-dark">
+                    @Model.Containers
+                </span>
+            </div>
+        </div>
+
+        <div class="col-xs-12  col-sm-12 col-md-12 col-lg-12 form-group">
+            <label class="col-md-1 col-sm-1 col-lg-2 pull-right control-label">@Model.StaticLabels["lbl6"] :</label>
+            <div class="col-md-11 col-sm-11 col-lg-10 pull-right">
+                <span class="text-dark">
+                    @Model.GrossWeight KG
+                </span>
+            </div>
+        </div>
+
+        <div class="col-xs-12  col-sm-12 col-md-12 col-lg-12 form-group">
+            <label class="col-md-1 col-sm-1 col-lg-2 pull-right control-label">@Model.StaticLabels["lbl7"] :</label>
+            <div class="col-md-11 col-sm-11 col-lg-10 pull-right">
+                <span class="text-dark">
+                    @Model.CBM
+                </span>
+            </div>
+        </div>
+
+        <div class="col-xs-12  col-sm-12 col-md-12 col-lg-12 form-group">
+            <label class="col-md-1 col-sm-1 col-lg-2 pull-right control-label">@Model.StaticLabels["lbl8"] :</label>
+            <div class="col-md-11 col-sm-11 col-lg-10 pull-right">
+                <span class="text-dark">
+                    @Model.ConsigneeName
+                </span>
+            </div>
+        </div>
+
+        <div class="col-xs-12  col-sm-12 col-md-12 col-lg-12 form-group">
+            <label class=" pull-right control-label">@Model.StaticLabels["lbl9"] </label>
+        </div> 
+        <div class="col-xs-12  col-sm-12 col-md-12 col-lg-12 form-group">
+            <label class="col-xs-8  col-sm-8 col-md-8 col-lg-8 control-label"> @Model.StaticLabels["lbl10"] ..... </label>
+        </div> 
+        <div class="col-xs-12  col-sm-12 col-md-12 col-lg-12 form-group">
+            <label class="col-sm-4 col-xs-4 col-xs-offset-1 control-label">@Model.CompanyName للنقل الدولي</label>
+        </div> 
+    </div>
+</section> 
+
+
+              </div>
+
+    </div>
+    
+    <div id="footer"> 
+        @{Html.RenderAction("GetPrintFooter", "Home");} 
+    </div>
+</body>
+</html>

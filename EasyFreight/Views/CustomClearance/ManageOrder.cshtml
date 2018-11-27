@@ -1,0 +1,170 @@
+﻿@model EasyFreight.ViewModel.CustomClearanceDetailMainVm
+@{
+    ViewBag.Title = "ManageOrder";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    EasyFreight.Models.CustomClearanceView CustomClearanceObj = ViewBag.customClearObj;
+}
+
+<link rel="stylesheet" href="@Url.Content("~/Content/manageorder-header.css")" />
+
+<header class="page-header">
+    <h2>Manage Custom Clearance Order</h2>
+
+    <div class="right-wrapper pull-right">
+        <ol class="breadcrumbs">
+            <li>
+                <a href="@Url.Content("~/Home/Index")">
+                    <i class="fa fa-home"></i>
+                </a>
+            </li>
+            <li><span>Custom Clearance</span></li>
+            <li><span>Manage Order</span></li>
+        </ol>
+
+        <a class="sidebar-right-toggle" data-open="sidebar-right"><i class="fa fa-chevron-left"></i></a>
+    </div>
+</header>
+
+<section class="panel">
+    <header class="panel-heading">
+        <div class="row pageHeader">
+            <form class="form-horizontal">
+                <div class="form-group head">
+                    <div class="col-sm-3 inlineUnit">
+                        <label class="col-sm-12">Booking Number</label>
+                        <div class="col-sm-12">
+                            <h3>@CustomClearanceObj.BookingNumber</h3>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 inlineUnit">
+                        <label class="col-sm-12">Opertation Number</label>
+                        <div class="col-sm-12">
+                            <h3>@CustomClearanceObj.OperationCode</h3>
+                        </div>
+                    </div>
+                    <div class="col-sm-2 inlineUnit">
+                        <label class="col-sm-12">Department</label>
+                        <div class="col-sm-12">
+                            @if (CustomClearanceObj.OrderFrom == 1)
+                            {
+                                <h3>Export  </h3>
+                            }
+                            else
+                            {
+                                <h3>Import </h3>
+                            }
+                        </div>
+                    </div>
+                    <div class="col-sm-4 inlineUnit">
+                        <label class="col-sm-12">Client</label>
+                        <div class="col-sm-12">
+                            <h4>@(CustomClearanceObj.OrderFrom == 1 ? CustomClearanceObj.ShipperNameEn : CustomClearanceObj.ConsigneeNameEn)</h4>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="form-group shipDetails">
+                    <div class="col-sm-3 inlineUnit">
+                        <label class="col-sm-12">From</label>
+                        <div class="col-sm-12">
+                            <h3>@CustomClearanceObj.FromPort</h3>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 inlineUnit">
+                        <label class="col-sm-12">To</label>
+                        <div class="col-sm-12">
+                            <h3>@CustomClearanceObj.ToPort</h3>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 inlineUnit">
+                        <label class="col-sm-12">Need Arrive Date</label>
+                        <div class="col-sm-12">
+                            <h3>@CustomClearanceObj.NeedArriveDate.ToString("dd/MM/yyyy")</h3>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 inlineUnit">
+                        <label class="col-sm-12">Need Arrive Time</label>
+                        <div class="col-sm-12">
+                            <h3>
+                                @CustomClearanceObj.NeedArriveTime.ToString(@"h\:mm")
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </header>
+
+    <div class="panel-body">
+        <form id="Form1">
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="w4-username">Cost Currency  </label>
+                <div class="col-sm-4">
+                    <select id="ddlCostCurrency" class="form-control populate" data-plugin-selecttwo>
+                        @foreach (var item in ViewBag.CurrencyList)
+                        {
+
+                            if (Model.CustomClearanceDetailVms.Count > 0 && item.Key == Model.CustomClearanceDetailVms.FirstOrDefault().CurrencyId)
+                            {
+                                <option selected value="@item.Key">@item.Value</option>
+                            }
+                            else
+                            {
+                                <option value="@item.Key">@item.Value</option>}
+                            }
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                @Html.Partial("~/Views/CustomClearance/_AddCost.cshtml", Model.CustomClearanceDetailVms)
+            </div>
+
+
+            <div class="form-group">
+                <div class="toggle-content">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="w4-username">Notes  </label>
+                        <div class="col-sm-8">
+                            <textarea rows="5" class="form-control" name="Notes" id="Notes" readonly>@CustomClearanceObj.Notes</textarea>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            
+  <div class="form-group">
+                        <div class="toggle-content">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label" for="w4-username">Comments  </label>
+                                <div class="col-sm-8">
+                                    <textarea rows="5" class="form-control" name="Comment" id="Comment" >@CustomClearanceObj.Comment</textarea>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+            @Html.Hidden("hd_CCID", @CustomClearanceObj.CCId);
+        </form>
+    </div>
+
+    <footer class="panel-footer">
+        <div id="SaveBtnDiv" class="row">
+            <div class="col-sm-9 col-sm-offset-3">
+                <button id="SaveForm" class="btn btn-primary">Save</button>
+                <button id="SaveExit" class="btn btn-primary">Save & Close Order</button>
+                <a id="ResetForm" href="@Url.Content("~/CustomClearance")" class="btn btn-default">Reset</a>
+            </div>
+        </div>
+    </footer>
+
+</section>
+
+@section scripts{
+    <script src="@Url.Content("~/Scripts/MasterData/ContactPerson.js")"></script>
+    <script src="@Url.Content("~/Scripts/AddCostCommon.js")"></script>
+    <script src="@Url.Content("~/Scripts/CustomClear/ManageScript.js")"></script>
+}

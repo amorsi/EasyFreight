@@ -1,0 +1,152 @@
+﻿@model EasyFreight.ViewModel.ConsigneeVm
+
+@{
+    ViewBag.Title = "Add";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<header class="page-header">
+    <h2>Add Consignee</h2>
+
+    <div class="right-wrapper pull-right">
+        <ol class="breadcrumbs">
+            <li>
+                <a href="@Url.Content("~/Home/Index")">
+                    <i class="fa fa-home"></i>
+                </a>
+            </li>
+            <li><span>Master Data</span></li>
+            <li><span>Add Consignee</span></li>
+        </ol>
+
+        <a class="sidebar-right-toggle" data-open="sidebar-right"><i class="fa fa-chevron-left"></i></a>
+    </div>
+</header>
+<!-- start: page -->
+<div class="row">
+    <div class="col-lg-12">
+        <section class="panel">
+            <header class="panel-heading">
+                <div class="panel-actions">
+                    <a href="#"></a>
+                    <a href="#"></a>
+                </div>
+
+                <h2 class="panel-title"></h2>
+            </header>
+            <div class="panel-body">
+                <form id="Form1">
+                    <div class="form-horizontal form-bordered">
+                        <div class="col-md-6 form-group">
+                            <label class="col-sm-4 control-label" for="w4-username">Name <span class="required">*</span></label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="ConsigneeNameEn" 
+                                        id="ConsigneeNameEn" value="@Model.ConsigneeNameEn" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label class="col-sm-4 control-label" for="w4-password">Name Arabic</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" 
+                                        name="ConsigneeNameAr" id="ConsigneeNameAr" value="@Model.ConsigneeNameAr">
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 form-group">
+                            <label class="col-sm-4 control-label" for="w4-username">Address</label>
+                            <div class="col-sm-8">
+                                <textarea id="ConsigneeAddressEn" rows="3" class="form-control"
+                                    name="ConsigneeAddressEn">@Model.ConsigneeAddressEn</textarea>
+                            </div>
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label class="col-sm-4 control-label" for="w4-password">Address Arabic</label>
+                            <div class="col-sm-8">
+                                <textarea id="ConsigneeAddressAr" rows="3" class="form-control"
+                                    name="ConsigneeAddressAr">@Model.ConsigneeAddressAr</textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-2 control-label" for="w4-CityId">City <span class="required">*</span></label>
+                            <div class="col-md-4">
+                                @Html.Partial("~/Views/Shared/_CityGrouped.cshtml",
+                                    ViewData["CityList"] as List<EasyFreight.ViewModel.CountryCityList>,
+                                    new ViewDataDictionary { { "ddlName", "CityId" }, 
+                                    { "selectedVal", @Model.CityId }, {"required", "required"} })
+
+                            </div>
+                        </div>
+
+                        <input type="hidden" name="CountryId" id="CountryId" value="@Model.CountryId" />
+                        <div class="col-md-6 form-group">
+                            <label class="col-sm-4 control-label">Email</label>
+                            <div class="col-sm-8">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-envelope"></i>
+                                    </span>
+                                    <input type="email" placeholder="eg.: email@email.com" 
+                                            class="form-control" name="Email" value="@Model.Email">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label class="col-sm-4 control-label">WebSite</label>
+                            <div class="col-sm-8">
+                                <input   placeholder="eg.: https://google.com" maxlength="50"
+                                        class="form-control" name="WebSite" value="@Model.WebSite">
+                            </div>
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label class="col-sm-4 control-label">Phone Number </label>
+                            <div class="col-sm-8">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-phone"></i>
+                                    </span>
+                                    <input type="text" class="form-control" maxlength="200"
+                                            name="PhoneNumber" value="@Model.PhoneNumber">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label class="col-sm-4 control-label">Fax </label>
+                            <div class="col-sm-8">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-fax"></i>
+                                    </span>
+                                    <input type="text" class="form-control" maxlength="200"
+                                            name="FaxNumber" value="@Model.FaxNumber">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    @Html.Partial("~/Areas/MasterData/Views/Shared/_AddContactPerson.cshtml", Model.ContactPersons)
+
+                    <input type="hidden" id="ConsigneeId" name="ConsigneeId" value="@Model.ConsigneeId" />
+                    <input type="hidden" id="ConsigneeCode" name="ConsigneeCode" value="@Model.ConsigneeCode" />
+                </form>
+            </div>
+
+            <footer class="panel-footer">
+                <div id="SaveBtnDiv" class="row">
+                    <div class="col-sm-9 col-sm-offset-3">
+                        <button id="SaveForm" class="btn btn-primary">Submit</button>
+                        <a id="ResetForm" href="@Url.Content("~/MasterData/Consignee")" class="btn btn-default" >Reset</a>
+                    </div>
+                </div>
+            </footer>
+        </section>
+    </div>
+</div>
+
+
+
+@section scripts{
+    <script src="@Url.Content("~/Scripts/MasterData/Consignee/ConsigneeAdd.js")"></script>
+    <script src="@Url.Content("~/Scripts/MasterData/ContactPerson.js")"></script>
+
+}

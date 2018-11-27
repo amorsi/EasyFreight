@@ -1,0 +1,22 @@
+﻿
+    .form-group.head {
+        margin-bottom: 0;
+        background-color: #00ace6;
+    }
+
+    .pageHeader .form-group {
+        color: #fff;
+    }
+
+    .row, .form-horizontal .form-group {
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .shipDetails {
+        background-color: #fff;
+        color: #333 !important;
+        margin-bottom: 3px;
+        padding-bottom: 10px;
+        padding-top: 10px;
+    }

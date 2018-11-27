@@ -1,0 +1,40 @@
+﻿@if (Request.IsAuthenticated)
+{
+    <div id="userbox" class="userbox">
+        <a href="#" data-toggle="dropdown">
+            <figure class="profile-picture">
+              <i title="Single Client" class="fa fa-user fa-3x" style="color: #cccccc;"></i>
+  @*<img src="@Url.Content("~/assets/images/!logged-user.jpg")" alt="Joseph Doe" class="img-circle" data-lock-picture="assets/images/!logged-user.jpg" />*@
+            </figure>
+            <div class="profile-info" data-lock-name="John Doe" data-lock-email="johndoe@okler.com">
+                <span class="name">@User.Identity.Name</span>
+                @*<span class="role">administrator</span>*@
+            </div>
+
+            <i class="fa custom-caret"></i>
+        </a>
+
+        <div class="dropdown-menu">
+            <ul class="list-unstyled">
+                <li class="divider"></li>
+<li ><a role="menuitem" tabindex="-1" href="~/Account/Manage"  ><i class="fa fa-lock"></i> Change Password</a></li>
+                <li>
+                    @using (Html.BeginForm("LogOff", "Account", new { area = "" }, FormMethod.Post, new { id = "logoutForm" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <a tabindex="-1" role="menuitem" href="javascript:document.getElementById('logoutForm').submit()"><i class="fa fa-power-off"></i>Logout</a>
+                    }
+                </li>
+            </ul>
+        </div>
+    </div>
+
+}
+else
+{
+    <div id="userbox" class="userbox">
+        @*  <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>*@
+        @Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })
+    </div>
+}
+

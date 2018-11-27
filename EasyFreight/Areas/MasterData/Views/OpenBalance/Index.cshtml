@@ -1,0 +1,89 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<header class="page-header">
+    <h2>Accounting Open Balance</h2>
+
+    <div class="right-wrapper pull-right">
+        <ol class="breadcrumbs">
+            <li>
+                <a href="@Url.Content("~/Home/Index")">
+                    <i class="fa fa-home"></i>
+                </a>
+            </li>
+            <li><span>Master Data </span></li>
+            <li><span>Open Balance</span></li>
+        </ol>
+        <a class="sidebar-right-toggle" data-open="sidebar-right"><i class="fa fa-chevron-left"></i></a>
+    </div>
+</header>
+
+<section class="panel">
+    <div class="panel-body">
+        <div class="col-md-12">
+            <div class="tabs tabs-primary">
+                <ul class="nav nav-tabs col-md-11">
+                    <li class="active">
+                        <a data-toggle="tab" href="#agent" aria-expanded="true">Agent (A/R)</a>
+                    </li>
+                    <li class="">
+                        <a data-toggle="tab" id="shipperlink" href="#shipper" aria-expanded="false">Shipper (A/R)</a>
+                    </li>
+                    <li class="">
+                        <a data-toggle="tab" id="conslink" href="#consignee" aria-expanded="false">Consignee (A/R)</a>
+                    </li>
+                    <li class="">
+                        <a data-toggle="tab" id="carrlink" href="#carrier" aria-expanded="false">Carrier (A/P)</a>
+                    </li>
+                    <li class="">
+                        <a data-toggle="tab" id="contlink" href="#contractor" aria-expanded="false">Contractor (A/P)</a>
+                    </li>
+                    <li class="">
+                        <a data-toggle="tab" id="cashlink" href="#cash" aria-expanded="false">Cash</a>
+                    </li>
+                    <li class="">
+                        <a data-toggle="tab" id="banklink" href="#bank" aria-expanded="false">Bank</a>
+                    </li>
+                     <li class="">
+                        <a data-toggle="tab" id="Partnerslink" href="#partner" aria-expanded="false">Partners</a>
+                    </li>
+                    <li class="">
+                        <a data-toggle="tab" id="CCCashDeplink" href="#cccashDep" aria-expanded="false">CC Cash Deposit</a>
+                    </li> 
+                </ul>
+
+                <div class="tab-content col-md-12">
+                    <div class="tab-pane active" id="agent">
+                        @{Html.RenderPartial("~/Areas/MasterData/Views/OpenBalance/_AddBalanceMain.cshtml");}
+
+                    </div>
+                    <div class="tab-pane" id="shipper">
+                    </div>
+                    <div class="tab-pane" id="consignee">
+                    </div>
+                    <div class="tab-pane" id="carrier">
+                    </div>
+                    <div class="tab-pane" id="contractor">
+                    </div>
+                    <div class="tab-pane" id="cash">
+                    </div>
+                    <div class="tab-pane" id="bank">
+                    </div>
+                      <div class="tab-pane" id="partner">
+                    </div>
+                      <div class="tab-pane" id="cccashDep">
+                    </div> 
+
+                </div>
+            </div>
+        </div>
+
+        
+    </div>
+</section>
+
+@section scripts{
+    <script src="@Url.Content("~/Scripts/Accounting/OpenBalance.js")"></script>
+}

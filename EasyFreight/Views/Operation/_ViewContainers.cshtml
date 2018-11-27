@@ -1,0 +1,83 @@
+﻿@model List<EasyFreight.ViewModel.OperationContainerVm>
+
+<div class="row">
+    <div class="col-sm-1 col-xs-1 ">
+        <label class="control-label">Container Type</label>
+    </div>
+    <div class="col-sm-2 col-xs-2 ">
+        <label class="control-label">Container #</label>
+    </div>
+    <div class="col-sm-2 col-xs-2 ">
+        <label class="control-label">Seal #</label>
+    </div>
+    <div class="col-sm-2 col-xs-2 ">
+        <label class="control-label">Package Type</label>
+    </div>
+    <div class="col-sm-2 col-xs-2 ">
+        <label class="control-label">Packages#</label>
+    </div>
+    <div class="col-sm-1 col-xs-1 ">
+        <label class="control-label">G.W (KG)</label>
+    </div>
+    <div class="col-sm-1 col-xs-1 ">
+        <label class="control-label">N.W (KG)</label>
+    </div>
+    <div class="col-sm-1 col-xs-1 ">
+        <label class="control-label">CBM (m3)</label>
+    </div>
+</div>
+@foreach (var item in Model)
+{
+    <div class="row" style="margin-top: 25px">
+
+
+        <div class="col-sm-1 col-xs-1 ">
+            <div class="form-group">
+                <span class="text-dark">@item.ContainerTypeName</span>
+            </div>
+        </div>
+
+        <div class="col-sm-2 col-xs-2 ">
+            <div class="form-group">
+                <span class="text-dark">@item.ContainerNumber</span>
+            </div>
+        </div>
+        <div class="col-sm-2 col-xs-2 ">
+            <div class="form-group">
+                <span class="text-dark">@item.SealNumber</span>
+            </div>
+        </div>
+
+        <div class="col-sm-2 col-xs-2 ">
+            <div class="form-group">
+                <span class="text-dark">@item.PackageTypeName</span>
+            </div>
+        </div>
+
+        <div class="col-sm-2 col-xs-2 ">
+            <div class="form-group">
+                <span class="text-dark">@item.NumberOfPackages</span>
+
+            </div>
+        </div>
+
+        <div class="col-sm-1 col-xs-1 ">
+            <div class="form-group">
+                <span class="text-dark">@item.GrossWeight</span>
+            </div>
+        </div>
+
+        <div class="col-sm-1 col-xs-1 ">
+            <div class="form-group">
+                <span class="text-dark">@item.NetWeight</span>
+
+            </div>
+        </div>
+        <div class="col-sm-1 col-xs-1 ">
+            <div class="form-group">
+                <span class="text-dark">@item.CBM</span>
+
+            </div>
+        </div>
+    </div>
+}

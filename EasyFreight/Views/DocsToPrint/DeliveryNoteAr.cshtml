@@ -1,0 +1,212 @@
+﻿@model EasyFreight.ViewModel.ConcessionLetterVm
+
+@{
+    ViewBag.Title = "DeliveryNoteAr";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>_PrintLayout</title>
+    <link rel="stylesheet" href="@Url.Content("~/assets/vendor/bootstrap/css/bootstrap.css")" />
+    <link rel="stylesheet" href="@Url.Content("~/Content/theme-custom.css")" />
+    <link rel="stylesheet" href="@Url.Content("~/assets/vendor/font-awesome/css/font-awesome.min.css")" />
+    @*<link rel="stylesheet" href="@Url.Content("~/Content/theme.css")" />*@
+    <style>
+        tfoot { display: table-footer-group; }
+
+    </style>
+</head>
+<body>
+    <div id="wrap">
+        <br />
+        <div id="header" class="col-sm-12 col-md-12 col-xs-12 col-lg-12">
+            <div class="col-sm-6 col-md-6 col-xs-6 col-lg-6">
+                <img src="@Url.Content("~/images/EnglishLogo.png")" height="100" width="250" />
+            </div>
+            <div class="col-sm-6 col-md-6 col-xs-6 col-lg-6" style="text-align: right;">
+                <img src="@Url.Content("~/images/ArabicLogo.png")" height="100" width="250" />
+            </div>
+        </div>
+
+
+        <div id="main" style="min-height:800px;">
+
+<section style="text-align:right;direction:rtl; font-size:17.5px;font-family:'Times New Roman'" class="panel hblist">
+   <div class="row"></div>
+    <div class="panel-body">
+        <div class="col-md-12 col-sm-12 col-lg-12 form-group">
+            <div class="col-md-6 col-xs-6">
+                <h4 class="text-dark" style="font-size:20px;font-weight:bold;">@Model.StaticLabels["lbl11"]</h4>
+            </div>
+        </div>
+
+
+        <div class="col-md-12 col-sm-12 col-lg-12 form-group">
+            <label class="col-md-12 col-sm-12col-lg-12 pull-right control-label">@Model.StaticLabels["lbl1"] / @DateTime.Now.ToString("dd/MM/yyyy")</label>
+            <div class="col-md-9 col-sm-9 col-lg-9 pull-right">
+                <span class="text-dark"></span>
+            </div>
+        </div>
+
+         <div class="row"></div>
+
+        <div class="col-xs-12 col-md-12 col-sm-12 col-lg-12 form-group">
+            <label class=" pull-right control-label">@Model.StaticLabels["lbl2"] /</label>
+
+        </div>
+
+        <div class="col-xs-12 col-md-12 col-sm-12 col-lg-12 form-group">
+            <label class="col-xs-12 col-md-3 col-sm-3 col-lg-3 pull-right control-label">@Model.StaticLabels["lbl3"] :</label>
+            <div class="col-xs-12 col-md-9 col-sm-9 col-lg-9">
+                <span class="text-dark">
+                    @Model.ConsigneeName
+                </span>
+            </div>
+        </div>
+
+        <div class="col-md-12 col-sm-12 col-lg-12 form-group">
+            <label class="col-sm-3 col-xs-3 pull-right control-label">@Model.StaticLabels["lbl4"] :</label>
+            <div class="col-sm-9 col-xs-9">
+                <span class="text-dark">
+                    @Model.VesselName
+                </span>
+            </div>
+        </div>
+
+        <div class="col-md-12 col-sm-12 col-lg-12 form-group">
+            <label class="col-sm-3 col-xs-3 pull-right control-label">@Model.StaticLabels["lbl5"] /</label>
+            <div class="col-sm-9 col-xs-9">
+                <span class="text-dark">
+                    @Model.CarrierName
+                </span>
+            </div>
+        </div>
+
+
+
+        <div class="col-md-12 col-sm-12 col-lg-12 form-group">
+            <div class="col-md-6 col-sm-6 col-lg-6  pull-right form-group">
+                <label class="col-md-4 col-sm-4 col-lg-4 pull-right control-label">@Model.StaticLabels["lbl7"] :</label>
+                <div class="col-md-8 col-sm-8 col-lg-8">
+                    <span class="text-dark">
+                        @Model.MBL
+                    </span>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-sm-6 col-lg-6  pull-right form-group">
+                <label class="col-md-4 col-sm-4 col-lg-4  pull-right control-label">@Model.StaticLabels["lbl6"] :</label>
+                <div class="col-md-8 col-sm-8 col-lg-8 pull-right">
+                    <span class="text-dark">
+                        @Model.HouseBL
+                    </span>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-md-12 col-sm-12 col-lg-12 form-group">
+            <div class="col-md-6 col-sm-6 col-lg-6  pull-right form-group">
+                <label class="col-md-4 col-sm-4 col-lg-4 pull-right  control-label">@Model.StaticLabels["lbl8"] :</label>
+                <div class="col-md-8 col-sm-8 col-lg-8 pull-right">
+                    <span class="text-dark">
+                        @Model.FromPort
+                    </span>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-6 col-lg-6  pull-right form-group">
+                <label class="col-md-4 col-sm-4 col-lg-4 pull-right control-label">@Model.StaticLabels["lbl9"] :</label>
+                <div class="col-md-8 col-sm-8 col-lg-8 pull-right">
+                    <span class="text-dark">
+                        @Model.ToPort
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-12 col-sm-12 col-lg-12 form-group">
+            <label class="col-md-2 col-sm-2 col-lg-2  pull-right control-label">@Model.StaticLabels["lbl10"] :</label>
+            <div class="col-md-10 col-sm-10 col-lg-10 pull-right">
+                <span class="text-dark">
+                    @Model.ArriveDate.Value.ToString("dd/MM/yyyy")
+                </span>
+            </div>
+        </div>
+
+        <div class="col-sm-12 col-xs-12 form-group">
+            <div class="col-sm-6 col-xs-6 form-group">
+                <label class="col-sm-3 col-xs-3 pull-right control-label">@Model.StaticLabels["lbl12"] :</label>
+                <div class="col-sm-9 col-xs-9">
+                    <span class="text-dark">
+                        @Model.ContainerNumber
+                    </span>
+                </div>
+            </div>
+
+            <div class="col-sm-6 col-xs-6 form-group">
+                <label class="col-sm-3 col-xs-3 pull-right control-label">@Model.StaticLabels["lbl13"] :</label>
+                <div class="col-sm-9 col-xs-9">
+                    <span class="text-dark">
+                        @Model.NumberOfPackages @Model.StaticLabels["lbl18"]
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-12 col-xs-12 form-group">
+            <label class="col-sm-2 col-xs-2 pull-right control-label">@Model.StaticLabels["lbl14"] :</label>
+            <div class="col-sm-10 col-xs-10">
+                <span class="text-dark">
+                    @Model.GoodsDescription
+                </span>
+            </div>
+        </div>
+
+        <div class="col-sm-12 col-xs-12 form-group">
+            <div class="col-sm-6 col-xs-6 form-group">
+                <label class="col-sm-3 col-xs-3 pull-right control-label">@Model.StaticLabels["lbl15"] :</label>
+                <div class="col-sm-9 col-xs-9">
+                    <span class="text-dark">
+                        @Model.GrossWeight
+                    </span>
+                </div>
+            </div>
+
+            <div class="col-sm-6 col-xs-6 form-group">
+                <label class="col-sm-3 col-xs-3 pull-right control-label">@Model.StaticLabels["lbl16"] :</label>
+                <div class="col-sm-9 col-xs-9">
+                    <span class="text-dark">
+                        @Model.CBM
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        
+
+        <div class="col-sm-12 col-xs-12 form-group">
+            <label class="col-sm-4 col-xs-4 col-xs-offset-4 control-label">@Model.StaticLabels["lbl17"] ..... </label>
+        </div>
+
+        
+
+    </div>
+</section>
+
+
+
+
+            
+              </div>
+
+    </div>
+    
+    <div id="footer"> 
+        @{Html.RenderAction("GetPrintFooter", "Home");} 
+    </div>
+</body>
+</html>

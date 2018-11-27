@@ -1,0 +1,55 @@
+﻿@*
+    How to use
+    @Html.Partial("~/Views/Shared/_InputWithCurrencySelect.cshtml",
+                                        ViewData["CurrencyList"] as Dictionary<int, string>,
+                                        new ViewDataDictionary
+                                        {
+                                        { "inputName", "FreightCostAmount" },
+                                        { "inputValue", @Model.FreightCostAmount },
+                                        { "selectedCurrencyId", @Model.FreighCurrencyId },
+                                        { "ddlCurrencyIdName", "FreighCurrencyId" },
+                                        { "defaultCurrencyId", 1 } ,
+                                        { "required", "required" or "" }
+                                        })
+*@
+
+@model Dictionary<int, string>
+@{
+    int selectedCurrId=0;
+    if(ViewBag.selectedCurrencyId != null)
+    {
+       selectedCurrId = ViewBag.selectedCurrencyId;
+    }
+       
+    string currSign = "Currency";
+
+    if (ViewBag.defaultCurrencyId != null && selectedCurrId == 0)
+    {
+        int defaulCurrId = ViewBag.defaultCurrencyId;
+        currSign = Model.Where(x => x.Key == defaulCurrId).FirstOrDefault().Value;
+        selectedCurrId = defaulCurrId;
+    }
+    
+   if(selectedCurrId != 0)
+    {
+         currSign = Model.Where(x => x.Key == selectedCurrId).FirstOrDefault().Value;
+    }
+}
+<div class="input-group mb-md">
+    <input type="text" id="@ViewBag.inputName" name="@ViewBag.inputName" @ViewBag.required value="@ViewBag.inputValue" class="form-control onlyNumbers">
+    <div class="input-group-btn">
+        <button type="button" class="btn btn-primary currSelected" tabindex="-1">@currSign</button>
+        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" tabindex="-1" aria-expanded="false">
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu  pull-right" role="menu">
+            @foreach (var item in Model)
+            {
+                <li><a href="javascript:void(0)" class="currencyitem" currencyId="@item.Key" >@item.Value</a></li>
+            }
+        </ul>
+        <input type="hidden" class="currIdHidden" name="@ViewBag.ddlCurrencyIdName" value="@selectedCurrId" />
+    </div>
+</div>
+
+

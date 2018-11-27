@@ -1,0 +1,172 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .select2-drop {
+        z-index: 99959;
+    }
+
+    .datepicker-dropdown {
+        z-index: 99959 !important;
+    }
+
+    .border {
+        border: 1px solid #888;
+        padding-top: 2px;
+        text-align: center;
+        vertical-align: central;
+    }
+
+    .default-icon {
+        color: #777;
+    }
+
+    .clicked-icon {
+        color: #0088cc;
+    }
+
+</style>
+
+<header class="page-header">
+    <h2>Accounting</h2>
+
+    <div class="right-wrapper pull-right">
+        <ol class="breadcrumbs">
+            <li>
+                <a href="@Url.Content("~/Home/Index")">
+                    <i class="fa fa-home"></i>
+                </a>
+            </li>
+            <li><span>Accounting</span></li>
+            <li><span>Operation Orders</span></li>
+        </ol>
+
+        <a class="sidebar-right-toggle" data-open="sidebar-right"><i class="fa fa-chevron-left"></i></a>
+    </div>
+</header>
+
+<section class="panel">
+    <header class="panel-heading">
+        <div class="panel-actions">
+            <a href="#" class=""></a>
+            <a href="#" class=""></a>
+        </div>
+
+        <h2 class="panel-title"></h2>
+    </header>
+
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="mb-md">
+                    <a href="javascript:void(0)" class="modal-with-form" id="advsearchlink">
+                        <i class="fa fa-search fa-2x"></i><span style="padding-left: 8px">Advanced Search</span>
+                    </a>
+                </div>
+            </div>
+            <div class="col-sm-1">
+                <div class="col-sm-12 border">
+                    <a id="ClearSearch" class="filter0 default-icon" title="Clear Search" href="javascript:void(0)">
+                        <i class="fa fa-eraser fa-2x"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="col-sm-4 border">
+                    <a id="AllType" class="filter1 clicked-icon" orderfrom="0" title="All" href="javascript:void(0)">
+                        <i class="fa fa-bars fa-2x"></i>
+                    </a>
+                </div>
+                <div class="col-sm-4 border">
+                    <a id="AirOnly" class="filter1 default-icon" orderfrom="1" title="Export" href="javascript:void(0)">
+                        <i class="fa fa-level-up fa-2x "></i>
+                    </a>
+                </div>
+                <div class="col-sm-4 border">
+                    <a id="shipOnly" href="javascript:void(0)" orderfrom="2" class="filter1 default-icon" title="Import">
+                        <i class="fa fa-level-down fa-2x"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-sm-2">
+                <div class="col-sm-4 border">
+                    <a id="AllType" class="filter2 clicked-icon" carriertype="0" title="All" href="javascript:void(0)">
+                        <i class="fa fa-bars fa-2x"></i>
+                    </a>
+                </div>
+                <div class="col-sm-4 border">
+                    <a id="AirOnly" class="filter2 default-icon" title="Air" carriertype="2" href="javascript:void(0)">
+                        <i class="fa fa-plane fa-2x "></i>
+                    </a>
+                </div>
+                <div class="col-sm-4 border">
+                    <a id="shipOnly" href="javascript:void(0)" carriertype="1" class="filter2 default-icon" title="Ship">
+                        <i class="fa fa-ship fa-2x"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div id="tbResult">
+            @Html.Partial("~/Views/Accounting/_ResultTable.cshtml")
+        </div>
+
+
+    </div>
+
+
+</section>
+
+<div id="modalAnim" class="modal-block modal-block-lg mfp-hide">
+    <section class="panel">
+        <header class="panel-heading">
+            <div class="panel-actions">
+                <button class="modal-dismiss" data-dismiss="modal"><i class="fa fa-times"></i></button>
+            </div>
+            <h2 id="modalheader" class="panel-title">Operation Details</h2>
+        </header>
+        <div class="panel-body">
+            <div class="modal-wrapper">
+                <div id="ModalContent" class="modal-text">
+                </div>
+            </div>
+        </div>
+        <footer class="panel-footer">
+            <div class="row">
+                <div class="col-md-12 text-right">
+                    <a class="btn btn-info" id="printopercost" role="button" href="javascript:void(0)">Print</a>
+                    <button class="btn btn-default modal-dismiss" data-dismiss="modal">Close</button>
+
+                </div>
+            </div>
+        </footer>
+    </section>
+</div>
+
+<div id="modalForm" class="modal-block modal-block-lg mfp-hide">
+    <section class="panel">
+        <header class="panel-heading">
+            <div class="panel-actions">
+                <button class="modal-dismiss" data-dismiss="modal"><i class="fa fa-times"></i></button>
+            </div>
+            <h2 class="panel-title">Advanced Search</h2>
+        </header>
+        <div id="searchdiv" class="panel-body">
+                        
+        </div>
+        <footer class="panel-footer">
+            <div class="row">
+                <div class="col-md-12 text-right">
+                    <input type="button" class="btn btn-primary search-modal-confirm" value="Search" />
+                    <button class="btn btn-default modal-dismiss">Cancel</button>
+                </div>
+            </div>
+        </footer>
+    </section>
+</div>
+
+@section scripts{
+    <script src="@Url.Content("~/Scripts/Accounting/IndexScript.js")"></script>
+}

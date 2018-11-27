@@ -1,0 +1,20 @@
+﻿@model EasyFreight.Models.HouseBillView
+@{
+    ViewBag.Title = "PrintHBDetailsV";
+    Layout = "~/Views/Shared/_PrintLayout.cshtml";
+}
+
+<div id="modalAnim" class="modal-block modal-block-lg">
+    <section class="panel">
+         
+        <div class="panel-body">
+            <div class="modal-wrapper">
+                <div id="ModalContent" class="modal-text">
+@*                    @{Html.RenderPartial("~/Views/Operation/_ViewHouseBill.cshtml", Model);}*@
+                    @{Html.RenderPartial("~/Views/Operation/_PrintHBDetails.cshtml", Model);}
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+

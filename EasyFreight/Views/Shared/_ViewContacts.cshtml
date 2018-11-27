@@ -1,0 +1,36 @@
+﻿@model List<EasyFreight.ViewModel.ContactPersonVm>
+@{
+    int index = 1;
+    }
+<section class="panel">
+
+    <div class="panel-body">
+        <div class="table-responsive">
+            <table class="table table-striped mb-none">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Contact Name</th>
+                        <th>Phone Number</th>
+                        <th>Email</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@index</td>
+                            <td>@item.ContactName</td>
+                            <td>@item.PhoneNumber</td>
+                            <td><a href="mailto:@item.Email">@item.Email</a></td>
+                        </tr>
+                        index++;
+                        
+                    }
+
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>

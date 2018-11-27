@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="9465306e10e94441ae31eec621f68f6c" Name="Diagram1">
+        <EntityTypeShape EntityType="SetupModel.PrefixSetup" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SetupModel.PrefixLastId" Width="1.5" PointX="3" PointY="1.375" />
+        <AssociationConnector Association="SetupModel.FK_PrefixSetup_PrefixLastId" />
+        <EntityTypeShape EntityType="SetupModel.Module" Width="1.5" PointX="3.375" PointY="7.25" />
+        <EntityTypeShape EntityType="SetupModel.ModuleScreen" Width="1.5" PointX="5.625" PointY="6.875" />
+        <EntityTypeShape EntityType="SetupModel.ScreenAction" Width="1.5" PointX="7.875" PointY="7.125" />
+        <EntityTypeShape EntityType="SetupModel.ScreenActionDep" Width="1.5" PointX="7.875" PointY="4" />
+        <EntityTypeShape EntityType="SetupModel.ScreenActionUser" Width="1.5" PointX="7.875" PointY="10" />
+        <EntityTypeShape EntityType="SetupModel.SecActionLib" Width="1.5" PointX="5.625" PointY="3" />
+        <AssociationConnector Association="SetupModel.FK_ModuleScreen_Module" />
+        <AssociationConnector Association="SetupModel.FK_ScreenAction_ModuleScreen" />
+        <AssociationConnector Association="SetupModel.FK_ScreenActionDep_ModuleScreen" />
+        <AssociationConnector Association="SetupModel.FK_ScreenActionUser_ModuleScreen" />
+        <AssociationConnector Association="SetupModel.FK_ScreenAction_SecActionLib" />
+        <AssociationConnector Association="SetupModel.FK_ScreenActionDep_SecActionLib" />
+        <AssociationConnector Association="SetupModel.FK_ScreenActionUser_SecActionLib" />
+        <EntityTypeShape EntityType="SetupModel.UserEmployee" Width="1.5" PointX="0.75" PointY="4.75" />
+        <EntityTypeShape EntityType="SetupModel.AspNetUser" Width="1.5" PointX="0.75" PointY="7.5" />
+        <AssociationConnector Association="SetupModel.FK_UserEmployee_AspNetUsers" />
+        <EntityTypeShape EntityType="SetupModel.AspNetUserRole" Width="1.5" PointX="3" PointY="9.875" />
+        <AssociationConnector Association="SetupModel.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

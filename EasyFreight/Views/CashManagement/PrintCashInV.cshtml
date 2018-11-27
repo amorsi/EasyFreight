@@ -1,0 +1,339 @@
+﻿@model EasyFreight.ViewModel.CashInVm
+@{
+    ViewBag.Title = "PrintCashInV";
+
+    Layout = (Model.CashType == "cashin") ? null : "~/Views/Shared/_PrintLayout.cshtml";
+     
+    
+    string paymentTerm = "";
+    switch (Model.PaymentTermId)
+    {
+        case 1:
+            paymentTerm = "نقدى";
+            break;
+        case 2:
+            paymentTerm = "اّجل";
+            break;
+        case 3:
+            paymentTerm = "إيداع بالبنك";
+            break;
+        case 4:
+            paymentTerm = "شيك";
+            break;
+        case 5:
+            paymentTerm = "من الدفعات المقدمة";
+            break;
+        case 6:
+            paymentTerm = "من الخزينة للبنك";
+            break;
+        case 7:
+            paymentTerm = "من البنك للخزينة";
+            break;
+        case 8:
+            paymentTerm = "تغيير عملة";
+            break;
+        case 9:
+            paymentTerm = "تحويل من بنك الى بنك";
+            break;
+    }
+ 
+        
+   
+}
+@if (Model.CashType != "cashin")
+{  
+  <hr />
+<div style="min-height: 1200px;">
+@{Html.RenderPartial("~/Views/CashManagement/_ViewCashInReceipt.cshtml", Model);}
+
+</div>
+<style>
+    .PaymentTerm {
+    visibility:hidden;
+    display:none;
+    }
+</style> 
+}
+
+@if (Model.CashType == "cashin")
+{ 
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- title -->
+    <title>Receipt</title>
+    
+    <!-- Bootstrap -->
+    <link href="@Url.Content("~/assets/print/css/bootstrap.min.css")" rel="stylesheet">
+    <!-- Bootstrap-Arabic -->
+       <link href="@Url.Content("~/assets/print/css/bootstrap-rtl.css")" rel="stylesheet">
+     <!-- Font -->
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+    <!-- Font-awesome -->
+       <link rel="stylesheet" type="text/css" href="@Url.Content("~/assets/print/css/font-awesome.min.css")">
+    <!-- Style -->
+      <link href="@Url.Content("~/assets/print/css/style.css")" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]-->
+     <script src="@Url.Content("~/assets/print/js/html5shiv.min.js")"></script>
+      <script src="@Url.Content("~/assets/print/js/respond.min.js")"></script>
+    <!--[endif]-->
+
+      <style>
+    .PaymentTerm {
+    visibility:hidden;
+    display:none;
+    }
+</style>
+  </head>
+  <body>
+    <div class="container"  >
+          <div id="ddd" class="col-xs-12" style="min-height: 50px;">
+
+          </div>
+    
+          <div id="header" class="col-xs-12" style="min-height: 130px;">
+            <div class="col-xs-6">
+                <img src="@Url.Content("~/images/EnglishLogo.png")" height="100" width="250" />
+            </div>
+            <div class="col-xs-6" style="text-align: left;">
+                <img src="@Url.Content("~/images/ArabicLogo.png")" height="100" width="250" />
+            </div>
+              <div class="row"><p></p></div>
+        </div>
+       
+       <div class="content receipt" >
+       <h3 style="text-align:center">ايصال توريد @paymentTerm<br> @Model.ReceiptCode</h3>
+       <p>الاسكندرية فى : @DateTime.Now.ToString("dd/MM/yyyy") </p>
+       <div class="row">
+          <div class="col-sm-8  col-xs-7">
+             <p>استلمنا نحن شركة ايه . أم كارجو للنقل الدولى ذ.م.م</p>
+          </div>
+          <div class="col-sm-4  col-xs-5">
+             <div class="row price text-center">
+                <div class="col-sm-4">
+                   <p class="curenc"></p>
+                   <div class="line20"></div>
+                   <p></p>
+                </div>
+                <div class="col-sm-4">
+                   <p class="curenc">@Model.CurrencySign</p>
+                   <div class="line2"></div>
+                   <p>@Model.ReceiptAmount</p>
+                </div>
+             </div>
+          </div>
+       </div>
+       <div class="row">
+          <div class="col-sm-6  col-xs-6">
+             <div class="row">
+                <div class="col-sm-3  col-xs-4">
+                   <p>من السيد : </p>
+                </div>
+                <div class="col-sm-9  col-xs-8">
+                   <p class="name"></p>
+                </div>
+             </div>
+          </div>
+          <div class="col-sm-6  col-xs-6">
+             <div class="row">
+                <div class="col-sm-4  col-xs-4">
+                   <p>مندوب شركة : </p>
+                </div>
+                <div class="col-sm-8  col-xs-8">
+                   <p >@Model.CustomerName</p>
+                </div>
+             </div>
+          </div>
+       </div> 
+             <div class="row">
+          <div class="col-sm-2  col-xs-2">
+              <p>مبلغ وقدره : </p>
+          </div>
+          <div class="col-sm-10  col-xs-10">
+             <p class="name0">  @EasyFreight.DAL.CashHelper.GetNumberToWords(Model.ReceiptAmount.Value,Model.CurrencySign)</p>
+          </div>
+       </div>
+       <div class="row">
+          <div class="col-sm-2  col-xs-2">
+              <p >وذلك قيمة : </p>
+          </div>
+          <div class="col-sm-10  col-xs-10">
+             <p > 
+                 @{string costName = ""; }
+                 @if (Model.PaymentTermId < 6) { 
+                  foreach (var item in Model.InvsVm.InvoiceDetails)
+                   {
+                       costName += item.PrintedTitle + " - ";
+                   }
+                  costName.TrimEnd('-');
+                 }else
+                 {
+                     costName = paymentTerm;
+                 }
+                  </p>
+          </div>
+       </div>
+               @if (Model.PaymentTermId < 6)
+               { 
+       <div class="row">
+          <div class="col-sm-6  col-xs-6">
+             <div class="row">
+                <div class="col-sm-6  col-xs-6">
+                   <p>سداد الفاتورة رقم : </p>
+                </div>
+                <div class="col-sm-6  col-xs-6">
+                   <p  > @Model.InvCodeListString</p>
+                </div>
+             </div>
+          </div>
+          <div class="col-sm-6  col-xs-6">
+             <div class="row">
+                <div class="col-sm-4  col-xs-5">
+                   <p>المؤرخة فى : </p>
+                </div>
+                <div class="col-sm-8  col-xs-7"> 
+                   <p  >
+                      @Model.InvsVm.InvoiceDate.Value.ToString("dd/MM/yyyy")
+                        
+                        </p>
+                </div>
+             </div>
+          </div>
+       </div>
+           }
+         
+             @if (Model.PaymentTermId == 3)
+           {  
+       <div class="row">
+          <div class="col-sm-3  col-xs-3">
+              <p>بموجب تحويل بنكى رقم  : </p>
+          </div>
+          <div class="col-sm-9  col-xs-9">
+             <p class="name"></p>
+          </div>
+       </div>
+       <div class="row">
+          <div class="col-sm-6  col-xs-6">
+             <div class="row">
+                <div class="col-sm-5  col-xs-5">
+                   <p>من حساب رقم:</p>
+                </div>
+                <div class="col-sm-7  col-xs-7 rigrt">
+                   <p class="name"></p>
+                </div>
+             </div>
+          </div>
+          <div class="col-sm-6  col-xs-6">
+             <div class="row">
+                <div class="col-sm-3  col-xs-3 left">
+                   <p>بنك : </p>
+                </div>
+                <div class="col-sm-9  col-xs-9 rigrt">
+                   <p class="name"></p>
+                </div>
+             </div>
+          </div>
+       </div>
+       <div class="row">
+          <div class="col-sm-6  col-xs-6">
+             <div class="row">
+                <div class="col-sm-4  col-xs-4">
+                   <p>الى حساب رقم:</p>
+                </div>
+                <div class="col-sm-8  col-xs-8 rigrt" >
+                   <p class="name0">@Model.BankDetailsVm.AccountNumber
+
+                   </p>
+                </div>
+             </div>
+          </div>
+          <div class="col-sm-6  col-xs-6">
+             <div class="row">
+                <div class="col-sm-3  col-xs-3 left">
+                   <p>بنك : </p>
+                </div>
+                <div class="col-sm-9  col-xs-9">
+                   <p class="name0">@Model.BankDetailsVm.BankNameEn </p>
+                </div>
+             </div>
+          </div>
+       </div>
+            }
+         
+            @if (Model.PaymentTermId == 4)
+            {
+ 
+                <div class="row">
+                    <div class="col-sm-6  col-xs-6">
+                        <div class="row">
+                             <div class="col-sm-6  col-xs-6">
+                                <p>بموجب شيك رقم:</p>
+                            </div>
+                            <div class="col-sm-6  col-xs-6 rigrt">
+                                <p class="name0">@Model.CashInReceiptChecks[0].CheckNumber</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6  col-xs-6">
+                        <div class="row">
+                            <div class="col-sm-5  col-xs-5">
+                                <p>بنك:</p>
+                            </div>
+                            <div class="col-sm-7  col-xs-7 rigrt">
+                                <p class="name0">@Model.CashInReceiptChecks[0].BankNameEn</p>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            
+              
+                <div class="row">
+                            <div class="col-sm-2  col-xs-3">
+                                <p>تاريخ استحقاق:</p>
+                            </div>
+                            <div class="col-sm-10  col-xs-9 rigrt">
+                                <p class="name0">@Model.CashInReceiptChecks[0].CheckDueDate.Value.ToString("dd/MM/yyyy")</p>
+                            </div>
+                        </div>
+                    
+            }
+
+                  <p class="Recog text-center">و هذا ايصال منا بالاستلام </p>
+       <div class="row text-center">
+          <div class="col-sm-6 col-xs-6">
+             <p>أمين الخزينة</p>
+          </div>
+          <div class="col-sm-6 col-xs-6">
+             <p>ادارة الحسابات</p>
+          </div>
+       </div>
+   
+      <div class="row" style="height:50px">
+           <p><br /></p>
+       </div>     
+           
+       </div><!-- End of content -->
+  
+      
+
+        <div class="row" style="height:500px">
+           <p><br /></p>
+       </div>    
+        <div id="footer" style="font-size:12px;font-weight:bold;"> 
+        @{Html.RenderAction("GetPrintFooter", "Home");} 
+    </div>
+  </div><!-- End of container -->
+ 
+     <script src="@Url.Content("~/assets/print/js/bootstrap.min.js")"  ></script>
+
+</body>
+</html>
+}

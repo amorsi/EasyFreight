@@ -1,0 +1,102 @@
+﻿@model EasyFreight.ViewModel.ConcessionLetterVm
+@{
+    ViewBag.Title = "ConcessionLetterAirAr";
+    Layout = "~/Views/Shared/_PrintLayout.cshtml";
+}
+<section style="text-align:right;direction:rtl;min-height:1100px;font-size:17.5px;font-family:'Times New Roman'" class="panel hblist" >
+    <div class="panel-body">
+
+        <br />
+        <div class="col-xs-12  col-sm-12 col-md-12 col-lg-12 form-group" style="text-align:center;">
+             
+                <h4   style="font-size:25px;font-weight:bold;">@Model.StaticLabels["lbl1"] : DL-@Model.HouseBL </h4>
+          
+            
+        </div>
+
+        <div class="col-xs-12  col-sm-12 col-md-12 col-lg-12 form-group">
+            <label class="col-md-2 col-sm-2 col-lg-2 pull-right control-label txtTitle">@Model.StaticLabels["lbl2"] /</label>
+            <div class="col-md-10 col-sm-10 col-lg-10 pull-right">
+                <span class="text-dark">
+                    @DateTime.Now.ToString("dd/MM/yyyy")
+                </span>
+            </div>
+        </div>
+
+        <div class="col-xs-12  col-sm-12 col-md-12 col-lg-12 form-group">
+            <label class="col-md-2 col-sm-2 col-lg-2 pull-right control-label txtTitle"  >@Model.StaticLabels["lbl3"] :</label>
+            <div class="col-md-10 col-sm-10 col-lg-10 pull-right">
+                <span class="text-dark">
+                    @Model.ToPort
+                </span>
+            </div>
+        </div>
+
+        <div class="col-xs-12  col-sm-12 col-md-12 col-lg-12 form-group">
+            <label class="col-md-2 col-sm-2 col-lg-2 pull-right control-label txtTitle">@Model.StaticLabels["lbl4"] :</label>
+            <div class="col-md-10 col-sm-10 col-lg-10 pull-right">
+                <span class="text-dark">
+                    @Model.ConsigneeName
+                </span>
+            </div>
+        </div>
+
+        <div class="col-xs-12  col-sm-12 col-md-12 col-lg-12 form-group">
+            <label class="col-md-3 col-sm-3 col-lg-3 pull-right control-label txtTitle">@Model.StaticLabels["lbl5"] :</label>
+            <div class="col-md-9 col-sm-9 col-lg-9 pull-right">
+                <span class="text-dark">
+                    @Model.MBL
+                </span>
+            </div>
+        </div>
+
+        <div class="col-xs-12  col-sm-12 col-md-12 col-lg-12 form-group">
+            <label class="col-md-3 col-sm-3 col-lg-3 pull-right control-label txtTitle">@Model.StaticLabels["lbl6"] :</label>
+            <div class="col-md-9 col-sm-9 col-lg-9 pull-right">
+                <span class="text-dark">
+                    @Model.HouseBL
+                </span>
+            </div>
+        </div>
+
+        <div class="col-xs-12  col-sm-12 col-md-12 col-lg-12 form-group">
+            <label class="col-md-2 col-sm-2 col-lg-2 pull-right control-label txtTitle">@Model.StaticLabels["lbl7"] :</label>
+            <div class="col-md-10 col-sm-10 col-lg-10 pull-right">
+                <span class="text-dark">
+                    @Model.NumberOfPackages @Model.StaticLabels["lbl8"]
+                </span>
+            </div>
+        </div>
+
+        <div class="col-xs-12  col-sm-12 col-md-12 col-lg-12 form-group">
+            <label class="col-md-2 col-sm-2 col-lg-2 pull-right control-label txtTitle">@Model.StaticLabels["lbl9"] :</label>
+            <div class="col-md-10 col-sm-10 col-lg-10  col-xs-10  pull-right">
+                <span class="text-dark">
+                    @Model.GrossWeight KG
+                </span>
+            </div>
+        </div>
+
+        <div class="col-xs-12  col-sm-12 col-md-12 col-lg-12 form-group">
+            <label class="col-md-2 col-sm-2 col-lg-2 pull-right control-label txtTitle">@Model.StaticLabels["lbl10"] :</label>
+            <div class="col-md-10 col-sm-10 col-lg-10  col-xs-10 pull-right ">
+                <span class="text-dark">
+                </span>
+            </div>
+        </div>
+
+        <div class="col-xs-12  col-sm-12 col-md-12 col-lg-12 form-group">
+            <label class="col-sm-4 col-xs-4 col-xs-offset-4 control-label " style="font-weight:bold;font-size:25px">@Model.StaticLabels["lbl11"] ..... </label>
+        </div>
+    </div>
+    <style>
+        .txtTitle {
+            font-size:20px;
+            font-weight:bold;
+        }
+        .text-dark {
+            font-size:18px !important;
+        }
+         
+    </style>
+</section>

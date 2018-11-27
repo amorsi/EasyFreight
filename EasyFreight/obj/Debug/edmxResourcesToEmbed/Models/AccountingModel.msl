@@ -1,0 +1,737 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="AccountingModelStoreContainer" CdmEntityContainer="AccountingEntities">
+    <EntitySetMapping Name="AccountingCharts">
+      <EntityTypeMapping TypeName="AccountingModel.AccountingChart">
+        <MappingFragment StoreEntitySet="AccountingChart">
+          <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+          <ScalarProperty Name="ParentAccountId" ColumnName="ParentAccountId" />
+          <ScalarProperty Name="AccountNameEn" ColumnName="AccountNameEn" />
+          <ScalarProperty Name="AccountNameAr" ColumnName="AccountNameAr" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ConsigneeAccs">
+      <EntityTypeMapping TypeName="AccountingModel.ConsigneeAcc">
+        <MappingFragment StoreEntitySet="Consignee">
+          <ScalarProperty Name="VatTaxAccountId" ColumnName="VatTaxAccountId" />
+          <ScalarProperty Name="TaxDepositAccountId" ColumnName="TaxDepositAccountId" />
+          <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+          <ScalarProperty Name="ConsigneeId" ColumnName="ConsigneeId" />
+          <ScalarProperty Name="ConsigneeCode" ColumnName="ConsigneeCode" />
+          <ScalarProperty Name="ConsigneeNameEn" ColumnName="ConsigneeNameEn" />
+          <ScalarProperty Name="ConsigneeNameAr" ColumnName="ConsigneeNameAr" />
+          <ScalarProperty Name="ConsigneeAddressEn" ColumnName="ConsigneeAddressEn" />
+          <ScalarProperty Name="ConsigneeAddressAr" ColumnName="ConsigneeAddressAr" />
+          <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+          <ScalarProperty Name="CityId" ColumnName="CityId" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="WebSite" ColumnName="WebSite" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="FaxNumber" ColumnName="FaxNumber" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CurrencyAccs">
+      <EntityTypeMapping TypeName="AccountingModel.CurrencyAcc">
+        <MappingFragment StoreEntitySet="Currency">
+          <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+          <ScalarProperty Name="CurrencyId" ColumnName="CurrencyId" />
+          <ScalarProperty Name="CurrencySign" ColumnName="CurrencySign" />
+          <ScalarProperty Name="CurrencyName" ColumnName="CurrencyName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HouseBillAccs">
+      <EntityTypeMapping TypeName="AccountingModel.HouseBillAcc">
+        <MappingFragment StoreEntitySet="HouseBill">
+          <ScalarProperty Name="IsHazardous" ColumnName="IsHazardous" />
+          <ScalarProperty Name="HouseBillId" ColumnName="HouseBillId" />
+          <ScalarProperty Name="OrderFrom" ColumnName="OrderFrom" />
+          <ScalarProperty Name="OperationId" ColumnName="OperationId" />
+          <ScalarProperty Name="OperationCode" ColumnName="OperationCode" />
+          <ScalarProperty Name="OperationDate" ColumnName="OperationDate" />
+          <ScalarProperty Name="HouseBL" ColumnName="HouseBL" />
+          <ScalarProperty Name="FromPortId" ColumnName="FromPortId" />
+          <ScalarProperty Name="ToPortId" ColumnName="ToPortId" />
+          <ScalarProperty Name="ShipperId" ColumnName="ShipperId" />
+          <ScalarProperty Name="ConsigneeId" ColumnName="ConsigneeId" />
+          <ScalarProperty Name="NotifierId" ColumnName="NotifierId" />
+          <ScalarProperty Name="NotifierAsConsignee" ColumnName="NotifierAsConsignee" />
+          <ScalarProperty Name="DeliveryType" ColumnName="DeliveryType" />
+          <ScalarProperty Name="AgentId" ColumnName="AgentId" />
+          <ScalarProperty Name="GrossWeight" ColumnName="GrossWeight" />
+          <ScalarProperty Name="NetWeight" ColumnName="NetWeight" />
+          <ScalarProperty Name="CBM" ColumnName="CBM" />
+          <ScalarProperty Name="NumberOfPackages" ColumnName="NumberOfPackages" />
+          <ScalarProperty Name="PackageTypeId" ColumnName="PackageTypeId" />
+          <ScalarProperty Name="IsPrepaid" ColumnName="IsPrepaid" />
+          <ScalarProperty Name="CollectedFreightCost" ColumnName="CollectedFreightCost" />
+          <ScalarProperty Name="FreighCurrencyId" ColumnName="FreighCurrencyId" />
+          <ScalarProperty Name="CollectedThcCost" ColumnName="CollectedThcCost" />
+          <ScalarProperty Name="ThcCurrencyId" ColumnName="ThcCurrencyId" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+          <ScalarProperty Name="GoodsDescription" ColumnName="GoodsDescription" />
+          <ScalarProperty Name="Marks" ColumnName="Marks" />
+          <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+          <ScalarProperty Name="BookingNumber" ColumnName="BookingNumber" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ShipperAccs">
+      <EntityTypeMapping TypeName="AccountingModel.ShipperAcc">
+        <MappingFragment StoreEntitySet="Shipper">
+          <ScalarProperty Name="VatTaxAccountId" ColumnName="VatTaxAccountId" />
+          <ScalarProperty Name="TaxDepositAccountId" ColumnName="TaxDepositAccountId" />
+          <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+          <ScalarProperty Name="ShipperId" ColumnName="ShipperId" />
+          <ScalarProperty Name="ShipperCode" ColumnName="ShipperCode" />
+          <ScalarProperty Name="ShipperNameEn" ColumnName="ShipperNameEn" />
+          <ScalarProperty Name="ShipperNameAr" ColumnName="ShipperNameAr" />
+          <ScalarProperty Name="ShipperAddressEn" ColumnName="ShipperAddressEn" />
+          <ScalarProperty Name="ShipperAddressAr" ColumnName="ShipperAddressAr" />
+          <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+          <ScalarProperty Name="CityId" ColumnName="CityId" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="WebSite" ColumnName="WebSite" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="FaxNumber" ColumnName="FaxNumber" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PaymentTerms">
+      <EntityTypeMapping TypeName="AccountingModel.PaymentTerm">
+        <MappingFragment StoreEntitySet="PaymentTerm">
+          <ScalarProperty Name="PaymentTermAr" ColumnName="PaymentTermAr" />
+          <ScalarProperty Name="PaymentTermEn" ColumnName="PaymentTermEn" />
+          <ScalarProperty Name="PaymentTermId" ColumnName="PaymentTermId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Invoices">
+      <EntityTypeMapping TypeName="AccountingModel.Invoice">
+        <MappingFragment StoreEntitySet="Invoice">
+          <ScalarProperty Name="DeleteReason" ColumnName="DeleteReason" />
+          <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="InvCurrencyId" ColumnName="InvCurrencyId" />
+          <ScalarProperty Name="InvStatusId" ColumnName="InvStatusId" />
+          <ScalarProperty Name="DueDate" ColumnName="DueDate" />
+          <ScalarProperty Name="TransId" ColumnName="TransId" />
+          <ScalarProperty Name="InvoiceType" ColumnName="InvoiceType" />
+          <ScalarProperty Name="PaymentTermId" ColumnName="PaymentTermId" />
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+          <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="OrderFrom" ColumnName="OrderFrom" />
+          <ScalarProperty Name="ConsigneeId" ColumnName="ConsigneeId" />
+          <ScalarProperty Name="ShipperId" ColumnName="ShipperId" />
+          <ScalarProperty Name="HouseBillId" ColumnName="HouseBillId" />
+          <ScalarProperty Name="OperationId" ColumnName="OperationId" />
+          <ScalarProperty Name="InvoiceDate" ColumnName="InvoiceDate" />
+          <ScalarProperty Name="InvoiceCode" ColumnName="InvoiceCode" />
+          <ScalarProperty Name="InvoiceId" ColumnName="InvoiceId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Banks">
+      <EntityTypeMapping TypeName="AccountingModel.Bank">
+        <MappingFragment StoreEntitySet="Bank">
+          <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+          <ScalarProperty Name="SwiftCode" ColumnName="SwiftCode" />
+          <ScalarProperty Name="BankAddressAr" ColumnName="BankAddressAr" />
+          <ScalarProperty Name="BankAddressEn" ColumnName="BankAddressEn" />
+          <ScalarProperty Name="BankNameAr" ColumnName="BankNameAr" />
+          <ScalarProperty Name="BankNameEn" ColumnName="BankNameEn" />
+          <ScalarProperty Name="BankId" ColumnName="BankId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BankAccounts">
+      <EntityTypeMapping TypeName="AccountingModel.BankAccount">
+        <MappingFragment StoreEntitySet="BankAccount">
+          <ScalarProperty Name="CurrencyId" ColumnName="CurrencyId" />
+          <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+          <ScalarProperty Name="AccountNumber" ColumnName="AccountNumber" />
+          <ScalarProperty Name="AccountName" ColumnName="AccountName" />
+          <ScalarProperty Name="BankId" ColumnName="BankId" />
+          <ScalarProperty Name="BankAccId" ColumnName="BankAccId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AgentNotes">
+      <EntityTypeMapping TypeName="AccountingModel.AgentNote">
+        <MappingFragment StoreEntitySet="AgentNote">
+          <ScalarProperty Name="CurrencySign" ColumnName="CurrencySign" />
+          <ScalarProperty Name="CurrencyId" ColumnName="CurrencyId" />
+          <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+          <ScalarProperty Name="InvStatusId" ColumnName="InvStatusId" />
+          <ScalarProperty Name="DueDate" ColumnName="DueDate" />
+          <ScalarProperty Name="TransId" ColumnName="TransId" />
+          <ScalarProperty Name="BankId" ColumnName="BankId" />
+          <ScalarProperty Name="BankAccId" ColumnName="BankAccId" />
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+          <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="ConsigneeId" ColumnName="ConsigneeId" />
+          <ScalarProperty Name="ShipperId" ColumnName="ShipperId" />
+          <ScalarProperty Name="HouseBillId" ColumnName="HouseBillId" />
+          <ScalarProperty Name="OperationId" ColumnName="OperationId" />
+          <ScalarProperty Name="AgentId" ColumnName="AgentId" />
+          <ScalarProperty Name="AgentNoteDate" ColumnName="AgentNoteDate" />
+          <ScalarProperty Name="AgentNoteCode" ColumnName="AgentNoteCode" />
+          <ScalarProperty Name="AgentNoteType" ColumnName="AgentNoteType" />
+          <ScalarProperty Name="AgentNoteId" ColumnName="AgentNoteId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AccTransactions">
+      <EntityTypeMapping TypeName="AccountingModel.AccTransaction">
+        <MappingFragment StoreEntitySet="AccTransaction">
+          <ScalarProperty Name="TransactionNameAr" ColumnName="TransactionNameAr" />
+          <ScalarProperty Name="TransactionName" ColumnName="TransactionName" />
+          <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="TransId" ColumnName="TransId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AccTransactionDetails">
+      <EntityTypeMapping TypeName="AccountingModel.AccTransactionDetail">
+        <MappingFragment StoreEntitySet="AccTransactionDetail">
+          <ScalarProperty Name="CurrencyId" ColumnName="CurrencyId" />
+          <ScalarProperty Name="CreditAmount" ColumnName="CreditAmount" />
+          <ScalarProperty Name="DebitAmount" ColumnName="DebitAmount" />
+          <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+          <ScalarProperty Name="TransId" ColumnName="TransId" />
+          <ScalarProperty Name="TransDetailId" ColumnName="TransDetailId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="InvStatusLibs">
+      <EntityTypeMapping TypeName="AccountingModel.InvStatusLib">
+        <MappingFragment StoreEntitySet="InvStatusLib">
+          <ScalarProperty Name="InvStatusNameAr" ColumnName="InvStatusNameAr" />
+          <ScalarProperty Name="InvStatusNameEn" ColumnName="InvStatusNameEn" />
+          <ScalarProperty Name="InvStatusId" ColumnName="InvStatusId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="InvoiceTotals">
+      <EntityTypeMapping TypeName="AccountingModel.InvoiceTotal">
+        <MappingFragment StoreEntitySet="InvoiceTotal">
+          <ScalarProperty Name="VatTaxAmount" ColumnName="VatTaxAmount" />
+          <ScalarProperty Name="TotalBeforeTax" ColumnName="TotalBeforeTax" />
+          <ScalarProperty Name="TaxDepositAmount" ColumnName="TaxDepositAmount" />
+          <ScalarProperty Name="CurrencySign" ColumnName="CurrencySign" />
+          <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+          <ScalarProperty Name="CurrencyId" ColumnName="CurrencyId" />
+          <ScalarProperty Name="InvoiceId" ColumnName="InvoiceId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="InvoiceDetails">
+      <EntityTypeMapping TypeName="AccountingModel.InvoiceDetail">
+        <MappingFragment StoreEntitySet="InvoiceDetail">
+          <ScalarProperty Name="PrintedTitle" ColumnName="PrintedTitle" />
+          <ScalarProperty Name="ItemOrder" ColumnName="ItemOrder" />
+          <ScalarProperty Name="ExchangeRate" ColumnName="ExchangeRate" />
+          <ScalarProperty Name="MainCurrencyId" ColumnName="MainCurrencyId" />
+          <ScalarProperty Name="CurrencyId" ColumnName="CurrencyId" />
+          <ScalarProperty Name="InvoiceAmount" ColumnName="InvoiceAmount" />
+          <ScalarProperty Name="MainAmount" ColumnName="MainAmount" />
+          <ScalarProperty Name="FkType" ColumnName="FkType" />
+          <ScalarProperty Name="CostFkId" ColumnName="CostFkId" />
+          <ScalarProperty Name="InvoiceId" ColumnName="InvoiceId" />
+          <ScalarProperty Name="InvDetailId" ColumnName="InvDetailId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CashInReceipts">
+      <EntityTypeMapping TypeName="AccountingModel.CashInReceipt">
+        <MappingFragment StoreEntitySet="CashInReceipt">
+          <ScalarProperty Name="PartnerAccountId" ColumnName="PartnerAccountId" />
+          <ScalarProperty Name="OperationId" ColumnName="OperationId" />
+          <ScalarProperty Name="DeleteReason" ColumnName="DeleteReason" />
+          <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="BankAccId" ColumnName="BankAccId" />
+          <ScalarProperty Name="BankId" ColumnName="BankId" />
+          <ScalarProperty Name="CurrencyId" ColumnName="CurrencyId" />
+          <ScalarProperty Name="TransId" ColumnName="TransId" />
+          <ScalarProperty Name="DiscountAmount" ColumnName="DiscountAmount" />
+          <ScalarProperty Name="ReceiptAmount" ColumnName="ReceiptAmount" />
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+          <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="PaymentTermId" ColumnName="PaymentTermId" />
+          <ScalarProperty Name="AgentId" ColumnName="AgentId" />
+          <ScalarProperty Name="ConsigneeId" ColumnName="ConsigneeId" />
+          <ScalarProperty Name="ShipperId" ColumnName="ShipperId" />
+          <ScalarProperty Name="ReceiptDate" ColumnName="ReceiptDate" />
+          <ScalarProperty Name="ReceiptCode" ColumnName="ReceiptCode" />
+          <ScalarProperty Name="ReceiptId" ColumnName="ReceiptId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CashInReceiptInvs">
+      <EntityTypeMapping TypeName="AccountingModel.CashInReceiptInv">
+        <MappingFragment StoreEntitySet="CashInReceiptInv">
+          <ScalarProperty Name="DiscountAmount" ColumnName="DiscountAmount" />
+          <ScalarProperty Name="PaidAmount" ColumnName="PaidAmount" />
+          <ScalarProperty Name="InvoiceId" ColumnName="InvoiceId" />
+          <ScalarProperty Name="ReceiptId" ColumnName="ReceiptId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CashInReceiptChecks">
+      <EntityTypeMapping TypeName="AccountingModel.CashInReceiptCheck">
+        <MappingFragment StoreEntitySet="CashInReceiptCheck">
+          <ScalarProperty Name="BankId" ColumnName="BankId" />
+          <ScalarProperty Name="CollectBy" ColumnName="CollectBy" />
+          <ScalarProperty Name="CollectDate" ColumnName="CollectDate" />
+          <ScalarProperty Name="TransId" ColumnName="TransId" />
+          <ScalarProperty Name="IsCollected" ColumnName="IsCollected" />
+          <ScalarProperty Name="CheckDueDate" ColumnName="CheckDueDate" />
+          <ScalarProperty Name="CheckNumber" ColumnName="CheckNumber" />
+          <ScalarProperty Name="ReceiptId" ColumnName="ReceiptId" />
+          <ScalarProperty Name="CashInCheckId" ColumnName="CashInCheckId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AgentNoteDetails">
+      <EntityTypeMapping TypeName="AccountingModel.AgentNoteDetail">
+        <MappingFragment StoreEntitySet="AgentNoteDetail">
+          <ScalarProperty Name="CurrencySign" ColumnName="CurrencySign" />
+          <ScalarProperty Name="CurrencyId" ColumnName="CurrencyId" />
+          <ScalarProperty Name="AgentNoteAmount" ColumnName="AgentNoteAmount" />
+          <ScalarProperty Name="ExchangeRate" ColumnName="ExchangeRate" />
+          <ScalarProperty Name="MainCurrencySign" ColumnName="MainCurrencySign" />
+          <ScalarProperty Name="MainCurrencyId" ColumnName="MainCurrencyId" />
+          <ScalarProperty Name="MainAmount" ColumnName="MainAmount" />
+          <ScalarProperty Name="OperCostLibId" ColumnName="OperCostLibId" />
+          <ScalarProperty Name="OperCostId" ColumnName="OperCostId" />
+          <ScalarProperty Name="AgentNoteId" ColumnName="AgentNoteId" />
+          <ScalarProperty Name="AgentNoteDetailId" ColumnName="AgentNoteDetailId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AgentNoteViews">
+      <EntityTypeMapping TypeName="AccountingModel.AgentNoteView">
+        <MappingFragment StoreEntitySet="AgentNoteView">
+          <ScalarProperty Name="AccountNumber" ColumnName="AccountNumber" />
+          <ScalarProperty Name="AccountName" ColumnName="AccountName" />
+          <ScalarProperty Name="BankNameEn" ColumnName="BankNameEn" />
+          <ScalarProperty Name="CurrencySign" ColumnName="CurrencySign" />
+          <ScalarProperty Name="CurrencyId" ColumnName="CurrencyId" />
+          <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+          <ScalarProperty Name="InvStatusId" ColumnName="InvStatusId" />
+          <ScalarProperty Name="InvStatusNameAr" ColumnName="InvStatusNameAr" />
+          <ScalarProperty Name="InvStatusNameEn" ColumnName="InvStatusNameEn" />
+          <ScalarProperty Name="MBL" ColumnName="MBL" />
+          <ScalarProperty Name="BookingNumber" ColumnName="BookingNumber" />
+          <ScalarProperty Name="OperationCode" ColumnName="OperationCode" />
+          <ScalarProperty Name="OrderFrom" ColumnName="OrderFrom" />
+          <ScalarProperty Name="AgentNameAr" ColumnName="AgentNameAr" />
+          <ScalarProperty Name="AgentNameEn" ColumnName="AgentNameEn" />
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+          <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="OperationId" ColumnName="OperationId" />
+          <ScalarProperty Name="AgentId" ColumnName="AgentId" />
+          <ScalarProperty Name="DueDate" ColumnName="DueDate" />
+          <ScalarProperty Name="AgentNoteDate" ColumnName="AgentNoteDate" />
+          <ScalarProperty Name="AgentNoteCode" ColumnName="AgentNoteCode" />
+          <ScalarProperty Name="AgentNoteType" ColumnName="AgentNoteType" />
+          <ScalarProperty Name="AgentNoteId" ColumnName="AgentNoteId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CashInReceiptAgNotes">
+      <EntityTypeMapping TypeName="AccountingModel.CashInReceiptAgNote">
+        <MappingFragment StoreEntitySet="CashInReceiptAgNote">
+          <ScalarProperty Name="DiscountAmount" ColumnName="DiscountAmount" />
+          <ScalarProperty Name="PaidAmount" ColumnName="PaidAmount" />
+          <ScalarProperty Name="AgentNoteId" ColumnName="AgentNoteId" />
+          <ScalarProperty Name="ReceiptId" ColumnName="ReceiptId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="InvoiceTotalAPs">
+      <EntityTypeMapping TypeName="AccountingModel.InvoiceTotalAP">
+        <MappingFragment StoreEntitySet="InvoiceTotalAP">
+          <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+          <ScalarProperty Name="CurrencySign" ColumnName="CurrencySign" />
+          <ScalarProperty Name="CurrencyId" ColumnName="CurrencyId" />
+          <ScalarProperty Name="InvoiceId" ColumnName="InvoiceId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CashOutReceipts">
+      <EntityTypeMapping TypeName="AccountingModel.CashOutReceipt">
+        <MappingFragment StoreEntitySet="CashOutReceipt">
+          <ScalarProperty Name="PartnerAccountId" ColumnName="PartnerAccountId" />
+          <ScalarProperty Name="OperationId" ColumnName="OperationId" />
+          <ScalarProperty Name="DeleteReason" ColumnName="DeleteReason" />
+          <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="BankAccId" ColumnName="BankAccId" />
+          <ScalarProperty Name="BankId" ColumnName="BankId" />
+          <ScalarProperty Name="CurrencyId" ColumnName="CurrencyId" />
+          <ScalarProperty Name="TransId" ColumnName="TransId" />
+          <ScalarProperty Name="DiscountAmount" ColumnName="DiscountAmount" />
+          <ScalarProperty Name="ReceiptAmount" ColumnName="ReceiptAmount" />
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+          <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="PaymentTermId" ColumnName="PaymentTermId" />
+          <ScalarProperty Name="AgentId" ColumnName="AgentId" />
+          <ScalarProperty Name="ContractorId" ColumnName="ContractorId" />
+          <ScalarProperty Name="CarrierId" ColumnName="CarrierId" />
+          <ScalarProperty Name="ReceiptDate" ColumnName="ReceiptDate" />
+          <ScalarProperty Name="ReceiptCode" ColumnName="ReceiptCode" />
+          <ScalarProperty Name="ReceiptId" ColumnName="ReceiptId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CashOutReceiptAgNotes">
+      <EntityTypeMapping TypeName="AccountingModel.CashOutReceiptAgNote">
+        <MappingFragment StoreEntitySet="CashOutReceiptAgNote">
+          <ScalarProperty Name="DiscountAmount" ColumnName="DiscountAmount" />
+          <ScalarProperty Name="PaidAmount" ColumnName="PaidAmount" />
+          <ScalarProperty Name="AgentNoteId" ColumnName="AgentNoteId" />
+          <ScalarProperty Name="ReceiptId" ColumnName="ReceiptId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CashOutReceiptChecks">
+      <EntityTypeMapping TypeName="AccountingModel.CashOutReceiptCheck">
+        <MappingFragment StoreEntitySet="CashOutReceiptCheck">
+          <ScalarProperty Name="BankId" ColumnName="BankId" />
+          <ScalarProperty Name="CollectBy" ColumnName="CollectBy" />
+          <ScalarProperty Name="CollectDate" ColumnName="CollectDate" />
+          <ScalarProperty Name="TransId" ColumnName="TransId" />
+          <ScalarProperty Name="IsCollected" ColumnName="IsCollected" />
+          <ScalarProperty Name="CheckDueDate" ColumnName="CheckDueDate" />
+          <ScalarProperty Name="CheckNumber" ColumnName="CheckNumber" />
+          <ScalarProperty Name="ReceiptId" ColumnName="ReceiptId" />
+          <ScalarProperty Name="CashOutCheckId" ColumnName="CashOutCheckId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CashOutReceiptInvs">
+      <EntityTypeMapping TypeName="AccountingModel.CashOutReceiptInv">
+        <MappingFragment StoreEntitySet="CashOutReceiptInv">
+          <ScalarProperty Name="DiscountAmount" ColumnName="DiscountAmount" />
+          <ScalarProperty Name="PaidAmount" ColumnName="PaidAmount" />
+          <ScalarProperty Name="InvoiceId" ColumnName="InvoiceId" />
+          <ScalarProperty Name="ReceiptId" ColumnName="ReceiptId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CashOutCCCashDeposits">
+      <EntityTypeMapping TypeName="AccountingModel.CashOutCCCashDeposit">
+        <MappingFragment StoreEntitySet="CashOutCCCashDeposit">
+          <ScalarProperty Name="DepositToUserEmpId" ColumnName="DepositToUserEmpId" />
+          <ScalarProperty Name="OperationId" ColumnName="OperationId" />
+          <ScalarProperty Name="ReceiptId" ColumnName="ReceiptId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="InvoiceAPs">
+      <EntityTypeMapping TypeName="AccountingModel.InvoiceAP">
+        <MappingFragment StoreEntitySet="InvoiceAP">
+          <ScalarProperty Name="InvoiceType" ColumnName="InvoiceType" />
+          <ScalarProperty Name="DeleteReason" ColumnName="DeleteReason" />
+          <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="InvCurrencyId" ColumnName="InvCurrencyId" />
+          <ScalarProperty Name="TransId" ColumnName="TransId" />
+          <ScalarProperty Name="InvStatusId" ColumnName="InvStatusId" />
+          <ScalarProperty Name="PaymentTermId" ColumnName="PaymentTermId" />
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+          <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="OrderFrom" ColumnName="OrderFrom" />
+          <ScalarProperty Name="ContractorId" ColumnName="ContractorId" />
+          <ScalarProperty Name="CarrierId" ColumnName="CarrierId" />
+          <ScalarProperty Name="HouseBillId" ColumnName="HouseBillId" />
+          <ScalarProperty Name="OperationId" ColumnName="OperationId" />
+          <ScalarProperty Name="APInvoiceCode" ColumnName="APInvoiceCode" />
+          <ScalarProperty Name="DueDate" ColumnName="DueDate" />
+          <ScalarProperty Name="InvoiceDate" ColumnName="InvoiceDate" />
+          <ScalarProperty Name="InvoiceCode" ColumnName="InvoiceCode" />
+          <ScalarProperty Name="InvoiceId" ColumnName="InvoiceId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="InvoiceDetailAPs">
+      <EntityTypeMapping TypeName="AccountingModel.InvoiceDetailAP">
+        <MappingFragment StoreEntitySet="InvoiceDetailAP">
+          <ScalarProperty Name="PrintedTitle" ColumnName="PrintedTitle" />
+          <ScalarProperty Name="ItemOrder" ColumnName="ItemOrder" />
+          <ScalarProperty Name="CurrencyId" ColumnName="CurrencyId" />
+          <ScalarProperty Name="InvoiceAmount" ColumnName="InvoiceAmount" />
+          <ScalarProperty Name="ExchangeRate" ColumnName="ExchangeRate" />
+          <ScalarProperty Name="MainCurrencyId" ColumnName="MainCurrencyId" />
+          <ScalarProperty Name="MainAmount" ColumnName="MainAmount" />
+          <ScalarProperty Name="FkType" ColumnName="FkType" />
+          <ScalarProperty Name="CostFkId" ColumnName="CostFkId" />
+          <ScalarProperty Name="InvoiceId" ColumnName="InvoiceId" />
+          <ScalarProperty Name="InvDetailId" ColumnName="InvDetailId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="APInvoiceViews">
+      <EntityTypeMapping TypeName="AccountingModel.APInvoiceView">
+        <MappingFragment StoreEntitySet="APInvoiceView">
+          <ScalarProperty Name="OperationDate" ColumnName="OperationDate" />
+          <ScalarProperty Name="InvoiceType" ColumnName="InvoiceType" />
+          <ScalarProperty Name="DeleteReason" ColumnName="DeleteReason" />
+          <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="ContractorNameAr" ColumnName="ContractorNameAr" />
+          <ScalarProperty Name="ContractorNameEn" ColumnName="ContractorNameEn" />
+          <ScalarProperty Name="OrderFrom" ColumnName="OrderFrom" />
+          <ScalarProperty Name="PaymentTermAr" ColumnName="PaymentTermAr" />
+          <ScalarProperty Name="PaymentTermEn" ColumnName="PaymentTermEn" />
+          <ScalarProperty Name="InvCurrencyId" ColumnName="InvCurrencyId" />
+          <ScalarProperty Name="TransId" ColumnName="TransId" />
+          <ScalarProperty Name="PaymentTermId" ColumnName="PaymentTermId" />
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+          <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="InvStatusNameAr" ColumnName="InvStatusNameAr" />
+          <ScalarProperty Name="InvStatusNameEn" ColumnName="InvStatusNameEn" />
+          <ScalarProperty Name="InvStatusId" ColumnName="InvStatusId" />
+          <ScalarProperty Name="CurrencySign" ColumnName="CurrencySign" />
+          <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+          <ScalarProperty Name="CurrencyId" ColumnName="CurrencyId" />
+          <ScalarProperty Name="CarrierNameAr" ColumnName="CarrierNameAr" />
+          <ScalarProperty Name="CarrierNameEn" ColumnName="CarrierNameEn" />
+          <ScalarProperty Name="MBL" ColumnName="MBL" />
+          <ScalarProperty Name="CarrierType" ColumnName="CarrierType" />
+          <ScalarProperty Name="BookingNumber" ColumnName="BookingNumber" />
+          <ScalarProperty Name="OperationCode" ColumnName="OperationCode" />
+          <ScalarProperty Name="ContractorId" ColumnName="ContractorId" />
+          <ScalarProperty Name="CarrierId" ColumnName="CarrierId" />
+          <ScalarProperty Name="HouseBillId" ColumnName="HouseBillId" />
+          <ScalarProperty Name="OperationId" ColumnName="OperationId" />
+          <ScalarProperty Name="APInvoiceCode" ColumnName="APInvoiceCode" />
+          <ScalarProperty Name="DueDate" ColumnName="DueDate" />
+          <ScalarProperty Name="InvoiceDate" ColumnName="InvoiceDate" />
+          <ScalarProperty Name="InvoiceCode" ColumnName="InvoiceCode" />
+          <ScalarProperty Name="InvoiceId" ColumnName="InvoiceId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="InvoiceViews">
+      <EntityTypeMapping TypeName="AccountingModel.InvoiceView">
+        <MappingFragment StoreEntitySet="InvoiceView">
+          <ScalarProperty Name="TotalBeforeTax" ColumnName="TotalBeforeTax" />
+          <ScalarProperty Name="TaxDepositAmount" ColumnName="TaxDepositAmount" />
+          <ScalarProperty Name="HouseBL" ColumnName="HouseBL" />
+          <ScalarProperty Name="OperationDate" ColumnName="OperationDate" />
+          <ScalarProperty Name="OperationCode" ColumnName="OperationCode" />
+          <ScalarProperty Name="DeleteReason" ColumnName="DeleteReason" />
+          <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="InvCurrencyId" ColumnName="InvCurrencyId" />
+          <ScalarProperty Name="PaymentTermAr" ColumnName="PaymentTermAr" />
+          <ScalarProperty Name="ConsigneeNameAr" ColumnName="ConsigneeNameAr" />
+          <ScalarProperty Name="ShipperNameAr" ColumnName="ShipperNameAr" />
+          <ScalarProperty Name="InvStatusNameAr" ColumnName="InvStatusNameAr" />
+          <ScalarProperty Name="InvStatusNameEn" ColumnName="InvStatusNameEn" />
+          <ScalarProperty Name="TransId" ColumnName="TransId" />
+          <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+          <ScalarProperty Name="CurrencySign" ColumnName="CurrencySign" />
+          <ScalarProperty Name="CurrencyId" ColumnName="CurrencyId" />
+          <ScalarProperty Name="ShipperNameEn" ColumnName="ShipperNameEn" />
+          <ScalarProperty Name="ConsigneeNameEn" ColumnName="ConsigneeNameEn" />
+          <ScalarProperty Name="PaymentTermEn" ColumnName="PaymentTermEn" />
+          <ScalarProperty Name="InvStatusId" ColumnName="InvStatusId" />
+          <ScalarProperty Name="InvoiceType" ColumnName="InvoiceType" />
+          <ScalarProperty Name="PaymentTermId" ColumnName="PaymentTermId" />
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+          <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="OrderFrom" ColumnName="OrderFrom" />
+          <ScalarProperty Name="ConsigneeId" ColumnName="ConsigneeId" />
+          <ScalarProperty Name="ShipperId" ColumnName="ShipperId" />
+          <ScalarProperty Name="HouseBillId" ColumnName="HouseBillId" />
+          <ScalarProperty Name="OperationId" ColumnName="OperationId" />
+          <ScalarProperty Name="DueDate" ColumnName="DueDate" />
+          <ScalarProperty Name="InvoiceDate" ColumnName="InvoiceDate" />
+          <ScalarProperty Name="InvoiceCode" ColumnName="InvoiceCode" />
+          <ScalarProperty Name="InvoiceId" ColumnName="InvoiceId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CashInReceiptViews">
+      <EntityTypeMapping TypeName="AccountingModel.CashInReceiptView">
+        <MappingFragment StoreEntitySet="CashInReceiptView">
+          <ScalarProperty Name="PaymentTermId" ColumnName="PaymentTermId" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="CurrencyId" ColumnName="CurrencyId" />
+          <ScalarProperty Name="IsCollected" ColumnName="IsCollected" />
+          <ScalarProperty Name="CheckDueDate" ColumnName="CheckDueDate" />
+          <ScalarProperty Name="CheckNumber" ColumnName="CheckNumber" />
+          <ScalarProperty Name="PaymentTermAr" ColumnName="PaymentTermAr" />
+          <ScalarProperty Name="PaymentTermEn" ColumnName="PaymentTermEn" />
+          <ScalarProperty Name="OperationId" ColumnName="OperationId" />
+          <ScalarProperty Name="CurrencySign" ColumnName="CurrencySign" />
+          <ScalarProperty Name="TransId" ColumnName="TransId" />
+          <ScalarProperty Name="DeleteReason" ColumnName="DeleteReason" />
+          <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="ReceiptAmount" ColumnName="ReceiptAmount" />
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+          <ScalarProperty Name="AgentNameAr" ColumnName="AgentNameAr" />
+          <ScalarProperty Name="AgentNameEn" ColumnName="AgentNameEn" />
+          <ScalarProperty Name="AgentId" ColumnName="AgentId" />
+          <ScalarProperty Name="ConsigneeNameAr" ColumnName="ConsigneeNameAr" />
+          <ScalarProperty Name="ConsigneeNameEn" ColumnName="ConsigneeNameEn" />
+          <ScalarProperty Name="ConsigneeId" ColumnName="ConsigneeId" />
+          <ScalarProperty Name="ShipperNameAr" ColumnName="ShipperNameAr" />
+          <ScalarProperty Name="ShipperNameEn" ColumnName="ShipperNameEn" />
+          <ScalarProperty Name="ShipperId" ColumnName="ShipperId" />
+          <ScalarProperty Name="ReceiptDate" ColumnName="ReceiptDate" />
+          <ScalarProperty Name="ReceiptCode" ColumnName="ReceiptCode" />
+          <ScalarProperty Name="ReceiptId" ColumnName="ReceiptId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CashOutReceiptViews">
+      <EntityTypeMapping TypeName="AccountingModel.CashOutReceiptView">
+        <MappingFragment StoreEntitySet="CashOutReceiptView">
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="BankId" ColumnName="BankId" />
+          <ScalarProperty Name="DeleteReason" ColumnName="DeleteReason" />
+          <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+          <ScalarProperty Name="CollectBy" ColumnName="CollectBy" />
+          <ScalarProperty Name="CollectDate" ColumnName="CollectDate" />
+          <ScalarProperty Name="Expr1" ColumnName="Expr1" />
+          <ScalarProperty Name="IsCollected" ColumnName="IsCollected" />
+          <ScalarProperty Name="CheckDueDate" ColumnName="CheckDueDate" />
+          <ScalarProperty Name="CheckNumber" ColumnName="CheckNumber" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="CurrencySign" ColumnName="CurrencySign" />
+          <ScalarProperty Name="CurrencyId" ColumnName="CurrencyId" />
+          <ScalarProperty Name="TransId" ColumnName="TransId" />
+          <ScalarProperty Name="ReceiptAmount" ColumnName="ReceiptAmount" />
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+          <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="PaymentTermAr" ColumnName="PaymentTermAr" />
+          <ScalarProperty Name="PaymentTermEn" ColumnName="PaymentTermEn" />
+          <ScalarProperty Name="PaymentTermId" ColumnName="PaymentTermId" />
+          <ScalarProperty Name="AgentNameAr" ColumnName="AgentNameAr" />
+          <ScalarProperty Name="AgentNameEn" ColumnName="AgentNameEn" />
+          <ScalarProperty Name="AgentId" ColumnName="AgentId" />
+          <ScalarProperty Name="ContractorNameAr" ColumnName="ContractorNameAr" />
+          <ScalarProperty Name="ContractorNameEn" ColumnName="ContractorNameEn" />
+          <ScalarProperty Name="ContractorId" ColumnName="ContractorId" />
+          <ScalarProperty Name="CarrierNameAr" ColumnName="CarrierNameAr" />
+          <ScalarProperty Name="CarrierNameEn" ColumnName="CarrierNameEn" />
+          <ScalarProperty Name="CarrierId" ColumnName="CarrierId" />
+          <ScalarProperty Name="ReceiptDate" ColumnName="ReceiptDate" />
+          <ScalarProperty Name="ReceiptCode" ColumnName="ReceiptCode" />
+          <ScalarProperty Name="ReceiptId" ColumnName="ReceiptId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ExpenseLibs">
+      <EntityTypeMapping TypeName="AccountingModel.ExpenseLib">
+        <MappingFragment StoreEntitySet="ExpenseLib">
+          <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+          <ScalarProperty Name="ExpenseNameAr" ColumnName="ExpenseNameAr" />
+          <ScalarProperty Name="ExpenseNameEn" ColumnName="ExpenseNameEn" />
+          <ScalarProperty Name="ExpenseId" ColumnName="ExpenseId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CashOutReceiptExpenses">
+      <EntityTypeMapping TypeName="AccountingModel.CashOutReceiptExpense">
+        <MappingFragment StoreEntitySet="CashOutReceiptExpense">
+          <ScalarProperty Name="PaidAmount" ColumnName="PaidAmount" />
+          <ScalarProperty Name="ExpenseId" ColumnName="ExpenseId" />
+          <ScalarProperty Name="ReceiptId" ColumnName="ReceiptId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetUserAccs">
+      <EntityTypeMapping TypeName="AccountingModel.AspNetUserAcc">
+        <MappingFragment StoreEntitySet="AspNetUsers">
+          <ScalarProperty Name="Discriminator" ColumnName="Discriminator" />
+          <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+          <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ArCashDeposits">
+      <EntityTypeMapping TypeName="AccountingModel.ArCashDeposit">
+        <MappingFragment StoreEntitySet="ArCashDeposit">
+          <ScalarProperty Name="BankAccId" ColumnName="BankAccId" />
+          <ScalarProperty Name="BankId" ColumnName="BankId" />
+          <ScalarProperty Name="CurrencyId" ColumnName="CurrencyId" />
+          <ScalarProperty Name="TransId" ColumnName="TransId" />
+          <ScalarProperty Name="ReceiptAmount" ColumnName="ReceiptAmount" />
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+          <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="PaymentTermId" ColumnName="PaymentTermId" />
+          <ScalarProperty Name="ConsigneeId" ColumnName="ConsigneeId" />
+          <ScalarProperty Name="ShipperId" ColumnName="ShipperId" />
+          <ScalarProperty Name="ReceiptDate" ColumnName="ReceiptDate" />
+          <ScalarProperty Name="ReceiptCode" ColumnName="ReceiptCode" />
+          <ScalarProperty Name="ReceiptId" ColumnName="ReceiptId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ArCashDepositViews">
+      <EntityTypeMapping TypeName="AccountingModel.ArCashDepositView">
+        <MappingFragment StoreEntitySet="ArCashDepositView">
+          <ScalarProperty Name="CurrencyName" ColumnName="CurrencyName" />
+          <ScalarProperty Name="CurrencySign" ColumnName="CurrencySign" />
+          <ScalarProperty Name="PaymentTermAr" ColumnName="PaymentTermAr" />
+          <ScalarProperty Name="PaymentTermEn" ColumnName="PaymentTermEn" />
+          <ScalarProperty Name="ConsigneeNameAr" ColumnName="ConsigneeNameAr" />
+          <ScalarProperty Name="ConsigneeNameEn" ColumnName="ConsigneeNameEn" />
+          <ScalarProperty Name="ShipperNameAr" ColumnName="ShipperNameAr" />
+          <ScalarProperty Name="ShipperNameEn" ColumnName="ShipperNameEn" />
+          <ScalarProperty Name="ReceiptAmount" ColumnName="ReceiptAmount" />
+          <ScalarProperty Name="BankAccId" ColumnName="BankAccId" />
+          <ScalarProperty Name="BankId" ColumnName="BankId" />
+          <ScalarProperty Name="CurrencyId" ColumnName="CurrencyId" />
+          <ScalarProperty Name="TransId" ColumnName="TransId" />
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="PaymentTermId" ColumnName="PaymentTermId" />
+          <ScalarProperty Name="ConsigneeId" ColumnName="ConsigneeId" />
+          <ScalarProperty Name="ShipperId" ColumnName="ShipperId" />
+          <ScalarProperty Name="ReceiptDate" ColumnName="ReceiptDate" />
+          <ScalarProperty Name="ReceiptCode" ColumnName="ReceiptCode" />
+          <ScalarProperty Name="ReceiptId" ColumnName="ReceiptId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ArCashDepositBalances">
+      <EntityTypeMapping TypeName="AccountingModel.ArCashDepositBalance">
+        <MappingFragment StoreEntitySet="ArCashDepositBalance">
+          <ScalarProperty Name="BalanceAmount" ColumnName="BalanceAmount" />
+          <ScalarProperty Name="CurrencyId" ColumnName="CurrencyId" />
+          <ScalarProperty Name="ConsigneeId" ColumnName="ConsigneeId" />
+          <ScalarProperty Name="ShipperId" ColumnName="ShipperId" />
+          <ScalarProperty Name="BalanceId" ColumnName="BalanceId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

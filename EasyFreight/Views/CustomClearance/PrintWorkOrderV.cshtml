@@ -1,0 +1,24 @@
+﻿@model EasyFreight.Models.CustomClearanceView
+@{
+    ViewBag.Title = "PrintWorkOrderV";
+    Layout = "~/Views/Shared/_PrintLayout.cshtml";
+}
+
+<div id="modalAnim" class="modal-block modal-block-lg">
+    <section class="panel">
+        <header class="panel-heading">
+            <h2 class="panel-title" style="text-align:center;direction:rtl;font-size:large">أمر شغل
+                @(Model.OrderFrom == 1 ? "<<صــادر>>" : "<<وارد>>" )
+            </h2>
+        </header>
+        <div class="panel-body">
+            <div class="modal-wrapper">
+                <div id="ModalContent" class="modal-text">
+                    @{Html.RenderPartial("~/Views/CustomClearance/_WorkOrder.cshtml", Model);}
+                </div>
+            </div>
+        </div>
+        <footer class="panel-footer"></footer>
+    </section>
+</div>
+

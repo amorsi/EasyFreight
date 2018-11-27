@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="2ab651acb0e443a995e777ef29b8f50a" Name="Diagram1">
+        <EntityTypeShape EntityType="EasyFreightModel.Agent" Width="1.5" PointX="5.25" PointY="29" IsExpanded="true" />
+        <EntityTypeShape EntityType="EasyFreightModel.AgentContact" Width="1.5" PointX="7.5" PointY="40.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="EasyFreightModel.Carrier" Width="1.5" PointX="5.25" PointY="23.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EasyFreightModel.CarrierContact" Width="1.5" PointX="7.5" PointY="20.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="EasyFreightModel.CarrierRate" Width="1.5" PointX="13.5" PointY="23.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="EasyFreightModel.CarrierRateTransit" Width="1.5" PointX="15.75" PointY="29.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="EasyFreightModel.City" Width="1.5" PointX="2" PointY="36.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="EasyFreightModel.CompanySetup" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EasyFreightModel.CompanySetupContact" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EasyFreightModel.Consignee" Width="1.5" PointX="5.25" PointY="33.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="EasyFreightModel.ConsigneeContact" Width="1.5" PointX="7.5" PointY="43.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="EasyFreightModel.ContainerType" Width="1.5" PointX="11.25" PointY="21.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="EasyFreightModel.Contractor" Width="1.5" PointX="8.25" PointY="23.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="EasyFreightModel.ContractorContact" Width="1.5" PointX="10.5" PointY="24.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="EasyFreightModel.Country" Width="1.5" PointX="0.75" PointY="22.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="EasyFreightModel.Currency" Width="1.5" PointX="11.25" PointY="17.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="EasyFreightModel.CurrencyExchage" Width="1.5" PointX="13.5" PointY="17.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="EasyFreightModel.IncotermLib" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EasyFreightModel.Notifier" Width="1.5" PointX="10.5" PointY="33.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="EasyFreightModel.NotifierContact" Width="1.5" PointX="12.75" PointY="39.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="EasyFreightModel.PackageType" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EasyFreightModel.Port" Width="1.5" PointX="8.25" PointY="33.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="EasyFreightModel.Shipper" Width="1.5" PointX="11.25" PointY="29" IsExpanded="true" />
+        <EntityTypeShape EntityType="EasyFreightModel.ShipperContact" Width="1.5" PointX="13.5" PointY="29.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="EasyFreightModel.StatusLib" Width="1.5" PointX="4.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EasyFreightModel.SystemSetup" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EasyFreightModel.TruckingCostLib" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
+        <AssociationConnector Association="EasyFreightModel.FK_Agent_City" ManuallyRouted="false" />
+        <AssociationConnector Association="EasyFreightModel.FK_Agent_Country" ManuallyRouted="false" />
+        <AssociationConnector Association="EasyFreightModel.FK_AgentContact_Agent" ManuallyRouted="false" />
+        <AssociationConnector Association="EasyFreightModel.FK_Carrier_City" ManuallyRouted="false" />
+        <AssociationConnector Association="EasyFreightModel.FK_Carrier_Country" ManuallyRouted="false" />
+        <AssociationConnector Association="EasyFreightModel.FK_CarrierContact_Carrier" ManuallyRouted="false" />
+        <AssociationConnector Association="EasyFreightModel.FK_CarrierRate_Carrier" ManuallyRouted="false" />
+        <AssociationConnector Association="EasyFreightModel.FK_CarrierRate_ContainerType" ManuallyRouted="false" />
+        <AssociationConnector Association="EasyFreightModel.FK_CarrierRate_Country" ManuallyRouted="false" />
+        <AssociationConnector Association="EasyFreightModel.FK_CarrierRate_Country1" ManuallyRouted="false" />
+        <AssociationConnector Association="EasyFreightModel.FK_CarrierRate_Currency" ManuallyRouted="false" />
+        <AssociationConnector Association="EasyFreightModel.FK_CarrierRate_Currency1" ManuallyRouted="false" />
+        <AssociationConnector Association="EasyFreightModel.FK_CarrierRate_Port" ManuallyRouted="false" />
+        <AssociationConnector Association="EasyFreightModel.FK_CarrierRate_Port1" ManuallyRouted="false" />
+        <AssociationConnector Association="EasyFreightModel.FK_CarrierRateTransit_CarrierRate" ManuallyRouted="false" />
+        <AssociationConnector Association="EasyFreightModel.FK_CarrierRateTransit_Port" ManuallyRouted="false" />
+        <AssociationConnector Association="EasyFreightModel.FK_City_Country" ManuallyRouted="false" />
+        <AssociationConnector Association="EasyFreightModel.FK_Consignee_City" ManuallyRouted="false" />
+        <AssociationConnector Association="EasyFreightModel.FK_Contractor_City" ManuallyRouted="false" />
+        <AssociationConnector Association="EasyFreightModel.FK_Notifier_City" ManuallyRouted="false" />
+        <AssociationConnector Association="EasyFreightModel.FK_Port_City" ManuallyRouted="false" />
+        <AssociationConnector Association="EasyFreightModel.FK_Shipper_City" ManuallyRouted="false" />
+        <AssociationConnector Association="EasyFreightModel.FK_Consignee_Country" ManuallyRouted="false" />
+        <AssociationConnector Association="EasyFreightModel.FK_ConsigneeContact_Consignee" ManuallyRouted="false" />
+        <AssociationConnector Association="EasyFreightModel.FK_Notifier_Consignee" ManuallyRouted="false" />
+        <AssociationConnector Association="EasyFreightModel.FK_Contractor_Country" ManuallyRouted="false" />
+        <AssociationConnector Association="EasyFreightModel.FK_ContractorContact_Contractor" ManuallyRouted="false" />
+        <AssociationConnector Association="EasyFreightModel.FK_Notifier_Country" ManuallyRouted="false" />
+        <AssociationConnector Association="EasyFreightModel.FK_Port_Country" ManuallyRouted="false" />
+        <AssociationConnector Association="EasyFreightModel.FK_Shipper_Country" ManuallyRouted="false" />
+        <AssociationConnector Association="EasyFreightModel.FK_CurrencyExchage_Currency" ManuallyRouted="false" />
+        <AssociationConnector Association="EasyFreightModel.FK_CurrencyExchage_Currency1" ManuallyRouted="false" />
+        <AssociationConnector Association="EasyFreightModel.FK_NotifierContact_Notifier" ManuallyRouted="false" />
+        <AssociationConnector Association="EasyFreightModel.FK_ShipperContact_Shipper" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="EasyFreightModel.TruckingOrderCost" Width="1.5" PointX="21" PointY="15.125" />
+        <EntityTypeShape EntityType="EasyFreightModel.TruckingOrderDetail" Width="1.5" PointX="18.75" PointY="21.875" />
+        <AssociationConnector Association="EasyFreightModel.FK_TruckingOrderDetail_Contractor" />
+        <AssociationConnector Association="EasyFreightModel.FK_TruckingOrderCost_Currency" />
+        <AssociationConnector Association="EasyFreightModel.FK_TruckingOrderCost_TruckingCostLib" />
+        <AssociationConnector Association="EasyFreightModel.FK_TruckingOrderCost_TruckingOrderDetail" />
+        <EntityTypeShape EntityType="EasyFreightModel.TruckingOrder" Width="1.5" PointX="16.5" PointY="21.375" />
+        <AssociationConnector Association="EasyFreightModel.FK_TruckingOrder_Carrier" />
+        <AssociationConnector Association="EasyFreightModel.FK_TruckingOrder_City" />
+        <AssociationConnector Association="EasyFreightModel.FK_TruckingOrder_City1" />
+        <AssociationConnector Association="EasyFreightModel.FK_TruckingOrder_Consignee" />
+        <AssociationConnector Association="EasyFreightModel.FK_TruckingOrder_Shipper" />
+        <AssociationConnector Association="EasyFreightModel.FK_TruckingOrder_StatusLib" />
+        <AssociationConnector Association="EasyFreightModel.FK_TruckingOrderDetail_TruckingOrder" />
+        <EntityTypeShape EntityType="EasyFreightModel.StaticText" Width="1.5" PointX="5.375" PointY="6.75" />
+        <EntityTypeShape EntityType="EasyFreightModel.StaticTextLabel" Width="1.5" PointX="7.625" PointY="6.875" />
+        <AssociationConnector Association="EasyFreightModel.FK_StaticTextLabel_StaticText" />
+        <EntityTypeShape EntityType="EasyFreightModel.DepartmentEasyModel" Width="1.5" PointX="9.375" PointY="0.75" />
+        <EntityTypeShape EntityType="EasyFreightModel.Vessel" Width="1.5" PointX="7.5" PointY="17.25" />
+        <AssociationConnector Association="EasyFreightModel.FK_Vessel_Carrier" />
+        <EntityTypeShape EntityType="EasyFreightModel.Area" Width="1.5" PointX="10.25" PointY="39" />
+        <EntityTypeShape EntityType="EasyFreightModel.ContractorRate" Width="1.5" PointX="18.5" PointY="29.625" />
+        <AssociationConnector Association="EasyFreightModel.FK_Area_City" />
+        <AssociationConnector Association="EasyFreightModel.FK_Area_Country" />
+        <AssociationConnector Association="EasyFreightModel.FK_ContractorRate_Area" />
+        <AssociationConnector Association="EasyFreightModel.FK_ContractorRate_Area1" />
+        <AssociationConnector Association="EasyFreightModel.FK_ContractorRate_City" />
+        <AssociationConnector Association="EasyFreightModel.FK_ContractorRate_City1" />
+        <AssociationConnector Association="EasyFreightModel.FK_ContractorRate_ContainerType" />
+        <AssociationConnector Association="EasyFreightModel.FK_ContractorRate_Contractor" />
+        <AssociationConnector Association="EasyFreightModel.FK_ContractorRate_Currency" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

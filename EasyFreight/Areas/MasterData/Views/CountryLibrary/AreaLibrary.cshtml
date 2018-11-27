@@ -1,0 +1,127 @@
+﻿@model List<EasyFreight.Models.Area>
+@{
+    ViewBag.Title = "PortLibrary";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<header class="page-header">
+    <h2>Port Library</h2>
+
+    <div class="right-wrapper pull-right">
+        <ol class="breadcrumbs">
+            <li>
+                <a href="@Url.Content("~/Home/Index")">
+                    <i class="fa fa-home"></i>
+                </a>
+            </li>
+            <li><span>Master Data</span></li>
+            <li><span>Area Library</span></li>
+        </ol>
+
+        <a class="sidebar-right-toggle" data-open="sidebar-right"><i class="fa fa-chevron-left"></i></a>
+    </div>
+</header>
+
+<div class="row">
+    <div class="col-xs-12">
+        <section id="AddForm" class="panel" style="display: none;">
+            <header class="panel-heading">
+                <div class="panel-actions">
+                </div>
+
+                <h2 class="panel-title"></h2>
+            </header>
+            <div class="panel-body">
+
+                <form id="Form1" class="form-horizontal form-bordered">
+
+
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Select City <span class="required">*</span></label>
+                            <div class="col-md-6">
+                                @Html.Partial("~/Views/Shared/_CityGrouped.cshtml",
+                                    ViewData["CityList"] as List<EasyFreight.ViewModel.CountryCityList>,
+                                    new ViewDataDictionary { { "ddlName", "CityId" }, 
+                                    { "selectedVal", null } })
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="inputDefault">Area Name English <span class="required">*</span></label>
+                            <div class="col-md-6">
+                                <input type="text" required class="form-control" id="AreaNameEn" name="AreaNameEn">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="inputDefault">Area Name Arabic</label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" id="AreaNameAr" name="AreaNameAr">
+                            </div>
+                        </div>
+                    
+                    <input type="hidden" name="CountryId" id="CountryId" value="0" />
+                    <input type="hidden" name="AreaId" id="AreaId" value="0" />
+                </form>
+            </div>
+
+            <footer class="panel-footer">
+                <div id="SaveBtnDiv" class="row" style="display: none;">
+                    <div class="col-sm-9 col-sm-offset-3">
+                        <button id="SaveForm" class="btn btn-primary">Submit</button>
+                        <button id="ResetForm" class="btn btn-default" type="reset">Reset</button>
+                    </div>
+                </div>
+            </footer>
+        </section>
+
+        <section class="panel">
+            <header class="panel-heading">
+                <div class="panel-actions">
+                </div>
+
+                <h2 class="panel-title"></h2>
+            </header>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="mb-md">
+                            <button id="addToTable" class="btn btn-primary">Add <i class="fa fa-plus"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <div id="tbContent">
+                    @Html.Partial("~/Areas/MasterData/Views/CountryLibrary/_AreasTable.cshtml", Model)
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
+<input type="hidden" id="DelAreaId" value="0" />
+
+<div id="dialog" class="modal-block mfp-hide">
+    <section class="panel">
+        <header class="panel-heading">
+            <h2 class="panel-title">Are you sure?</h2>
+        </header>
+        <div class="panel-body">
+            <div class="modal-wrapper">
+                <div class="modal-text">
+                    <p>Are you sure that you want to delete this row?</p>
+                </div>
+            </div>
+        </div>
+        <footer class="panel-footer">
+            <div class="row">
+                <div class="col-md-12 text-right">
+                    <button id="dialogConfirm" class="btn btn-primary modal-confirm">Confirm</button>
+                    <button id="dialogCancel" class="btn btn-default modal-dismiss">Cancel</button>
+                </div>
+            </div>
+        </footer>
+    </section>
+</div>
+
+@section scripts{
+    <script src="@Url.Content("~/Scripts/MasterData/AreasLibrary.js")"></script>
+}

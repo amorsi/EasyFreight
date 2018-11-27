@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ReportsAccountingStoreContainer" CdmEntityContainer="ReportsAccountingEntities">
+    <FunctionImportMapping FunctionImportName="GetAccountSummaryByParentAccId" FunctionName="ReportsAccounting.Store.GetAccountSummaryByParentAccId">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ReportsAccounting.GetAccountSummaryByParentAccId_Result">
+          <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+          <ScalarProperty Name="AccountNameAr" ColumnName="AccountNameAr" />
+          <ScalarProperty Name="AccountNameEn" ColumnName="AccountNameEn" />
+          <ScalarProperty Name="DebitAmout" ColumnName="DebitAmout" />
+          <ScalarProperty Name="CreditAmount" ColumnName="CreditAmount" />
+          <ScalarProperty Name="CurrencySign" ColumnName="CurrencySign" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetAccountDetailsByAccId" FunctionName="ReportsAccounting.Store.GetAccountDetailsByAccId">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ReportsAccounting.GetAccountDetailsByAccId_Result">
+          <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+          <ScalarProperty Name="AccountNameAr" ColumnName="AccountNameAr" />
+          <ScalarProperty Name="AccountNameEn" ColumnName="AccountNameEn" />
+          <ScalarProperty Name="DebitAmount" ColumnName="DebitAmount" />
+          <ScalarProperty Name="CreditAmount" ColumnName="CreditAmount" />
+          <ScalarProperty Name="CurrencySign" ColumnName="CurrencySign" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+          <ScalarProperty Name="TransactionName" ColumnName="TransactionName" />
+          <ScalarProperty Name="TransactionNameAr" ColumnName="TransactionNameAr" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="AccRpt_TopViewBalance2" FunctionName="ReportsAccounting.Store.AccRpt_TopViewBalance">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ReportsAccounting.AccRpt_TopViewBalance2_Result">
+          <ScalarProperty Name="ParentAccountId" ColumnName="ParentAccountId" />
+          <ScalarProperty Name="AccountNameEn" ColumnName="AccountNameEn" />
+          <ScalarProperty Name="AccountNameAr" ColumnName="AccountNameAr" />
+          <ScalarProperty Name="EGP" ColumnName="EGP" />
+          <ScalarProperty Name="USD" ColumnName="USD" />
+          <ScalarProperty Name="EUR" ColumnName="EUR" />
+          <ScalarProperty Name="GBP" ColumnName="GBP" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+  </EntityContainerMapping>
+</Mapping>

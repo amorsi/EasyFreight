@@ -1,0 +1,146 @@
+﻿@model List<EasyFreight.ViewModel.BankAccountVm>
+
+@{
+    int index = 0;
+    int lastIndex = 0;
+
+    if (Model != null)
+    {
+        lastIndex = Model.Count() - 1;
+    }
+}
+
+
+<div class="col-md-12">
+    <h3>Bank Accounts</h3>
+</div>
+
+<div class="col-sm-10">
+    <div class="col-sm-4">
+        <div class="form-group">
+            <label class="control-label">Currency</label>
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="form-group">
+            <label class="control-label">Account Name</label>
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="form-group">
+            <label class="control-label">Account Number</label>
+        </div>
+    </div>
+
+    <div class="row contactform form-template" style="display: none;">
+
+        <div class="col-sm-4">
+            <label class="control-label"></label>
+            <div class="form-group">
+                <select name="BankAccounts[-1].CurrencyId"
+                        required class="form-control populate">
+                    @foreach (var item in ViewBag.CurrencyList)
+                    {
+
+                        <option value="@item.Key">@item.Value</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <label class="control-label"></label>
+            <div class="form-group">
+                <div class="input-group">
+                    
+                    <input type="text" name="BankAccounts[-1].AccountName" class="form-control ">
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <label class="control-label"></label>
+            <div class="form-group">
+                <div class="input-group">
+                    
+                    <input type="text" name="BankAccounts[-1].AccountNumber" class="form-control  ">
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-1" style="margin-top: 25px">
+            <div class="form-group">
+                <label class="control-label"></label>
+                <a class="on-default remove-contact" href="javascript:void(0)"><i class="fa fa-trash-o fa-2x"></i></a>
+            </div>
+        </div>
+        <input type="hidden" name="BankAccounts[-1].BankAccId" />
+        <input type="hidden" name="BankAccounts[-1].BankId" />
+        <input type="hidden"  name="BankAccounts[-1].AccountId" />
+
+
+    </div>
+    @foreach (var item in Model)
+    {
+        <div class="row contactform" style="margin-top: 30px">
+            <div class="col-sm-4">
+
+                <div class="form-group">
+                    <select name="BankAccounts[@index].CurrencyId" data-plugin-selecttwo
+                            required class="form-control populate">
+                        @foreach (var curr in ViewBag.CurrencyList)
+                        {
+                            if (curr.Key == item.CurrencyId)
+                            {
+                                <option selected value="@curr.Key">@curr.Value</option>
+                            }
+                            else
+                            {
+                                <option value="@curr.Key">@curr.Value</option>}
+                        }
+                    </select>
+
+
+                </div>
+            </div>
+            <div class="col-sm-3">
+
+                <div class="form-group">
+                    <div class="input-group">
+                        
+                        <input type="text" name="BankAccounts[@index].AccountName"
+                               class="form-control  " value="@item.AccountName">
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+
+                <div class="form-group">
+                    <div class="input-group">
+                        
+                        <input type="text"
+                               class="form-control  " name="BankAccounts[@index].AccountNumber" value="@item.AccountNumber">
+                    </div>
+                </div>
+            </div>
+
+            @if (index > 0)
+            {
+                <div class="col-sm-1" style="margin-top: 5px">
+                    <div class="form-group">
+                        <a class="on-default remove-contact" href="javascript:void(0)"><i class="fa fa-trash-o fa-2x"></i></a>
+                    </div>
+                </div>
+            }
+            <input type="hidden" name="BankAccounts[@index].BankAccId" value="@item.BankAccId" />
+            <input type="hidden" name="BankAccounts[@index].BankId" value="@item.BankId" />
+            <input type="hidden" name="BankAccounts[@index].AccountId" value="@item.AccountId" />
+        </div>
+            index++;
+    }
+    <div class="form-group" style="margin-top: 5px">
+        <div class="col-sm-offset-9 col-sm-3">
+            <a href="javascript:void(0)" lastindex="@lastIndex" class="btnAdd">Add Account</a>
+        </div>
+    </div>
+
+</div>
+
+

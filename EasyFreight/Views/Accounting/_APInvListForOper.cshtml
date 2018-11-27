@@ -1,0 +1,106 @@
+﻿@model List<EasyFreight.ViewModel.InvoiceVm>
+@{
+    int index = 1;
+}
+<section id="apcontent" class="panel">
+    <header class="panel-heading">
+        <div class="panel-actions" style="padding-right:60px">
+            <div class="btn-group">
+                <button type="button" class="mb-xs mt-xs mr-xs btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Actions <span class="caret"></span></button>
+                <ul class="dropdown-menu" role="menu">
+                    <li>
+                        <a class="addapinv" invfor="1"
+                           href='javascript:void(0)'
+                           onclick="this.href = ROOT + 'APInvoice/AddInvoice?hbId=0&operId=' + $('#operationid').val() + '&invFor=1'">
+                            <i class="fa fa-ship"></i> (A/P) Add Carrier Invoice
+                        </a>
+                    </li>
+                    <li>
+                        <a class="addapinv" invfor="2"
+                           href="javascript:void(0)"
+                           onclick="this.href = ROOT + 'APInvoice/AddInvoice?hbId=0&operId=' + $('#operationid').val() + '&invFor=2'">
+
+                            <i class="fa fa-truck"></i> (A/P) Add Contractor Invoice
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <h2 class="panel-title">A/P Invoices</h2>
+        <p class="panel-subtitle">Carriers and contractors invoices.</p>
+    </header>
+    <div class="panel-body">
+        @if (Model.Count == 0)
+        {
+            <div class="well warning">
+                No Invoices Was Issued.
+            </div>
+        }
+        else
+        {
+
+            <div class="table-responsive">
+                <table id="tbinvlist" class="table table-striped mb-none">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Invoice Number</th>
+                            <th>A/P Invoice</th>
+                            <th>Invoice Date</th>
+                            <th>Due Date</th>
+                            <th>Supplier</th>
+                            <th>Amount</th>
+                            <th>Amount Due</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@index</td>
+                                <td>@item.InvoiceCode</td>
+                                <td>@item.APInvoiceCode</td>
+                                <td>@(item.InvoiceDate != null ? item.InvoiceDate.Value.ToString("dd/MM/yyyy") : "")</td>
+                                <td>@(item.DueDate != null ? item.DueDate.Value.ToString("dd/MM/yyyy") : "")</td>
+                                <td>@item.CustomerName</td>
+                                <td>
+                                    @if (item.InvoiceTotals != null)
+                                    {
+                                        foreach (var total in item.InvoiceTotals)
+                                        {
+                                            <div>@total.CurrencySign  @total.TotalAmount</div>
+                                        }
+                                    }
+
+
+                                </td>
+                                <td>
+                                    @item.AmountDue
+                                </td>
+                                <td>
+                                    @item.InvStatusName
+                                </td>
+                                <td>
+                                    <a href="@Url.Content("~/APInvoice/ViewInvoice?id=" +  item.InvoiceId + "&hbId=0&invFor=" + item.InvoiceType + "&operId=" + item.OperationId)" target="_blank" title="View"
+                                       bankid="@item.InvoiceId" style="padding-left:5px"
+                                       class="on-default viewinv"><i class="fa fa-eye"></i></a>
+                                    <a href="@Url.Content("~/APInvoice/PrintInvoice?id=" + item.InvoiceId + "&hbId=0&invFor=" + item.InvoiceType + "&operId=" + item.OperationId)" title="Print"
+                                       bankid="@item.InvoiceId" style="padding-left:5px"
+                                       class="on-default printinv"><i class="fa fa-print"></i></a>
+
+                                </td>
+                            </tr>
+                            index++;
+
+                        }
+
+
+                    </tbody>
+                </table>
+            </div>
+
+        }
+    </div>
+</section>

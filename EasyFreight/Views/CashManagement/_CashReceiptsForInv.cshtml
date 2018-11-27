@@ -1,0 +1,71 @@
+﻿@model List<EasyFreight.ViewModel.CashInInvoiceVm>
+
+@{
+    bool isOut = false;
+    if (Model.Count > 0)
+    {
+        isOut = Model.FirstOrDefault().CashInReceipt.CashType == "cashin" ? false : true;
+    }
+}
+@if (Model.Count == 0)
+{
+    <div class="well warning">
+        No payments has been collected for this Invoice.
+    </div>
+
+}
+else
+{
+    <section class="panel">
+
+        <div class="panel-body">
+            <div class="table-responsive">
+                <table id="tbinvlist" class="table table-striped mb-none">
+                    <thead>
+                        <tr>
+                            <th>Receipt Code</th>
+                            <th>Receipt Date</th>
+                            <th>Collected Amount</th>
+                            <th>Payment Term</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @item.CashInReceipt.ReceiptCode
+                                </td>
+                                <td>
+                                    @item.CashInReceipt.ReceiptDate.Value.ToString("dd/MM/yyyy")
+                                </td>
+                                <td>
+                                    @item.PaidAmount (@item.CurrencySign)
+                                </td>
+                                <td>
+                                    @item.CashInReceipt.PaymentTermName
+                                </td>
+                                <td>
+
+                                    <a href="javascript:void(0)" title="View"
+                                       recid="@item.ReceiptId" isout="@isOut.ToString()" style="padding-left:5px"
+                                       class="on-default viewrec"><i class="fa fa-eye"></i></a>
+                                    <a href="@Url.Content("~/CashManagement/PrintCashIn?id=" + item.ReceiptId + "&isOut=" + isOut)" title="Print"
+                                       recid="@item.InvoiceId" style="padding-left:5px"
+                                       class="on-default printinv"><i class="fa fa-print"></i></a>
+
+                                     <a  href="javascript:void(0)" title="Delete"
+                                       recid="@item.ReceiptId" style="padding-left:5px" invid="@item.InvoiceId" agnid="@item.AgentNoteId" isout="@isOut.ToString()"
+                                       class="on-default deleteCashInv"><i class="fa fa-trash"></i></a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+}
+

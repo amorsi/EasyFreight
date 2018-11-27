@@ -1,0 +1,33 @@
+﻿@model EasyFreight.ViewModel.InvoiceVm
+@{
+    ViewBag.Title = "ViewInvoice";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<header class="page-header">
+    <h2>View Invoice</h2>
+
+    <div class="right-wrapper pull-right">
+        <ol class="breadcrumbs">
+            <li>
+                <a href="index.html">
+                    <i class="fa fa-home"></i>
+                </a>
+            </li>
+            <li><span>Accounting</span></li>
+            <li><span>View Invoice</span></li>
+        </ol>
+
+        <a class="sidebar-right-toggle" data-open="sidebar-right"><i class="fa fa-chevron-left"></i></a>
+    </div>
+</header>
+
+@{Html.RenderPartial("~/Views/Invoice/_ViewInvoice.cshtml", Model);}
+
+<div class="text-right  mr-lg">
+    <div class="col-md-4 col-md-offset-3">
+        <a id="ResetForm" href="@Url.Content("~/Invoice/PrintInvoice?id=" + Model.InvoiceId + "&hbId=" + Model.HouseBillId)"
+           class="btn btn-primary btn-block">Print</a>
+    </div>
+
+</div>

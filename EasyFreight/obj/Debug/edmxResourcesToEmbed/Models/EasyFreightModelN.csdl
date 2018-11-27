@@ -1,0 +1,1573 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="EasyFreightModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Agent">
+    <Key>
+      <PropertyRef Name="AgentId" />
+    </Key>
+    <Property Name="AgentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AgentCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="AgentNameEn" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="AgentNameAr" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="AgentAddressEn" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="AgentAddressAr" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="CountryId" Type="Int32" />
+    <Property Name="CityId" Type="Int32" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="WebSite" Type="String" MaxLength="75" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="FaxNumber" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="City" Relationship="Self.FK_Agent_City" FromRole="Agent" ToRole="City" />
+    <NavigationProperty Name="Country" Relationship="Self.FK_Agent_Country" FromRole="Agent" ToRole="Country" />
+    <NavigationProperty Name="AgentContacts" Relationship="Self.FK_AgentContact_Agent" FromRole="Agent" ToRole="AgentContact" />
+    <Property Name="AccountId" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="AgentContact">
+    <Key>
+      <PropertyRef Name="ContactId" />
+    </Key>
+    <Property Name="ContactId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AgentId" Type="Int32" />
+    <Property Name="ContactName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Agent" Relationship="Self.FK_AgentContact_Agent" FromRole="AgentContact" ToRole="Agent" />
+  </EntityType>
+  <EntityType Name="Carrier">
+    <Key>
+      <PropertyRef Name="CarrierId" />
+    </Key>
+    <Property Name="CarrierId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CarrierCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CarrierNameEn" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CarrierNameAr" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CarrierAddressEn" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="CarrierAddressAr" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="CountryId" Type="Int32" />
+    <Property Name="CityId" Type="Int32" />
+    <Property Name="CarrierType" Type="Byte" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="WebSite" Type="String" MaxLength="75" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="FaxNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="City" Relationship="Self.FK_Carrier_City" FromRole="Carrier" ToRole="City" />
+    <NavigationProperty Name="Country" Relationship="Self.FK_Carrier_Country" FromRole="Carrier" ToRole="Country" />
+    <NavigationProperty Name="CarrierContacts" Relationship="Self.FK_CarrierContact_Carrier" FromRole="Carrier" ToRole="CarrierContact" />
+    <NavigationProperty Name="CarrierRates" Relationship="Self.FK_CarrierRate_Carrier" FromRole="Carrier" ToRole="CarrierRate" />
+    <NavigationProperty Name="TruckingOrders" Relationship="EasyFreightModel.FK_TruckingOrder_Carrier" FromRole="Carrier" ToRole="TruckingOrder" />
+    <Property Name="AccountId" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Vessels" Relationship="EasyFreightModel.FK_Vessel_Carrier" FromRole="Carrier" ToRole="Vessel" />
+  </EntityType>
+  <EntityType Name="CarrierContact">
+    <Key>
+      <PropertyRef Name="ContactId" />
+    </Key>
+    <Property Name="ContactId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CarrierId" Type="Int32" />
+    <Property Name="ContactName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Carrier" Relationship="Self.FK_CarrierContact_Carrier" FromRole="CarrierContact" ToRole="Carrier" />
+  </EntityType>
+  <EntityType Name="CarrierRate">
+    <Key>
+      <PropertyRef Name="CarrierRateId" />
+    </Key>
+    <Property Name="CarrierRateId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CarrierId" Type="Int32" Nullable="false" />
+    <Property Name="FromPortId" Type="Int32" Nullable="false" />
+    <Property Name="ToPortId" Type="Int32" Nullable="false" />
+    <Property Name="FromCountryId" Type="Int32" Nullable="false" />
+    <Property Name="ToCountryId" Type="Int32" Nullable="false" />
+    <Property Name="ContainerTypeId" Type="Int32" Nullable="false" />
+    <Property Name="FreightCostAmount" Type="Decimal" Precision="18" Scale="3" />
+    <Property Name="FreighCurrencyId" Type="Int32" />
+    <Property Name="ThcCostAmount" Type="Decimal" Precision="18" Scale="3" />
+    <Property Name="ThcCurrencyId" Type="Int32" />
+    <Property Name="IsValid" Type="Boolean" />
+    <Property Name="ValidToChecked" Type="Boolean" />
+    <Property Name="ValidToDate" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="Carrier" Relationship="Self.FK_CarrierRate_Carrier" FromRole="CarrierRate" ToRole="Carrier" />
+    <NavigationProperty Name="ContainerType" Relationship="Self.FK_CarrierRate_ContainerType" FromRole="CarrierRate" ToRole="ContainerType" />
+    <NavigationProperty Name="Country" Relationship="Self.FK_CarrierRate_Country" FromRole="CarrierRate" ToRole="Country" />
+    <NavigationProperty Name="Country1" Relationship="Self.FK_CarrierRate_Country1" FromRole="CarrierRate" ToRole="Country" />
+    <NavigationProperty Name="Currency" Relationship="Self.FK_CarrierRate_Currency" FromRole="CarrierRate" ToRole="Currency" />
+    <NavigationProperty Name="Currency1" Relationship="Self.FK_CarrierRate_Currency1" FromRole="CarrierRate" ToRole="Currency" />
+    <NavigationProperty Name="Port" Relationship="Self.FK_CarrierRate_Port" FromRole="CarrierRate" ToRole="Port" />
+    <NavigationProperty Name="Port1" Relationship="Self.FK_CarrierRate_Port1" FromRole="CarrierRate" ToRole="Port" />
+    <NavigationProperty Name="CarrierRateTransits" Relationship="Self.FK_CarrierRateTransit_CarrierRate" FromRole="CarrierRate" ToRole="CarrierRateTransit" />
+  </EntityType>
+  <EntityType Name="CarrierRateTransit">
+    <Key>
+      <PropertyRef Name="CarrierRateId" />
+      <PropertyRef Name="TransitPortId" />
+    </Key>
+    <Property Name="CarrierRateId" Type="Int32" Nullable="false" />
+    <Property Name="TransitPortId" Type="Int32" Nullable="false" />
+    <Property Name="TransitCountryId" Type="Int32" />
+    <NavigationProperty Name="CarrierRate" Relationship="Self.FK_CarrierRateTransit_CarrierRate" FromRole="CarrierRateTransit" ToRole="CarrierRate" />
+    <NavigationProperty Name="Port" Relationship="Self.FK_CarrierRateTransit_Port" FromRole="CarrierRateTransit" ToRole="Port" />
+  </EntityType>
+  <EntityType Name="City">
+    <Key>
+      <PropertyRef Name="CityId" />
+    </Key>
+    <Property Name="CityId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CountryId" Type="Int32" Nullable="false" />
+    <Property Name="CityNameEn" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CityNameAr" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Agents" Relationship="Self.FK_Agent_City" FromRole="City" ToRole="Agent" />
+    <NavigationProperty Name="Carriers" Relationship="Self.FK_Carrier_City" FromRole="City" ToRole="Carrier" />
+    <NavigationProperty Name="Country" Relationship="Self.FK_City_Country" FromRole="City" ToRole="Country" />
+    <NavigationProperty Name="Consignees" Relationship="Self.FK_Consignee_City" FromRole="City" ToRole="Consignee" />
+    <NavigationProperty Name="Contractors" Relationship="Self.FK_Contractor_City" FromRole="City" ToRole="Contractor" />
+    <NavigationProperty Name="Notifiers" Relationship="Self.FK_Notifier_City" FromRole="City" ToRole="Notifier" />
+    <NavigationProperty Name="Ports" Relationship="Self.FK_Port_City" FromRole="City" ToRole="Port" />
+    <NavigationProperty Name="Shippers" Relationship="Self.FK_Shipper_City" FromRole="City" ToRole="Shipper" />
+    <NavigationProperty Name="TruckingOrders" Relationship="EasyFreightModel.FK_TruckingOrder_City" FromRole="City" ToRole="TruckingOrder" />
+    <NavigationProperty Name="TruckingOrders1" Relationship="EasyFreightModel.FK_TruckingOrder_City1" FromRole="City" ToRole="TruckingOrder" />
+    <NavigationProperty Name="Areas" Relationship="EasyFreightModel.FK_Area_City" FromRole="City" ToRole="Area" />
+    <NavigationProperty Name="ContractorRates" Relationship="EasyFreightModel.FK_ContractorRate_City" FromRole="City" ToRole="ContractorRate" />
+    <NavigationProperty Name="ContractorRates1" Relationship="EasyFreightModel.FK_ContractorRate_City1" FromRole="City" ToRole="ContractorRate" />
+  </EntityType>
+  <EntityType Name="CompanySetup">
+    <Key>
+      <PropertyRef Name="CompanyId" />
+    </Key>
+    <Property Name="CompanyId" Type="Int32" Nullable="false" />
+    <Property Name="CompanyNameEn" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CompanyNameAr" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CompanyAddressEn" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CompanyAddressAr" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="CountryId" Type="Int32" />
+    <Property Name="CityId" Type="Int32" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="WebSite" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="EnglishLogoUrl" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="ArabicLogoUrl" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="CompanySetupContact">
+    <Key>
+      <PropertyRef Name="CompanyId" />
+    </Key>
+    <Property Name="CompanyId" Type="Int32" Nullable="false" />
+    <Property Name="PhoneNumber1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumber2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumber3" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="FaxNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Consignee">
+    <Key>
+      <PropertyRef Name="ConsigneeId" />
+    </Key>
+    <Property Name="ConsigneeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ConsigneeCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ConsigneeNameEn" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ConsigneeNameAr" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="ConsigneeAddressEn" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="ConsigneeAddressAr" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="CountryId" Type="Int32" />
+    <Property Name="CityId" Type="Int32" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="WebSite" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="FaxNumber" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="City" Relationship="Self.FK_Consignee_City" FromRole="Consignee" ToRole="City" />
+    <NavigationProperty Name="Country" Relationship="Self.FK_Consignee_Country" FromRole="Consignee" ToRole="Country" />
+    <NavigationProperty Name="ConsigneeContacts" Relationship="Self.FK_ConsigneeContact_Consignee" FromRole="Consignee" ToRole="ConsigneeContact" />
+    <NavigationProperty Name="Notifiers" Relationship="Self.FK_Notifier_Consignee" FromRole="Consignee" ToRole="Notifier" />
+    <NavigationProperty Name="TruckingOrders" Relationship="EasyFreightModel.FK_TruckingOrder_Consignee" FromRole="Consignee" ToRole="TruckingOrder" />
+    <Property Name="AccountId" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="TaxDepositAccountId" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="ConsigneeContact">
+    <Key>
+      <PropertyRef Name="ContactId" />
+    </Key>
+    <Property Name="ContactId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ConsigneeId" Type="Int32" />
+    <Property Name="ContactName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Consignee" Relationship="Self.FK_ConsigneeContact_Consignee" FromRole="ConsigneeContact" ToRole="Consignee" />
+  </EntityType>
+  <EntityType Name="ContainerType">
+    <Key>
+      <PropertyRef Name="ContainerTypeId" />
+    </Key>
+    <Property Name="ContainerTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ContainerTypeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="MaxWeight" Type="Decimal" Precision="18" Scale="5" Nullable="false" />
+    <Property Name="MaxCBM" Type="Decimal" Precision="18" Scale="5" Nullable="false" />
+    <NavigationProperty Name="CarrierRates" Relationship="Self.FK_CarrierRate_ContainerType" FromRole="ContainerType" ToRole="CarrierRate" />
+    <NavigationProperty Name="ContractorRates" Relationship="EasyFreightModel.FK_ContractorRate_ContainerType" FromRole="ContainerType" ToRole="ContractorRate" />
+  </EntityType>
+  <EntityType Name="Contractor">
+    <Key>
+      <PropertyRef Name="ContractorId" />
+    </Key>
+    <Property Name="ContractorId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ContractorCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ContractorNameEn" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ContractorNameAr" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ContractorAddressEn" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="ContractorAddressAr" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="CountryId" Type="Int32" />
+    <Property Name="CityId" Type="Int32" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="WebSite" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="FaxNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="City" Relationship="Self.FK_Contractor_City" FromRole="Contractor" ToRole="City" />
+    <NavigationProperty Name="Country" Relationship="Self.FK_Contractor_Country" FromRole="Contractor" ToRole="Country" />
+    <NavigationProperty Name="ContractorContacts" Relationship="Self.FK_ContractorContact_Contractor" FromRole="Contractor" ToRole="ContractorContact" />
+    <NavigationProperty Name="TruckingOrderDetails" Relationship="EasyFreightModel.FK_TruckingOrderDetail_Contractor" FromRole="Contractor" ToRole="TruckingOrderDetail" />
+    <Property Name="AccountId" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="ContractorRates" Relationship="EasyFreightModel.FK_ContractorRate_Contractor" FromRole="Contractor" ToRole="ContractorRate" />
+  </EntityType>
+  <EntityType Name="ContractorContact">
+    <Key>
+      <PropertyRef Name="ContactId" />
+    </Key>
+    <Property Name="ContactId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ContractorId" Type="Int32" />
+    <Property Name="ContactName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Contractor" Relationship="Self.FK_ContractorContact_Contractor" FromRole="ContractorContact" ToRole="Contractor" />
+  </EntityType>
+  <EntityType Name="Country">
+    <Key>
+      <PropertyRef Name="CountryId" />
+    </Key>
+    <Property Name="CountryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CountryNameEn" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CountryNameAr" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Agents" Relationship="Self.FK_Agent_Country" FromRole="Country" ToRole="Agent" />
+    <NavigationProperty Name="Carriers" Relationship="Self.FK_Carrier_Country" FromRole="Country" ToRole="Carrier" />
+    <NavigationProperty Name="CarrierRates" Relationship="Self.FK_CarrierRate_Country" FromRole="Country" ToRole="CarrierRate" />
+    <NavigationProperty Name="CarrierRates1" Relationship="Self.FK_CarrierRate_Country1" FromRole="Country" ToRole="CarrierRate" />
+    <NavigationProperty Name="Cities" Relationship="Self.FK_City_Country" FromRole="Country" ToRole="City" />
+    <NavigationProperty Name="Consignees" Relationship="Self.FK_Consignee_Country" FromRole="Country" ToRole="Consignee" />
+    <NavigationProperty Name="Contractors" Relationship="Self.FK_Contractor_Country" FromRole="Country" ToRole="Contractor" />
+    <NavigationProperty Name="Notifiers" Relationship="Self.FK_Notifier_Country" FromRole="Country" ToRole="Notifier" />
+    <NavigationProperty Name="Ports" Relationship="Self.FK_Port_Country" FromRole="Country" ToRole="Port" />
+    <NavigationProperty Name="Shippers" Relationship="Self.FK_Shipper_Country" FromRole="Country" ToRole="Shipper" />
+    <NavigationProperty Name="Areas" Relationship="EasyFreightModel.FK_Area_Country" FromRole="Country" ToRole="Area" />
+  </EntityType>
+  <EntityType Name="Currency">
+    <Key>
+      <PropertyRef Name="CurrencyId" />
+    </Key>
+    <Property Name="CurrencyId" Type="Int32" Nullable="false" />
+    <Property Name="CurrencySign" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CurrencyName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="CarrierRates" Relationship="Self.FK_CarrierRate_Currency" FromRole="Currency" ToRole="CarrierRate" />
+    <NavigationProperty Name="CarrierRates1" Relationship="Self.FK_CarrierRate_Currency1" FromRole="Currency" ToRole="CarrierRate" />
+    <NavigationProperty Name="CurrencyExchages" Relationship="Self.FK_CurrencyExchage_Currency" FromRole="Currency" ToRole="CurrencyExchage" />
+    <NavigationProperty Name="CurrencyExchages1" Relationship="Self.FK_CurrencyExchage_Currency1" FromRole="Currency" ToRole="CurrencyExchage" />
+    <NavigationProperty Name="TruckingOrderCosts" Relationship="EasyFreightModel.FK_TruckingOrderCost_Currency" FromRole="Currency" ToRole="TruckingOrderCost" />
+    <Property Name="AccountId" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="ContractorRates" Relationship="EasyFreightModel.FK_ContractorRate_Currency" FromRole="Currency" ToRole="ContractorRate" />
+  </EntityType>
+  <EntityType Name="CurrencyExchage">
+    <Key>
+      <PropertyRef Name="CurrencyExchageId" />
+    </Key>
+    <Property Name="CurrencyExchageId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FromCurrencyId" Type="Int32" Nullable="false" />
+    <Property Name="ToCurrencyId" Type="Int32" Nullable="false" />
+    <Property Name="ExchangeRate" Type="Decimal" Precision="10" Scale="5" Nullable="false" />
+    <Property Name="ValidFrom" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="ValidTo" Type="DateTime" Nullable="false" Precision="0" />
+    <NavigationProperty Name="Currency" Relationship="Self.FK_CurrencyExchage_Currency" FromRole="CurrencyExchage" ToRole="Currency" />
+    <NavigationProperty Name="Currency1" Relationship="Self.FK_CurrencyExchage_Currency1" FromRole="CurrencyExchage" ToRole="Currency" />
+  </EntityType>
+  <EntityType Name="IncotermLib">
+    <Key>
+      <PropertyRef Name="IncotermId" />
+    </Key>
+    <Property Name="IncotermId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IncotermCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="IncotermName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Notifier">
+    <Key>
+      <PropertyRef Name="NotifierId" />
+    </Key>
+    <Property Name="NotifierId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NotifierCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="NotifierNameEn" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="NotifierNameAr" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="NotifierAddressEn" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="NotifierAddressAr" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="CountryId" Type="Int32" />
+    <Property Name="CityId" Type="Int32" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="WebSite" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="FaxNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="ConsigneeId" Type="Int32" />
+    <NavigationProperty Name="City" Relationship="Self.FK_Notifier_City" FromRole="Notifier" ToRole="City" />
+    <NavigationProperty Name="Consignee" Relationship="Self.FK_Notifier_Consignee" FromRole="Notifier" ToRole="Consignee" />
+    <NavigationProperty Name="Country" Relationship="Self.FK_Notifier_Country" FromRole="Notifier" ToRole="Country" />
+    <NavigationProperty Name="NotifierContacts" Relationship="Self.FK_NotifierContact_Notifier" FromRole="Notifier" ToRole="NotifierContact" />
+  </EntityType>
+  <EntityType Name="NotifierContact">
+    <Key>
+      <PropertyRef Name="ContactId" />
+    </Key>
+    <Property Name="ContactId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NotifierId" Type="Int32" />
+    <Property Name="ContactName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Notifier" Relationship="Self.FK_NotifierContact_Notifier" FromRole="NotifierContact" ToRole="Notifier" />
+  </EntityType>
+  <EntityType Name="PackageType">
+    <Key>
+      <PropertyRef Name="PackageTypeId" />
+    </Key>
+    <Property Name="PackageTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PackageTypeNameEn" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PackageTypeNameAr" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Port">
+    <Key>
+      <PropertyRef Name="PortId" />
+    </Key>
+    <Property Name="PortId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CountryId" Type="Int32" Nullable="false" />
+    <Property Name="CityId" Type="Int32" Nullable="false" />
+    <Property Name="PortType" Type="Byte" Nullable="false" />
+    <Property Name="PortNameEn" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PortNameAr" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="CarrierRates" Relationship="Self.FK_CarrierRate_Port" FromRole="Port" ToRole="CarrierRate" />
+    <NavigationProperty Name="CarrierRates1" Relationship="Self.FK_CarrierRate_Port1" FromRole="Port" ToRole="CarrierRate" />
+    <NavigationProperty Name="CarrierRateTransits" Relationship="Self.FK_CarrierRateTransit_Port" FromRole="Port" ToRole="CarrierRateTransit" />
+    <NavigationProperty Name="City" Relationship="Self.FK_Port_City" FromRole="Port" ToRole="City" />
+    <NavigationProperty Name="Country" Relationship="Self.FK_Port_Country" FromRole="Port" ToRole="Country" />
+  </EntityType>
+  <EntityType Name="Shipper">
+    <Key>
+      <PropertyRef Name="ShipperId" />
+    </Key>
+    <Property Name="ShipperId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ShipperCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ShipperNameEn" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ShipperNameAr" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="ShipperAddressEn" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="ShipperAddressAr" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="CountryId" Type="Int32" />
+    <Property Name="CityId" Type="Int32" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="WebSite" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="FaxNumber" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="City" Relationship="Self.FK_Shipper_City" FromRole="Shipper" ToRole="City" />
+    <NavigationProperty Name="Country" Relationship="Self.FK_Shipper_Country" FromRole="Shipper" ToRole="Country" />
+    <NavigationProperty Name="ShipperContacts" Relationship="Self.FK_ShipperContact_Shipper" FromRole="Shipper" ToRole="ShipperContact" />
+    <NavigationProperty Name="TruckingOrders" Relationship="EasyFreightModel.FK_TruckingOrder_Shipper" FromRole="Shipper" ToRole="TruckingOrder" />
+    <Property Name="AccountId" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="TaxDepositAccountId" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="ShipperContact">
+    <Key>
+      <PropertyRef Name="ContactId" />
+    </Key>
+    <Property Name="ContactId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ShipperId" Type="Int32" />
+    <Property Name="ContactName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Shipper" Relationship="Self.FK_ShipperContact_Shipper" FromRole="ShipperContact" ToRole="Shipper" />
+  </EntityType>
+  <EntityType Name="StatusLib">
+    <Key>
+      <PropertyRef Name="StatusId" />
+    </Key>
+    <Property Name="StatusId" Type="Byte" Nullable="false" />
+    <Property Name="StatusName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="TruckingOrders" Relationship="EasyFreightModel.FK_TruckingOrder_StatusLib" FromRole="StatusLib" ToRole="TruckingOrder" />
+  </EntityType>
+  <EntityType Name="SystemSetup">
+    <Key>
+      <PropertyRef Name="CompanyId" />
+    </Key>
+    <Property Name="CompanyId" Type="Int32" Nullable="false" />
+    <Property Name="CarrierPrefix" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="ShipperPrefix" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="ConsigneePrefix" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="NotifierPrefix" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="ContractorPrefix" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="DefaultCurrencyId" Type="Int32" />
+    <Property Name="ImportPrefix" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="ExportPrefix" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="TruckingCostLib">
+    <Key>
+      <PropertyRef Name="TruckingCostId" />
+    </Key>
+    <Property Name="TruckingCostId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TruckingCostName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="TruckingOrderCosts" Relationship="EasyFreightModel.FK_TruckingOrderCost_TruckingCostLib" FromRole="TruckingCostLib" ToRole="TruckingOrderCost" />
+    <Property Name="TruckingCostNameAr" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <Association Name="FK_Agent_City">
+    <End Role="City" Type="Self.City" Multiplicity="0..1" />
+    <End Role="Agent" Type="Self.Agent" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="City">
+        <PropertyRef Name="CityId" />
+      </Principal>
+      <Dependent Role="Agent">
+        <PropertyRef Name="CityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Agent_Country">
+    <End Role="Country" Type="Self.Country" Multiplicity="0..1" />
+    <End Role="Agent" Type="Self.Agent" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country">
+        <PropertyRef Name="CountryId" />
+      </Principal>
+      <Dependent Role="Agent">
+        <PropertyRef Name="CountryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AgentContact_Agent">
+    <End Role="Agent" Type="Self.Agent" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AgentContact" Type="Self.AgentContact" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Agent">
+        <PropertyRef Name="AgentId" />
+      </Principal>
+      <Dependent Role="AgentContact">
+        <PropertyRef Name="AgentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Carrier_City">
+    <End Role="City" Type="Self.City" Multiplicity="0..1" />
+    <End Role="Carrier" Type="Self.Carrier" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="City">
+        <PropertyRef Name="CityId" />
+      </Principal>
+      <Dependent Role="Carrier">
+        <PropertyRef Name="CityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Carrier_Country">
+    <End Role="Country" Type="Self.Country" Multiplicity="0..1" />
+    <End Role="Carrier" Type="Self.Carrier" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country">
+        <PropertyRef Name="CountryId" />
+      </Principal>
+      <Dependent Role="Carrier">
+        <PropertyRef Name="CountryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CarrierContact_Carrier">
+    <End Role="Carrier" Type="Self.Carrier" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="CarrierContact" Type="Self.CarrierContact" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Carrier">
+        <PropertyRef Name="CarrierId" />
+      </Principal>
+      <Dependent Role="CarrierContact">
+        <PropertyRef Name="CarrierId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CarrierRate_Carrier">
+    <End Role="Carrier" Type="Self.Carrier" Multiplicity="1" />
+    <End Role="CarrierRate" Type="Self.CarrierRate" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Carrier">
+        <PropertyRef Name="CarrierId" />
+      </Principal>
+      <Dependent Role="CarrierRate">
+        <PropertyRef Name="CarrierId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CarrierRate_ContainerType">
+    <End Role="ContainerType" Type="Self.ContainerType" Multiplicity="1" />
+    <End Role="CarrierRate" Type="Self.CarrierRate" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ContainerType">
+        <PropertyRef Name="ContainerTypeId" />
+      </Principal>
+      <Dependent Role="CarrierRate">
+        <PropertyRef Name="ContainerTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CarrierRate_Country">
+    <End Role="Country" Type="Self.Country" Multiplicity="1" />
+    <End Role="CarrierRate" Type="Self.CarrierRate" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country">
+        <PropertyRef Name="CountryId" />
+      </Principal>
+      <Dependent Role="CarrierRate">
+        <PropertyRef Name="FromCountryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CarrierRate_Country1">
+    <End Role="Country" Type="Self.Country" Multiplicity="1" />
+    <End Role="CarrierRate" Type="Self.CarrierRate" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country">
+        <PropertyRef Name="CountryId" />
+      </Principal>
+      <Dependent Role="CarrierRate">
+        <PropertyRef Name="ToCountryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CarrierRate_Currency">
+    <End Role="Currency" Type="Self.Currency" Multiplicity="0..1" />
+    <End Role="CarrierRate" Type="Self.CarrierRate" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Currency">
+        <PropertyRef Name="CurrencyId" />
+      </Principal>
+      <Dependent Role="CarrierRate">
+        <PropertyRef Name="FreighCurrencyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CarrierRate_Currency1">
+    <End Role="Currency" Type="Self.Currency" Multiplicity="0..1" />
+    <End Role="CarrierRate" Type="Self.CarrierRate" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Currency">
+        <PropertyRef Name="CurrencyId" />
+      </Principal>
+      <Dependent Role="CarrierRate">
+        <PropertyRef Name="ThcCurrencyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CarrierRate_Port">
+    <End Role="Port" Type="Self.Port" Multiplicity="1" />
+    <End Role="CarrierRate" Type="Self.CarrierRate" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Port">
+        <PropertyRef Name="PortId" />
+      </Principal>
+      <Dependent Role="CarrierRate">
+        <PropertyRef Name="FromPortId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CarrierRate_Port1">
+    <End Role="Port" Type="Self.Port" Multiplicity="1" />
+    <End Role="CarrierRate" Type="Self.CarrierRate" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Port">
+        <PropertyRef Name="PortId" />
+      </Principal>
+      <Dependent Role="CarrierRate">
+        <PropertyRef Name="ToPortId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CarrierRateTransit_CarrierRate">
+    <End Role="CarrierRate" Type="Self.CarrierRate" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="CarrierRateTransit" Type="Self.CarrierRateTransit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CarrierRate">
+        <PropertyRef Name="CarrierRateId" />
+      </Principal>
+      <Dependent Role="CarrierRateTransit">
+        <PropertyRef Name="CarrierRateId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CarrierRateTransit_Port">
+    <End Role="Port" Type="Self.Port" Multiplicity="1" />
+    <End Role="CarrierRateTransit" Type="Self.CarrierRateTransit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Port">
+        <PropertyRef Name="PortId" />
+      </Principal>
+      <Dependent Role="CarrierRateTransit">
+        <PropertyRef Name="TransitPortId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_City_Country">
+    <End Role="Country" Type="Self.Country" Multiplicity="1" />
+    <End Role="City" Type="Self.City" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country">
+        <PropertyRef Name="CountryId" />
+      </Principal>
+      <Dependent Role="City">
+        <PropertyRef Name="CountryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Consignee_City">
+    <End Role="City" Type="Self.City" Multiplicity="0..1" />
+    <End Role="Consignee" Type="Self.Consignee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="City">
+        <PropertyRef Name="CityId" />
+      </Principal>
+      <Dependent Role="Consignee">
+        <PropertyRef Name="CityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Contractor_City">
+    <End Role="City" Type="Self.City" Multiplicity="0..1" />
+    <End Role="Contractor" Type="Self.Contractor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="City">
+        <PropertyRef Name="CityId" />
+      </Principal>
+      <Dependent Role="Contractor">
+        <PropertyRef Name="CityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Notifier_City">
+    <End Role="City" Type="Self.City" Multiplicity="0..1" />
+    <End Role="Notifier" Type="Self.Notifier" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="City">
+        <PropertyRef Name="CityId" />
+      </Principal>
+      <Dependent Role="Notifier">
+        <PropertyRef Name="CityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Port_City">
+    <End Role="City" Type="Self.City" Multiplicity="1" />
+    <End Role="Port" Type="Self.Port" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="City">
+        <PropertyRef Name="CityId" />
+      </Principal>
+      <Dependent Role="Port">
+        <PropertyRef Name="CityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Shipper_City">
+    <End Role="City" Type="Self.City" Multiplicity="0..1" />
+    <End Role="Shipper" Type="Self.Shipper" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="City">
+        <PropertyRef Name="CityId" />
+      </Principal>
+      <Dependent Role="Shipper">
+        <PropertyRef Name="CityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Consignee_Country">
+    <End Role="Country" Type="Self.Country" Multiplicity="0..1" />
+    <End Role="Consignee" Type="Self.Consignee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country">
+        <PropertyRef Name="CountryId" />
+      </Principal>
+      <Dependent Role="Consignee">
+        <PropertyRef Name="CountryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ConsigneeContact_Consignee">
+    <End Role="Consignee" Type="Self.Consignee" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="ConsigneeContact" Type="Self.ConsigneeContact" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Consignee">
+        <PropertyRef Name="ConsigneeId" />
+      </Principal>
+      <Dependent Role="ConsigneeContact">
+        <PropertyRef Name="ConsigneeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Notifier_Consignee">
+    <End Role="Consignee" Type="Self.Consignee" Multiplicity="0..1" />
+    <End Role="Notifier" Type="Self.Notifier" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Consignee">
+        <PropertyRef Name="ConsigneeId" />
+      </Principal>
+      <Dependent Role="Notifier">
+        <PropertyRef Name="ConsigneeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Contractor_Country">
+    <End Role="Country" Type="Self.Country" Multiplicity="0..1" />
+    <End Role="Contractor" Type="Self.Contractor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country">
+        <PropertyRef Name="CountryId" />
+      </Principal>
+      <Dependent Role="Contractor">
+        <PropertyRef Name="CountryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ContractorContact_Contractor">
+    <End Role="Contractor" Type="Self.Contractor" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="ContractorContact" Type="Self.ContractorContact" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Contractor">
+        <PropertyRef Name="ContractorId" />
+      </Principal>
+      <Dependent Role="ContractorContact">
+        <PropertyRef Name="ContractorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Notifier_Country">
+    <End Role="Country" Type="Self.Country" Multiplicity="0..1" />
+    <End Role="Notifier" Type="Self.Notifier" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country">
+        <PropertyRef Name="CountryId" />
+      </Principal>
+      <Dependent Role="Notifier">
+        <PropertyRef Name="CountryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Port_Country">
+    <End Role="Country" Type="Self.Country" Multiplicity="1" />
+    <End Role="Port" Type="Self.Port" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country">
+        <PropertyRef Name="CountryId" />
+      </Principal>
+      <Dependent Role="Port">
+        <PropertyRef Name="CountryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Shipper_Country">
+    <End Role="Country" Type="Self.Country" Multiplicity="0..1" />
+    <End Role="Shipper" Type="Self.Shipper" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country">
+        <PropertyRef Name="CountryId" />
+      </Principal>
+      <Dependent Role="Shipper">
+        <PropertyRef Name="CountryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CurrencyExchage_Currency">
+    <End Role="Currency" Type="Self.Currency" Multiplicity="1" />
+    <End Role="CurrencyExchage" Type="Self.CurrencyExchage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Currency">
+        <PropertyRef Name="CurrencyId" />
+      </Principal>
+      <Dependent Role="CurrencyExchage">
+        <PropertyRef Name="FromCurrencyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CurrencyExchage_Currency1">
+    <End Role="Currency" Type="Self.Currency" Multiplicity="1" />
+    <End Role="CurrencyExchage" Type="Self.CurrencyExchage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Currency">
+        <PropertyRef Name="CurrencyId" />
+      </Principal>
+      <Dependent Role="CurrencyExchage">
+        <PropertyRef Name="ToCurrencyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_NotifierContact_Notifier">
+    <End Role="Notifier" Type="Self.Notifier" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="NotifierContact" Type="Self.NotifierContact" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Notifier">
+        <PropertyRef Name="NotifierId" />
+      </Principal>
+      <Dependent Role="NotifierContact">
+        <PropertyRef Name="NotifierId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ShipperContact_Shipper">
+    <End Role="Shipper" Type="Self.Shipper" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="ShipperContact" Type="Self.ShipperContact" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Shipper">
+        <PropertyRef Name="ShipperId" />
+      </Principal>
+      <Dependent Role="ShipperContact">
+        <PropertyRef Name="ShipperId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="EasyFreightEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Agents" EntityType="Self.Agent" />
+    <EntitySet Name="AgentContacts" EntityType="Self.AgentContact" />
+    <EntitySet Name="Carriers" EntityType="Self.Carrier" />
+    <EntitySet Name="CarrierContacts" EntityType="Self.CarrierContact" />
+    <EntitySet Name="CarrierRates" EntityType="Self.CarrierRate" />
+    <EntitySet Name="CarrierRateTransits" EntityType="Self.CarrierRateTransit" />
+    <EntitySet Name="Cities" EntityType="Self.City" />
+    <EntitySet Name="CompanySetups" EntityType="Self.CompanySetup" />
+    <EntitySet Name="CompanySetupContacts" EntityType="Self.CompanySetupContact" />
+    <EntitySet Name="Consignees" EntityType="Self.Consignee" />
+    <EntitySet Name="ConsigneeContacts" EntityType="Self.ConsigneeContact" />
+    <EntitySet Name="ContainerTypes" EntityType="Self.ContainerType" />
+    <EntitySet Name="Contractors" EntityType="Self.Contractor" />
+    <EntitySet Name="ContractorContacts" EntityType="Self.ContractorContact" />
+    <EntitySet Name="Countries" EntityType="Self.Country" />
+    <EntitySet Name="Currencies" EntityType="Self.Currency" />
+    <EntitySet Name="CurrencyExchages" EntityType="Self.CurrencyExchage" />
+    <EntitySet Name="IncotermLibs" EntityType="Self.IncotermLib" />
+    <EntitySet Name="Notifiers" EntityType="Self.Notifier" />
+    <EntitySet Name="NotifierContacts" EntityType="Self.NotifierContact" />
+    <EntitySet Name="PackageTypes" EntityType="Self.PackageType" />
+    <EntitySet Name="Ports" EntityType="Self.Port" />
+    <EntitySet Name="Shippers" EntityType="Self.Shipper" />
+    <EntitySet Name="ShipperContacts" EntityType="Self.ShipperContact" />
+    <EntitySet Name="StatusLibs" EntityType="Self.StatusLib" />
+    <EntitySet Name="SystemSetups" EntityType="Self.SystemSetup" />
+    <EntitySet Name="TruckingCostLibs" EntityType="Self.TruckingCostLib" />
+    <AssociationSet Name="FK_Agent_City" Association="Self.FK_Agent_City">
+      <End Role="City" EntitySet="Cities" />
+      <End Role="Agent" EntitySet="Agents" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Agent_Country" Association="Self.FK_Agent_Country">
+      <End Role="Country" EntitySet="Countries" />
+      <End Role="Agent" EntitySet="Agents" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AgentContact_Agent" Association="Self.FK_AgentContact_Agent">
+      <End Role="Agent" EntitySet="Agents" />
+      <End Role="AgentContact" EntitySet="AgentContacts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Carrier_City" Association="Self.FK_Carrier_City">
+      <End Role="City" EntitySet="Cities" />
+      <End Role="Carrier" EntitySet="Carriers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Carrier_Country" Association="Self.FK_Carrier_Country">
+      <End Role="Country" EntitySet="Countries" />
+      <End Role="Carrier" EntitySet="Carriers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CarrierContact_Carrier" Association="Self.FK_CarrierContact_Carrier">
+      <End Role="Carrier" EntitySet="Carriers" />
+      <End Role="CarrierContact" EntitySet="CarrierContacts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CarrierRate_Carrier" Association="Self.FK_CarrierRate_Carrier">
+      <End Role="Carrier" EntitySet="Carriers" />
+      <End Role="CarrierRate" EntitySet="CarrierRates" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CarrierRate_ContainerType" Association="Self.FK_CarrierRate_ContainerType">
+      <End Role="ContainerType" EntitySet="ContainerTypes" />
+      <End Role="CarrierRate" EntitySet="CarrierRates" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CarrierRate_Country" Association="Self.FK_CarrierRate_Country">
+      <End Role="Country" EntitySet="Countries" />
+      <End Role="CarrierRate" EntitySet="CarrierRates" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CarrierRate_Country1" Association="Self.FK_CarrierRate_Country1">
+      <End Role="Country" EntitySet="Countries" />
+      <End Role="CarrierRate" EntitySet="CarrierRates" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CarrierRate_Currency" Association="Self.FK_CarrierRate_Currency">
+      <End Role="Currency" EntitySet="Currencies" />
+      <End Role="CarrierRate" EntitySet="CarrierRates" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CarrierRate_Currency1" Association="Self.FK_CarrierRate_Currency1">
+      <End Role="Currency" EntitySet="Currencies" />
+      <End Role="CarrierRate" EntitySet="CarrierRates" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CarrierRate_Port" Association="Self.FK_CarrierRate_Port">
+      <End Role="Port" EntitySet="Ports" />
+      <End Role="CarrierRate" EntitySet="CarrierRates" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CarrierRate_Port1" Association="Self.FK_CarrierRate_Port1">
+      <End Role="Port" EntitySet="Ports" />
+      <End Role="CarrierRate" EntitySet="CarrierRates" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CarrierRateTransit_CarrierRate" Association="Self.FK_CarrierRateTransit_CarrierRate">
+      <End Role="CarrierRate" EntitySet="CarrierRates" />
+      <End Role="CarrierRateTransit" EntitySet="CarrierRateTransits" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CarrierRateTransit_Port" Association="Self.FK_CarrierRateTransit_Port">
+      <End Role="Port" EntitySet="Ports" />
+      <End Role="CarrierRateTransit" EntitySet="CarrierRateTransits" />
+    </AssociationSet>
+    <AssociationSet Name="FK_City_Country" Association="Self.FK_City_Country">
+      <End Role="Country" EntitySet="Countries" />
+      <End Role="City" EntitySet="Cities" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Consignee_City" Association="Self.FK_Consignee_City">
+      <End Role="City" EntitySet="Cities" />
+      <End Role="Consignee" EntitySet="Consignees" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Contractor_City" Association="Self.FK_Contractor_City">
+      <End Role="City" EntitySet="Cities" />
+      <End Role="Contractor" EntitySet="Contractors" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Notifier_City" Association="Self.FK_Notifier_City">
+      <End Role="City" EntitySet="Cities" />
+      <End Role="Notifier" EntitySet="Notifiers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Port_City" Association="Self.FK_Port_City">
+      <End Role="City" EntitySet="Cities" />
+      <End Role="Port" EntitySet="Ports" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Shipper_City" Association="Self.FK_Shipper_City">
+      <End Role="City" EntitySet="Cities" />
+      <End Role="Shipper" EntitySet="Shippers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Consignee_Country" Association="Self.FK_Consignee_Country">
+      <End Role="Country" EntitySet="Countries" />
+      <End Role="Consignee" EntitySet="Consignees" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ConsigneeContact_Consignee" Association="Self.FK_ConsigneeContact_Consignee">
+      <End Role="Consignee" EntitySet="Consignees" />
+      <End Role="ConsigneeContact" EntitySet="ConsigneeContacts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Notifier_Consignee" Association="Self.FK_Notifier_Consignee">
+      <End Role="Consignee" EntitySet="Consignees" />
+      <End Role="Notifier" EntitySet="Notifiers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Contractor_Country" Association="Self.FK_Contractor_Country">
+      <End Role="Country" EntitySet="Countries" />
+      <End Role="Contractor" EntitySet="Contractors" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ContractorContact_Contractor" Association="Self.FK_ContractorContact_Contractor">
+      <End Role="Contractor" EntitySet="Contractors" />
+      <End Role="ContractorContact" EntitySet="ContractorContacts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Notifier_Country" Association="Self.FK_Notifier_Country">
+      <End Role="Country" EntitySet="Countries" />
+      <End Role="Notifier" EntitySet="Notifiers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Port_Country" Association="Self.FK_Port_Country">
+      <End Role="Country" EntitySet="Countries" />
+      <End Role="Port" EntitySet="Ports" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Shipper_Country" Association="Self.FK_Shipper_Country">
+      <End Role="Country" EntitySet="Countries" />
+      <End Role="Shipper" EntitySet="Shippers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CurrencyExchage_Currency" Association="Self.FK_CurrencyExchage_Currency">
+      <End Role="Currency" EntitySet="Currencies" />
+      <End Role="CurrencyExchage" EntitySet="CurrencyExchages" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CurrencyExchage_Currency1" Association="Self.FK_CurrencyExchage_Currency1">
+      <End Role="Currency" EntitySet="Currencies" />
+      <End Role="CurrencyExchage" EntitySet="CurrencyExchages" />
+    </AssociationSet>
+    <AssociationSet Name="FK_NotifierContact_Notifier" Association="Self.FK_NotifierContact_Notifier">
+      <End Role="Notifier" EntitySet="Notifiers" />
+      <End Role="NotifierContact" EntitySet="NotifierContacts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ShipperContact_Shipper" Association="Self.FK_ShipperContact_Shipper">
+      <End Role="Shipper" EntitySet="Shippers" />
+      <End Role="ShipperContact" EntitySet="ShipperContacts" />
+    </AssociationSet>
+    <FunctionImport Name="GetCarrierRate" ReturnType="Collection(EasyFreightModel.GetCarrierRate_Result)">
+      <Parameter Name="getValidOnly" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <FunctionImport Name="GetContractorRate" ReturnType="Collection(EasyFreightModel.GetContractorRate_Result)">
+      <Parameter Name="getValidOnly" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <EntitySet Name="TruckingOrderCosts" EntityType="EasyFreightModel.TruckingOrderCost" />
+    <EntitySet Name="TruckingOrderDetails" EntityType="EasyFreightModel.TruckingOrderDetail" />
+    <AssociationSet Name="FK_TruckingOrderDetail_Contractor" Association="EasyFreightModel.FK_TruckingOrderDetail_Contractor">
+      <End Role="Contractor" EntitySet="Contractors" />
+      <End Role="TruckingOrderDetail" EntitySet="TruckingOrderDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TruckingOrderCost_Currency" Association="EasyFreightModel.FK_TruckingOrderCost_Currency">
+      <End Role="Currency" EntitySet="Currencies" />
+      <End Role="TruckingOrderCost" EntitySet="TruckingOrderCosts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TruckingOrderCost_TruckingCostLib" Association="EasyFreightModel.FK_TruckingOrderCost_TruckingCostLib">
+      <End Role="TruckingCostLib" EntitySet="TruckingCostLibs" />
+      <End Role="TruckingOrderCost" EntitySet="TruckingOrderCosts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TruckingOrderCost_TruckingOrderDetail" Association="EasyFreightModel.FK_TruckingOrderCost_TruckingOrderDetail">
+      <End Role="TruckingOrderDetail" EntitySet="TruckingOrderDetails" />
+      <End Role="TruckingOrderCost" EntitySet="TruckingOrderCosts" />
+    </AssociationSet>
+    <EntitySet Name="TruckingOrders" EntityType="EasyFreightModel.TruckingOrder" />
+    <AssociationSet Name="FK_TruckingOrder_Carrier" Association="EasyFreightModel.FK_TruckingOrder_Carrier">
+      <End Role="Carrier" EntitySet="Carriers" />
+      <End Role="TruckingOrder" EntitySet="TruckingOrders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TruckingOrder_City" Association="EasyFreightModel.FK_TruckingOrder_City">
+      <End Role="City" EntitySet="Cities" />
+      <End Role="TruckingOrder" EntitySet="TruckingOrders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TruckingOrder_City1" Association="EasyFreightModel.FK_TruckingOrder_City1">
+      <End Role="City" EntitySet="Cities" />
+      <End Role="TruckingOrder" EntitySet="TruckingOrders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TruckingOrder_Consignee" Association="EasyFreightModel.FK_TruckingOrder_Consignee">
+      <End Role="Consignee" EntitySet="Consignees" />
+      <End Role="TruckingOrder" EntitySet="TruckingOrders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TruckingOrder_Shipper" Association="EasyFreightModel.FK_TruckingOrder_Shipper">
+      <End Role="Shipper" EntitySet="Shippers" />
+      <End Role="TruckingOrder" EntitySet="TruckingOrders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TruckingOrder_StatusLib" Association="EasyFreightModel.FK_TruckingOrder_StatusLib">
+      <End Role="StatusLib" EntitySet="StatusLibs" />
+      <End Role="TruckingOrder" EntitySet="TruckingOrders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TruckingOrderDetail_TruckingOrder" Association="EasyFreightModel.FK_TruckingOrderDetail_TruckingOrder">
+      <End Role="TruckingOrder" EntitySet="TruckingOrders" />
+      <End Role="TruckingOrderDetail" EntitySet="TruckingOrderDetails" />
+    </AssociationSet>
+    <EntitySet Name="StaticTexts" EntityType="EasyFreightModel.StaticText" />
+    <EntitySet Name="StaticTextLabels" EntityType="EasyFreightModel.StaticTextLabel" />
+    <AssociationSet Name="FK_StaticTextLabel_StaticText" Association="EasyFreightModel.FK_StaticTextLabel_StaticText">
+      <End Role="StaticText" EntitySet="StaticTexts" />
+      <End Role="StaticTextLabel" EntitySet="StaticTextLabels" />
+    </AssociationSet>
+    <EntitySet Name="DepartmentEasyModels" EntityType="EasyFreightModel.DepartmentEasyModel" />
+    <EntitySet Name="Vessels" EntityType="EasyFreightModel.Vessel" />
+    <AssociationSet Name="FK_Vessel_Carrier" Association="EasyFreightModel.FK_Vessel_Carrier">
+      <End Role="Carrier" EntitySet="Carriers" />
+      <End Role="Vessel" EntitySet="Vessels" />
+    </AssociationSet>
+    <EntitySet Name="Areas" EntityType="EasyFreightModel.Area" />
+    <EntitySet Name="ContractorRates" EntityType="EasyFreightModel.ContractorRate" />
+    <AssociationSet Name="FK_Area_City" Association="EasyFreightModel.FK_Area_City">
+      <End Role="City" EntitySet="Cities" />
+      <End Role="Area" EntitySet="Areas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Area_Country" Association="EasyFreightModel.FK_Area_Country">
+      <End Role="Country" EntitySet="Countries" />
+      <End Role="Area" EntitySet="Areas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ContractorRate_Area" Association="EasyFreightModel.FK_ContractorRate_Area">
+      <End Role="Area" EntitySet="Areas" />
+      <End Role="ContractorRate" EntitySet="ContractorRates" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ContractorRate_Area1" Association="EasyFreightModel.FK_ContractorRate_Area1">
+      <End Role="Area" EntitySet="Areas" />
+      <End Role="ContractorRate" EntitySet="ContractorRates" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ContractorRate_City" Association="EasyFreightModel.FK_ContractorRate_City">
+      <End Role="City" EntitySet="Cities" />
+      <End Role="ContractorRate" EntitySet="ContractorRates" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ContractorRate_City1" Association="EasyFreightModel.FK_ContractorRate_City1">
+      <End Role="City" EntitySet="Cities" />
+      <End Role="ContractorRate" EntitySet="ContractorRates" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ContractorRate_ContainerType" Association="EasyFreightModel.FK_ContractorRate_ContainerType">
+      <End Role="ContainerType" EntitySet="ContainerTypes" />
+      <End Role="ContractorRate" EntitySet="ContractorRates" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ContractorRate_Contractor" Association="EasyFreightModel.FK_ContractorRate_Contractor">
+      <End Role="Contractor" EntitySet="Contractors" />
+      <End Role="ContractorRate" EntitySet="ContractorRates" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ContractorRate_Currency" Association="EasyFreightModel.FK_ContractorRate_Currency">
+      <End Role="Currency" EntitySet="Currencies" />
+      <End Role="ContractorRate" EntitySet="ContractorRates" />
+    </AssociationSet>
+  </EntityContainer>
+  <ComplexType Name="GetCarrierRate_Result">
+    <Property Type="Int32" Name="CarrierRateId" Nullable="false" />
+    <Property Type="Int32" Name="CarrierId" Nullable="false" />
+    <Property Type="Int32" Name="FromPortId" Nullable="false" />
+    <Property Type="Int32" Name="ToPortId" Nullable="false" />
+    <Property Type="Int32" Name="FromCountryId" Nullable="false" />
+    <Property Type="Int32" Name="ToCountryId" Nullable="false" />
+    <Property Type="Int32" Name="ContainerTypeId" Nullable="false" />
+    <Property Type="Decimal" Name="FreightCostAmount" Nullable="true" Precision="18" Scale="3" />
+    <Property Type="Int32" Name="FreighCurrencyId" Nullable="true" />
+    <Property Type="Decimal" Name="ThcCostAmount" Nullable="true" Precision="18" Scale="3" />
+    <Property Type="Int32" Name="ThcCurrencyId" Nullable="true" />
+    <Property Type="Boolean" Name="IsValid" Nullable="true" />
+    <Property Type="Boolean" Name="ValidToChecked" Nullable="true" />
+    <Property Type="DateTime" Name="ValidToDate" Nullable="true" />
+    <Property Type="String" Name="FromPortName" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="ToPortName" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="FromCountryName" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="ToCountryName" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="ContainerTypeName" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="FreighCurrencySign" Nullable="false" MaxLength="10" />
+    <Property Type="String" Name="ThcCurrencySign" Nullable="false" MaxLength="10" />
+    <Property Type="String" Name="CarrierName" Nullable="false" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="GetContractorRate_Result">
+    <Property Type="Int32" Name="ContractorRateId" Nullable="false" />
+    <Property Type="Int32" Name="ContractorId" Nullable="false" />
+    <Property Type="Int32" Name="FromAreaId" Nullable="false" />
+    <Property Type="Int32" Name="ToAreaId" Nullable="false" />
+    <Property Type="Int32" Name="FromCityId" Nullable="false" />
+    <Property Type="Int32" Name="ToCityId" Nullable="false" />
+    <Property Type="Int32" Name="ContainerTypeId" Nullable="false" />
+    <Property Type="Decimal" Name="CostAmount" Nullable="false" Precision="18" Scale="3" />
+    <Property Type="Int32" Name="CurrencyId" Nullable="false" />
+    <Property Type="Boolean" Name="IsValid" Nullable="true" />
+    <Property Type="Boolean" Name="ValidToChecked" Nullable="true" />
+    <Property Type="DateTime" Name="ValidToDate" Nullable="true" />
+    <Property Type="String" Name="FromAreaName" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="ToAreaName" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="FromCityName" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="ToCityName" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="ContainerTypeName" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="CurrencySign" Nullable="false" MaxLength="10" />
+    <Property Type="String" Name="ContractorName" Nullable="false" MaxLength="50" />
+  </ComplexType>
+  <EntityType Name="TruckingOrderCost">
+    <Key>
+      <PropertyRef Name="TruckingOrderCostId" />
+      <PropertyRef Name="TruckingOrderId" />
+      <PropertyRef Name="TruckingCostId" />
+    </Key>
+    <Property Name="TruckingOrderCostId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TruckingOrderId" Type="Int32" Nullable="false" />
+    <Property Name="TruckingCostId" Type="Int32" Nullable="false" />
+    <Property Name="ContractorId" Type="Int32" Nullable="false" />
+    <Property Name="TruckingCostNet" Type="Decimal" Nullable="false" Precision="18" Scale="3" />
+    <Property Name="TruckingCostSelling" Type="Decimal" Nullable="false" Precision="18" Scale="3" />
+    <Property Name="CurrencyId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Currency" Relationship="EasyFreightModel.FK_TruckingOrderCost_Currency" FromRole="TruckingOrderCost" ToRole="Currency" />
+    <NavigationProperty Name="TruckingCostLib" Relationship="EasyFreightModel.FK_TruckingOrderCost_TruckingCostLib" FromRole="TruckingOrderCost" ToRole="TruckingCostLib" />
+    <NavigationProperty Name="TruckingOrderDetail" Relationship="EasyFreightModel.FK_TruckingOrderCost_TruckingOrderDetail" FromRole="TruckingOrderCost" ToRole="TruckingOrderDetail" />
+  </EntityType>
+  <EntityType Name="TruckingOrderDetail">
+    <Key>
+      <PropertyRef Name="TruckingOrderId" />
+    </Key>
+    <Property Name="TruckingOrderId" Type="Int32" Nullable="false" />
+    <Property Name="ContractorId" Type="Int32" Nullable="false" />
+    <Property Name="TruckingOrderCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="DriverName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DriverMobile" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ArriveDate" Type="DateTime" Precision="3" />
+    <Property Name="ArriveTime" Type="Time" Precision="1" />
+    <Property Name="LeaveDate" Type="DateTime" Precision="3" />
+    <Property Name="LeaveTime" Type="Time" Precision="1" />
+    <Property Name="LoadedDate" Type="DateTime" Precision="3" />
+    <Property Name="LoadedTime" Type="Time" Precision="1" />
+    <Property Name="Notes" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="FollowUpDate" Type="DateTime" Precision="3" />
+    <Property Name="FollowUpBy" Type="String" MaxLength="128" Unicode="true" FixedLength="false" />
+    <Property Name="CostCurrencyId" Type="Int32" />
+    <NavigationProperty Name="Contractor" Relationship="EasyFreightModel.FK_TruckingOrderDetail_Contractor" FromRole="TruckingOrderDetail" ToRole="Contractor" />
+    <NavigationProperty Name="TruckingOrderCosts" Relationship="EasyFreightModel.FK_TruckingOrderCost_TruckingOrderDetail" FromRole="TruckingOrderDetail" ToRole="TruckingOrderCost" />
+    <NavigationProperty Name="TruckingOrder" Relationship="EasyFreightModel.FK_TruckingOrderDetail_TruckingOrder" FromRole="TruckingOrderDetail" ToRole="TruckingOrder" />
+  </EntityType>
+  <Association Name="FK_TruckingOrderDetail_Contractor">
+    <End Type="EasyFreightModel.Contractor" Role="Contractor" Multiplicity="1" />
+    <End Type="EasyFreightModel.TruckingOrderDetail" Role="TruckingOrderDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Contractor">
+        <PropertyRef Name="ContractorId" />
+      </Principal>
+      <Dependent Role="TruckingOrderDetail">
+        <PropertyRef Name="ContractorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TruckingOrderCost_Currency">
+    <End Type="EasyFreightModel.Currency" Role="Currency" Multiplicity="1" />
+    <End Type="EasyFreightModel.TruckingOrderCost" Role="TruckingOrderCost" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Currency">
+        <PropertyRef Name="CurrencyId" />
+      </Principal>
+      <Dependent Role="TruckingOrderCost">
+        <PropertyRef Name="CurrencyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TruckingOrderCost_TruckingCostLib">
+    <End Type="EasyFreightModel.TruckingCostLib" Role="TruckingCostLib" Multiplicity="1" />
+    <End Type="EasyFreightModel.TruckingOrderCost" Role="TruckingOrderCost" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TruckingCostLib">
+        <PropertyRef Name="TruckingCostId" />
+      </Principal>
+      <Dependent Role="TruckingOrderCost">
+        <PropertyRef Name="TruckingCostId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TruckingOrderCost_TruckingOrderDetail">
+    <End Type="EasyFreightModel.TruckingOrderDetail" Role="TruckingOrderDetail" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="EasyFreightModel.TruckingOrderCost" Role="TruckingOrderCost" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TruckingOrderDetail">
+        <PropertyRef Name="TruckingOrderId" />
+      </Principal>
+      <Dependent Role="TruckingOrderCost">
+        <PropertyRef Name="TruckingOrderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="TruckingOrder">
+    <Key>
+      <PropertyRef Name="TruckingOrderId" />
+    </Key>
+    <Property Name="TruckingOrderId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TruckingOrderCode" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="OperationId" Type="Int32" Nullable="false" />
+    <Property Name="OrderFrom" Type="Byte" Nullable="false" />
+    <Property Name="HouseBillId" Type="Int32" />
+    <Property Name="OperationCode" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="HouseBL" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="BookingNo" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="FromAreaId" Type="Int32" Nullable="false" />
+    <Property Name="ToAreaId" Type="Int32" Nullable="false" />
+    <Property Name="FromCityId" Type="Int32" />
+    <Property Name="ToCityId" Type="Int32" />
+    <Property Name="ShipperId" Type="Int32" />
+    <Property Name="CarrierId" Type="Int32" />
+    <Property Name="ConsigneeId" Type="Int32" />
+    <Property Name="NeedArriveDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="NeedArriveTime" Type="Time" Nullable="false" Precision="1" />
+    <Property Name="ShipFromAddress" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="CreateBy" Type="String" MaxLength="128" Unicode="true" FixedLength="false" />
+    <Property Name="StatusId" Type="Byte" Nullable="false" />
+    <Property Name="AssignToUserId" Type="String" MaxLength="128" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="Carrier" Relationship="EasyFreightModel.FK_TruckingOrder_Carrier" FromRole="TruckingOrder" ToRole="Carrier" />
+    <NavigationProperty Name="City" Relationship="EasyFreightModel.FK_TruckingOrder_City" FromRole="TruckingOrder" ToRole="City" />
+    <NavigationProperty Name="City1" Relationship="EasyFreightModel.FK_TruckingOrder_City1" FromRole="TruckingOrder" ToRole="City" />
+    <NavigationProperty Name="Consignee" Relationship="EasyFreightModel.FK_TruckingOrder_Consignee" FromRole="TruckingOrder" ToRole="Consignee" />
+    <NavigationProperty Name="Shipper" Relationship="EasyFreightModel.FK_TruckingOrder_Shipper" FromRole="TruckingOrder" ToRole="Shipper" />
+    <NavigationProperty Name="StatusLib" Relationship="EasyFreightModel.FK_TruckingOrder_StatusLib" FromRole="TruckingOrder" ToRole="StatusLib" />
+    <NavigationProperty Name="TruckingOrderDetail" Relationship="EasyFreightModel.FK_TruckingOrderDetail_TruckingOrder" FromRole="TruckingOrder" ToRole="TruckingOrderDetail" />
+  </EntityType>
+  <Association Name="FK_TruckingOrder_Carrier">
+    <End Type="EasyFreightModel.Carrier" Role="Carrier" Multiplicity="0..1" />
+    <End Type="EasyFreightModel.TruckingOrder" Role="TruckingOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Carrier">
+        <PropertyRef Name="CarrierId" />
+      </Principal>
+      <Dependent Role="TruckingOrder">
+        <PropertyRef Name="CarrierId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TruckingOrder_City">
+    <End Type="EasyFreightModel.City" Role="City" Multiplicity="0..1" />
+    <End Type="EasyFreightModel.TruckingOrder" Role="TruckingOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="City">
+        <PropertyRef Name="CityId" />
+      </Principal>
+      <Dependent Role="TruckingOrder">
+        <PropertyRef Name="FromCityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TruckingOrder_City1">
+    <End Type="EasyFreightModel.City" Role="City" Multiplicity="0..1" />
+    <End Type="EasyFreightModel.TruckingOrder" Role="TruckingOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="City">
+        <PropertyRef Name="CityId" />
+      </Principal>
+      <Dependent Role="TruckingOrder">
+        <PropertyRef Name="ToCityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TruckingOrder_Consignee">
+    <End Type="EasyFreightModel.Consignee" Role="Consignee" Multiplicity="0..1" />
+    <End Type="EasyFreightModel.TruckingOrder" Role="TruckingOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Consignee">
+        <PropertyRef Name="ConsigneeId" />
+      </Principal>
+      <Dependent Role="TruckingOrder">
+        <PropertyRef Name="ConsigneeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TruckingOrder_Shipper">
+    <End Type="EasyFreightModel.Shipper" Role="Shipper" Multiplicity="0..1" />
+    <End Type="EasyFreightModel.TruckingOrder" Role="TruckingOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Shipper">
+        <PropertyRef Name="ShipperId" />
+      </Principal>
+      <Dependent Role="TruckingOrder">
+        <PropertyRef Name="ShipperId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TruckingOrder_StatusLib">
+    <End Type="EasyFreightModel.StatusLib" Role="StatusLib" Multiplicity="1" />
+    <End Type="EasyFreightModel.TruckingOrder" Role="TruckingOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StatusLib">
+        <PropertyRef Name="StatusId" />
+      </Principal>
+      <Dependent Role="TruckingOrder">
+        <PropertyRef Name="StatusId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TruckingOrderDetail_TruckingOrder">
+    <End Type="EasyFreightModel.TruckingOrder" Role="TruckingOrder" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="EasyFreightModel.TruckingOrderDetail" Role="TruckingOrderDetail" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="TruckingOrder">
+        <PropertyRef Name="TruckingOrderId" />
+      </Principal>
+      <Dependent Role="TruckingOrderDetail">
+        <PropertyRef Name="TruckingOrderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="StaticText">
+    <Key>
+      <PropertyRef Name="StaticTextId" />
+    </Key>
+    <Property Name="StaticTextId" Type="Int32" Nullable="false" />
+    <Property Name="ScreenName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="StaticTextEn1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="StaticTextAr1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="StaticTextEn2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="StaticTextAr2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="StaticTextLabels" Relationship="EasyFreightModel.FK_StaticTextLabel_StaticText" FromRole="StaticText" ToRole="StaticTextLabel" />
+  </EntityType>
+  <EntityType Name="StaticTextLabel">
+    <Key>
+      <PropertyRef Name="LblId" />
+      <PropertyRef Name="StaticTextId" />
+    </Key>
+    <Property Name="LblId" Type="Int32" Nullable="false" />
+    <Property Name="StaticTextId" Type="Int32" Nullable="false" />
+    <Property Name="FieldPrefix" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="TextEn" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="TextAr" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="StaticText" Relationship="EasyFreightModel.FK_StaticTextLabel_StaticText" FromRole="StaticTextLabel" ToRole="StaticText" />
+  </EntityType>
+  <Association Name="FK_StaticTextLabel_StaticText">
+    <End Type="EasyFreightModel.StaticText" Role="StaticText" Multiplicity="1" />
+    <End Type="EasyFreightModel.StaticTextLabel" Role="StaticTextLabel" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StaticText">
+        <PropertyRef Name="StaticTextId" />
+      </Principal>
+      <Dependent Role="StaticTextLabel">
+        <PropertyRef Name="StaticTextId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="DepartmentEasyModel">
+    <Key>
+      <PropertyRef Name="DepId" />
+    </Key>
+    <Property Name="DepId" Type="Int32" Nullable="false" />
+    <Property Name="DepNameEn" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DepNameAr" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Vessel">
+    <Key>
+      <PropertyRef Name="VesselId" />
+    </Key>
+    <Property Name="VesselId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="VesselName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CarrierId" Type="Int32" />
+    <NavigationProperty Name="Carrier" Relationship="EasyFreightModel.FK_Vessel_Carrier" FromRole="Vessel" ToRole="Carrier" />
+  </EntityType>
+  <Association Name="FK_Vessel_Carrier">
+    <End Type="EasyFreightModel.Carrier" Role="Carrier" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="EasyFreightModel.Vessel" Role="Vessel" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Carrier">
+        <PropertyRef Name="CarrierId" />
+      </Principal>
+      <Dependent Role="Vessel">
+        <PropertyRef Name="CarrierId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Area">
+    <Key>
+      <PropertyRef Name="AreaId" />
+    </Key>
+    <Property Name="AreaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CountryId" Type="Int32" Nullable="false" />
+    <Property Name="CityId" Type="Int32" Nullable="false" />
+    <Property Name="AreaNameEn" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="AreaNameAr" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="City" Relationship="EasyFreightModel.FK_Area_City" FromRole="Area" ToRole="City" />
+    <NavigationProperty Name="Country" Relationship="EasyFreightModel.FK_Area_Country" FromRole="Area" ToRole="Country" />
+    <NavigationProperty Name="ContractorRates" Relationship="EasyFreightModel.FK_ContractorRate_Area" FromRole="Area" ToRole="ContractorRate" />
+    <NavigationProperty Name="ContractorRates1" Relationship="EasyFreightModel.FK_ContractorRate_Area1" FromRole="Area" ToRole="ContractorRate" />
+  </EntityType>
+  <EntityType Name="ContractorRate">
+    <Key>
+      <PropertyRef Name="ContractorRateId" />
+    </Key>
+    <Property Name="ContractorRateId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ContractorId" Type="Int32" Nullable="false" />
+    <Property Name="FromAreaId" Type="Int32" />
+    <Property Name="ToAreaId" Type="Int32" />
+    <Property Name="FromCityId" Type="Int32" Nullable="false" />
+    <Property Name="ToCityId" Type="Int32" Nullable="false" />
+    <Property Name="ContainerTypeId" Type="Int32" Nullable="false" />
+    <Property Name="CostAmount" Type="Decimal" Nullable="false" Precision="18" Scale="3" />
+    <Property Name="CurrencyId" Type="Int32" Nullable="false" />
+    <Property Name="IsValid" Type="Boolean" />
+    <Property Name="ValidToChecked" Type="Boolean" />
+    <Property Name="ValidToDate" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="Area" Relationship="EasyFreightModel.FK_ContractorRate_Area" FromRole="ContractorRate" ToRole="Area" />
+    <NavigationProperty Name="Area1" Relationship="EasyFreightModel.FK_ContractorRate_Area1" FromRole="ContractorRate" ToRole="Area" />
+    <NavigationProperty Name="City" Relationship="EasyFreightModel.FK_ContractorRate_City" FromRole="ContractorRate" ToRole="City" />
+    <NavigationProperty Name="City1" Relationship="EasyFreightModel.FK_ContractorRate_City1" FromRole="ContractorRate" ToRole="City" />
+    <NavigationProperty Name="ContainerType" Relationship="EasyFreightModel.FK_ContractorRate_ContainerType" FromRole="ContractorRate" ToRole="ContainerType" />
+    <NavigationProperty Name="Contractor" Relationship="EasyFreightModel.FK_ContractorRate_Contractor" FromRole="ContractorRate" ToRole="Contractor" />
+    <NavigationProperty Name="Currency" Relationship="EasyFreightModel.FK_ContractorRate_Currency" FromRole="ContractorRate" ToRole="Currency" />
+  </EntityType>
+  <Association Name="FK_Area_City">
+    <End Type="EasyFreightModel.City" Role="City" Multiplicity="1" />
+    <End Type="EasyFreightModel.Area" Role="Area" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="City">
+        <PropertyRef Name="CityId" />
+      </Principal>
+      <Dependent Role="Area">
+        <PropertyRef Name="CityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Area_Country">
+    <End Type="EasyFreightModel.Country" Role="Country" Multiplicity="1" />
+    <End Type="EasyFreightModel.Area" Role="Area" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country">
+        <PropertyRef Name="CountryId" />
+      </Principal>
+      <Dependent Role="Area">
+        <PropertyRef Name="CountryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ContractorRate_Area">
+    <End Type="EasyFreightModel.Area" Role="Area" Multiplicity="0..1" />
+    <End Type="EasyFreightModel.ContractorRate" Role="ContractorRate" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Area">
+        <PropertyRef Name="AreaId" />
+      </Principal>
+      <Dependent Role="ContractorRate">
+        <PropertyRef Name="FromAreaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ContractorRate_Area1">
+    <End Type="EasyFreightModel.Area" Role="Area" Multiplicity="0..1" />
+    <End Type="EasyFreightModel.ContractorRate" Role="ContractorRate" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Area">
+        <PropertyRef Name="AreaId" />
+      </Principal>
+      <Dependent Role="ContractorRate">
+        <PropertyRef Name="ToAreaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ContractorRate_City">
+    <End Type="EasyFreightModel.City" Role="City" Multiplicity="1" />
+    <End Type="EasyFreightModel.ContractorRate" Role="ContractorRate" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="City">
+        <PropertyRef Name="CityId" />
+      </Principal>
+      <Dependent Role="ContractorRate">
+        <PropertyRef Name="FromCityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ContractorRate_City1">
+    <End Type="EasyFreightModel.City" Role="City" Multiplicity="1" />
+    <End Type="EasyFreightModel.ContractorRate" Role="ContractorRate" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="City">
+        <PropertyRef Name="CityId" />
+      </Principal>
+      <Dependent Role="ContractorRate">
+        <PropertyRef Name="ToCityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ContractorRate_ContainerType">
+    <End Type="EasyFreightModel.ContainerType" Role="ContainerType" Multiplicity="1" />
+    <End Type="EasyFreightModel.ContractorRate" Role="ContractorRate" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ContainerType">
+        <PropertyRef Name="ContainerTypeId" />
+      </Principal>
+      <Dependent Role="ContractorRate">
+        <PropertyRef Name="ContainerTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ContractorRate_Contractor">
+    <End Type="EasyFreightModel.Contractor" Role="Contractor" Multiplicity="1" />
+    <End Type="EasyFreightModel.ContractorRate" Role="ContractorRate" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Contractor">
+        <PropertyRef Name="ContractorId" />
+      </Principal>
+      <Dependent Role="ContractorRate">
+        <PropertyRef Name="ContractorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ContractorRate_Currency">
+    <End Type="EasyFreightModel.Currency" Role="Currency" Multiplicity="1" />
+    <End Type="EasyFreightModel.ContractorRate" Role="ContractorRate" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Currency">
+        <PropertyRef Name="CurrencyId" />
+      </Principal>
+      <Dependent Role="ContractorRate">
+        <PropertyRef Name="CurrencyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

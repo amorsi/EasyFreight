@@ -1,0 +1,24 @@
+﻿@model List<EasyFreight.ViewModel.CountryCityList>
+<select id="ddlCountryCity" name="@ViewBag.ddlName" data-plugin-selecttwo class="form-control populate"
+        data-placeholder="Select City"  @ViewBag.required >
+    <option></option>
+    @foreach (var item in Model)
+    {
+        if (item.CityList.Count > 0)
+        {
+            <optgroup label="@item.CountryName">
+                @foreach (var port in item.CityList)
+                {
+                    if (ViewBag.selectedVal != null && ViewBag.selectedVal != 0 && port.Key == ViewBag.selectedVal)
+                    {
+                        <option countryid="@item.CountryId" selected value="@port.Key">@port.Value </option>
+                    }
+                    else
+                    {
+                        <option countryid="@item.CountryId" value="@port.Key">@port.Value </option>
+                    }
+                }
+            </optgroup>
+        }
+    }
+</select>
